@@ -5,15 +5,16 @@
 
 from openerp import api, fields, models
 
-"""
-This Abstract Model is used to share behaviour between some github models
-that have an author_id.
 
-* Manage to define the company related to the author.
-"""
 
 
 class AbtractGithubModelAuthor(models.AbstractModel):
+    """
+    This Abstract Model is used to share behaviour between some github models
+    that have an author_id.
+    * define the company related to the author.
+    """
+
     _name = 'abstract.github.model.author'
     _inherit = ['abstract.github.model']
 

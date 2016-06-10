@@ -11,16 +11,13 @@ from openerp import api, fields, models, exceptions, _
 from .github import Github
 
 
-"""
-
-This abstract model is used to share all features related to github model.
-Note that some fields and function have to be defined in the inherited model.
-(github_type for instance)
-
-"""
-
-
 class AbtractGithubModel(models.AbstractModel):
+    """
+    This abstract model is used to share all features related to github model.
+    Note that some fields and function have to be defined in the inherited
+    model. (github_type for instance)
+    """
+
     _name = 'abstract.github.model'
     _github_type = None
     _github_login_field = None
@@ -79,7 +76,7 @@ class AbtractGithubModel(models.AbstractModel):
 
     # Custom Public Function
     @api.model
-    def get_from_id_or_create(self, data, extra_data={}):
+    def get_from_id_or_create(self, data, extra_data=None):
         """Search if the odoo object exists in database. If yes, returns the
             object. Otherwise, creates the new object.
 
@@ -91,6 +88,7 @@ class AbtractGithubModel(models.AbstractModel):
             >>> self.env['github_organization'].get_from_id_or_create(
                 {'id': 7600578, 'url': 'https://api.github.com/orgs/OCA'})
         """
+        extra_data = extra_data and extra_data or {}
         res = self.search([('github_id', '=', data['id'])])
         if not res:
             if self._need_individual_call:
@@ -162,7 +160,8 @@ class AbtractGithubModel(models.AbstractModel):
 
     # Custom Private Function
     @api.model
-    def _create_from_github_data(self, data, extra_data={}):
+    def _create_from_github_data(self, data, extra_data=None):
+        extra_data = extra_data and extra_data or {}
         vals = self.get_odoo_data_from_github(data)
         vals.update(extra_data)
         return self.create(vals)
