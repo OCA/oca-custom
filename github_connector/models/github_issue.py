@@ -81,8 +81,8 @@ class GithubIssue(models.Model):
             'title': data['title'],
             'body': data['body'],
             'state': data['state'],
-            'issue_type': data.get('pull_request', False)
-            and 'pull_request' or 'issue',
+            'issue_type': data.get('pull_request', False) and
+            'pull_request' or 'issue',
         })
         return res
 
