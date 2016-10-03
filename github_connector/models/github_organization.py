@@ -34,6 +34,14 @@ class GithubOrganization(models.Model):
         "odoo-community.org\n"
         "OpenUpgrade\n")
 
+    specific_repository_names = fields.Text(
+        string='Specific Repositories', help="Set here repository names you"
+        " you want download. One repository per line. The other will be"
+        " ignored. Exemple:\n"
+        "pos\n"
+        "server-tools\n")
+
+
     member_ids = fields.Many2many(
         string='Members', comodel_name='res.partner',
         relation='github_organization_partner_rel', column1='organization_id',
@@ -134,11 +142,13 @@ class GithubOrganization(models.Model):
             repository_ids = []
             ignored_list = organization.ignored_repository_names and\
                 organization.ignored_repository_names.split("\n") or []
-
+            specific_list = organization.specific_repository_names and\
+                organization.specific_repository_names.split("\n") or []
             for data in github_repo.list([organization.github_login]):
                 if data['name'] not in ignored_list:
-                    repository = repository_obj.get_from_id_or_create(data)
-                    repository_ids.append(repository.id)
+                    if not specific_list or data['name'] in specific_list:
+                        repository = repository_obj.get_from_id_or_create(data)
+                        repository_ids.append(repository.id)
             organization.repository_ids = repository_ids
 
     @api.multi

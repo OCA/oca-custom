@@ -6,9 +6,12 @@
 import base64
 import urllib
 from datetime import datetime
+import logging
 
 from openerp import api, fields, models, exceptions, _
 from .github import Github
+
+_logger = logging.getLogger(__name__)
 
 
 class AbtractGithubModel(models.AbstractModel):
@@ -143,11 +146,12 @@ class AbtractGithubModel(models.AbstractModel):
         github_model = self.get_github_for(self.github_type())
         for item in self:
             if item._model._name == 'github.issue':
-                # This Hack is not very beautiful
-                # Github doesn't provides api to load an issue, by issue id
-                # TODO Refactor me.
+                # Github doesn't provides api to load an issue by id
                 res = github_model.get(
                     [item.repository_id.github_login, item.github_login])
+            elif item._model._name =='github.organization':
+                # Github doesn't provides api to load an organization by id
+                res = github_model.get([item.github_login])
             else:
                 res = github_model.get([item.github_id], by_id=True)
             item._update_from_github_data(res)
@@ -155,7 +159,16 @@ class AbtractGithubModel(models.AbstractModel):
             self.full_update()
 
     def get_base64_image_from_github(self, url):
-        stream = urllib.urlopen(url).read()
+        max_try = int(
+            self.env['ir.config_parameter'].get_param('github.max_try'))
+        for i in range(max_try):
+            try:
+                stream = urllib.urlopen(url).read()
+                break # success
+            except Exception as err:
+                _logger.warning("URL Call Error. %s" % (err.__str__()))
+        else: # all ntries failed
+            raise err
         return base64.standard_b64encode(stream)
 
     # Custom Private Function
@@ -178,4 +191,5 @@ class AbtractGithubModel(models.AbstractModel):
         return Github(
             github_type,
             self.env['ir.config_parameter'].get_param('github.login'),
-            self.env['ir.config_parameter'].get_param('github.password'))
+            self.env['ir.config_parameter'].get_param('github.password'),
+            int(self.env['ir.config_parameter'].get_param('github.max_try')))

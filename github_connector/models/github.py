@@ -10,13 +10,15 @@ from openerp import exceptions, _
 from requests.auth import HTTPBasicAuth
 import requests
 import json
-
 import logging
+
 _logger = logging.getLogger(__name__)
 
 _MAX_NUMBER_REQUEST = 30
 
 _BASE_URL = 'https://api.github.com/'
+
+_GITHUB_URL = 'https://github.com/'
 
 _GITHUB_TYPE = [
     ('organization', 'Organization'),
@@ -25,7 +27,7 @@ _GITHUB_TYPE = [
 ]
 
 _GITHUB_TYPE_URL = {
-    'organization': {'url': 'orgs/%s', 'url_by_id': 'organizations/%s'},
+    'organization': {'url': 'orgs/%s'},
     'user': {'url': 'users/%s', 'url_by_id': 'user/%s'},
     'repository': {'url': 'repos/%s', 'url_by_id': 'repositories/%s'},
     'team': {'url_by_id': 'teams/%s'},
@@ -42,11 +44,12 @@ _GITHUB_TYPE_URL = {
 
 class Github(object):
 
-    def __init__(self, github_type, login, password):
+    def __init__(self, github_type, login, password, max_try):
         super(Github, self).__init__()
         self.github_type = github_type
         self.login = login
         self.password = password
+        self.max_try = max_try
 
     def list(self, arguments):
         page = 1
@@ -62,8 +65,16 @@ class Github(object):
 
     def get_by_url(self, url):
         _logger.info("Calling %s" % (url))
-        response = requests.get(
-            url, verify=False, auth=HTTPBasicAuth(self.login, self.password))
+        for i in range(self.max_try):
+            try:
+                response = requests.get(
+                    url, auth=HTTPBasicAuth(self.login, self.password))
+                break # success
+            except Exception as err:
+                _logger.warning("URL Call Error. %s" % (err.__str__()))
+        else: # all ntries failed
+            raise err
+
         if response.status_code == 401:
             raise exceptions.Warning(
                 _("Github Access Error"),

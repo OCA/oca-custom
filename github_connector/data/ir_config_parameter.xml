@@ -18,6 +18,12 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="group_ids" eval="[(4, ref('base.group_erp_manager'))]" />
     </record>
 
+    <record id="github_max_try" model="ir.config_parameter">
+        <field name="key">github.max_try</field>
+        <field name="value">5</field>
+        <field name="group_ids" eval="[(4, ref('base.group_erp_manager'))]" />
+    </record>
+
     <record id="git_source_code_local_path" model="ir.config_parameter">
         <field name="key">git.source_code_local_path</field>
         <field name="value">/tmp/</field>

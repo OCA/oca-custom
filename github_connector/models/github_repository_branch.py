@@ -11,6 +11,7 @@ from git import Repo
 from subprocess import check_output
 from datetime import datetime
 
+from .github import _GITHUB_URL
 from openerp import models, fields, api, exceptions, _
 
 _logger = logging.getLogger(__name__)
@@ -104,10 +105,10 @@ class GithubRepository(models.Model):
                 # Cloning the repository
                 os.makedirs(branch.local_path)
 
-                # TODO move this url in github.py file
-                command = "cd %s &&"\
-                    + "git clone https://github.com/%s/%s.git -b %s ." % (
+                command = ("cd %s &&"\
+                    + "git clone %s%s/%s.git -b %s .") % (
                         branch.local_path,
+                        _GITHUB_URL,
                         branch.repository_id.organization_id.github_login,
                         branch.repository_id.name,
                         branch.name)

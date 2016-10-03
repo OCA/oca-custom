@@ -18,6 +18,7 @@ OpenUpgrade
 openupgradelib
 pylint-odoo
 l10n-peru]]></field>
+        <field name="specific_repository_names"><![CDATA[pos]]></field>
     </record>
 
 </data></openerp>
