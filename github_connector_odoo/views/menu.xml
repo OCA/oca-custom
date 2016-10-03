@@ -21,10 +21,11 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         sequence="2"
         action="action_odoo_module_version"/>
 
-    <menuitem id="menu_odoo_module_evaluation"
-        parent="menu_odoo"
-        sequence="3"
-        action="action_odoo_module_evaluation"/>
+<!--TODO Finish evalation module-->
+<!--    <menuitem id="menu_odoo_module_evaluation"-->
+<!--        parent="menu_odoo"-->
+<!--        sequence="3"-->
+<!--        action="action_odoo_module_evaluation"/>-->
 
     <!-- SubMenu "Copyright" -->
     <menuitem id="menu_odoo_copyright"

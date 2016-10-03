@@ -12,7 +12,7 @@ from subprocess import check_output
 from datetime import datetime
 
 from .github import _GITHUB_URL
-from openerp import models, fields, api, exceptions, _
+from openerp import models, fields, api
 
 _logger = logging.getLogger(__name__)
 
@@ -125,21 +125,25 @@ class GithubRepository(models.Model):
                     res = check_output(
                         ['git', 'pull', 'origin', branch.name],
                         cwd=branch.local_path)
+                    if branch.state == 'to_download' or\
+                            'up-to-date' not in res:
+                        branch.write({
+                            'last_download_date': datetime.today(),
+                            'state': 'to_analyze',
+                            })
+                    else:
+                        branch.write({
+                            'last_download_date': datetime.today(),
+                            })
                 except:
-                    raise exceptions.Warning(
-                        _("Git Access Error"),
-                        _("Unable to access to pull repository in %s.") % (
-                            branch.local_path))
-                if branch.state == 'to_download' or\
-                        'up-to-date' not in res:
-                    branch.write({
-                        'last_download_date': datetime.today(),
-                        'state': 'to_analyze',
-                        })
-                else:
-                    branch.write({
-                        'last_download_date': datetime.today(),
-                        })
+                    # Trying to clean the local folder
+                    _logger.warning(
+                        "Error when updating the branch %s in the local folder"
+                        " %s.\n Deleting the local folder and trying"
+                        " again." % (branch.name, branch.local_path))
+                    command = ("rm -r %s") % (branch.local_path)
+                    os.system(command)
+                    branch._download_code()
         return True
 
     def _get_analyzable_files(self, existing_folder):

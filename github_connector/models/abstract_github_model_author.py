@@ -38,7 +38,7 @@ class AbtractGithubModelAuthor(models.AbstractModel):
     def create(self, vals):
         # Set related company of the author, if defined
         partner = self.env['res.partner'].browse(vals.get('author_id'))
-        vals.update({'company_author_id': partner.company_id.id})
+        vals.update({'company_author_id': partner.parent_id.id})
         res = super(AbtractGithubModelAuthor, self).create(vals)
         return res
 
