@@ -14,15 +14,5 @@ class GithubOrganizationSerie(models.Model):
     name = fields.Char(string='Name', required=True)
 
     organization_id = fields.Many2one(
-        comodel_name='github.organization', string='Organization')
-
-    complete_name = fields.Char(
-        string='Complete Name', store=True, compute='_compute_complete_name')
-
-    # Compute Section
-    @api.multi
-    @api.depends('name', 'organization_id.name')
-    def _compute_complete_name(self):
-        for serie in self:
-            serie.complete_name =\
-                serie.organization_id.name + '/' + serie.name
+        comodel_name='github.organization', string='Organization',
+        required=True)

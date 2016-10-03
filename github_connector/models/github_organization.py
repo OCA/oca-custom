@@ -45,7 +45,7 @@ class GithubOrganization(models.Model):
 
     repository_ids = fields.One2many(
         string='Repositories', comodel_name='github.repository',
-        inverse_name='organization_id', readonly=True)
+        ondelete='cascade', inverse_name='organization_id', readonly=True)
 
     repository_qty = fields.Integer(
         string='Repositories Quantity', compute='_compute_repository_qty',
