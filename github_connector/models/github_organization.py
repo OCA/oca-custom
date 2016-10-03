@@ -18,8 +18,6 @@ class GithubOrganization(models.Model):
     name = fields.Char(
         string='Organization Name', required=True, readonly=True)
 
-    billing_email = fields.Char(string='Billing Email', readonly=True)
-
     image = fields.Binary(string='Image', readonly=True)
 
     description = fields.Char(string='Description', readonly=True)
@@ -80,7 +78,6 @@ class GithubOrganization(models.Model):
             'location': data['location'],
             'website_url': data['blog'],
             'email': data['email'],
-            'billing_email': data['billing_email'],
             'image': self.get_base64_image_from_github(data['avatar_url']),
         })
         return res
