@@ -144,7 +144,7 @@ class AbtractGithubModel(models.AbstractModel):
         for item in self:
             if item._model._name == 'github.issue':
                 # This Hack is not very beautiful
-                # Github doesn't provides api to load a issue, by issue id
+                # Github doesn't provides api to load an issue, by issue id
                 # TODO Refactor me.
                 res = github_model.get(
                     [item.repository_id.github_login, item.github_login])
