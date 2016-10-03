@@ -6,8 +6,6 @@
 from openerp import api, fields, models
 
 
-
-
 class AbtractGithubModelAuthor(models.AbstractModel):
     """
     This Abstract Model is used to share behaviour between some github models
