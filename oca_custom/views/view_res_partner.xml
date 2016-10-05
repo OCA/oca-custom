@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<openerp><data>
+
+    <record id="view_res_partner_form" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="x_github_login" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_res_partner_form_github" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="github_connector.view_res_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="github_login" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+        </field>
+    </record>
+
+</data></openerp>
