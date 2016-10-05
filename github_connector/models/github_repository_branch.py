@@ -159,12 +159,18 @@ class GithubRepository(models.Model):
     def analyze_code_one(self, branch):
         """Overload Me in custom Module that manage Source Code analysis.
         """
+        self.ensure_one()
         commit_obj = self.env['git.commit']
         path = branch.local_path
         # Compute Files Sizes
         size = 0
         for file_path in self._get_analyzable_files(path):
-            size += os.path.getsize(file_path)
+            try:
+                size += os.path.getsize(file_path)
+            except:
+                _logger.warning(
+                    "Warning : unable to eval the size of '%s'." % (file_path))
+
 
         # Analyse Commits
         new_commits = 0
@@ -178,7 +184,13 @@ class GithubRepository(models.Model):
         existing_commits = commit_obj.search([
             ('repository_branch_id', 'in', ignore_branches.ids)])
         existing_names = [x.name for x in existing_commits]
-        repo = Repo(path)
+        try:
+            repo = Repo(path)
+        except:
+            # If it's not a correct repository, we flag the branch
+            # to be downloaded again
+            self.state = 'to_download'
+            return {'size': 0}
         commit_lst = list(repo.iter_commits(branch.name))
         _logger.info(
             "Found %d commits ..." % (len(commit_lst)))
@@ -201,7 +213,7 @@ class GithubRepository(models.Model):
                     "Warning Folder %s not found. Analyze skipped." % (path))
             else:
                 _logger.info("Analyzing Source Code in %s ..." % (path))
-                vals = self.analyze_code_one(branch)
+                vals = branch.analyze_code_one(branch)
                 vals.update({
                     'last_analyze_date': datetime.today(),
                     'state': 'analyzed',
