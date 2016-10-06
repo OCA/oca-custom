@@ -24,14 +24,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="view_mode">tree,form</field>
     </record>
 
-    <record id="action_odoo_module_evaluation" model="ir.actions.act_window">
-        <field name="name">Odoo Module Evaluations</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">odoo.module.evaluation</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
     <record id="action_odoo_license" model="ir.actions.act_window">
         <field name="name">Licenses</field>
         <field name="type">ir.actions.act_window</field>

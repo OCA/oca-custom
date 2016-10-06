@@ -40,11 +40,11 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <form>
                 <header>
                     <button name="button_sync_branch" type="object" string="Branches Sync." icon="STOCK_REFRESH"
-                        groups="base.group_erp_manager"/>
+                        groups="github_connector.group_github_connector_manager"/>
                     <button name="button_sync_issue" type="object" string="Issues + PR Sync." icon="STOCK_REFRESH"
-                        groups="base.group_erp_manager"/>
+                        groups="github_connector.group_github_connector_manager"/>
                     <button name="button_sync_issue_with_comment" type="object" string="Issues + PR and Comments Sync." icon="STOCK_REFRESH"
-                        groups="base.group_erp_manager"/>
+                        groups="github_connector.group_github_connector_manager"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -91,9 +91,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 <field name="github_write_date" />
                                 <field name="github_last_sync_date" />
                                 <button name="button_update_from_github_light" type="object" string="Light Sync" icon="STOCK_REFRESH"
-                                    groups="base.group_erp_manager"/>
+                                    groups="github_connector.group_github_connector_manager"/>
                                 <button name="button_update_from_github_full" type="object" string="Full Sync" icon="STOCK_REFRESH"
-                                    groups="base.group_erp_manager"/>
+                                    groups="github_connector.group_github_connector_manager"/>
                             </group>
                         </page>
                         <page string="Branches">

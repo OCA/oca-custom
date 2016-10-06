@@ -41,11 +41,11 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="last_analyze_date"/>
                 <field name="state"/>
                 <button name="button_download_code" type="object" states="to_download" string="Download" icon="STOCK_SAVE"
-                    groups="base.group_erp_manager"/>
+                    groups="github_connector.group_github_connector_manager"/>
                 <button name="button_download_code" type="object" states="to_analyze,analyzed" string="Update" icon="STOCK_REFRESH"
-                    groups="base.group_erp_manager"/>
+                    groups="github_connector.group_github_connector_manager"/>
                 <button name="button_analyze_code" type="object" states="to_analyze" string="Analyze" icon="STOCK_EXECUTE"
-                    groups="base.group_erp_manager"/>
+                    groups="github_connector.group_github_connector_manager"/>
             </tree>
         </field>
     </record>
@@ -56,13 +56,13 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <form>
                 <header>
                     <button name="button_download_code" type="object" states="to_download" string="Download Source Code" icon="STOCK_SAVE" class="oe_highlight"
-                        groups="base.group_erp_manager"/>
+                        groups="github_connector.group_github_connector_manager"/>
                     <button name="button_download_code" type="object" states="to_analyze,analyzed" string="Update Source Code" icon="STOCK_REFRESH"
-                        groups="base.group_erp_manager"/>
+                        groups="github_connector.group_github_connector_manager"/>
                     <button name="button_analyze_code" type="object" states="to_analyze" string="Analyze Source Code" icon="STOCK_EXECUTE" class="oe_highlight"
-                        groups="base.group_erp_manager"/>
+                        groups="github_connector.group_github_connector_manager"/>
                     <button name="button_analyze_code" type="object" states="analyzed" string="Update Source Code Analyzis" icon="STOCK_EXECUTE"
-                        groups="base.group_erp_manager"/>
+                        groups="github_connector.group_github_connector_manager"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>

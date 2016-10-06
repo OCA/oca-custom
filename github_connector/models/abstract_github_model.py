@@ -5,10 +5,10 @@
 
 import base64
 import urllib
-from datetime import datetime
 import logging
+from datetime import datetime
 
-from openerp import api, fields, models, exceptions, _
+from openerp import tools, api, fields, models, exceptions, _
 from .github import Github
 
 _logger = logging.getLogger(__name__)
@@ -188,8 +188,15 @@ class AbtractGithubModel(models.AbstractModel):
 
     @api.multi
     def get_github_for(self, github_type):
+        company = self.env.user.company_id
+        if (not tools.config.get('github_login') or
+            not tools.config.get('github_password')):
+            raise exceptions.Warning(
+                _("Configuration Error"),
+                _("Please add 'github_login' and 'github_password' "
+                  "in Odoo configuration file."))
         return Github(
             github_type,
-            self.env['ir.config_parameter'].get_param('github.login'),
-            self.env['ir.config_parameter'].get_param('github.password'),
+            tools.config['github_login'],
+            tools.config['github_password'],
             int(self.env['ir.config_parameter'].get_param('github.max_try')))

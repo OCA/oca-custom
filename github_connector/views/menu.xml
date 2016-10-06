@@ -75,6 +75,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <!-- Settings Part -->
     <menuitem id="menu_github_settings"
         parent="menu_github"
+        groups="github_connector.group_github_connector_manager"
         sequence="50"
         name="Settings"/>
 

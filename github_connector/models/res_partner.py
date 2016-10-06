@@ -126,24 +126,7 @@ class ResPartner(models.Model):
         for partner in self:
             partner.team_qty = len(partner.team_ids)
 
-# TODO Fonctionnement a valider
-#    # Overloadable Section
-#    @api.multi
-#    def write(self, vals):
-#        res = super(ResPartner, self).write(vals)
-#        if vals.get('parent_id', False):
-#            # We apply corporate setting to existing github activities
-#            # (issues / comments) if corporate informations is not defined
-#            issues = self.env['github.issue'].search([
-#                ('author_id', 'in', self.ids),
-#                ('company_author_id', '=', False)])
-#            issues.write({'company_author_id': vals.get('parent_id')})
-#            comments = self.env['github.comment'].search([
-#                ('author_id', 'in', self.ids),
-#                ('company_author_id', '=', False)])
-#            comments.write({'company_author_id': vals.get('parent_id')})
-#        return res
-
+    # Custom Section
     @api.model
     def get_odoo_data_from_github(self, data):
         res = super(ResPartner, self).get_odoo_data_from_github(data)

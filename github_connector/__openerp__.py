@@ -9,7 +9,6 @@
     'version': '8.0.0.0.0',
     'category': 'Custom',
     'author': [
-        'Sylvain LE GAL',
         'GRAP',
         'Akretion',
         'Odoo Community Association (OCA)',
@@ -19,6 +18,8 @@
     ],
     'data': [
         'security/ir.model.access.csv',
+        'security/ir_model_category.xml',
+        'security/res_groups.xml',
         'data/ir_config_parameter.xml',
         'data/ir_cron.xml',
         'views/view_wizard_load_github_model.xml',

@@ -79,8 +79,8 @@ class Github(object):
             raise exceptions.Warning(
                 _("Github Access Error"),
                 _("Unable to authenticate to Github with the login '%s'.\n"
-                    "You should Check your credentials in the Odoo Parameters"
-                    " Menu.") % (self.login))
+                    "You should Check your credentials in the Odoo"
+                    " configuration file.") % (self.login))
         elif response.status_code != 200:
             raise exceptions.Warning(
                 _("Github Error"),

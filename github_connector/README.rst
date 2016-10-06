@@ -7,26 +7,36 @@ Load Github Data in your Odoo Instance
 
 This module allow you to
 
-* recover social informations from Github. (Members of an organizations,
-  Pull requests, Issues, Comments, ...)
-* download source code
-
-Installation
-============
-
-Nothing special is needed to install this module.
+* recover social informations from Github. (Members of organizations,
+  Pull Requests, Issues, Comments, ...)
+* download source code from Github
 
 Configuration
 =============
 
 Once installed, you have to:
+* Open your openerp.cfg file and add extra settings to mention github
+ credencials:
+    * Add the following entries
+
+github_login = your_github_login
+github_password = your_github_password
 
 * go to 'Settings' / 'Technical' / 'Parameters' / 'System Parameters'
-* set credentials to access to github
-* set a local folder, if you want to download code source from github
+    * github.max_try: mention the number of call to the API, before an error
+      is raised. Set an high value if your connection is bad
+    * git.source_code_loca_path: set a local folder, that will be used to
+      download source code from github
+    * git.partial_commit_during_analyze: Set to True if you want to commit
+      in the database the result of the analysis after each repository analysis.
+      Set to True if you have a lot of repository to reduce the size of
+      the transaction, when you realize the first big analyse.
 
 .. image:: /github_connector/static/description/github_settings.png
 
+* Go to your(s) user(s) form to put them in the new 'Connector Github Manager'
+  groups. The members of this group will have the possibility to run Github
+  synchronization.
 
 Usage
 =====
@@ -37,7 +47,6 @@ To recover information from github, you have to:
 * Select the object type you want to synchronize and its github name
 
 .. image:: /github_connector/static/description/sync_organization.png
-
 
 Optionaly, once organization created, you have to create series of your project
 
@@ -59,6 +68,10 @@ Reporting
 
 This module provides several reportings.
 
+**Commits by branches and by series**
+
+.. image:: /github_connector/static/description/reporting_commit_by_repository_and_serie.png
+
 **Branches by Series**
 
 .. image:: /github_connector/static/description/reporting_branches_by_serie.png
@@ -66,11 +79,6 @@ This module provides several reportings.
 **Sizes by Series**
 
 .. image:: /github_connector/static/description/reporting_sizes_by_serie.png
-
-
-Known issues / Roadmap
-======================
-
 
 Credits
 =======
@@ -80,6 +88,7 @@ Contributors
 
 * Sylvain LE GAL (https://twitter.com/legalsylvain)
 * Sébastien BEAU (sebastien.beau@akretion.com)
+* Benoît GUILLOT (benoit.guillot@akretion.com)
 
 Maintainer
 ----------
