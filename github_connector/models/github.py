@@ -71,7 +71,8 @@ class Github(object):
                     url, auth=HTTPBasicAuth(self.login, self.password))
                 break # success
             except Exception as err:
-                _logger.warning("URL Call Error. %s" % (err.__str__()))
+                _logger.warning("URL Call Error. %d/%d. URL: %s" % (
+                    i, self.max_try, err.__str__()))
         else: # all ntries failed
             raise err
 

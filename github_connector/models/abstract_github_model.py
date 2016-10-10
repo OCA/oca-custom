@@ -182,9 +182,16 @@ class AbtractGithubModel(models.AbstractModel):
     @api.multi
     def _update_from_github_data(self, data):
         for item in self:
-            # TODO Check on dates.
             vals = self.get_odoo_data_from_github(data)
-            return item.write(vals)
+            # Optimization. Due to the fact that github datas rarely change,
+            # and that there a lot of related / computed fields invalidation
+            # process, we realize a write only if data changed
+            to_write = {}
+            for k, v in vals.iteritems():
+                if item[k] != v:
+                    to_write[k] = v
+            if to_write:
+                item.write(to_write)
 
     @api.multi
     def get_github_for(self, github_type):

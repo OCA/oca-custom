@@ -4,6 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import urllib2
+from collections import defaultdict
 
 from openerp import models, fields, api
 
@@ -19,11 +20,14 @@ class GithubRepository(models.Model):
     @api.multi
     @api.depends('organization_id.ci_url')
     def _compute_ci_id(self):
+        url_done = defaultdict(list)
         for repository in self:
-            url = repository.organization_id.ci_url
-            if url:
-                ci_list = urllib2.urlopen(
-                    urllib2.Request(url)).read().split('\n')
-                for item in ci_list:
+            url_done[repository.organization_id].append(repository)
+
+        for organization_id, repositories in url_done.iteritems():
+            ci_list = urllib2.urlopen(
+                urllib2.Request(organization_id.ci_url)).read().split('\n')
+            for item in ci_list:
+                for repository in repositories:
                     if item.endswith(repository.complete_name):
                         repository.ci_id = item.split('|')[0]
