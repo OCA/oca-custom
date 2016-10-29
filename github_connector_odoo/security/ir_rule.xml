@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<openerp><data>
+
+    <record id="odoo_module_evaluation_personal_edit" model="ir.rule">
+        <field name="name">Personal Odoo Module Evaluations</field>
+        <field name="model_id" ref="model_odoo_module_evaluation"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="perm_read" eval="False"/>
+    </record>
+
+    <record id="odoo_module_evaluation_all_edit" model="ir.rule">
+        <field name="name">All Odoo Module Evaluations</field>
+        <field name="model_id" ref="model_odoo_module_evaluation"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('base.group_erp_manager'))]"/>
+    </record>
+
+</data></openerp>
+
+
+
+
