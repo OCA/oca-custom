@@ -1,0 +1,1 @@
+interface-github https://github.com/legalsylvain/interface-github.git 8.0_ADD_github_connector_modules
