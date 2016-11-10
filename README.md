@@ -5,3 +5,5 @@ Custom Modules for Odoo Community Association
 =============================================
 
 This project aims to deal with modules related to the Odoo instance of the OCA.
+
+OCA rules related to Pull Requests acceptances (2 approvments required, 5 days before merging) do not rule for this repository.
