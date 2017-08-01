@@ -16,7 +16,6 @@
         'github_connector',
     ],
     'data': [
-        'views/view_res_partner.xml',
     ],
     'installable': True,
 }
