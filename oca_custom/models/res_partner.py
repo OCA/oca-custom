@@ -10,5 +10,3 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     github_login = fields.Char(readonly=False)
-
-    x_github_login = fields.Char(related='github_login', store=True)
