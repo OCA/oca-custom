@@ -5,7 +5,7 @@
 {
     'name': 'OCA Custom Settings',
     'summary': 'Custom Settings for OCA Instance',
-    'version': '8.0.0.0.0',
+    'version': '10.0.0.0.0',
     'category': 'Custom',
     'author': [
         'GRAP',
@@ -16,7 +16,6 @@
         'github_connector',
     ],
     'data': [
-        'views/view_res_partner.xml',
     ],
     'installable': True,
 }
