@@ -10,7 +10,8 @@ Custom module for OCA Instance.
 Features
 ========
 
-* The module add an extra field x_github_login, related to the github_login field
+* Make the github_login field from connector_github editable so it can
+  be set manually (eg when registering new CLA's)
 
 Credits
 =======
@@ -20,6 +21,7 @@ Contributors
 
 * Sylvain LE GAL (https://twitter.com/legalsylvain)
 * Benoit GUILLOT (benoit.guillot@akretion.com)
+* Stéphane Bidoul (stephane.bidoul@acsone.eu)
 
 Maintainer
 ----------
