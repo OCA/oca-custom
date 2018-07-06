@@ -1,17 +1,13 @@
 # Copyright 2018 Surekha Technologies (https://www.surekhatech.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-import logging
-
 from odoo import api, fields, models
-
-_logger = logging.getLogger(__name__)
 
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    is_integrator = fields.Boolean(string='Intergrator',
-                                   compute='_compute_intergrator',
+    is_integrator = fields.Boolean(string='Integrator',
+                                   compute='_compute_integrator',
                                    store=True)
 
     contributor_count = fields.Integer(string='Number of contributors',
@@ -26,40 +22,50 @@ class ResPartner(models.Model):
                                   compute='_compute_module_count',
                                   store=True)
 
-    @api.one
     @api.depends(
         'child_ids',
         'child_ids.membership_state',
-        'child_ids.parent_id',
-        'child_ids.website_published')
-    def _compute_intergrator(self):
-        if any([child.website_published and (
-            child.github_login or child.membership_state == 'paid') for
-                child in self.child_ids]):
-            self.is_integrator = True
-        else:
-            self.is_integrator = False
+        'child_ids.parent_id')
+    def _compute_integrator(self):
+        for partner in self:
+            if any([(child.github_login or child.membership_state == 'paid')
+                    for child in partner.child_ids]):
+                partner.is_integrator = True
+            else:
+                partner.is_integrator = False
 
-    @api.one
-    @api.depends('child_ids.github_login', 'child_ids.parent_id',
-                 'child_ids.website_published')
+    @api.depends('child_ids.github_login', 'child_ids.parent_id')
     def _compute_contributor_count(self):
-        self.contributor_count = len(self.child_ids.filtered(
-            lambda
-            child: child.github_login
-            and child.website_published and child.membership_state != 'paid'))
+        contributor_data = self.read_group(
+            domain=[('parent_id', 'in', self.ids),
+                    ('github_login', '!=', False)], fields=['parent_id'],
+            groupby=['parent_id'])
 
-    @api.one
-    @api.depends('child_ids.membership_state', 'child_ids.parent_id',
-                 'child_ids.website_published')
+        contributor_mapped_data = dict(
+            (item['parent_id'][0], item['parent_id_count']) for item in
+            contributor_data)
+
+        for partner in self:
+            partner.contributor_count = contributor_mapped_data.get(
+                partner.id, 0)
+
+    @api.depends('child_ids.membership_state', 'child_ids.parent_id')
     def _compute_member_count(self):
-        self.member_count = len(self.child_ids.filtered(
-            lambda
-            child: child.website_published
-            and child.membership_state == 'paid'))
+        member_data = self.read_group(
+            domain=[('parent_id', 'in', self.ids),
+                    ('membership_state', '=', 'paid')], fields=['parent_id'],
+            groupby=['parent_id'])
 
-    @api.one
+        member_mapped_data = dict(
+            (item['parent_id'][0],
+             item['parent_id_count']) for item in member_data)
+
+        for partner in self:
+            partner.member_count = member_mapped_data.get(partner.id, 0)
+
+    @api.multi
     @api.depends('author_ids', 'author_ids.partner_id')
     def _compute_module_count(self):
-        self.module_count = sum(
-            [author.module_qty for author in self.author_ids])
+        for partner in self:
+            partner.module_count = sum(
+                [author.module_qty for author in partner.author_ids])
