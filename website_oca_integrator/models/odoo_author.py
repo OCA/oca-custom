@@ -10,4 +10,4 @@ class OdooAuthor(models.Model):
     partner_id = fields.Many2one(
         comodel_name='res.partner', string='Company',
         domain="[('is_company','=', True),('website_published', '=', True)]",
-        help="Select company which is linked to this Author.")
+        help="Select company which is linked to this author.")
