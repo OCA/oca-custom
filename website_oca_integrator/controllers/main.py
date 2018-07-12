@@ -22,13 +22,13 @@ class WebsiteIntegrator(http.Controller):
     ], type='http', auth="public", website=True)
     def integrators(self, country=None, page=0, **post):
         """
-        Displays integrators in website.
+        Display integrators in website.
         """
         country_all = post.pop('country_all', False)
         partner_obj = request.env['res.partner']
         search = post.get('search', '')
 
-        # serch integrators
+        # search integrators
         base_integrator_domain = [('is_company', '=', True),
                                   ('is_integrator', '=', True),
                                   ('website_published', '=', True)]
@@ -84,7 +84,7 @@ class WebsiteIntegrator(http.Controller):
             offset=pager['offset'], limit=self._references_per_page)
         integrators = integrator_ids.sudo()
 
-        google_map_partner_ids = ','.join(
+        google_map_integrator_ids = ','.join(
             map(str, [i.id for i in integrators]))
         google_maps_api_key = request.env['ir.config_parameter'].sudo(
         ).get_param('google_maps_api_key')
@@ -93,7 +93,7 @@ class WebsiteIntegrator(http.Controller):
             'countries': countries,
             'current_country': country,
             'integrators': integrators,
-            'google_map_integrator_ids': google_map_partner_ids,
+            'google_map_integrator_ids': google_map_integrator_ids,
             'pager': pager,
             'searches': post,
             'search_path': "%s" % werkzeug.url_encode(post),

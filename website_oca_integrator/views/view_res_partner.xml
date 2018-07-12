@@ -5,7 +5,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
 
-    <!-- Add Author tab -->
+    <!-- Add author tab -->
     <record id="view_res_partner_form_inherit" model="ir.ui.view">
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="github_connector.view_res_partner_form"/>
