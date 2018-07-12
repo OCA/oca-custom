@@ -3,7 +3,7 @@
 {
     'name': 'Website OCA Integrator',
     'summary': 'Displays Integrators in website.',
-    'version': "11.0.1.0.0",
+    'version': '11.0.1.0.0',
     'category': 'Website',
     'license': 'AGPL-3',
     'website': 'https://github.com/OCA/oca-custom',
@@ -20,6 +20,10 @@
         'views/website_oca_integrator_data.xml',
         'views/view_res_partner.xml',
         'views/view_odoo_author.xml',
+    ],
+    'demo': [
+        'demo/res_partner.xml',
+        'demo/odoo_author.xml',
     ],
     'installable': True,
 }
