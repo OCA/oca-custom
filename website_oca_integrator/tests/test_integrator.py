@@ -4,9 +4,6 @@
 import datetime
 from dateutil.relativedelta import relativedelta
 
-from odoo.api import Environment
-from odoo.tests.common import HttpCase
-
 from odoo.addons.account.tests.account_test_classes import AccountingTestCase
 
 
@@ -22,12 +19,13 @@ class TestIntegratorAssign(AccountingTestCase):
             'name': 'Partner 1',
             'is_company': True,
             'website_published': True,
+            'github_organization': 'company1_github_login'
         })
 
         self.company2 = self.partner.create({
             'name': 'Partner 2',
             'is_company': True,
-            'website_published': False,
+            'website_published': False
         })
 
         # customer section
@@ -116,40 +114,8 @@ class TestIntegratorAssign(AccountingTestCase):
                          "If partner's contact has paid member \
                          then, partner should be considered as member.")
 
-
-class TestIntegratorController(HttpCase):
-    def setUp(self):
-        super(TestIntegratorController, self).setUp()
-
-        cr = self.registry.cursor()
-        self.env2 = env = Environment(cr, self.uid, {})
-
-        self.country = self.browse_ref('base.in')
-
-        self.partner = env['res.partner'].create({
-            'name': 'Partner 3',
-            'is_company': True,
-            'website_published': True,
-            'country_id': self.country.id,
+    def test_not_integrator(self):
+        self.company1.write({
+            'is_company': False,
         })
-
-        self.customer = env['res.partner'].create({
-            'name': 'Customer 3',
-            'github_login': 'customer3_github_login',
-            'website_published': True,
-            'parent_id': self.partner.id
-        })
-
-    def _test_integrator_page(self, page, code=200):
-        response = self.url_open(page)
-        self.assertEqual(response.status_code, code)
-
-    def test_integrator(self):
-        self.env2.cr.release()
-        self._test_integrator_page(
-            "/integrators/country/{}".format(self.country.id))
-        self._test_integrator_page("/integrators")
-        self._test_integrator_page(
-            "/integrators?search=%s" %
-            self.partner.name)
-        self._test_integrator_page("/integrators?&country_all=True")
+        self.assertEqual(self.company1.github_organization, False)
