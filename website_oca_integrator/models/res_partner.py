@@ -7,6 +7,13 @@ from odoo import api, fields, models
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
+    github_organization = fields.Char()
+
+    github_organization_url = fields.Char(
+        string='Github Organization URL',
+        compute='_compute_github_organization_url',
+        store=True)
+
     is_integrator = fields.Boolean(string='Integrator',
                                    compute='_compute_integrator',
                                    store=True)
@@ -23,9 +30,45 @@ class ResPartner(models.Model):
                                   compute='_compute_module_count',
                                   store=True)
 
+    implemented_date = fields.Date()
+
     author_ids = fields.One2many(comodel_name='odoo.author',
                                  string='Authors', inverse_name='partner_id',
                                  readonly=True)
+
+    developed_module_ids = fields.Many2many(
+        string='Developed Modules',
+        comodel_name='product.template',
+        relation='product_module_res_partner_rel',
+        column1='partner_id',
+        column2='product_template_id',
+        compute='_compute_developed_modules',
+        store=True)
+
+    favourite_module_ids = fields.Many2many(
+        string='Favourite Modules',
+        comodel_name='product.template',
+        relation='favourite_product_module_res_partner_rel',
+        column1='partner_id',
+        column2='product_template_id', readonly=True)
+
+    sponsorship_line_ids = fields.One2many(
+        string='Sponsorship Activities',
+        comodel_name='sponsorship.line',
+        inverse_name='partner_id')
+
+    @api.multi
+    @api.depends('github_organization')
+    def _compute_github_organization_url(self):
+        github_url = 'https://github.com/'
+        for record in self:
+            if record.is_company:
+                github_organization = record.github_organization
+                if github_organization:
+                    record.github_organization_url = \
+                        github_url + github_organization
+                else:
+                    record.github_organization_url = False
 
     @api.depends(
         'child_ids',
@@ -69,8 +112,29 @@ class ResPartner(models.Model):
             partner.member_count = member_mapped_data.get(partner.id, 0)
 
     @api.multi
-    @api.depends('author_ids', 'author_ids.partner_id')
+    @api.depends('author_ids', 'author_ids.partner_id',
+                 'author_ids.module_qty')
     def _compute_module_count(self):
         for partner in self:
             partner.module_count = sum(
                 [author.module_qty for author in partner.author_ids])
+
+    @api.multi
+    @api.depends('author_ids', 'is_integrator',
+                 'author_ids.module_ids.product_template_id')
+    def _compute_developed_modules(self):
+        for partner in self:
+            if partner.is_integrator:
+                module_list = self.env['odoo.module'].search(
+                    [('author_ids', 'in', partner.author_ids.ids)])
+                product_list = self.env['product.template'].search(
+                    [('odoo_module_id', 'in', module_list.ids)])
+                partner.developed_module_ids = [(6, 0, product_list.ids)]
+
+    @api.multi
+    def write(self, vals):
+        # clear github organization data if partner is not company
+        if not vals.get('is_company', True):
+            vals['github_organization'] = False
+        res = super(ResPartner, self).write(vals)
+        return res
