@@ -9,7 +9,8 @@ class SponsorshipLine(models.Model):
 
     date_from = fields.Date(string='Join Date', required=True)
     date_end = fields.Date(string='End Date', required=True)
-    sponsorship_id = fields.Many2one(
-        comodel_name='product.product', string='Sponsorship Product')
+    sponsorship_id = fields.Many2one(comodel_name='product.product',
+                                     string='Sponsorship Product')
     partner_id = fields.Many2one(comodel_name='res.partner', string='Partner')
-    grade_id = fields.Many2one('res.partner.grade', 'Level', required=True)
+    grade_id = fields.Many2one(comodel_name='res.partner.grade',
+                               string='Level', required=True)
