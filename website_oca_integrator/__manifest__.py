@@ -28,6 +28,7 @@
         'views/website_oca_integrator_data.xml',
         'views/view_res_partner.xml',
         'views/view_odoo_author.xml',
+        'data/ir_cron.xml',
     ],
     'demo': [
         'demo/res_users.xml',

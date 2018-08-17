@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_sponsorship_line_partner_manager,sponsorship_line partner_manager,model_sponsorship_line,base.group_partner_manager,1,1,1,1
 access_sponsorship_line,sponsorship_line,model_sponsorship_line,,1,0,0,0
+access_contributor_module_reader,contributor_module reader,model_contributor_module,,1,0,0,0

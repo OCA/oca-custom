@@ -159,4 +159,37 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         </xpath>
     </template>
 
+    <template id="contributor_modules_list" name="Contributor Modules Lists"
+              inherit_id="website_partner.partner_detail">
+        <xpath expr="//div[hasclass('col-md-8')]" position="inside">
+            <t t-set="product_templates"
+               t-value="partner.contributor_module_line_ids.sorted(key='date_pr_merged',reverse=True).mapped('product_template_id').filtered('website_published')"/>
+            <t t-if="product_templates">
+                <div class="clearfix border_bottom">
+                    <h3 id="modules_list"
+                        style=" margin-bottom: 20px; border-bottom: solid 1px #ccc; padding-bottom: 20px;">
+                        Latest Contributed Modules
+                    </h3>
+                </div>
+                <div class="row">
+                    <div>
+                        <div class="border_bottom">
+                            <div class="col-sm-4"
+                                 t-foreach="product_templates"
+                                 t-as="module"
+                                 style="display: flex; align-items: center;">
+                                <!-- if product has image then display it, otherwise display default module icon -->
+                                <img t-attf-src="#{'/web/image/product.template/%s/image' %(module.id) if module.image else '/base/static/description/icon.png'}"
+                                     style="margin-right: 10px; height: 70px"/>
+                                <a t-attf-href="/shop/product/#{slug(module)}">
+                                    <strong t-field="module.name"/>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
 </odoo>
