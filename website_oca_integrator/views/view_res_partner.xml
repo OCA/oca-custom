@@ -19,7 +19,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     </group>
                 </page>
                 <page name="author" string="Authors &amp; Modules">
-                    <group colspan="2" col="2">
+                    <group colspan="2" col="2" attrs="{'invisible': [('is_company', '=', False)]}">
                         <separator string="Authors" colspan="2"/>
                         <field name="author_ids">
                             <tree>
@@ -27,12 +27,20 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             </tree>
                         </field>
                     </group>
-                    <group colspan="2" col="2">
+                    <group colspan="2" col="2" attrs="{'invisible': [('is_company', '=', False)]}">
                         <separator string="Module Information" colspan="2"/>
                         <field name="developed_module_ids"
                                widget="many2many_tags"/>
                         <field name="favourite_module_ids"
                                widget="many2many_tags"/>
+                    </group>
+                    <group colspan="2" col="2" attrs="{'invisible': [('is_company', '=', True)]}">
+                        <field name="contributor_module_line_ids">
+                            <tree editable="bottom">
+                                <field name="product_template_id"/>
+                                <field name="date_pr_merged"/>
+                            </tree>
+                        </field>
                     </group>
                 </page>
             </page>
