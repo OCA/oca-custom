@@ -4,8 +4,8 @@
 from odoo import fields, models
 
 
-class ContributorModule(models.Model):
-    _name = 'contributor.module'
+class ContributorModuleLine(models.Model):
+    _name = 'contributor.module.line'
 
     product_template_id = fields.Many2one(
         string='Odoo Module',
@@ -13,6 +13,7 @@ class ContributorModule(models.Model):
         required=True
     )
 
-    partner_id = fields.Many2one(comodel_name='res.partner', string="Partner")
+    partner_id = fields.Many2one(comodel_name='res.partner', string="Partner",
+                                 required=True)
 
     date_pr_merged = fields.Datetime(string="Merged date of PR", required=True)

@@ -1,4 +1,5 @@
 # Copyright 2018 Surekha Technologies (https://www.surekhatech.com)
+# Part of Odoo. See Odoo LICENSE file for full copyright and licensing details.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import werkzeug
