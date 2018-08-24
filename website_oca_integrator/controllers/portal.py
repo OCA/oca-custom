@@ -12,7 +12,7 @@ from odoo.addons.portal.controllers.portal import CustomerPortal
 class IntegratorPortal(CustomerPortal):
     OPTIONAL_BILLING_FIELDS = CustomerPortal.OPTIONAL_BILLING_FIELDS + \
         ['github_organization', 'favourite_module_ids',
-            'website_short_description', 'website_description', 'files']
+            'website_short_description', 'website_description']
 
     @route()
     def account(self, redirect=None, **post):
@@ -45,3 +45,13 @@ class IntegratorPortal(CustomerPortal):
         modules = integrator.favourite_module_ids
         modules_data = ([{'id': m.id, 'name': m.name} for m in modules])
         return json.dumps(modules_data)
+
+    def details_form_validate(self, data):
+        # after adding HTML editor in portal page, if we click on
+        # 'Confirm' button then, 'files' key is passed in post data.
+        # this field does not exist in 'res.partner'. removed this
+        # key to prevent an error of "Unknown field 'files'".
+        data.pop('files', False)
+        error, error_message = super(IntegratorPortal, self)\
+            .details_form_validate(data)
+        return error, error_message
