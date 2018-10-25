@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2018 Surekha Technologies (https://www.surekhatech.com)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="res_partner_contact_1_demo" model="res.partner">
+        <field name="name">Rusty Collins</field>
+        <field name="parent_id" eval="ref('partner_integrator_portal_demo')"/>
+        <field name="function">Service Manager</field>
+        <field name="email">rusty@yourcompany.example.com</field>
+        <field name="github_login">demo-git-rusty</field>
+    </record>
+
+    <record id="res_partner_contact_2_demo" model="res.partner">
+        <field name="name">Diane Sanford</field>
+        <field name="parent_id" eval="ref('partner_integrator_portal_demo')"/>
+        <field name="function">Service Manager</field>
+        <field name="email">diane@yourcompany.example.com</field>
+        <field name="website_published">True</field>
+        <field name="github_login">demo-git-diane</field>
+    </record>
+
+    <record id="res_partner_contact_3_demo" model="res.partner">
+        <field name="name">Patricia Coley</field>
+        <field name="parent_id" eval="ref('partner_integrator_portal_demo')"/>
+        <field name="function">Store Manager</field>
+        <field name="email">joseph@yourcompany.example.com</field>
+        <field name="github_login">demo-git-patricia</field>
+    </record>
+
+</odoo>

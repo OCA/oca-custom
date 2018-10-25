@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2018 Surekha Technologies (https://www.surekhatech.com)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <!-- Add integrators link in footer -->
+    <template id="integrator_footer" inherit_id="website.footer_default"
+              name="Footer Integrators Link">
+        <xpath expr="//div[@id='info']/ul" position="inside">
+            <li>
+                <a href="/integrators">Integrators</a>
+            </li>
+        </xpath>
+    </template>
+
+    <!-- Integrator layout -->
+    <template id="integrator_layout" name="Integrators Layout">
+        <t t-call="website.layout">
+            <t t-set="additional_title">OCA Integrators</t>
+            <div id="wrap">
+                <div class="oe_structure"/>
+                <div class="container mt16">
+                    <div class="row">
+                        <t t-raw="ref_content"/>
+                    </div>
+                </div>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </template>
+
+    <!-- Integrator listing -->
+    <template id="integrator_index" name="Find Integrators">
+        <t t-call="website_oca_integrator.integrator_layout">
+            <t t-set="ref_content">
+                <div class="col-md-12">
+                    <h1 class="text-center">
+                        Which organizations support the OCA?
+                    </h1>
+                    <h2 class="text-center text-muted">
+                        Our Integrators
+                    </h2>
+                </div>
+
+                <!-- display integrators by country wise -->
+                <div class="col-md-3 mb32" id="integrator_left">
+                    <ul id="integrators_countries"
+                        class="nav nav-pills nav-stacked mt16">
+                        <li class="nav-header">
+                            <h3>Filter by Country</h3>
+                        </li>
+                        <t t-foreach="countries" t-as="country">
+                            <li t-if="country['country_id']"
+                                t-att-class="country['active'] and 'active' or None">
+                                <a t-attf-href="/integrators#{country['country_id'][0] and '/country/%s' % country['country_id'][0] or '' }#{ '?' + (search_path or '') + (country['country_id'][0] == 0 and '&amp;country_all=True' or '')}">
+                                    <span class="badge pull-right"
+                                          t-esc="country['country_id_count'] or ''"/>
+                                    <t t-esc="country['country_id'][1]"/>
+                                </a>
+                            </li>
+                        </t>
+                    </ul>
+                </div>
+
+                <!-- integrators content -->
+                <div class="col-md-8 col-md-offset-1" id="ref_content">
+                    <div class='navbar'>
+                        <div>
+                            <t t-call="website.pager"/>
+                            <form action="" method="get"
+                                  class="navbar-search pull-right pagination form-inline">
+                                <div class="form-group pull-right">
+                                    <input type="text" name="search"
+                                           class="search-query col-md-2 mt4 form-control"
+                                           placeholder="Search"
+                                           t-att-value="searches.get('search', '')"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <p t-if="not integrators">No result found</p>
+                        <t t-foreach="integrators" t-as="integrator">
+                            <div class="media">
+                                <a class="pull-left"
+                                   t-attf-href="/integrators/#{slug(integrator)}?#{current_grade and 'grade_id=%s&amp;' % current_grade.id}#{current_country and 'country_id=%s' % current_country.id}"
+                                   t-field="integrator.image"
+                                   t-options='{"widget": "image", "class": "media-object", "max_width": 128}'
+                                />
+
+                                <div class="media-body o_partner_body"
+                                     style="min-height: 64px;">
+                                    <a class="media-heading"
+                                       t-attf-href="/integrators/#{slug(integrator)}?#{current_grade and 'grade_id=%s&amp;' % current_grade.id}#{current_country and 'country_id=%s' % current_country.id}">
+                                        <span t-field="integrator.display_name"/>
+                                    </a>
+                                    <t t-if="integrator.sponsorship_line_ids">
+                                        <t t-set="today_date"
+                                           t-value="datetime.datetime.now().strftime('%Y-%m-%d')"/>
+                                        <t t-set="current_sponsorships"
+                                           t-value="integrator.sponsorship_line_ids.filtered(lambda sponsorship: sponsorship.date_end &gt;= today_date and sponsorship.date_from &lt;= today_date)"/>
+                                        <t t-foreach="current_sponsorships"
+                                           t-as="sponsorship">
+                                            <img t-att-src="'data:image/png;base64,%s'%to_text(sponsorship.sponsorship_id.image_medium)"
+                                                 height="50" width="50"
+                                                 alt=""/>
+                                        </t>
+                                    </t>
+                                    <div t-field="integrator.website_short_description"/>
+                                    <t t-if="any([p.website_published for p in integrator.implemented_partner_ids])">
+                                        <small>
+                                            <a t-attf-href="/integrators/#{slug(integrator)}#reference_column">
+                                                <t t-esc="integrator.implemented_count"/>
+                                                reference(s)
+                                            </a>
+                                        </small>
+                                    </t>
+                                    <t t-if="integrator.contributor_count">
+                                        <small>
+                                            <a t-attf-href="/integrators/#{slug(integrator)}#contributor_member_column">
+                                                <t t-esc="integrator.contributor_count"/>
+                                                contributor(s)
+                                            </a>
+                                        </small>
+                                    </t>
+                                    <t t-if="integrator.member_count">
+                                        <small>
+                                            <a t-attf-href="/integrators/#{slug(integrator)}#contributor_member_column">
+                                                <t t-esc="integrator.member_count"/>
+                                                member(s)
+                                            </a>
+                                        </small>
+                                    </t>
+                                    <t t-if="integrator.module_count">
+                                        <small>
+                                            <a t-attf-href="/integrators/#{slug(integrator)}#module_column">
+                                                <t t-esc="integrator.module_count"/>
+                                                module(s)
+                                            </a>
+                                        </small>
+                                    </t>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                    <div class='navbar'>
+                        <t t-call="website.pager">
+                            <t t-set="classname">pull-left</t>
+                        </t>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <!-- Display world map of integrator -->
+    <template id="integrator_world_map"
+              inherit_id="website_oca_integrator.integrator_index"
+              customize_show="True"
+              name="Left World Map">
+        <xpath expr="//ul[@id='integrators_countries']" position="after">
+            <t t-if="google_maps_api_key">
+                <!-- modal for large map -->
+                <div class="modal fade partner_map_modal" tabindex="-1"
+                     role="dialog" aria-labelledby="myLargeModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close"
+                                        data-dismiss="modal"
+                                        aria-hidden="true">×
+                                </button>
+                                <h4 class="modal-title">World Map</h4>
+                            </div>
+                            <iframe t-attf-src="/google_map/?width=898&amp;height=485&amp;partner_ids=#{ google_map_integrator_ids }&amp;integrator_url=/integrators/"
+                                    style="width:898px; height:485px; border:0; padding:0; margin:0;"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- modal end -->
+                <h3>World Map
+                    <button class="btn btn-link" data-toggle="modal"
+                            data-target=".partner_map_modal">
+                        <span class="fa fa-external-link"/>
+                    </button>
+                </h3>
+                <ul class="nav">
+                    <iframe t-attf-src="/google_map?width=260&amp;height=240&amp;partner_ids=#{ google_map_integrator_ids }&amp;integrator_url=/integrators/"
+                            style="width:260px; height:240px; border:0; padding:0; margin:0;"
+                            scrolling="no"/>
+                </ul>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- Integrator's detail page -->
+    <template id="integrators" name="Integrator detail">
+        <t t-call="website_oca_integrator.integrator_layout">
+            <t t-set="ref_content">
+                <div class="col-md-5">
+                    <ol t-if="not edit_page" class="breadcrumb">
+                        <li>
+                            <a t-attf-href="/integrators#{current_country and '/country/%s' % slug(current_country)}">
+                                Our Integrators
+                            </a>
+                        </li>
+                        <li class="active">
+                            <span t-field="integrator.display_name"/>
+                        </li>
+                    </ol>
+                </div>
+                <t t-call="website_partner.partner_detail">
+                    <t t-set="left_column">
+                        <t t-set="partner"
+                           t-value="integrator"/> <!-- website_partner.partner_detail template use "partners" -->
+                        <t t-if="sponsorship_lines">
+                            <div class="well">
+                                <div class="row">
+                                    <h3 class="text-center"
+                                        style="margin-bottom: 24px; padding-bottom: 10px; border-bottom: solid 1px #ccc; margin: auto; width: 249px; left: #{ '25%' if len(memberships_lines) == 1 else '' }">
+                                        Sponsorship Details
+                                    </h3>
+                                    <div>
+                                        <ul style="font-size: 14px; list-style-type: decimal; text-align: left; width: 290px; margin: auto; margin-top: 15px">
+                                            <li t-foreach="sponsorship_lines"
+                                                t-as="sponsorship">
+                                                <span t-field="sponsorship.date_from"
+                                                      t-options='{"format": "dd/MM/yyyy"}'/>
+                                                <span>-</span>
+                                                <span t-field="sponsorship.date_end"
+                                                      t-options='{"format": "dd/MM/yyyy"}'/>
+                                                <span>(</span><span t-field="sponsorship.grade_id.name"/><span>)</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                        <div id="contributor_member_column" class="mb16">
+                            <div class="well"
+                                 style="padding: 4px; text-align: center;">
+                                <h4>
+                                    <a t-attf-href="/integrators/#{slug(integrator)}/contributors/">
+                                        Click here
+                                    </a>
+                                    to view Contributors/Members
+                                </h4>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-set="right_column">
+                        <div id="reference_column" class="mb16">
+                            <t t-call="website_oca_integrator.integrator_references_block"/>
+                        </div>
+                        <div id="module_column" class="mb16">
+                            <t t-call="website_oca_integrator.integrator_modules_list"/>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- Integrator github url -->
+    <template id="integrator_github_url"
+              inherit_id="website_partner.partner_detail"
+              name="Integrator Github Link">
+        <xpath expr="//div[hasclass('col-md-4')]/address" position="inside">
+            <t t-if="integrator and integrator.github_organization_url">
+                <div>
+                    <i class="fa fa-github" style="font-size: 16px"/>
+                    <a t-att-href="integrator.github_organization_url">
+                        <span t-field="integrator.github_organization_url"/>
+                    </a>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- Hide grade level for integrator -->
+    <template id="integrator_grade_detail"
+              inherit_id="website_crm_partner_assign.grade_in_detail">
+        <xpath expr="//h3" position="replace">
+            <t t-if="not integrator">
+                <h3 class="col-md-12 text-center text-muted"
+                    t-if="partner.grade_id and partner.grade_id.website_published">
+                    <span t-field="partner.grade_id"/>
+                    Partner
+                </h3>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- Integrator references -->
+    <template id="integrator_references_block"
+              name="Integrator References Block">
+        <t t-if="references">
+            <h3 style=" margin-bottom: 20px; border-bottom: solid 1px #ccc; padding-bottom: 15px;"
+                id="references">References
+            </h3>
+            <div t-foreach="references" t-as="reference" class="media">
+                <a class="pull-left"
+                   t-attf-href="/customers/#{slug(reference)}">
+                    <span t-field="reference.image_small"
+                          t-options='{"widget": "image", "class": "center-block"}'/>
+                </a>
+                <div class="media-body" style="min-height: 64px;">
+                    <a class="media-heading"
+                       t-attf-href="/customers/#{slug(reference)}">
+                        <span t-field="reference.self"/>
+                    </a>
+                    <div t-field='reference.website_short_description'/>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Integrator's module list-->
+    <template id="integrator_modules_list" name="Integrator Modules Lists">
+        <t t-if="modules_list">
+            <div class="clearfix border_bottom">
+                <h3 id="modules_list"
+                    style=" margin-bottom: 20px; border-bottom: solid 1px #ccc; padding-bottom: 20px;">
+                    Modules
+                    <t t-if="display_all_modules">
+                        <a t-attf-href="/shop/?&amp;integrator=#{slug(partner)}"
+                           style="margin-top: -10px;"
+                           class="btn btn-info pull-right" role="button">View
+                            All Modules
+                        </a>
+                    </t>
+                </h3>
+            </div>
+            <div class="row">
+                <div>
+                    <div class="border_bottom">
+                        <div class="col-sm-4" t-foreach="modules_list"
+                             t-as="module"
+                             style="display: flex; align-items: center;">
+                            <!-- if product has image then display it, otherwise display default module icon -->
+                            <img t-attf-src="#{'/web/image/product.template/%s/image' %(module.id) if module.image else '/base/static/description/icon.png'}"
+                                 style="margin-right: 10px; height: 70px"/>
+                            <a t-attf-href="/shop/product/#{slug(module)}">
+                                <strong t-field="module.name"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>
