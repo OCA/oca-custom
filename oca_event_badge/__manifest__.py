@@ -1,11 +1,12 @@
 # Copyright 2018 ACSONE SA/NV
+# Copyright 2018 Tecnativa - Cristina Martin R.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     'name': 'OCA Event Badge',
     'summary': """
         Creates Custom Event Badges based on the Partner Tags""",
-    'version': '11.0.1.0.0',
+    'version': '12.0.1.0.0',
     'license': 'AGPL-3',
     'author': 'ACSONE SA/NV,Odoo Community Association (OCA)',
     'website': 'https://github.com/OCA/oca-custom',
