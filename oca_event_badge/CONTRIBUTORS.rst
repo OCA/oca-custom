@@ -1,1 +1,0 @@
-* Gilles Meyomesse gilles.meyomesse@acsone.eu (https://acsone.eu)
