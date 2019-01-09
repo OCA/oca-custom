@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="project.edit_project"/>
         <field name="arch" type="xml">
             <notebook>
-                <page string="members" name="members">
+                <page string="Members" name="members">
                     <field name="members"/>
                 </page>
             </notebook>
