@@ -23,7 +23,7 @@ Project Members
     :target: https://runbot.odoo-community.org/runbot/273/12.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module adds a tab *Members* to the project which allows you to specify
 which users belong to.
