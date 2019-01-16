@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-oca-custom Odoo addons",
     version=version,
     install_requires=[
+        'odoo12-addon-oca_event_badge',
         'odoo12-addon-project_members',
     ],
     classifiers=[
