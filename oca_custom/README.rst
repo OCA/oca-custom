@@ -23,7 +23,7 @@ OCA Custom Settings
     :target: https://runbot.odoo-community.org/runbot/273/12.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 Custom module for OCA Instance.
 
@@ -63,8 +63,8 @@ Contributors
 * Sylvain LE GAL (https://twitter.com/legalsylvain)
 * Benoit GUILLOT (benoit.guillot@akretion.com)
 * Stéphane Bidoul (stephane.bidoul@acsone.eu)
-* Vicent Cubells
-* Cristina Martin R.
+* Vicent Cubells (vicent.cubells@tecnativa.com)
+* Cristina Martin R. (cristina.martin@tecnativa.com)
 
 Maintainers
 ~~~~~~~~~~~
