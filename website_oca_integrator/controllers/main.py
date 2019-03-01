@@ -82,7 +82,7 @@ class WebsiteIntegrator(http.Controller):
         # search integrators matching current search parameters
         integrator_ids = partner_obj.sudo().search(
             base_integrator_domain, 
-            order="grade_id ASC NULLS LAST, implemented_count DESC,"
+            order="grade_id ASC, implemented_count DESC,"
                   "contributor_count DESC, member_count DESC,"
                   "display_name ASC",
             offset=pager['offset'], limit=self._references_per_page)
