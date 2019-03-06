@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2019 Surekha Technologies (https://www.surekhatech.com)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <!-- Project -->
+    <record id="project_project_1_demo" model="project.project">
+        <field name="sequence">10</field>
+        <field name="name">Database migration</field>
+        <field name="label_tasks">Database</field>
+        <field name="user_id" ref="base.user_demo"/>
+        <field name="type_ids" eval="[(4, ref('project.project_stage_0')), (4, ref('project.project_stage_1')), (4, ref('project.project_stage_2')), (4, ref('project.project_stage_3'))]"/>
+        <field name="privacy_visibility">employees</field>
+        <field name="description">
+            This OCA project aims to provide an Open Source upgrade path for Odoo. It is hosted at GitHub.
+        </field>
+        <field name="image" type="base64" file="website_oca_psc_team/static/src/img/database_migration.jpg"/>
+    </record>
+
+</odoo>
