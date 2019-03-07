@@ -3,9 +3,9 @@
 # @author: Alexandre Fayolle
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
-    'name': 'project members',
-    'description': 'add members to projects',
-    'summary': 'add members to projects'
+    'name': 'Project members',
+    'description': 'Add members to projects',
+    'summary': 'Add members to projects',
     'version': '10.0.1.0.0',
     'category': 'Project',
     'depends': ['project'],
