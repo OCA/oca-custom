@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2019 Surekha Technologies (https://www.surekhatech.com)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="psc_category_1_demo" model="psc.category">
+        <field name="name">Business Topics Teams</field>
+        <field name="sequence">10</field>
+        <field name="description">Accounting, Sales, Logistics, ...</field>
+        <field name="project_ids"
+               eval="[(4, ref('project_project_1_demo')),
+                      (4, ref('project_project_2_demo')),
+                      (4, ref('project_project_3_demo'))]"/>
+    </record>
+
+    <record id="psc_category_2_demo" model="psc.category">
+        <field name="name">Vertical Interest Teams</field>
+        <field name="sequence">10</field>
+        <field name="description">Hotel, Construction, Medical, ...</field>
+        <field name="project_ids"
+               eval="[(4, ref('project_project_4_demo')),
+                      (4, ref('project_project_5_demo'))]"/>
+    </record>
+
+</odoo>
