@@ -7,7 +7,7 @@
     'summary': 'Custom Settings for OCA Instance',
     'version': '10.0.1.0.0',
     'category': 'Custom',
-    'author': 
+    'author':
         'GRAP,'
         'Akretion,'
         'Odoo Community Association (OCA)',
