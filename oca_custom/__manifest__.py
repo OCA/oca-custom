@@ -5,13 +5,13 @@
 {
     'name': 'OCA Custom Settings',
     'summary': 'Custom Settings for OCA Instance',
-    'version': '10.0.0.0.0',
+    'version': '10.0.1.0.0',
     'category': 'Custom',
-    'author': [
-        'GRAP',
-        'Akretion',
+    'author':
+        'GRAP,'
+        'Akretion,'
         'Odoo Community Association (OCA)',
-    ],
+    'license': 'AGPL-3',
     'depends': [
         'github_connector',
     ],
