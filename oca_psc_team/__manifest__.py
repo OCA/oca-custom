@@ -13,7 +13,6 @@
         'project',
         'github_connector',
         'project_members',
-        'website',
     ],
     'data': [
         'security/ir.model.access.csv',

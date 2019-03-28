@@ -24,7 +24,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                         <field name="short_description"/>
                         <field name="description"/>
                         <field name="github_repository_ids"
-                               widget="many2many"/>
+                               options="{'no_create': True}"
+                               widget="many2many_tags"/>
                     </group>
                 </page>
             </notebook>
