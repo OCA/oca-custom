@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo11-addon-oca_custom',
         'odoo11-addon-oca_event_badge',
+        'odoo11-addon-oca_psc_team',
         'odoo11-addon-project_members',
         'odoo11-addon-website_oca_integrator',
     ],
