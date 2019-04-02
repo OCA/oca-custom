@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2019 Surekha Technologies (https://www.surekhatech.com)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <!-- Create project manager partner -->
+    <record id="project_manager_partner_demo" model="res.partner">
+        <field name="name">Project Manager</field>
+        <field name="email">project_manager@yourcompany.example.com</field>
+        <field name="image" type="base64"
+               file="base/static/src/img/avatar.png"/>
+        <field name="country_id" ref="base.in"/>
+    </record>
+
+    <!-- Create project manager user -->
+    <record id="project_manager_user_demo" model="res.users"
+            context="{'no_reset_password': True}">
+        <field name="partner_id"
+               ref="website_oca_psc_team.project_manager_partner_demo"/>
+        <field name="login">project_manager_demo</field>
+        <field name="password">project_manager_demo</field>
+        <field name="groups_id" eval="[(6, 0, [ref('project.group_project_manager'),
+                                               ref('website.group_website_designer'),
+                                               ref('base.group_user')])]"/>
+    </record>
+
+</odoo>
