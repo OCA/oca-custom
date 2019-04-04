@@ -13,6 +13,7 @@ setuptools.setup(
         'odoo11-addon-oca_psc_team',
         'odoo11-addon-project_members',
         'odoo11-addon-website_oca_integrator',
+        'odoo11-addon-website_oca_psc_team',
     ],
     classifiers=[
         'Programming Language :: Python',
