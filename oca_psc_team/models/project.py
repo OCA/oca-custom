@@ -60,4 +60,5 @@ class ProjectProject(models.Model):
         # up to 3 lines.
         if len(self.short_description) >= 75:
             raise ValidationError(_(
-                'Number of characters must be less then or equal to 75.'))
+                'Number of characters must be less then or equal to 75 for '
+                '\'Short Description\' field.'))

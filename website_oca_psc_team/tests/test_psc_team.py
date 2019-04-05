@@ -41,7 +41,7 @@ class TestPSCTeamsController(HttpCase):
         cr = self.registry.cursor()
         assert cr == self.registry.test_cr
         user_id = self.env.ref(
-            'website_oca_psc_team.project_manager_partner_demo').id
+            'website_oca_psc_team.project_manager_user_demo').id
         env = Environment(cr, user_id, {})
 
         app_store_project_id = self.browse_ref(

@@ -19,7 +19,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                eval="[(4, ref('base.user_demo'))]"/>
         <field name="short_description">OCA Apps store module repository.</field>
         <field name="github_repository_ids"
-               eval="[(4, ref('github_repository_1_demo'))]"/>
+               eval="[(4, ref('github_repository_6_demo'))]"/>
         <field name="description">
             Providing facility for displaying the module specific information in
             a standard Odoo e-commerce website (front-end) and download the zip

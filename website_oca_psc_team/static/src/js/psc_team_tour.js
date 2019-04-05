@@ -40,7 +40,7 @@ odoo.define("website_oca_psc_team.psc_team_project_tour", function (require) {
             },
 
             {
-                content: "Clik here to save changes.",
+                content: "Click here to save changes.",
                 trigger: "button[data-action=save]",
             },
 
