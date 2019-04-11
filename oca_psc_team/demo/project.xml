@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2019 Surekha Technologies (https://www.surekhatech.com)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <!-- Project -->
+    <record id="project_project_1_demo" model="project.project">
+        <field name="name">Apps store</field>
+        <field name="sequence">10</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="type_ids"
+               eval="[(4, ref('project.project_stage_0')),
+                      (4, ref('project.project_stage_1')),
+                      (4, ref('project.project_stage_2')),
+                      (4, ref('project.project_stage_3'))]"/>
+        <field name="privacy_visibility">employees</field>
+        <field name="members"
+               eval="[(4, ref('base.user_demo'))]"/>
+        <field name="short_description">OCA Apps store module repository.</field>
+        <field name="github_repository_ids"
+               eval="[(4, ref('github_repository_6_demo'))]"/>
+        <field name="description">
+            Providing facility for displaying the module specific information in
+            a standard Odoo e-commerce website (front-end) and download the zip
+            file of the selected product.
+
+            Contribute to OCA/apps-store development by creating an account on
+            GitHub.
+        </field>
+        <field name="image"
+               type="base64"
+               file="oca_psc_team/static/src/img/project_apps_store.png"/>
+    </record>
+
+    <record id="project_project_2_demo" model="project.project">
+        <field name="name">Project &amp; Services</field>
+        <field name="sequence">10</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="type_ids"
+               eval="[(4, ref('project.project_stage_0')),
+                      (4, ref('project.project_stage_1')),
+                      (4, ref('project.project_stage_2')),
+                      (4, ref('project.project_stage_3'))]"/>
+        <field name="privacy_visibility">employees</field>
+        <field name="members"
+               eval="[(4, ref('base.user_demo'))]"/>
+        <field name="short_description">Find modules related to project &amp; services management.</field>
+        <field name="description"><![CDATA[
+            Find relevant modules for service business processes or companies.
+            This project aims to extend Odoo on contract management features, such as:
+            <ul>
+                <li>Manage sold hours in advance</li>
+                <li>Invoice on contract basis</li>
+                <li>...</li>
+            </ul>
+            ]]>
+        </field>
+        <field name="github_repository_ids"
+               eval="[(4, ref('github_repository_2_demo'))]"/>
+        <field name="image"
+               type="base64"
+               file="oca_psc_team/static/src/img/project_services.png"/>
+    </record>
+
+    <record id="project_project_3_demo" model="project.project">
+        <field name="name">Tools &amp; Administration</field>
+        <field name="sequence">10</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="type_ids"
+               eval="[(4, ref('project.project_stage_0')),
+                      (4, ref('project.project_stage_1')),
+                      (4, ref('project.project_stage_2')),
+                      (4, ref('project.project_stage_3'))]"/>
+        <field name="privacy_visibility">employees</field>
+        <field name="members"
+               eval="[(4, ref('base.user_demo'))]"/>
+        <field name="short_description">Modules and toolbox to improve your Odoo experience.</field>
+        <field name="github_repository_ids"
+               eval="[(4, ref('oca_psc_team.github_repository_3_demo'))]"/>
+        <field name="description">
+            Tools for Odoo Administrators to improve some technical features on
+            Odoo.
+        </field>
+        <field name="image"
+               type="base64"
+               file="oca_psc_team/static/src/img/project_tools_administration.png"/>
+    </record>
+
+    <record id="project_project_4_demo" model="project.project">
+        <field name="name">Construction</field>
+        <field name="sequence">10</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="type_ids"
+               eval="[(4, ref('project.project_stage_0')),
+                      (4, ref('project.project_stage_1')),
+                      (4, ref('project.project_stage_2')),
+                      (4, ref('project.project_stage_3'))]"/>
+        <field name="privacy_visibility">employees</field>
+        <field name="members"
+               eval="[(4, ref('base.user_demo'))]"/>
+        <field name="short_description">Modules for Construction companies.</field>
+        <field name="github_repository_ids"
+               eval="[(4, ref('github_repository_4_demo'))]"/>
+        <field name="description"><![CDATA[
+            These modules introduce the concept of an architect of a
+            construction project.
+
+            <ul>
+                <li>A partner can be an architect (company, individual,
+                    employee, ...)
+                </li>
+                <li>An opportunity/lead can have a architect related to it.</li>
+                <li>Projects can have a an architect related to it.</li>
+            </ul>
+            ]]>
+        </field>
+        <field name="image"
+               type="base64"
+               file="oca_psc_team/static/src/img/project_construction.png"/>
+    </record>
+
+    <record id="project_project_5_demo" model="project.project">
+        <field name="name">Vertical Medical</field>
+        <field name="sequence">10</field>
+        <field name="type_ids"
+               eval="[(4, ref('project.project_stage_0')),
+                      (4, ref('project.project_stage_1')),
+                      (4, ref('project.project_stage_2')),
+                      (4, ref('project.project_stage_3'))]"/>
+        <field name="privacy_visibility">employees</field>
+        <field name="members"
+               eval="[(4, ref('base.user_demo'))]"/>
+        <field name="short_description">Modules for hospitals and drugs management.</field>
+        <field name="github_repository_ids"
+               eval="[(4, ref('oca_psc_team.github_repository_5_demo'))]"/>
+        <field name="description">
+            Vertical Medical provides a Free and Open Source solution for
+            storing and processing medical records in Odoo.
+
+            Many of the workflow were built in alignment with existing Odoo
+            processes to allow for seamless operation with other record types.
+        </field>
+        <field name="image"
+               type="base64"
+               file="oca_psc_team/static/src/img/project_vertical_medical.png"/>
+    </record>
+
+</odoo>
