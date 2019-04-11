@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2019 Surekha Technologies (https://www.surekhatech.com)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <template id="assets_psc_team_frontend"
+              name="website_oca_psc_team assets"
+              inherit_id="web.assets_frontend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet"
+                  href="website_oca_psc_team/static/src/css/website_oca_psc_team.css"/>
+            <script type="text/javascript"
+                    src="website_oca_psc_team/static/src/js/psc_team_tour.js"/>
+        </xpath>
+    </template>
+
+</odoo>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2019 Surekha Technologies (https://www.surekhatech.com)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <!-- Common layout for both PSC teams list page and PSC detail page -->
+    <template id="psc_page_layout" name="PSC Page Layout">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="oe_structure"/>
+                <t t-raw="psc_header"/>
+                <div class="container mt16">
+                    <div class="row o_web_psc_team">
+                        <t t-raw="psc_content"/>
+                    </div>
+                </div>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </template>
+
+    <!-- PSC teams list-->
+    <template id="psc_teams" name="PSC Teams List Page">
+        <t t-call="website_oca_psc_team.psc_page_layout">
+            <t t-set="additional_title">PSC Teams</t>
+            <t t-set="psc_content">
+                <t t-foreach="psc_categories" t-as="psc_category">
+                    <t t-set="psc_projects_length"
+                       t-value="len(psc_category.project_ids)"/>
+                    <t t-if="psc_projects_length">
+                        <div class="col-md-12 mb16 mb48 clearfix">
+                            <h1 class="text-center">
+                                <t t-esc="psc_category.name"/>
+                            </h1>
+                            <h3 class="text-center text-muted">
+                                <t t-esc="psc_category.description"/>
+                            </h3>
+                        </div>
+
+                        <div t-att-class="'col-md-12 mb16 %s clearfix' % ('o_web_psc_team_project'
+                                       if psc_projects_length &lt; 4 else '')">
+                            <t t-call="website_oca_psc_team.psc_team_projects"/>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- Project list of each PSC teams sorted by alphabetically -->
+    <template id="psc_team_projects" name="PSC Team Projects">
+        <div class="col-md-3 col-sm-6 o_web_psc_team_projects_list"
+             t-foreach="psc_category.project_ids.sorted(key=lambda p: p.name)"
+             t-as="project">
+            <div class="o_web_psc_team_project_detail">
+                <img t-att-src="'data:image/png;base64,%s'%to_text(project.image_medium)
+                     if project.image_medium else 'website_oca_psc_team/static/src/img/icon.png'"
+                     height="100"
+                     width="100"/>
+                <h3>
+                    <t t-esc="project.name"/>
+                </h3>
+                <div class="o_web_psc_team_project_short_description">
+                    <p class="text-muted">
+                        <t t-esc="project.short_description"/>
+                    </p>
+                </div>
+                <p>
+                    <a class="btn btn-info"
+                       t-attf-href="/psc-teams/#{slug(project)}">
+                        Discover
+                    </a>
+                </p>
+            </div>
+        </div>
+    </template>
+
+    <!-- PSC project's detail page -->
+    <template id="psc_project_detail" name="PSC Project's detail page">
+        <t t-call="website_oca_psc_team.psc_page_layout">
+            <t t-set="additional_title">
+                <t t-esc="project.name"/>
+            </t>
+            <t t-set="psc_header">
+                <div class="well well-lg mb48">
+                    <div class="container">
+                        <h1>
+                            <t t-esc="project.name"/>
+                        </h1>
+                        <div class="o_web_psc_team_project_description"
+                             t-field="project.description"/>
+                    </div>
+                </div>
+            </t>
+            <t t-set="psc_content">
+                <div class="col-md-4 col-sm-5 mb48">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <t t-call="website_oca_psc_team.oca_project_representative"/>
+                        </div>
+                        <div class="col-md-12">
+                            <t t-call="website_oca_psc_team.project_github_links"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-7 mb48">
+                    <t t-call="website_oca_psc_team.project_team_members"/>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <template id="oca_project_representative" name="Project Representative">
+        <div class="well">
+            <div class="o_web_psc_team_project_manager">
+                <h3>OCA Representative:</h3>
+                <ul>
+                    <li t-if="project.user_id.partner_id.website_published">
+                        <img t-att-src="'data:image/png;base64,%s'%to_text(project.user_id.image_small)
+                             if project.user_id.image_small else '/base/static/src/img/avatar.png'"
+                             height="48"
+                             width="48"/>
+                        <a t-attf-href="/partners/#{slug(project.user_id.partner_id)}">
+                            <t t-esc="project.user_id.name"/>
+                        </a>
+                    </li>
+                    <h5 t-else="">No OCA Representative found.</h5>
+                </ul>
+            </div>
+        </div>
+    </template>
+
+    <template id="project_github_links" name="Project Github Links">
+        <div class="well">
+            <div class="o_web_psc_team_project_repo">
+                <h3>Projects:</h3>
+                <ol t-if="project.github_repository_ids">
+                    <t t-foreach="project.github_repository_ids"
+                       t-as="github_repository">
+                        <li>
+                            <a t-attf-href="{{github_repository.organization_id.github_url
+                                + '/' + github_repository.name}}" target="_blank">
+                                <t t-esc="github_repository.github_login"/>
+                            </a>
+                        </li>
+                    </t>
+                </ol>
+                <h5 t-else="">No Project found.</h5>
+            </div>
+        </div>
+    </template>
+
+    <template id="project_team_members" name="Project Team Members">
+        <div class="o_web_psc_team_project_member_list">
+            <div class="col-md-12">
+                <h3>Team Members</h3>
+            </div>
+            <t t-set="project_members"
+               t-value="project.members.filtered('partner_id.website_published')"/>
+            <div class="col-md-6"
+                 t-foreach="project_members"
+                 t-as="member">
+                <div class="o_web_psc_team_project_member">
+                    <img t-att-src="'data:image/png;base64,%s'%to_text(member.image_small)
+                         if member.image_small else '/base/static/src/img/avatar.png'"
+                         height="48"
+                         width="48"/>
+                    <a t-attf-href="/partners/#{slug(member.partner_id)}">
+                        <t t-esc="member.name"/>
+                    </a>
+                </div>
+            </div>
+            <h5 t-if="not project_members">
+                No Team member found.
+            </h5>
+        </div>
+    </template>
+
+</odoo>
