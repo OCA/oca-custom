@@ -21,7 +21,7 @@ odoo.define("website_oca_psc_team.psc_team_project_tour", function (require) {
 
             {
                 content: "Click here to edit project page.",
-                extra_trigger: ".well",
+                extra_trigger: ".card-body",
                 trigger: ".o_menu_systray a[data-action=edit]",
             },
 
@@ -46,6 +46,7 @@ odoo.define("website_oca_psc_team.psc_team_project_tour", function (require) {
 
             {
                 content: "Go to psc teams page.",
+                extra_trigger: ".o_menu_systray a[data-action=edit]:visible",
                 trigger: "#top_menu li a[href='/psc-teams']",
             },
         ]

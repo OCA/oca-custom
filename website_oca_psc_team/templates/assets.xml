@@ -10,7 +10,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
               inherit_id="web.assets_frontend">
         <xpath expr="." position="inside">
             <link rel="stylesheet"
-                  href="website_oca_psc_team/static/src/css/website_oca_psc_team.css"/>
+                  href="website_oca_psc_team/static/src/scss/website_oca_psc_team.scss"/>
             <script type="text/javascript"
                     src="website_oca_psc_team/static/src/js/psc_team_tour.js"/>
         </xpath>
