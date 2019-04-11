@@ -30,7 +30,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     <t t-set="psc_projects_length"
                        t-value="len(psc_category.project_ids)"/>
                     <t t-if="psc_projects_length">
-                        <div class="col-md-12 mb16 mb48 clearfix">
+                        <div class="col-lg-12 mb16 mb48 clearfix">
                             <h1 class="text-center">
                                 <t t-esc="psc_category.name"/>
                             </h1>
@@ -39,7 +39,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             </h3>
                         </div>
 
-                        <div t-att-class="'col-md-12 mb16 %s clearfix' % ('o_web_psc_team_project'
+                        <div t-att-class="'col-lg-12 mb16 %s clearfix' % ('o_web_psc_team_project'
                                        if psc_projects_length &lt; 4 else '')">
                             <t t-call="website_oca_psc_team.psc_team_projects"/>
                         </div>
@@ -51,28 +51,30 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <!-- Project list of each PSC teams sorted by alphabetically -->
     <template id="psc_team_projects" name="PSC Team Projects">
-        <div class="col-md-3 col-sm-6 o_web_psc_team_projects_list"
-             t-foreach="psc_category.project_ids.sorted(key=lambda p: p.name)"
-             t-as="project">
-            <div class="o_web_psc_team_project_detail">
-                <img t-att-src="'data:image/png;base64,%s'%to_text(project.image_medium)
-                     if project.image_medium else 'website_oca_psc_team/static/src/img/icon.png'"
-                     height="100"
-                     width="100"/>
-                <h3>
-                    <t t-esc="project.name"/>
-                </h3>
-                <div class="o_web_psc_team_project_short_description">
-                    <p class="text-muted">
-                        <t t-esc="project.short_description"/>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 o_web_psc_team_projects_list"
+                 t-foreach="psc_category.project_ids.sorted(key=lambda p: p.name)"
+                 t-as="project">
+                <div class="o_web_psc_team_project_detail">
+                    <img t-att-src="'data:image/png;base64,%s'%to_text(project.image_medium)
+                         if project.image_medium else 'website_oca_psc_team/static/src/img/icon.png'"
+                         height="100"
+                         width="100"/>
+                    <h3>
+                        <t t-esc="project.name"/>
+                    </h3>
+                    <div class="o_web_psc_team_project_short_description">
+                        <p class="text-muted">
+                            <t t-esc="project.short_description"/>
+                        </p>
+                    </div>
+                    <p>
+                        <a class="btn btn-info"
+                           t-attf-href="/psc-teams/#{slug(project)}">
+                            Discover
+                        </a>
                     </p>
                 </div>
-                <p>
-                    <a class="btn btn-info"
-                       t-attf-href="/psc-teams/#{slug(project)}">
-                        Discover
-                    </a>
-                </p>
             </div>
         </div>
     </template>
@@ -84,7 +86,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <t t-esc="project.name"/>
             </t>
             <t t-set="psc_header">
-                <div class="well well-lg mb48">
+                <div class="card card-body bg-light mb48">
                     <div class="container">
                         <h1>
                             <t t-esc="project.name"/>
@@ -95,17 +97,17 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 </div>
             </t>
             <t t-set="psc_content">
-                <div class="col-md-4 col-sm-5 mb48">
+                <div class="col-lg-4 col-md-5 mb48">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-lg-12">
                             <t t-call="website_oca_psc_team.oca_project_representative"/>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-lg-12">
                             <t t-call="website_oca_psc_team.project_github_links"/>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8 col-sm-7 mb48">
+                <div class="col-lg-8 col-md-7 mb48">
                     <t t-call="website_oca_psc_team.project_team_members"/>
                 </div>
             </t>
@@ -113,7 +115,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     </template>
 
     <template id="oca_project_representative" name="Project Representative">
-        <div class="well">
+        <div class="card card-body bg-light">
             <div class="o_web_psc_team_project_manager">
                 <h3>OCA Representative:</h3>
                 <ul>
@@ -133,7 +135,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     </template>
 
     <template id="project_github_links" name="Project Github Links">
-        <div class="well">
+        <div class="card card-body bg-light mt24">
             <div class="o_web_psc_team_project_repo">
                 <h3>Projects:</h3>
                 <ol t-if="project.github_repository_ids">
@@ -153,13 +155,13 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     </template>
 
     <template id="project_team_members" name="Project Team Members">
-        <div class="o_web_psc_team_project_member_list">
-            <div class="col-md-12">
+        <div class="row o_web_psc_team_project_member_list">
+            <div class="col-lg-12">
                 <h3>Team Members</h3>
             </div>
             <t t-set="project_members"
                t-value="project.members.filtered('partner_id.website_published')"/>
-            <div class="col-md-6"
+            <div class="col-lg-6"
                  t-foreach="project_members"
                  t-as="member">
                 <div class="o_web_psc_team_project_member">
@@ -172,7 +174,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     </a>
                 </div>
             </div>
-            <h5 t-if="not project_members">
+            <h5 class="col-lg-6" t-if="not project_members">
                 No Team member found.
             </h5>
         </div>

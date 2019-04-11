@@ -10,7 +10,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="name">Project Manager</field>
         <field name="email">project_manager@yourcompany.example.com</field>
         <field name="image" type="base64"
-               file="base/static/src/img/avatar.png"/>
+               file="base/static/img/avatar.png"/>
         <field name="country_id" ref="base.in"/>
     </record>
 
