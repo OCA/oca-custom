@@ -4,7 +4,7 @@
     'name': 'OCA PSC Team',
     'summary': 'This module allows you to store PSC details in project.'
                'These details will be displayed in PSC Teams in website.',
-    'version': '11.0.1.0.0',
+    'version': '12.0.1.0.0',
     'category': 'Website',
     'license': 'AGPL-3',
     'website': 'https://github.com/OCA/oca-custom',
