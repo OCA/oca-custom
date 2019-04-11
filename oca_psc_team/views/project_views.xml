@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2019 Surekha Technologies (https://www.surekhatech.com)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="edit_project" model="ir.ui.view">
+        <field name="name">project.project.form</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/div[hasclass('oe_title')]"
+                   position="before">
+                <field name="image"
+                       widget='image' class="oe_avatar"
+                       options='{"preview_image": "image_medium"}'/>
+            </xpath>
+
+            <notebook>
+                <page string="PSC Details" name="psc_details">
+                    <group>
+                        <field name="psc_category_id"/>
+                        <field name="short_description"/>
+                        <field name="description"/>
+                        <field name="github_repository_ids"
+                               options="{'no_create': True}"
+                               widget="many2many_tags"/>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+</odoo>

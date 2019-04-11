@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2019 Surekha Technologies (https://www.surekhatech.com)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <!-- Github organization -->
+    <record id="github_organization_1_demo" model="github.organization">
+        <field name="name">Organization 1</field>
+        <field name="github_url">https://github.com/organization_1</field>
+        <field name="github_login">organization1_login</field>
+    </record>
+
+    <!-- Github repository -->
+    <record id="github_repository_2_demo" model="github.repository">
+        <field name="name">repository_2</field>
+        <field name="github_login">organization_1/repository_2</field>
+        <field name="organization_id" ref="github_organization_1_demo"/>
+    </record>
+
+    <record id="github_repository_3_demo" model="github.repository">
+        <field name="name">repository_3</field>
+        <field name="github_login">organization_1/repository_3</field>
+        <field name="organization_id" ref="github_organization_1_demo"/>
+    </record>
+
+    <record id="github_repository_4_demo" model="github.repository">
+        <field name="name">repository_4</field>
+        <field name="github_login">organization_1/repository_4</field>
+        <field name="organization_id" ref="github_organization_1_demo"/>
+    </record>
+
+    <record id="github_repository_5_demo" model="github.repository">
+        <field name="name">repository_5</field>
+        <field name="github_login">organization_1/repository_5</field>
+        <field name="organization_id" ref="github_organization_1_demo"/>
+    </record>
+
+    <record id="github_repository_6_demo" model="github.repository">
+        <field name="name">repository_6</field>
+        <field name="github_login">organization_1/repository_6</field>
+        <field name="organization_id" ref="github_organization_1_demo"/>
+    </record>
+
+</odoo>
