@@ -10,7 +10,8 @@
     'author': 'Odoo Community Association (OCA), Surekha Technologies',
     'depends': [
         'oca_psc_team',
-        'website'
+        'website',
+        'website_crm_partner_assign'
     ],
     'data': [
         'templates/assets.xml',

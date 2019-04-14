@@ -7,6 +7,7 @@ from odoo import fields, models
 class PscCategory(models.Model):
     _name = 'psc.category'
     _order = 'sequence'
+    _description = 'PSC Categories'
 
     name = fields.Char(
         required=True,

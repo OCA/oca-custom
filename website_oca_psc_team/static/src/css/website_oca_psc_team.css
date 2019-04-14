@@ -54,6 +54,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).*/
 	text-overflow: ellipsis;
 	display: block;
 	margin-top: 10px;
+	padding-bottom: 5px;
 }
 
 @media (max-width: 991px) {
