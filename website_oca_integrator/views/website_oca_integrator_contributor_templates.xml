@@ -139,7 +139,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <template id="contributor_github_url"
               inherit_id="website_partner.partner_detail"
               name="Contributor Github Link">
-        <xpath expr="//div[hasclass('col-md-4')]/address" position="inside">
+        <xpath expr="//div[hasclass('col-lg-4')]/address" position="inside">
             <t t-if="partner and partner.github_url">
                 <div>
                     <i class="fa fa-github" style="font-size:16px"/>
@@ -161,7 +161,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <template id="contributor_modules_list" name="Contributor Modules Lists"
               inherit_id="website_partner.partner_detail">
-        <xpath expr="//div[hasclass('col-md-8')]" position="inside">
+        <xpath expr="//div[hasclass('col-lg-8')]" position="inside">
             <t t-set="product_templates"
                t-value="partner.contributor_module_line_ids.sorted(key='date_pr_merged',reverse=True).mapped('product_template_id').filtered('website_published')"/>
             <t t-if="product_templates">
