@@ -6,6 +6,7 @@ from odoo import fields, models
 
 class SponsorshipLine(models.Model):
     _name = "sponsorship.line"
+    _description = 'Sponsorship Line'
 
     date_from = fields.Date(string='Join Date', required=True)
     date_end = fields.Date(string='End Date', required=True)

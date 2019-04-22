@@ -6,6 +6,7 @@ from odoo import fields, models
 
 class ContributorModuleLine(models.Model):
     _name = 'contributor.module.line'
+    _description = 'Contributor Line'
 
     product_template_id = fields.Many2one(
         string='Odoo Module',
