@@ -15,7 +15,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="street">Palermo, Capital Federal</field>
         <field name="street2">C1414CMS Capital Federal</field>
         <field name="image" type="base64"
-               file="base/static/src/img/avatar.png"/>
+               file="base/static/img/avatar.png"/>
         <field name="zip">4683</field>
         <field name="country_id" ref="base.in"/>
         <field name="company_name">YourCompany</field>

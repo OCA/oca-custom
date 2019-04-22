@@ -6,9 +6,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 <odoo>
 
     <!-- Add integrators link in footer -->
-    <template id="integrator_footer" inherit_id="website.footer_default"
+    <template id="integrator_footer" inherit_id="website.footer_custom"
               name="Footer Integrators Link">
-        <xpath expr="//div[@id='info']/ul" position="inside">
+        <xpath expr="//div[@id='connect']/ul" position="inside">
             <li>
                 <a href="/integrators">Integrators</a>
             </li>
@@ -268,7 +268,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <template id="integrator_github_url"
               inherit_id="website_partner.partner_detail"
               name="Integrator Github Link">
-        <xpath expr="//div[hasclass('col-md-4')]/address" position="inside">
+        <xpath expr="//div[hasclass('col-lg-4')]/address" position="inside">
             <t t-if="integrator and integrator.github_organization_url">
                 <div>
                     <i class="fa fa-github" style="font-size: 16px"/>
