@@ -10,8 +10,6 @@ License AGPL - 3.0 or later(http: // www.gnu.org / licenses / agpl.html).
         <xpath expr="." position="inside">
             <script type="text/javascript"
                     src="/website_oca_integrator/static/src/js/integrator_portal.js"/>
-            <script type="text/javascript"
-                    src="/website_oca_integrator/static/src/js/integrator_portal_tour.js"/>
         </xpath>
     </template>
 
