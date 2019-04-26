@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo12-addon-oca_custom',
         'odoo12-addon-oca_event_badge',
         'odoo12-addon-project_members',
+        'odoo12-addon-website_oca_integrator',
     ],
     classifiers=[
         'Programming Language :: Python',
