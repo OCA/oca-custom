@@ -57,12 +57,20 @@ class WebsiteIntegrator(http.Controller):
             'country_id': (0, _("All Countries")),
             'active': bool(country is None),
         })
-
+        url = '/integrators'
+        if not country and not country_all:
+            country_code = request.session['geoip'].get('country_code')
+            if country_code:
+                countries_ = request.env['res.country'].search([('code', '=', country_code)])
+                country_ = countries_[0] if countries_ else None
+                if country_ and partner_obj.sudo().search(
+                    country_domain + [('country_id', '=', country_.id)]
+                ):
+                    country = country_
+        
         if country:
             base_integrator_domain += [('country_id', '=', country.id)]
             url = '/integrators/country/' + slug(country)
-        else:
-            url = '/integrators'
 
         url_args = {}
         if search:
