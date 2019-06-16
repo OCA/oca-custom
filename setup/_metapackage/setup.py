@@ -10,8 +10,10 @@ setuptools.setup(
     install_requires=[
         'odoo12-addon-oca_custom',
         'odoo12-addon-oca_event_badge',
+        'odoo12-addon-oca_psc_team',
         'odoo12-addon-project_members',
         'odoo12-addon-website_oca_integrator',
+        'odoo12-addon-website_oca_psc_team',
     ],
     classifiers=[
         'Programming Language :: Python',
