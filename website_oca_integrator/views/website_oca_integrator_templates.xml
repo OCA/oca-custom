@@ -98,7 +98,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                     </a>
                                     <t t-if="integrator.sponsorship_line_ids">
                                         <t t-set="today_date"
-                                           t-value="datetime.datetime.now().strftime('%Y-%m-%d')"/>
+                                           t-value="datetime.date.today()"/>
                                         <t t-set="current_sponsorships"
                                            t-value="integrator.sponsorship_line_ids.filtered(lambda sponsorship: sponsorship.date_end &gt;= today_date and sponsorship.date_from &lt;= today_date)"/>
                                         <t t-foreach="current_sponsorships"

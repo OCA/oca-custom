@@ -76,8 +76,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                                 <span t-field="contributor.display_name"/>
                                             </a>
                                             <t t-if="contributor.member_lines">
+                                                <t t-set="today_date" t-value="datetime.date.today()"/>
                                                 <t t-set="current_memberships"
-                                                   t-value="contributor.member_lines.filtered(lambda membership: membership.state == 'paid' and membership.date_to &gt;= datetime.datetime.now().strftime('%Y-%m-%d') and membership.date_from &lt;= datetime.datetime.now().strftime('%Y-%m-%d'))"/>
+                                                   t-value="contributor.member_lines.filtered(lambda membership: membership.state == 'paid' and membership.date_to &gt;= today_date and membership.date_from &lt;= today_date)"/>
                                                 <t t-foreach="current_memberships"
                                                    t-as="membership">
                                                     <img class="img"
