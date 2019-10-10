@@ -58,7 +58,7 @@ class ProjectProject(models.Model):
     def _check_short_description(self):
         # Project description in website PSC Team list view should be
         # up to 3 lines.
-        if len(self.short_description) >= 75:
+        if self.short_description and len(self.short_description) >= 75:
             raise ValidationError(_(
                 'Number of characters must be less then or equal to 75 for '
                 '\'Short Description\' field.'))
