@@ -7,11 +7,11 @@
     'summary': 'Custom Settings for OCA Instance',
     'version': '8.0.0.0.0',
     'category': 'Custom',
-    'author': [
-        'GRAP',
-        'Akretion',
-        'Odoo Community Association (OCA)',
-    ],
+    'author': (
+        'GRAP,'
+        'Akretion,'
+        'Odoo Community Association (OCA)'
+    ),
     'depends': [
         'github_connector',
     ],
