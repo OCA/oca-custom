@@ -5,8 +5,6 @@ from odoo import fields, models
 
 
 class ProjectGithubRepository(models.Model):
-    _inherit = 'github.repository'
+    _inherit = "github.repository"
 
-    project_id = fields.Many2one(
-        comodel_name='project.project',
-        string='Project')
+    project_id = fields.Many2one(comodel_name="project.project", string="Project")
