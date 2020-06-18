@@ -6,3 +6,4 @@
 
     * Vicent Cubells <vicent.cubells@tecnativa.com>
     * Cristina Martin R.
+    * Carlos Roca
