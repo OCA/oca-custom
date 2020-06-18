@@ -5,12 +5,12 @@ from odoo import fields, models
 
 
 class ProjectProject(models.Model):
-    _inherit = 'project.project'
+    _inherit = "project.project"
 
     members = fields.Many2many(
-        comodel_name='res.users',
-        relation='project_user_rel',
-        column1='project_id',
-        column2='uid',
-        string='Project Members',
+        comodel_name="res.users",
+        relation="project_user_rel",
+        column1="project_id",
+        column2="uid",
+        string="Project Members",
     )
