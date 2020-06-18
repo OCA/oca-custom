@@ -5,22 +5,16 @@ from odoo import fields, models
 
 
 class PscCategory(models.Model):
-    _name = 'psc.category'
-    _order = 'sequence'
-    _description = 'PSC Categories'
+    _name = "psc.category"
+    _order = "sequence"
+    _description = "PSC Categories"
 
-    name = fields.Char(
-        required=True,
-    )
+    name = fields.Char(required=True,)
 
-    description = fields.Text(
-        required=True,
-    )
+    description = fields.Text(required=True,)
 
     sequence = fields.Integer()
 
     project_ids = fields.One2many(
-        comodel_name='project.project',
-        inverse_name='psc_category_id',
-        string='Project'
+        comodel_name="project.project", inverse_name="psc_category_id", string="Project"
     )
