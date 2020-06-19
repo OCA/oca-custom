@@ -32,7 +32,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             GitHub.
         </field>
         <field
-            name="image"
+            name="image_1920"
             type="base64"
             file="oca_psc_team/static/src/img/project_apps_store.png"
         />
@@ -70,7 +70,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             eval="[(4, ref('github_repository_2_demo'))]"
         />
         <field
-            name="image"
+            name="image_1920"
             type="base64"
             file="oca_psc_team/static/src/img/project_services.png"
         />
@@ -100,7 +100,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             Odoo.
         </field>
         <field
-            name="image"
+            name="image_1920"
             type="base64"
             file="oca_psc_team/static/src/img/project_tools_administration.png"
         />
@@ -139,7 +139,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             ]]>
         </field>
         <field
-            name="image"
+            name="image_1920"
             type="base64"
             file="oca_psc_team/static/src/img/project_construction.png"
         />
@@ -171,7 +171,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             processes to allow for seamless operation with other record types.
         </field>
         <field
-            name="image"
+            name="image_1920"
             type="base64"
             file="oca_psc_team/static/src/img/project_vertical_medical.png"
         />
