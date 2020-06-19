@@ -11,10 +11,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="arch" type="xml">
             <xpath expr="//form/sheet/div[hasclass('oe_title')]" position="before">
                 <field
-                    name="image"
-                    widget='image'
+                    name="image_1920"
+                    widget="image"
                     class="oe_avatar"
-                    options='{"preview_image": "image_medium"}'
+                    options="{'preview_image': 'image_128'}"
                 />
             </xpath>
             <notebook>
