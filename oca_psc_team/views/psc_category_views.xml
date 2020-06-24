@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2019 Surekha Technologies (https://www.surekhatech.com)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record id="psc_category_view_form" model="ir.ui.view">
+        <field name="name">psc.category.form</field>
+        <field name="model">psc.category</field>
+        <field name="arch" type="xml">
+            <form string="PSC Categories">
+                <sheet string="PSC Categories">
+                    <group>
+                        <field name="name" />
+                        <field name="sequence" />
+                        <field name="description" />
+                        <field name="project_ids" widget="many2many_tags" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="psc_category_view_tree" model="ir.ui.view">
+        <field name="name">psc.category.tree</field>
+        <field name="model">psc.category</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="description" />
+            </tree>
+        </field>
+    </record>
+    <record id="psc_category_action" model="ir.actions.act_window">
+        <field name="name">PSC Category</field>
+        <field name="res_model">psc.category</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+        id="psc_category_menu"
+        name="PSC Categories"
+        parent="project.menu_project_config"
+        sequence="100"
+        action="psc_category_action"
+    />
+</odoo>
