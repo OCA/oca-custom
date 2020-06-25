@@ -8,7 +8,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="project_manager_partner_demo" model="res.partner">
         <field name="name">Project Manager</field>
         <field name="email">project_manager@yourcompany.example.com</field>
-        <field name="image" type="base64" file="base/static/img/avatar.png" />
+        <field name="image_1920" type="base64" file="base/static/img/avatar.png" />
         <field name="country_id" ref="base.in" />
     </record>
     <!-- Create project manager user -->
