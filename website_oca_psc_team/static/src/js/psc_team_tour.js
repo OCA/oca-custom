@@ -1,6 +1,6 @@
 /* Copyright 2019 Surekha Technologies (https://www.surekhatech.com)
 License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). */
-odoo.define("website_oca_psc_team.psc_team_project_tour", function (require) {
+odoo.define("website_oca_psc_team.psc_team_project_tour", function(require) {
     "use strict";
 
     var tour = require("web_tour.tour");
@@ -29,10 +29,8 @@ odoo.define("website_oca_psc_team.psc_team_project_tour", function (require) {
                 content: "Click here to edit project description.",
                 extra_trigger: "#snippet_structure:visible",
                 trigger: ".o_web_psc_team_project_description p",
-                run: function () {
-                    $(".o_web_psc_team_project_description").addClass(
-                        "o_dirty"
-                    );
+                run: function() {
+                    $(".o_web_psc_team_project_description").addClass("o_dirty");
                     $(".o_web_psc_team_project_description p").text(
                         "Updated Apps store project description."
                     );
