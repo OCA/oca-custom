@@ -6,6 +6,6 @@ from odoo import fields, models
 
 
 class ResPartner(models.Model):
-    _inherit = 'res.partner'
+    _inherit = "res.partner"
 
     github_login = fields.Char(readonly=False)
