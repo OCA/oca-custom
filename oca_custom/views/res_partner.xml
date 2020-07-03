@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_partner_github_visible" model="ir.ui.view">
+        <field name="name">res.partner.github.visible.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="github_connector.view_res_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='github']" position="attributes">
+                <!-- make the github page always visible -->
+                <attribute name="attrs" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
