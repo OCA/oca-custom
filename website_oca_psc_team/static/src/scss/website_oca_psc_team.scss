@@ -1,0 +1,170 @@
+/*Copyright 2019 Surekha Technologies (https://www.surekhatech.com)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).*/
+
+/* PSC List Page */
+.o_web_psc_team_projects_list {
+    border-right: solid 1px #ccc;
+    margin-bottom: 40px;
+    position: relative;
+    &:nth-child(4n) {
+        border-right: none;
+    }
+    &:last-child {
+        border-right: none;
+    }
+    &:before {
+        border-bottom: solid 1px #ccc;
+        content: "";
+        position: absolute;
+        bottom: -20px;
+        width: 101%;
+        left: 0;
+    }
+}
+
+.o_web_psc_team_project {
+    text-align: center;
+    .o_web_psc_team_projects_list {
+        float: none;
+        display: inline-block;
+    }
+    .row {
+        display: block;
+    }
+}
+
+.o_web_psc_team_project_short_description {
+    height: 60px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.o_web_psc_team_project_detail {
+    padding: 10px 20px;
+    text-align: center;
+    h3 {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: block;
+        margin-top: 10px;
+        padding-bottom: 5px;
+    }
+}
+
+.o_web_psc_team_project_description {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-top: 20px;
+}
+
+@media (max-width: 991px) {
+    .o_web_psc_team_projects_list {
+        &:nth-child(4n) {
+            border-right: solid 1px #ccc;
+        }
+        &:nth-child(3) {
+            float: left;
+        }
+        &:nth-child(2n) {
+            border-right: none;
+        }
+    }
+    .o_web_psc_team {
+        h1 {
+            font-size: 30px;
+        }
+        h3 {
+            font-size: 22px;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .o_web_psc_team_projects_list {
+        &:nth-child(4n) {
+            border-right: none;
+        }
+        border-right: none;
+        &:nth-child(3) {
+            float: none;
+        }
+    }
+    .o_web_psc_team_project {
+        .o_web_psc_team_projects_list {
+            display: block;
+        }
+    }
+    .o_web_psc_team {
+        h1 {
+            font-size: 24px;
+        }
+        h3 {
+            font-size: 18px;
+        }
+    }
+}
+
+/* Project's Detail Page */
+.o_web_psc_team_project_manager {
+    ul {
+        padding: 0;
+        list-style: none;
+        font-size: 16px;
+        li {
+            display: flex;
+            vertical-align: middle;
+            align-items: center;
+        }
+    }
+    h3 {
+        border-bottom: solid 1px #ccc;
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+        margin-top: 0;
+    }
+    img {
+        margin-right: 15px;
+        border-radius: 4px;
+        border: solid 1px #ccc;
+    }
+}
+
+.o_web_psc_team_project_repo {
+    h3 {
+        border-bottom: solid 1px #ccc;
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+        margin-top: 0;
+    }
+    ol {
+        padding-left: 20px;
+        list-style-position: outside;
+        li {
+            font-size: 16px;
+            margin-bottom: 5px;
+            word-break: break-all;
+            padding: 0 10px;
+        }
+    }
+}
+
+.o_web_psc_team_project_member_list {
+    .o_web_psc_team_project_member {
+        margin-bottom: 20px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+    }
+    img {
+        margin-right: 20px;
+        border-radius: 4px;
+        border: solid 1px #ccc;
+    }
+    h3 {
+        margin-top: 0;
+        border-bottom: solid 1px #ccc;
+        padding-bottom: 5px;
+        margin-bottom: 20px;
+    }
+}
