@@ -1,279 +1,346 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!--
 Copyright 2018 Surekha Technologies (https://www.surekhatech.com)
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
-
     <!-- Product attributes and values -->
     <record id="product_attribute_1_demo" model="product.attribute">
         <field name="name">Demo Module version</field>
     </record>
-
     <record id="product_attribute_value_1_demo" model="product.attribute.value">
         <field name="name">9.0</field>
-        <field name="attribute_id" ref="product_attribute_1_demo"/>
+        <field name="attribute_id" ref="product_attribute_1_demo" />
     </record>
-
     <record id="product_attribute_value_2_demo" model="product.attribute.value">
         <field name="name">10.0</field>
-        <field name="attribute_id" ref="product_attribute_1_demo"/>
+        <field name="attribute_id" ref="product_attribute_1_demo" />
     </record>
-
     <!-- Product public category -->
     <record id="product_category_1_demo" model="product.public.category">
         <field name="name">Modules</field>
     </record>
-
     <!-- Products -->
     <record id="product_product_1_demo" model="product.product">
         <field name="name">Odoo Module 1</field>
-        <field name="public_categ_ids" eval="[(6,0,[ref('product_category_1_demo')])]"/>
+        <field
+            name="public_categ_ids"
+            eval="[(6,0,[ref('product_category_1_demo')])]"
+        />
         <field name="website_published">True</field>
         <field name="type">service</field>
-        <field name="attribute_value_ids" eval="[(6,0,[ref('product_attribute_value_1_demo')])]"/>
+        <field
+            name="attribute_value_ids"
+            eval="[(6,0,[ref('product_attribute_value_1_demo')])]"
+        />
     </record>
-
     <record id="product_product_2_demo" model="product.product">
         <field name="name">Odoo Module 2</field>
-        <field name="public_categ_ids" eval="[(6,0,[ref('product_category_1_demo')])]"/>
+        <field
+            name="public_categ_ids"
+            eval="[(6,0,[ref('product_category_1_demo')])]"
+        />
         <field name="website_published">True</field>
         <field name="type">service</field>
-        <field name="attribute_value_ids" eval="[(6,0,[ref('product_attribute_value_1_demo')])]"/>
+        <field
+            name="attribute_value_ids"
+            eval="[(6,0,[ref('product_attribute_value_1_demo')])]"
+        />
     </record>
-
     <record id="product_product_3_demo" model="product.product">
         <field name="name">Odoo Module 3</field>
-        <field name="public_categ_ids" eval="[(6,0,[ref('product_category_1_demo')])]"/>
+        <field
+            name="public_categ_ids"
+            eval="[(6,0,[ref('product_category_1_demo')])]"
+        />
         <field name="website_published">True</field>
         <field name="type">service</field>
-        <field name="attribute_value_ids" eval="[(6,0,[ref('product_attribute_value_1_demo')])]"/>
+        <field
+            name="attribute_value_ids"
+            eval="[(6,0,[ref('product_attribute_value_1_demo')])]"
+        />
     </record>
-
     <record id="product_product_4_demo" model="product.product">
         <field name="name">Odoo Module 4</field>
-        <field name="public_categ_ids" eval="[(6,0,[ref('product_category_1_demo')])]"/>
+        <field
+            name="public_categ_ids"
+            eval="[(6,0,[ref('product_category_1_demo')])]"
+        />
         <field name="website_published">True</field>
         <field name="type">service</field>
-        <field name="attribute_value_ids" eval="[(6,0,[ref('product_attribute_value_1_demo')])]"/>
+        <field
+            name="attribute_value_ids"
+            eval="[(6,0,[ref('product_attribute_value_1_demo')])]"
+        />
     </record>
-
     <record id="product_product_5_demo" model="product.product">
         <field name="name">Odoo Module 5</field>
-        <field name="public_categ_ids" eval="[(6,0,[ref('product_category_1_demo')])]"/>
+        <field
+            name="public_categ_ids"
+            eval="[(6,0,[ref('product_category_1_demo')])]"
+        />
         <field name="website_published">True</field>
         <field name="type">service</field>
-        <field name="attribute_value_ids" eval="[(6,0,[ref('product_attribute_value_1_demo')])]"/>
+        <field
+            name="attribute_value_ids"
+            eval="[(6,0,[ref('product_attribute_value_1_demo')])]"
+        />
     </record>
-
     <record id="product_product_6_demo" model="product.product">
         <field name="name">Odoo Module 6</field>
-        <field name="public_categ_ids" eval="[(6,0,[ref('product_category_1_demo')])]"/>
+        <field
+            name="public_categ_ids"
+            eval="[(6,0,[ref('product_category_1_demo')])]"
+        />
         <field name="website_published">True</field>
         <field name="type">service</field>
-        <field name="attribute_value_ids" eval="[(6,0,[ref('product_attribute_value_1_demo')])]"/>
+        <field
+            name="attribute_value_ids"
+            eval="[(6,0,[ref('product_attribute_value_1_demo')])]"
+        />
     </record>
-
     <record id="product_product_1b_demo" model="product.product">
-        <field name="product_tmpl_id" ref="product_product_1_demo_product_template"/>
-        <field name="attribute_value_ids" eval="[(6,0,[ref('product_attribute_value_2_demo')])]"/>
+        <field name="product_tmpl_id" ref="product_product_1_demo_product_template" />
+        <field
+            name="attribute_value_ids"
+            eval="[(6,0,[ref('product_attribute_value_2_demo')])]"
+        />
     </record>
-
     <record id="product_product_2b_demo" model="product.product">
-        <field name="product_tmpl_id" ref="product_product_2_demo_product_template"/>
-        <field name="attribute_value_ids" eval="[(6,0,[ref('product_attribute_value_2_demo')])]"/>
+        <field name="product_tmpl_id" ref="product_product_2_demo_product_template" />
+        <field
+            name="attribute_value_ids"
+            eval="[(6,0,[ref('product_attribute_value_2_demo')])]"
+        />
     </record>
-
     <record id="product_product_3b_demo" model="product.product">
-        <field name="product_tmpl_id" ref="product_product_3_demo_product_template"/>
-        <field name="attribute_value_ids" eval="[(6,0,[ref('product_attribute_value_2_demo')])]"/>
+        <field name="product_tmpl_id" ref="product_product_3_demo_product_template" />
+        <field
+            name="attribute_value_ids"
+            eval="[(6,0,[ref('product_attribute_value_2_demo')])]"
+        />
     </record>
-
     <record id="product_product_4b_demo" model="product.product">
-        <field name="product_tmpl_id" ref="product_product_4_demo_product_template"/>
-        <field name="attribute_value_ids" eval="[(6,0,[ref('product_attribute_value_2_demo')])]"/>
+        <field name="product_tmpl_id" ref="product_product_4_demo_product_template" />
+        <field
+            name="attribute_value_ids"
+            eval="[(6,0,[ref('product_attribute_value_2_demo')])]"
+        />
     </record>
-
     <record id="product_product_5b_demo" model="product.product">
-        <field name="product_tmpl_id" ref="product_product_5_demo_product_template"/>
-        <field name="attribute_value_ids" eval="[(6,0,[ref('product_attribute_value_2_demo')])]"/>
+        <field name="product_tmpl_id" ref="product_product_5_demo_product_template" />
+        <field
+            name="attribute_value_ids"
+            eval="[(6,0,[ref('product_attribute_value_2_demo')])]"
+        />
     </record>
-
     <record id="product_product_6b_demo" model="product.product">
-        <field name="product_tmpl_id" ref="product_product_6_demo_product_template"/>
-        <field name="attribute_value_ids" eval="[(6,0,[ref('product_attribute_value_2_demo')])]"/>
+        <field name="product_tmpl_id" ref="product_product_6_demo_product_template" />
+        <field
+            name="attribute_value_ids"
+            eval="[(6,0,[ref('product_attribute_value_2_demo')])]"
+        />
     </record>
-
     <!-- Product attribute lines -->
     <record id="product_attribute_line_1_demo" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="product_product_1_demo_product_template"/>
-        <field name="attribute_id" ref="product_attribute_1_demo"/>
-        <field name="value_ids" eval="[(6,0,[ref('product_attribute_value_1_demo'),ref('product_attribute_value_2_demo')])]"/>
+        <field name="product_tmpl_id" ref="product_product_1_demo_product_template" />
+        <field name="attribute_id" ref="product_attribute_1_demo" />
+        <field
+            name="value_ids"
+            eval="[(6,0,[ref('product_attribute_value_1_demo'),ref('product_attribute_value_2_demo')])]"
+        />
     </record>
-
     <record id="product_attribute_line_2_demo" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="product_product_2_demo_product_template"/>
-        <field name="attribute_id" ref="product_attribute_1_demo"/>
-        <field name="value_ids" eval="[(6,0,[ref('product_attribute_value_1_demo'), ref('product_attribute_value_2_demo')])]"/>
+        <field name="product_tmpl_id" ref="product_product_2_demo_product_template" />
+        <field name="attribute_id" ref="product_attribute_1_demo" />
+        <field
+            name="value_ids"
+            eval="[(6,0,[ref('product_attribute_value_1_demo'), ref('product_attribute_value_2_demo')])]"
+        />
     </record>
-
     <record id="product_attribute_line_3_demo" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="product_product_3_demo_product_template"/>
-        <field name="attribute_id" ref="product_attribute_1_demo"/>
-        <field name="value_ids" eval="[(6,0,[ref('product_attribute_value_1_demo'), ref('product_attribute_value_2_demo')])]"/>
+        <field name="product_tmpl_id" ref="product_product_3_demo_product_template" />
+        <field name="attribute_id" ref="product_attribute_1_demo" />
+        <field
+            name="value_ids"
+            eval="[(6,0,[ref('product_attribute_value_1_demo'), ref('product_attribute_value_2_demo')])]"
+        />
     </record>
-
     <record id="product_attribute_line_4_demo" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="product_product_4_demo_product_template"/>
-        <field name="attribute_id" ref="product_attribute_1_demo"/>
-        <field name="value_ids" eval="[(6,0,[ref('product_attribute_value_1_demo'), ref('product_attribute_value_2_demo')])]"/>
+        <field name="product_tmpl_id" ref="product_product_4_demo_product_template" />
+        <field name="attribute_id" ref="product_attribute_1_demo" />
+        <field
+            name="value_ids"
+            eval="[(6,0,[ref('product_attribute_value_1_demo'), ref('product_attribute_value_2_demo')])]"
+        />
     </record>
-
     <record id="product_attribute_line_5_demo" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="product_product_5_demo_product_template"/>
-        <field name="attribute_id" ref="product_attribute_1_demo"/>
-        <field name="value_ids" eval="[(6,0,[ref('product_attribute_value_1_demo'), ref('product_attribute_value_2_demo')])]"/>
+        <field name="product_tmpl_id" ref="product_product_5_demo_product_template" />
+        <field name="attribute_id" ref="product_attribute_1_demo" />
+        <field
+            name="value_ids"
+            eval="[(6,0,[ref('product_attribute_value_1_demo'), ref('product_attribute_value_2_demo')])]"
+        />
     </record>
-
     <record id="product_attribute_line_6_demo" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="product_product_6_demo_product_template"/>
-        <field name="attribute_id" ref="product_attribute_1_demo"/>
-        <field name="value_ids" eval="[(6,0,[ref('product_attribute_value_1_demo'), ref('product_attribute_value_2_demo')])]"/>
+        <field name="product_tmpl_id" ref="product_product_6_demo_product_template" />
+        <field name="attribute_id" ref="product_attribute_1_demo" />
+        <field
+            name="value_ids"
+            eval="[(6,0,[ref('product_attribute_value_1_demo'), ref('product_attribute_value_2_demo')])]"
+        />
     </record>
-
     <!-- Odoo module -->
     <record id="odoo_module_1_demo" model="odoo.module">
         <field name="technical_name">odoo_module1</field>
-        <field name="product_template_id" ref="product_product_1_demo_product_template"/>
+        <field
+            name="product_template_id"
+            ref="product_product_1_demo_product_template"
+        />
     </record>
-
     <record id="odoo_module_2_demo" model="odoo.module">
         <field name="technical_name">odoo_module2</field>
-        <field name="product_template_id" ref="product_product_2_demo_product_template"/>
+        <field
+            name="product_template_id"
+            ref="product_product_2_demo_product_template"
+        />
     </record>
-
     <record id="odoo_module_3_demo" model="odoo.module">
         <field name="technical_name">odoo_module3</field>
-        <field name="product_template_id" ref="product_product_3_demo_product_template"/>
+        <field
+            name="product_template_id"
+            ref="product_product_3_demo_product_template"
+        />
     </record>
-
     <record id="odoo_module_4_demo" model="odoo.module">
         <field name="technical_name">odoo_module4</field>
-        <field name="product_template_id" ref="product_product_4_demo_product_template"/>
+        <field
+            name="product_template_id"
+            ref="product_product_4_demo_product_template"
+        />
     </record>
-
     <record id="odoo_module_5_demo" model="odoo.module">
         <field name="technical_name">odoo_module5</field>
-        <field name="product_template_id" ref="product_product_5_demo_product_template"/>
+        <field
+            name="product_template_id"
+            ref="product_product_5_demo_product_template"
+        />
     </record>
-
     <record id="odoo_module_6_demo" model="odoo.module">
         <field name="technical_name">odoo_module6</field>
-        <field name="product_template_id" ref="product_product_6_demo_product_template"/>
+        <field
+            name="product_template_id"
+            ref="product_product_6_demo_product_template"
+        />
     </record>
-
     <!-- Product template -->
     <record id="product_product_1_demo_product_template" model="product.template">
-        <field name="attribute_line_ids" eval="[(6,0,[ref('product_attribute_line_1_demo')])]"/>
-        <field name="odoo_module_id" ref="odoo_module_1_demo"/>
+        <field
+            name="attribute_line_ids"
+            eval="[(6,0,[ref('product_attribute_line_1_demo')])]"
+        />
+        <field name="odoo_module_id" ref="odoo_module_1_demo" />
     </record>
-
     <record id="product_product_2_demo_product_template" model="product.template">
-        <field name="attribute_line_ids" eval="[(6,0,[ref('product_attribute_line_2_demo')])]"/>
-        <field name="odoo_module_id" ref="odoo_module_2_demo"/>
+        <field
+            name="attribute_line_ids"
+            eval="[(6,0,[ref('product_attribute_line_2_demo')])]"
+        />
+        <field name="odoo_module_id" ref="odoo_module_2_demo" />
     </record>
-
     <record id="product_product_3_demo_product_template" model="product.template">
-        <field name="attribute_line_ids" eval="[(6,0,[ref('product_attribute_line_3_demo')])]"/>
-        <field name="odoo_module_id" ref="odoo_module_3_demo"/>
+        <field
+            name="attribute_line_ids"
+            eval="[(6,0,[ref('product_attribute_line_3_demo')])]"
+        />
+        <field name="odoo_module_id" ref="odoo_module_3_demo" />
     </record>
-
     <record id="product_product_4_demo_product_template" model="product.template">
-        <field name="attribute_line_ids" eval="[(6,0,[ref('product_attribute_line_4_demo')])]"/>
-        <field name="odoo_module_id" ref="odoo_module_4_demo"/>
+        <field
+            name="attribute_line_ids"
+            eval="[(6,0,[ref('product_attribute_line_4_demo')])]"
+        />
+        <field name="odoo_module_id" ref="odoo_module_4_demo" />
     </record>
-
     <record id="product_product_5_demo_product_template" model="product.template">
-        <field name="attribute_line_ids" eval="[(6,0,[ref('product_attribute_line_5_demo')])]"/>
-        <field name="odoo_module_id" ref="odoo_module_5_demo"/>
+        <field
+            name="attribute_line_ids"
+            eval="[(6,0,[ref('product_attribute_line_5_demo')])]"
+        />
+        <field name="odoo_module_id" ref="odoo_module_5_demo" />
     </record>
-
     <record id="product_product_6_demo_product_template" model="product.template">
-        <field name="attribute_line_ids" eval="[(6,0,[ref('product_attribute_line_6_demo')])]"/>
-        <field name="odoo_module_id" ref="odoo_module_6_demo"/>
+        <field
+            name="attribute_line_ids"
+            eval="[(6,0,[ref('product_attribute_line_6_demo')])]"
+        />
+        <field name="odoo_module_id" ref="odoo_module_6_demo" />
     </record>
-
     <!-- Odoo module version -->
     <record id="odoo_module_version_1_demo" model="odoo.module.version">
         <field name="name">Odoo Module 1</field>
         <field name="technical_name">odoo_module1</field>
-        <field name="module_id" ref="odoo_module_1_demo"/>
-        <field name="repository_branch_id" ref="github_repository_branch_1_demo"/>
+        <field name="module_id" ref="odoo_module_1_demo" />
+        <field name="repository_branch_id" ref="github_repository_branch_1_demo" />
         <field name="license">AGPL-3</field>
         <field name="version">7.0</field>
         <field name="author">Joseph Lee</field>
         <field name="depends">base</field>
         <field name="external_dependencies">{}</field>
     </record>
-
     <record id="odoo_module_version_2_demo" model="odoo.module.version">
         <field name="name">Odoo Module 2</field>
         <field name="technical_name">odoo_module2</field>
-        <field name="module_id" ref="odoo_module_2_demo"/>
-        <field name="repository_branch_id" ref="github_repository_branch_1_demo"/>
+        <field name="module_id" ref="odoo_module_2_demo" />
+        <field name="repository_branch_id" ref="github_repository_branch_1_demo" />
         <field name="license">AGPL-3</field>
         <field name="version">8.0</field>
         <field name="author">Joseph Lee</field>
         <field name="depends">base</field>
         <field name="external_dependencies">{}</field>
     </record>
-
     <record id="odoo_module_version_3_demo" model="odoo.module.version">
         <field name="name">Odoo Module 3</field>
         <field name="technical_name">odoo_module3</field>
-        <field name="module_id" ref="odoo_module_3_demo"/>
-        <field name="repository_branch_id" ref="github_repository_branch_1_demo"/>
+        <field name="module_id" ref="odoo_module_3_demo" />
+        <field name="repository_branch_id" ref="github_repository_branch_1_demo" />
         <field name="license">AGPL-3</field>
         <field name="version">9.0</field>
         <field name="author">Joseph Lee</field>
         <field name="depends">base</field>
         <field name="external_dependencies">{}</field>
     </record>
-
     <record id="odoo_module_version_4_demo" model="odoo.module.version">
         <field name="name">Odoo Module 4</field>
         <field name="technical_name">odoo_module4</field>
-        <field name="module_id" ref="odoo_module_4_demo"/>
-        <field name="repository_branch_id" ref="github_repository_branch_1_demo"/>
+        <field name="module_id" ref="odoo_module_4_demo" />
+        <field name="repository_branch_id" ref="github_repository_branch_1_demo" />
         <field name="license">AGPL-3</field>
         <field name="version">10.0</field>
         <field name="author">Joseph Lee</field>
         <field name="depends">base</field>
         <field name="external_dependencies">{}</field>
     </record>
-
     <record id="odoo_module_version_5_demo" model="odoo.module.version">
         <field name="name">Odoo Module 5</field>
         <field name="technical_name">odoo_module5</field>
-        <field name="module_id" ref="odoo_module_5_demo"/>
-        <field name="repository_branch_id" ref="github_repository_branch_1_demo"/>
+        <field name="module_id" ref="odoo_module_5_demo" />
+        <field name="repository_branch_id" ref="github_repository_branch_1_demo" />
         <field name="license">AGPL-3</field>
         <field name="version">11.0</field>
         <field name="author">Joseph Lee</field>
         <field name="depends">base</field>
         <field name="external_dependencies">{}</field>
     </record>
-
     <record id="odoo_module_version_6_demo" model="odoo.module.version">
         <field name="name">Odoo Module 6</field>
         <field name="technical_name">odoo_module6</field>
-        <field name="module_id" ref="odoo_module_6_demo"/>
-        <field name="repository_branch_id" ref="github_repository_branch_1_demo"/>
+        <field name="module_id" ref="odoo_module_6_demo" />
+        <field name="repository_branch_id" ref="github_repository_branch_1_demo" />
         <field name="license">AGPL-3</field>
         <field name="version">5.0</field>
         <field name="author">Rodney Black</field>
         <field name="depends">base</field>
         <field name="external_dependencies">{}</field>
     </record>
-
 </odoo>

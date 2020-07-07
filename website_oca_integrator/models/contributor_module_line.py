@@ -5,16 +5,15 @@ from odoo import fields, models
 
 
 class ContributorModuleLine(models.Model):
-    _name = 'contributor.module.line'
-    _description = 'Contributor Line'
+    _name = "contributor.module.line"
+    _description = "Contributor Line"
 
     product_template_id = fields.Many2one(
-        string='Odoo Module',
-        comodel_name='product.template',
-        required=True
+        string="Odoo Module", comodel_name="product.template", required=True
     )
 
-    partner_id = fields.Many2one(comodel_name='res.partner', string="Partner",
-                                 required=True)
+    partner_id = fields.Many2one(
+        comodel_name="res.partner", string="Partner", required=True
+    )
 
     date_pr_merged = fields.Datetime(string="Merged date of PR", required=True)
