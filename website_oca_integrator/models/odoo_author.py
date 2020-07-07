@@ -5,9 +5,11 @@ from odoo import fields, models
 
 
 class OdooAuthor(models.Model):
-    _inherit = 'odoo.author'
+    _inherit = "odoo.author"
 
     partner_id = fields.Many2one(
-        comodel_name='res.partner', string='Company',
+        comodel_name="res.partner",
+        string="Company",
         domain="[('is_company','=', True),('website_published', '=', True)]",
-        help="Select company which is linked to this author.")
+        help="Select company which is linked to this author.",
+    )
