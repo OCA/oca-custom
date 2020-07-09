@@ -65,6 +65,7 @@ Contributors
 
     * Cristina Martin R.
     * Manuel Calero
+    * Carlos Roca
 
 Other credits
 ~~~~~~~~~~~~~

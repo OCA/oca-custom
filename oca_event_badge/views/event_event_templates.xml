@@ -12,7 +12,7 @@
         <xpath expr="//div[@id='o_event_name']" position="inside" priority="99">
             <div class="row">
                 <div
-                    t-if="bool(len(o.partner_id.parent_id))"
+                    t-if="o.partner_id.parent_id"
                     class="col-12 text-center"
                     t-ignore="true"
                 >
@@ -30,7 +30,7 @@
         <xpath expr="//div[@id='o_event_name']" position="inside">
             <div class="row">
                 <div
-                    t-if="bool(len(o.partner_id.category_id))"
+                    t-if="o.partner_id.category_id"
                     class="col-12 text-center mt16"
                     t-ignore="true"
                 >
@@ -45,13 +45,13 @@
                                 class="badge_logo"
                             />
                         </t>
-                        <t t-if="val.name == 'delegate'">
+                        <t t-elif="val.name == 'delegate'">
                             <img
                                 src="/oca_event_badge/static/src/img/oca_delegate.png"
                                 class="badge_logo"
                             />
                         </t>
-                        <t t-if="val.name == 'member'">
+                        <t t-elif="val.name == 'member'">
                             <img
                                 src="/oca_event_badge/static/src/img/oca_member.png"
                                 class="badge_logo"
