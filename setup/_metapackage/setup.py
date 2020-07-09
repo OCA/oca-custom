@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo13-addon-oca_custom',
+        'odoo13-addon-oca_event_badge',
         'odoo13-addon-oca_psc_team',
         'odoo13-addon-project_members',
         'odoo13-addon-website_oca_psc_team',
