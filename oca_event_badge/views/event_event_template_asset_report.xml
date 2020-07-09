@@ -8,7 +8,7 @@
             <link
                 href="/oca_event_badge/static/src/css/event_event_template.scss"
                 rel="stylesheet"
-                type="text/scss"
+                type="text/css"
             />
         </xpath>
     </template>
