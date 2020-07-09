@@ -4,22 +4,18 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name': 'OCA Event Badge',
-    'summary': """
+    "name": "OCA Event Badge",
+    "summary": """
         Creates Custom Event Badges based on the Partner Tags""",
-    'version': '13.0.1.0.0',
-    'license': 'AGPL-3',
-    'author': 'ACSONE SA/NV,Odoo Community Association (OCA)',
-    'website': 'https://github.com/OCA/oca-custom',
-    'category': 'Custom',
-    'depends': [
-        'base',
-        'event',
-        'web',
+    "version": "13.0.1.0.0",
+    "license": "AGPL-3",
+    "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/oca-custom",
+    "category": "Custom",
+    "depends": ["base", "event", "web"],
+    "data": [
+        "views/event_event_template_asset_report.xml",
+        "views/event_event_templates.xml",
     ],
-    'data': [
-        'views/event_event_template_asset_report.xml',
-        'views/event_event_templates.xml',
-    ],
-    'installable': True,
+    "installable": True,
 }
