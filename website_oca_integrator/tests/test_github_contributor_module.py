@@ -4,6 +4,7 @@
 import mock
 
 from odoo.tests.common import TransactionCase
+from odoo.tools import config
 
 from odoo.addons.github_connector.models.github import Github
 
@@ -15,15 +16,17 @@ github_model = (
 
 class TestGithubContributorModule(TransactionCase):
     def setUp(self):
-        super(TestGithubContributorModule, self).setUp()
+        super().setUp()
 
+        # Trick this configuration value for avoiding an error
+        config["source_code_local_path"] = "/tmp/"
         self.partner = self.env["res.partner"]
 
         self.company3 = self.partner.create(
             {
                 "name": "Partner 3",
                 "is_company": True,
-                "website_published": True,
+                "is_published": True,
                 "github_organization": "company3_github_login",
             }
         )
@@ -33,7 +36,7 @@ class TestGithubContributorModule(TransactionCase):
                 "name": "Contributor 1",
                 "is_company": False,
                 "github_login": "contributor1_github_login",
-                "website_published": True,
+                "is_published": True,
                 "parent_id": self.company3.id,
             }
         )
@@ -134,9 +137,8 @@ class TestGithubContributorModule(TransactionCase):
 
     def test_contributor_five_modules(self):
         self.product_template6_id = self.browse_ref(
-            "website_oca_integrator.odoo_module_6_demo"
+            "github_connector_odoo.odoo_module_6_demo"
         ).product_template_id
-
         self.contributor1.write(
             {
                 "contributor_module_line_ids": [
@@ -145,7 +147,7 @@ class TestGithubContributorModule(TransactionCase):
                         0,
                         {
                             "product_template_id": self.product_template6_id.id,
-                            "date_pr_merged": "12-08-2018",
+                            "date_pr_merged": "2018-08-12",
                             "partner_id": self.contributor1.id,
                         },
                     )
@@ -174,7 +176,7 @@ class TestGithubContributorModule(TransactionCase):
                     self.partner.cron_create_github_user_module()
 
             self.product_template_id = self.browse_ref(
-                "website_oca_integrator.odoo_module_1_demo"
+                "github_connector_odoo.odoo_module_1_demo"
             ).product_template_id
 
             module_lines = self.env["contributor.module.line"].search(
@@ -267,10 +269,10 @@ class TestGithubContributorModule(TransactionCase):
 
     def test_update_contributor_modules(self):
         modules = {
-            "odoo_module1": "2018-07-10T10:06:19Z",
-            "odoo_module2": "2018-06-13T11:01:29Z",
-            "odoo_module3": "2018-05-12T09:08:25Z",
-            "odoo_module4": "2018-04-12T12:02:05Z",
+            "odoo_module1": "2018-07-10 10:06:19",
+            "odoo_module2": "2018-06-13 11:01:29",
+            "odoo_module3": "2018-05-12 09:08:25",
+            "odoo_module4": "2018-04-12 12:02:05",
         }
         self.partner.update_contributor_modules(self.contributor1, modules)
         self.assertEqual(

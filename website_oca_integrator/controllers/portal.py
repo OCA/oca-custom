@@ -19,15 +19,13 @@ class IntegratorPortal(CustomerPortal):
 
     @route()
     def account(self, redirect=None, **post):
-        response = super(IntegratorPortal, self).account(redirect=redirect, **post)
         if post:
-            module_list = []
-            partner = request.env.user.partner_id
             modules = post.get("favourite_module_ids")
             if modules:
-                module_list = map(int, modules.split(","))
-            partner.sudo().write({"favourite_module_ids": [(6, 0, module_list)]})
-        return response
+                post["favourite_module_ids"] = [int(id) for id in modules.split(",")]
+            else:
+                post["favourite_module_ids"] = False
+        return super().account(redirect=redirect, **post)
 
     @http.route(
         "/my/account/get_developed_modules",

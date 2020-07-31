@@ -8,12 +8,11 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="partner_integrator_portal_demo" model="res.partner">
         <field name="name">Demo Integrator</field>
         <field name="email">integrator.portal@yourcompany.example.com</field>
-        <field name="supplier" eval="False" />
         <field name="is_company">1</field>
         <field name="city">Vivegnis</field>
         <field name="street">Palermo, Capital Federal</field>
         <field name="street2">C1414CMS Capital Federal</field>
-        <field name="image" type="base64" file="base/static/img/avatar.png" />
+        <field name="image_1920" type="base64" file="base/static/img/avatar.png" />
         <field name="zip">4683</field>
         <field name="country_id" ref="base.in" />
         <field name="company_name">YourCompany</field>
