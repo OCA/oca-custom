@@ -2,14 +2,17 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 from odoo.tests.common import HttpCase
+from odoo.tools import config
 
 from odoo.addons.http_routing.models.ir_http import slug
 
 
 class TestIntegratorController(HttpCase):
     def setUp(self):
-        super(TestIntegratorController, self).setUp()
+        super().setUp()
 
+        # Trick this configuration value for avoiding an error
+        config["source_code_local_path"] = "/tmp/"
         self.country_india = self.browse_ref("base.in")
         self.partner = self.browse_ref(
             "website_oca_integrator.partner_integrator_portal_demo"
@@ -20,10 +23,15 @@ class TestIntegratorController(HttpCase):
         self.contact2 = self.browse_ref(
             "website_oca_integrator.res_partner_contact_2_demo"
         )
+        self.product_template = self.browse_ref(
+            "website_oca_integrator.product_product_1_demo_product_template"
+        )
         self.product_attribute = self.browse_ref(
             "website_oca_integrator.product_attribute_value_1_demo"
         )
-        self.product = self.browse_ref("website_oca_integrator.product_product_1_demo")
+        self.product = self.env["product.product"].search(
+            [("product_tmpl_id", "=", self.product_template.id)]
+        )[:1]
 
     def _test_website_page(self, page, code=200):
         response = self.url_open(page)
@@ -47,28 +55,6 @@ class TestIntegratorController(HttpCase):
             "/integrators/{}?country_id={}".format(
                 slug(self.partner), self.country_india.id
             )
-        )
-
-    def test_product_list_page(self):
-        self._test_website_page(
-            "/shop?search={}&attrib={}-{}&integrator={}".format(
-                self.partner.author_ids[0].module_ids[0].name,
-                self.product_attribute.attribute_id.id,
-                self.product_attribute.id,
-                slug(self.partner),
-            )
-        )
-        self._test_website_page(
-            "/shop/category/{}-{}?integrator={}".format(
-                self.product.public_categ_ids[0].name,
-                self.product.public_categ_ids[0].id,
-                slug(self.partner),
-            )
-        )
-        self._test_website_page("/shop?&integrator={}".format("test-integrator"))
-        self._test_website_page("/shop")
-        self._test_website_page(
-            "/shop?&integrator={}&ppg={}".format(slug(self.partner), "testppg")
         )
 
     def test_contributor_list_page(self):

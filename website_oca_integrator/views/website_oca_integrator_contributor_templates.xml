@@ -75,7 +75,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                             class="pull-left"
                                             style="margin-top: 12px;"
                                             t-attf-href="/members/#{slug(contributor)}"
-                                            t-field="contributor.image"
+                                            t-field="contributor.image_1920"
                                             t-options='{"widget": "image", "class": "media-object", "max_width": 90}'
                                         />
                                         <div
@@ -231,7 +231,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             >
                                 <!-- if product has image then display it, otherwise display default module icon -->
                                 <img
-                                    t-attf-src="#{'/web/image/product.template/%s/image' %(module.id) if module.image else '/base/static/description/icon.png'}"
+                                    t-attf-src="#{'/web/image/product.template/%s/image' %(module.id) if module.image_1920 else '/base/static/description/icon.png'}"
                                     style="margin-right: 10px; height: 70px"
                                 />
                                 <a t-attf-href="/shop/product/#{slug(module)}">

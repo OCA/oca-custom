@@ -5,13 +5,18 @@ import datetime
 
 from dateutil.relativedelta import relativedelta
 
+from odoo.tests.common import Form
+from odoo.tools import config
+
 from odoo.addons.account.tests.account_test_classes import AccountingTestCase
 
 
 class TestIntegratorAssign(AccountingTestCase):
     def setUp(self):
-        super(TestIntegratorAssign, self).setUp()
+        super().setUp()
 
+        # Trick this configuration value for avoiding an error
+        config["source_code_local_path"] = "/tmp/"
         self.partner = self.env["res.partner"]
 
         # company section
@@ -19,13 +24,13 @@ class TestIntegratorAssign(AccountingTestCase):
             {
                 "name": "Partner 1",
                 "is_company": True,
-                "website_published": True,
+                "is_published": True,
                 "github_organization": "company1_github_login",
             }
         )
 
         self.company2 = self.partner.create(
-            {"name": "Partner 2", "is_company": True, "website_published": False}
+            {"name": "Partner 2", "is_company": True, "is_published": False}
         )
 
         # customer section
@@ -34,7 +39,7 @@ class TestIntegratorAssign(AccountingTestCase):
                 "name": "Customer 1",
                 "is_company": False,
                 "github_login": "customer1_github_login",
-                "website_published": True,
+                "is_published": True,
                 "parent_id": self.company1.id,
             }
         )
@@ -43,7 +48,7 @@ class TestIntegratorAssign(AccountingTestCase):
             {
                 "name": "Customer 2",
                 "is_company": False,
-                "website_published": True,
+                "is_published": True,
                 "parent_id": self.company2.id,
             }
         )
@@ -65,14 +70,20 @@ class TestIntegratorAssign(AccountingTestCase):
         )
 
     def create_member_invoice(self, customer):
-        customer.create_membership_invoice(
-            product_id=self.membership_product.id, datas={"amount": 75.0}
-        )
-        invoice = self.env["account.invoice"].search(
+        customer.create_membership_invoice(self.membership_product, 75.0)
+        invoice = self.env["account.move"].search(
             [("partner_id", "=", customer.id)], limit=1
         )
-        invoice.action_invoice_open()
-        invoice.pay_and_reconcile(self.bank_journal, invoice.amount_total)
+        invoice.post()
+        # Create payment from invoice
+        self.payment_model = self.env["account.payment"]
+        payment_register = Form(
+            self.payment_model.with_context(
+                active_model="account.move", active_ids=invoice.ids
+            )
+        )
+        self.payment = payment_register.save()
+        self.payment.post()
 
     def test_integrators(self):
         # contact has github login and not a paid member

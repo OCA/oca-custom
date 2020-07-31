@@ -134,12 +134,8 @@ class WebsiteIntegrator(http.Controller):
         not selected 5 modules, then returns latest 5 developed modules.
         """
         module_display_count = 5
-        favourite_modules = integrator.favourite_module_ids.filtered(
-            "website_published"
-        )
-        developed_modules = integrator.developed_module_ids.filtered(
-            "website_published"
-        )
+        favourite_modules = integrator.favourite_module_ids.filtered("is_published")
+        developed_modules = integrator.developed_module_ids.filtered("is_published")
         favourite_module_count = len(favourite_modules)
         developed_module_count = len(developed_modules)
 
