@@ -21,7 +21,7 @@ odoo.define("website_oca_integrator.portal", function(require) {
             },
             {
                 trigger: "#s2id_autogen2",
-                run: "text Odoo",
+                run: "text Prod.",
             },
             {
                 trigger: ".select2-match",
@@ -41,7 +41,7 @@ odoo.define("website_oca_integrator.portal", function(require) {
                 trigger: "button[type='submit']",
             },
             {
-                trigger: ".o_portal_my_home",
+                trigger: ".btn-sm",
             },
         ]
     );

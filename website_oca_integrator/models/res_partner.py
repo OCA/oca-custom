@@ -80,7 +80,6 @@ class ResPartner(models.Model):
         readonly=True,
     )
 
-    @api.multi
     @api.depends("github_organization")
     def _compute_github_organization_url(self):
         github_url = "https://github.com/"
@@ -139,7 +138,6 @@ class ResPartner(models.Model):
         for partner in self:
             partner.member_count = member_mapped_data.get(partner.id, 0)
 
-    @api.multi
     @api.depends("author_ids", "author_ids.partner_id", "author_ids.module_qty")
     def _compute_module_count(self):
         for partner in self:
@@ -147,7 +145,6 @@ class ResPartner(models.Model):
                 [author.module_qty for author in partner.author_ids]
             )
 
-    @api.multi
     @api.depends(
         "author_ids", "is_integrator", "author_ids.module_ids.product_template_id"
     )
@@ -162,7 +159,6 @@ class ResPartner(models.Model):
                 )
                 partner.developed_module_ids = [(6, 0, product_list.ids)]
 
-    @api.multi
     def write(self, vals):
         # clear github organization data if partner is not company
         if not vals.get("is_company", True):

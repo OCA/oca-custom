@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Copyright 2020 Tecnativa - Carlos Roca
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <!-- Odoo module -->
+    <record id="github_connector_odoo.odoo_module_1_demo" model="odoo.module">
+        <field
+            name="product_template_id"
+            ref="product_product_1_demo_product_template"
+        />
+    </record>
+    <record id="github_connector_odoo.odoo_module_2_demo" model="odoo.module">
+        <field
+            name="product_template_id"
+            ref="product_product_2_demo_product_template"
+        />
+    </record>
+    <record id="github_connector_odoo.odoo_module_3_demo" model="odoo.module">
+        <field
+            name="product_template_id"
+            ref="product_product_3_demo_product_template"
+        />
+    </record>
+    <record id="github_connector_odoo.odoo_module_4_demo" model="odoo.module">
+        <field
+            name="product_template_id"
+            ref="product_product_4_demo_product_template"
+        />
+    </record>
+    <record id="github_connector_odoo.odoo_module_5_demo" model="odoo.module">
+        <field
+            name="product_template_id"
+            ref="product_product_5_demo_product_template"
+        />
+    </record>
+    <record id="github_connector_odoo.odoo_module_6_demo" model="odoo.module">
+        <field
+            name="product_template_id"
+            ref="product_product_6_demo_product_template"
+        />
+    </record>
+</odoo>

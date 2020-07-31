@@ -95,7 +95,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 <a
                                     class="pull-left"
                                     t-attf-href="/integrators/#{slug(integrator)}?#{current_grade and 'grade_id=%s&amp;' % current_grade.id}#{current_country and 'country_id=%s' % current_country.id}"
-                                    t-field="integrator.image"
+                                    t-field="integrator.image_1920"
                                     t-options='{"widget": "image", "class": "media-object", "max_width": 128}'
                                 />
                                 <div
@@ -122,7 +122,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                             t-as="sponsorship"
                                         >
                                             <img
-                                                t-att-src="'data:image/png;base64,%s'%to_text(sponsorship.sponsorship_id.image_medium)"
+                                                t-att-src="'data:image/png;base64,%s'%to_text(sponsorship.sponsorship_id.image_128)"
                                                 height="50"
                                                 width="50"
                                                 alt=""
@@ -380,7 +380,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <div t-foreach="references" t-as="reference" class="media">
                 <a class="pull-left" t-attf-href="/customers/#{slug(reference)}">
                     <span
-                        t-field="reference.image_small"
+                        t-field="reference.image_128"
                         t-options='{"widget": "image", "class": "center-block"}'
                     />
                 </a>
@@ -428,7 +428,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                         >
                             <!-- if product has image then display it, otherwise display default module icon -->
                             <img
-                                t-attf-src="#{'/web/image/product.template/%s/image' %(module.id) if module.image else '/base/static/description/icon.png'}"
+                                t-attf-src="#{'/web/image/product.template/%s/image' %(module.id) if module.image_1920 else '/base/static/description/icon.png'}"
                                 style="margin-right: 10px; height: 70px"
                             />
                             <a t-attf-href="/shop/product/#{slug(module)}">

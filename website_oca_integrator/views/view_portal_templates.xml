@@ -11,17 +11,11 @@ License AGPL - 3.0 or later(http: // www.gnu.org / licenses / agpl.html).
         inherit_id="website.layout"
         name="Integrator portal layout"
     >
-        <xpath
-            expr="//t[@t-call-assets='web_editor.summernote'][@t-js='false']"
-            position="attributes"
-        >
-            <attribute name="groups" />
+        <xpath expr="//div[@id='wrapwrap']" position="before">
+            <t t-set="pageName" t-value="'website_forum'" />
         </xpath>
-        <xpath
-            expr="//t[@t-call-assets='web_editor.summernote'][@t-css='false']"
-            position="attributes"
-        >
-            <attribute name="groups" />
+        <xpath expr="//div[@id='wrapwrap']" position="attributes">
+            <attribute name="t-att-data-forum_id">forum and forum.id</attribute>
         </xpath>
     </template>
     <!-- Website portal integrator layout -->

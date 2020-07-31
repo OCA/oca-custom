@@ -2,11 +2,20 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 import odoo.tests
+from odoo.tools import config
 
 
 @odoo.tests.common.at_install(False)
 @odoo.tests.common.post_install(True)
 class TestUi(odoo.tests.HttpCase):
+    def setUp(self):
+        super().setUp()
+        # Trick this configuration value for avoiding an error
+        config["source_code_local_path"] = "/tmp/"
+        # HACK: Force computation due to demo data glitch
+        partner = self.env.ref("website_oca_integrator.partner_integrator_portal_demo")
+        partner._compute_developed_modules()
+
     def test_integrator_portal(self):
         self.browser_js(
             "/my/account",
