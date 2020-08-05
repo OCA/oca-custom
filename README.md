@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/OCA/oca-custom.svg?branch=8.0)](https://travis-ci.org/OCA/oca-custom)
-[![Coverage Status](https://coveralls.io/repos/github/OCA/oca-custom/badge.svg?branch=8.0)](https://coveralls.io/github/OCA/oca-custom?branch=8.0)
+[![Build Status](https://travis-ci.org/OCA/oca-custom.svg?branch=11.0)](https://travis-ci.org/OCA/oca-custom)
+[![Coverage Status](https://coveralls.io/repos/github/OCA/oca-custom/badge.svg?branch=11.0)](https://coveralls.io/github/OCA/oca-custom?branch=11.0)
 
 Custom Modules for Odoo Community Association
 =============================================
