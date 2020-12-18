@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
 Copyright 2019 Surekha Technologies (https://www.surekhatech.com)
+Copyright 2020 Tecnativa - Pedro M. Baeza
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
@@ -12,11 +13,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <xpath expr="." position="inside">
             <link
                 rel="stylesheet"
-                href="website_oca_psc_team/static/src/scss/website_oca_psc_team.scss"
-            />
-            <script
-                type="text/javascript"
-                src="website_oca_psc_team/static/src/js/psc_team_tour.js"
+                href="/website_oca_psc_team/static/src/css/website_oca_psc_team.css"
             />
         </xpath>
     </template>
