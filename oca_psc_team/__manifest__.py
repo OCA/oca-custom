@@ -14,6 +14,7 @@
         "security/ir.model.access.csv",
         "views/project_views.xml",
         "views/psc_category_views.xml",
+        "views/repository_views.xml",
     ],
     "demo": [
         "demo/github_repository.xml",
