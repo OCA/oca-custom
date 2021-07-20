@@ -4,6 +4,7 @@
 
 * `Tecnativa <https://www.tecnativa.com>`_
 
-    * Vicent Cubells <vicent.cubells@tecnativa.com>
+    * Vicent Cubells
     * Cristina Martin R.
     * Carlos Roca
+    * Ernesto Tejeda
