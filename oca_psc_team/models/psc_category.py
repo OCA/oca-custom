@@ -9,9 +9,13 @@ class PscCategory(models.Model):
     _order = "sequence"
     _description = "PSC Categories"
 
-    name = fields.Char(required=True,)
+    name = fields.Char(
+        required=True,
+    )
 
-    description = fields.Text(required=True,)
+    description = fields.Text(
+        required=True,
+    )
 
     sequence = fields.Integer()
 
