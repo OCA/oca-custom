@@ -142,11 +142,11 @@ class TestPscCategoryAccessRight(common.TransactionCase):
 
         # check for unlink access
         with self.assertRaises(AccessError):
-            self.psc_category_1.sudo(self.project_user).unlink()
+            self.psc_category_1.with_user(self.project_user).unlink()
 
         # check for write access
         with self.assertRaises(AccessError):
-            self.psc_category_1.sudo(self.project_user).write(
+            self.psc_category_1.with_user(self.project_user).write(
                 {"description": "Test description"}
             )
 
@@ -165,9 +165,9 @@ class TestPscCategoryAccessRight(common.TransactionCase):
         )
 
         # check for unlink access
-        self.psc_category_2.sudo(self.project_manager).unlink()
+        self.psc_category_2.with_user(self.project_manager).unlink()
 
         # check for write access
-        self.psc_category_1.sudo(self.project_manager).write(
+        self.psc_category_1.with_user(self.project_manager).write(
             {"description": "Test description"}
         )
