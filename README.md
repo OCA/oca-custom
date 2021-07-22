@@ -15,7 +15,11 @@ This project aims to deal with modules related to the Odoo instance of the OCA.
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | summary
+--- | --- | ---
+[oca_event_badge](oca_event_badge/) | 14.0.1.0.0 | Creates Custom Event Badges based on the Partner Tags
 
 [//]: # (end addons)
 
