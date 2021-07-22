@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018 ACSONE SA/NV
+     Copyright 2019 Tecnativa - Cristina Martin R.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <template
+        id="oca_event_badge_registration_report_template"
+        inherit_id="event.event_registration_report_template_badge"
+    >
+        <!-- the priority allows to force the position parent partner name
+         before the position of the event ticket if the event ticket is defined -->
+        <xpath expr="//div[@id='o_event_name']" position="inside" priority="99">
+            <div class="row">
+                <div
+                    t-if="o.partner_id.parent_id"
+                    class="col-12 text-center"
+                    t-ignore="true"
+                >
+                    <span>
+                        <t t-esc="o.partner_id.parent_id.name" />
+                    </span>
+                </div>
+            </div>
+        </xpath>
+    </template>
+    <template
+        id="oca_event_badge_registration_report_logo_template"
+        inherit_id="event.event_registration_report_template_badge"
+    >
+        <xpath expr="//div[@id='o_event_name']" position="inside">
+            <div class="row">
+                <div
+                    t-if="o.partner_id.category_id"
+                    class="col-12 text-center mt16"
+                    t-ignore="true"
+                >
+                    <span
+                        class="text-center"
+                        t-foreach="o.partner_id.category_id"
+                        t-as="val"
+                    >
+                        <t t-if="val.name == 'board'">
+                            <img
+                                src="/oca_event_badge/static/src/img/oca_board.png"
+                                class="badge_logo"
+                            />
+                        </t>
+                        <t t-elif="val.name == 'delegate'">
+                            <img
+                                src="/oca_event_badge/static/src/img/oca_delegate.png"
+                                class="badge_logo"
+                            />
+                        </t>
+                        <t t-elif="val.name == 'member'">
+                            <img
+                                src="/oca_event_badge/static/src/img/oca_member.png"
+                                class="badge_logo"
+                            />
+                        </t>
+                    </span>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
