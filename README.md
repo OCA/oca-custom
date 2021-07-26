@@ -20,6 +20,7 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [oca_event_badge](oca_event_badge/) | 14.0.1.0.0 | Creates Custom Event Badges based on the Partner Tags
+[project_members](project_members/) | 14.0.1.0.0 | add members to projects
 
 [//]: # (end addons)
 
