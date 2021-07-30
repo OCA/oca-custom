@@ -26,12 +26,8 @@ class TestPSCTeamsController(HttpCase):
         # project id in url.
         self._test_website_page("/psc-teams/{}-{}".format(self.test_project.name, 999))
 
-        self.phantom_js(
-            "/psc-teams",
-            "odoo.__DEBUG__.services['web_tour.tour']" ".run('psc_team_project_tour')",
-            "odoo.__DEBUG__.services['web_tour.tour']"
-            ".tours.psc_team_project_tour.ready",
-            login="project_manager_demo",
+        self.start_tour(
+            "/psc-teams", "psc_team_project_tour", login="project_manager_demo"
         )
 
         project_manager_user = self.env.ref(
