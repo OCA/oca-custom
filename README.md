@@ -21,6 +21,7 @@ addon | version | summary
 --- | --- | ---
 [oca_custom](oca_custom/) | 14.0.1.0.0 | Custom Settings for OCA Instance
 [oca_event_badge](oca_event_badge/) | 14.0.1.0.0 | Creates Custom Event Badges based on the Partner Tags
+[oca_psc_team](oca_psc_team/) | 14.0.1.0.0 | This module allows you to store PSC details in project.These details will be displayed in PSC Teams in website.
 [project_members](project_members/) | 14.0.1.0.0 | add members to projects
 
 [//]: # (end addons)
