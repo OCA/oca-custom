@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo14-addon-oca_custom',
         'odoo14-addon-oca_event_badge',
+        'odoo14-addon-oca_psc_team',
         'odoo14-addon-project_members',
     ],
     classifiers=[
