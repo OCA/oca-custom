@@ -1,7 +1,7 @@
 /* Copyright 2018 Surekha Technologies (https://www.surekhatech.com)
 License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). */
 
-odoo.define("website_oca_integrator.portal", function(require) {
+odoo.define("website_oca_integrator.portal", function (require) {
     "use strict";
 
     var Tour = require("web_tour.tour");
