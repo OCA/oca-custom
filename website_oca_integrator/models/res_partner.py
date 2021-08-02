@@ -1,11 +1,9 @@
 # Copyright 2018 Surekha Technologies (https://www.surekhatech.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import datetime
 import logging
 
 from odoo import api, fields, models
-from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 _logger = logging.getLogger(__name__)
 
@@ -100,7 +98,7 @@ class ResPartner(models.Model):
         for partner in self:
             if any(
                 [
-                    (child.github_login or child.membership_state == "paid")
+                    (child.github_name or child.membership_state == "paid")
                     for child in partner.child_ids
                 ]
             ):
@@ -108,10 +106,10 @@ class ResPartner(models.Model):
             else:
                 partner.is_integrator = False
 
-    @api.depends("child_ids.github_login", "child_ids.parent_id")
+    @api.depends("child_ids.github_name", "child_ids.parent_id")
     def _compute_contributor_count(self):
         contributor_data = self.read_group(
-            domain=[("parent_id", "in", self.ids), ("github_login", "!=", False)],
+            domain=[("parent_id", "in", self.ids), ("github_name", "!=", False)],
             fields=["parent_id"],
             groupby=["parent_id"],
         )
@@ -163,7 +161,7 @@ class ResPartner(models.Model):
         # clear github organization data if partner is not company
         if not vals.get("is_company", True):
             vals["github_organization"] = False
-        res = super(ResPartner, self).write(vals)
+        res = super().write(vals)
         return res
 
     def update_contributor_modules(self, contributor, modules):
@@ -224,55 +222,34 @@ class ResPartner(models.Model):
             }
         )
 
-    def get_github_user_modules(
-        self, event_response, github_connector, all_modules_len, github_orgs
-    ):
+    def get_github_user_modules(self, gh_events, github_orgs):
         """
         Find latest 5 technical name of the modules based on the PR
         which are opened for OCA organization by github user.
         """
         current_page_modules = {}  # holds module name and merged date of PR.
-        for event in event_response:
-            org = event.get("org") and event["org"]["login"]
+        for gh_event in gh_events:
+            org = gh_event.org and gh_event.org.login
             if (
-                event["type"] == "PullRequestEvent"
+                gh_event.type == "PullRequestEvent"
                 and org in github_orgs
-                and event["payload"]["action"] == "opened"
+                and gh_event.payload["action"] == "opened"
             ):
-                pull_request = event["payload"]["pull_request"]
+                pr_number = gh_event.payload["pull_request"]["number"]
                 try:
-                    pr_response = self.get_github_api_response(
-                        github_connector, pull_request["url"]
-                    )
+                    gh_pull_request = gh_event.repo.get_pull(pr_number)
                 except Exception:
                     _logger.warning(
-                        "Error while calling url '%s' during fetching "
-                        "module for '%s'."
-                        % (pull_request["url"], event["actor"]["login"])
+                        "Error while fetching pull request #'%s' of repository '%s'/'%s'."
+                        % (pr_number, org, gh_event.repo)
                     )
                     continue
-                if pr_response["merged"]:
-                    commit_sha = pull_request["head"]["sha"]
-                    # commit url of repo from which PR is created.
-                    commit_url = pull_request["head"]["repo"]["commits_url"].replace(
-                        "{/sha}", "/" + commit_sha
-                    )
-                    try:
-                        commit_data = self.get_github_api_response(
-                            github_connector, commit_url
-                        )
-                    except Exception:
-                        _logger.warning(
-                            "Error while calling url '%s' during fetching "
-                            "module for '%s'." % (commit_url, event["actor"]["login"])
-                        )
-                        continue
+                if gh_pull_request.merged:
+                    commit_sha = gh_pull_request.head.sha
+                    gh_commit = gh_event.repo.get_commit(commit_sha)
 
-                    # find module name(s) from all committed files
-                    for commit_file in commit_data["files"]:
-                        if len(current_page_modules) + all_modules_len == 5:
-                            return current_page_modules
-                        file_name = commit_file.get("filename").split("/")[0].split(".")
+                    for commit_file in gh_commit.files:
+                        file_name = commit_file.filename.split("/")[0].split(".")
                         # if length of filename is 1 then filename
                         # can be technical name of module
                         if (
@@ -284,64 +261,35 @@ class ResPartner(models.Model):
                                 [("technical_name", "in", module_name)]
                             )
                             if odoo_module:
-                                date = datetime.datetime.strptime(
-                                    pr_response["merged_at"], "%Y-%m-%dT%H:%M:%SZ"
-                                ).strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+                                date = gh_pull_request.merged_at
                                 current_page_modules[module_name[0]] = date
-
+                                if len(current_page_modules) == 5:
+                                    return current_page_modules
         return current_page_modules
 
-    def get_github_api_response(self, github_connector, query_url):
-        return github_connector.get_by_url(query_url, "get")
-
     def get_github_organization(self):
-        return self.env["github.organization"].search([]).mapped("github_login")
+        return self.env["github.organization"].search([]).mapped("github_name")
 
     def get_contributors(self):
         contributors = self.env["res.partner"].search(
-            ["&", ("github_login", "!=", False), ("website_published", "=", True)]
+            ["&", ("github_name", "!=", False), ("website_published", "=", True)]
         )
         return contributors
 
     def contributors_fetch_modules(self):
-        all_modules = {}
-        github_users_api = "https://api.github.com/users/"
-        event_url = "/events?page=%d"
-
-        github_connector = self.env["abstract.github.model"].get_github_connector(
-            "user"
-        )
+        gh_api = self.get_github_connector()
         contributors = self.get_contributors()
         github_orgs = self.get_github_organization()
 
         for contributor in contributors:
-            contributor_event_url = (
-                github_users_api + contributor.github_login + event_url
-            )
-            # github API is limited to only 10 pages.
-            for page in range(1, 11):
-                try:
-                    event_response = self.get_github_api_response(
-                        github_connector, contributor_event_url % (page)
-                    )
-                    if not event_response:
-                        # if we get empty response in page then all
-                        # other next pages will have empty response.
-                        break
-                except Exception:
-                    _logger.warning(
-                        "Github login for partner '%s' is not"
-                        " correctly set." % (contributor.name)
-                    )
-                    break
-                current_page_modules = self.get_github_user_modules(
-                    event_response, github_connector, len(all_modules), github_orgs
-                )
-                all_modules.update(current_page_modules)
-                if len(all_modules) == 5:
-                    break
-            self.update_contributor_modules(contributor, all_modules)
-            all_modules.clear()
+            try:
+                gh_user = gh_api.get_user(contributor.github_name)
+            except Exception:
+                _logger.warning("Error while fetching user '%s'." % (contributor.name))
+                continue
+            gh_events = gh_user.get_events()
+            modules = self.get_github_user_modules(gh_events, github_orgs)
+            self.update_contributor_modules(contributor, modules)
 
     def cron_create_github_user_module(self):
         self.contributors_fetch_modules()

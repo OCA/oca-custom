@@ -14,24 +14,31 @@ class TestIntegratorController(HttpCase):
         # Trick this configuration value for avoiding an error
         config["source_code_local_path"] = "/tmp/"
         self.country_india = self.browse_ref("base.in")
-        self.partner = self.browse_ref(
-            "website_oca_integrator.partner_integrator_portal_demo"
+        self.partner = self.env["res.partner"].create(
+            {
+                "name": "Partner Test",
+                "is_company": True,
+                "email": "partner.test@yourcompany.example.com",
+                "city": "Vivegnis",
+                "street": "Palermo, Capital Federal",
+                "country_id": self.country_india.id,
+                "website_published": True,
+            }
         )
-        self.contact1 = self.browse_ref(
-            "website_oca_integrator.res_partner_contact_1_demo"
+        self.contact1 = self.env["res.partner"].create(
+            {
+                "name": "Contact 2 Test",
+                "parent_id": self.partner.id,
+                "github_name": "demo-git-rusty",
+            }
         )
-        self.contact2 = self.browse_ref(
-            "website_oca_integrator.res_partner_contact_2_demo"
+        self.contact2 = self.env["res.partner"].create(
+            {
+                "name": "Contact 2 Test",
+                "parent_id": self.partner.id,
+                "github_name": "demo-git-diane",
+            }
         )
-        self.product_template = self.browse_ref(
-            "website_oca_integrator.product_product_1_demo_product_template"
-        )
-        self.product_attribute = self.browse_ref(
-            "website_oca_integrator.product_attribute_value_1_demo"
-        )
-        self.product = self.env["product.product"].search(
-            [("product_tmpl_id", "=", self.product_template.id)]
-        )[:1]
 
     def _test_website_page(self, page, code=200):
         response = self.url_open(page)

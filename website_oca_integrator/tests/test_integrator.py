@@ -8,10 +8,10 @@ from dateutil.relativedelta import relativedelta
 from odoo.tests.common import Form
 from odoo.tools import config
 
-from odoo.addons.account.tests.account_test_classes import AccountingTestCase
+from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
-class TestIntegratorAssign(AccountingTestCase):
+class TestIntegratorAssign(AccountTestInvoicingCommon):
     def setUp(self):
         super().setUp()
 
@@ -25,7 +25,7 @@ class TestIntegratorAssign(AccountingTestCase):
                 "name": "Partner 1",
                 "is_company": True,
                 "is_published": True,
-                "github_organization": "company1_github_login",
+                "github_organization": "company1_github_name",
             }
         )
 
@@ -38,7 +38,7 @@ class TestIntegratorAssign(AccountingTestCase):
             {
                 "name": "Customer 1",
                 "is_company": False,
-                "github_login": "customer1_github_login",
+                "github_name": "customer1_github_name",
                 "is_published": True,
                 "parent_id": self.company1.id,
             }
@@ -76,14 +76,14 @@ class TestIntegratorAssign(AccountingTestCase):
         )
         invoice.post()
         # Create payment from invoice
-        self.payment_model = self.env["account.payment"]
+        self.payment_model = self.env["account.payment.register"]
         payment_register = Form(
             self.payment_model.with_context(
                 active_model="account.move", active_ids=invoice.ids
             )
         )
         self.payment = payment_register.save()
-        self.payment.post()
+        self.payment.action_create_payments()
 
     def test_integrators(self):
         # contact has github login and not a paid member

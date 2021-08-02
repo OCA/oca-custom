@@ -67,5 +67,5 @@ class IntegratorPortal(CustomerPortal):
         # this field does not exist in 'res.partner'. removed this
         # key to prevent an error of "Unknown field 'files'".
         data.pop("files", False)
-        error, error_message = super(IntegratorPortal, self).details_form_validate(data)
+        error, error_message = super().details_form_validate(data)
         return error, error_message
