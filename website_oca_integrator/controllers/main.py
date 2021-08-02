@@ -302,7 +302,8 @@ class WebsiteIntegrator(http.Controller):
         )
 
         base_url = "/integrators/{}/contributors{}".format(
-            integrator, "/country/%s" % country_id if country_id else "",
+            integrator,
+            "/country/%s" % country_id if country_id else "",
         )
 
         contributors_count = partner.sudo().search_count(country_domain)

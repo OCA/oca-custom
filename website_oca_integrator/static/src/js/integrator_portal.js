@@ -1,7 +1,7 @@
 /* Copyright 2018 Surekha Technologies (https://www.surekhatech.com)
 License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). */
 
-odoo.define("website_oca_integrator.website_oca_integrator", function(require) {
+odoo.define("website_oca_integrator.website_oca_integrator", function (require) {
     "use strict";
 
     var publicWidget = require("web.public.widget");
@@ -12,7 +12,7 @@ odoo.define("website_oca_integrator.website_oca_integrator", function(require) {
         /**
          * @override
          */
-        start: function() {
+        start: function () {
             this.$el.select2({
                 tags: true,
                 maximumInputLength: 25,
@@ -20,28 +20,28 @@ odoo.define("website_oca_integrator.website_oca_integrator", function(require) {
                 ajax: {
                     url: "/my/account/get_developed_modules",
                     dataType: "json",
-                    data: function(term) {
+                    data: function (term) {
                         return {
                             query: term,
                             limit: 25,
                         };
                     },
-                    results: function(data) {
+                    results: function (data) {
                         var res = [];
-                        _.each(data, function(x) {
+                        _.each(data, function (x) {
                             res.push({id: x.id, text: x.name});
                         });
                         return {results: res};
                     },
                 },
-                initSelection: function(element, callback) {
+                initSelection: function (element, callback) {
                     return $.ajax({
                         type: "GET",
                         url: "/my/account/get_favourite_modules",
                         dataType: "json",
-                        success: function(data) {
+                        success: function (data) {
                             var res = [];
-                            _.each(data, function(x) {
+                            _.each(data, function (x) {
                                 res.push({id: x.id, text: x.name});
                             });
                             element.val("");
@@ -61,7 +61,7 @@ odoo.define("website_oca_integrator.website_oca_integrator", function(require) {
         /**
          * @override
          */
-        start: function() {
+        start: function () {
             if (!this.$el.val().match(/\S/)) {
                 this.$el.val("<p><br/></p>");
             }
@@ -78,7 +78,7 @@ odoo.define("website_oca_integrator.website_oca_integrator", function(require) {
                 styleWithSpan: false,
             });
         },
-        _submit: function() {
+        _submit: function () {
             const $form = this.$el.closest("form");
             this.$el.html($form.find(".note-editable").code());
         },
