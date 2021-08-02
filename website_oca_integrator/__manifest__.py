@@ -3,7 +3,7 @@
 {
     "name": "Website OCA Integrator",
     "summary": "Displays Integrators in website.",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "category": "Website",
     "license": "AGPL-3",
     "website": "https://github.com/OCA/oca-custom",
@@ -30,14 +30,6 @@
         "views/view_odoo_author.xml",
         "data/ir_cron.xml",
     ],
-    "demo": [
-        "demo/assets.xml",
-        "demo/res_users.xml",
-        "demo/res_partner.xml",
-        "demo/odoo_author.xml",
-        "demo/product_template_demo.xml",
-        "demo/odoo_module_demo.xml",
-        "demo/product_template_post_demo.xml",
-    ],
+    "external_dependencies": {"python": ["responses"]},
     "installable": True,
 }

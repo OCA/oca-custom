@@ -30,7 +30,7 @@ class WebsiteIntegratorSale(WebsiteSale):
         """
         Filter products by integrator.
         """
-        response = super(WebsiteIntegratorSale, self).shop(
+        response = super().shop(
             page=page, category=category, search=search, ppg=ppg, **post
         )
 

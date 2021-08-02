@@ -254,7 +254,7 @@ class WebsiteIntegrator(http.Controller):
         country_domain = [
             "|",
             ("membership_state", "=", "paid"),
-            ("github_login", "!=", False),
+            ("github_name", "!=", False),
             ("website_published", "=", True),
             ("parent_id", "=", integrator_id),
         ]

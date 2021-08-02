@@ -4,8 +4,8 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). */
 odoo.define("website_oca_integrator.portal", function (require) {
     "use strict";
 
-    var Tour = require("web_tour.tour");
-    var base = require("web_editor.base");
+    const Tour = require("web_tour.tour");
+    const base = require("web_editor.base");
 
     Tour.register(
         "integrator_portal",

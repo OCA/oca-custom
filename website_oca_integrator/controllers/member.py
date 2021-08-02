@@ -13,9 +13,7 @@ class WebsiteContributorMembership(WebsiteMembership):
         """
         Display contributor/member page.
         """
-        response = super(WebsiteContributorMembership, self).partners_detail(
-            partner_id, **post
-        )
+        response = super().partners_detail(partner_id, **post)
 
         # if contributor/member exist then render page
         # else redirect it to contributor/member list page.

@@ -4,7 +4,7 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). */
 odoo.define("website_oca_integrator.website_oca_integrator", function (require) {
     "use strict";
 
-    var publicWidget = require("web.public.widget");
+    const publicWidget = require("web.public.widget");
 
     publicWidget.registry.integratorModuleSelector = publicWidget.Widget.extend({
         selector: "input.module_js_select2",
@@ -20,35 +20,31 @@ odoo.define("website_oca_integrator.website_oca_integrator", function (require) 
                 ajax: {
                     url: "/my/account/get_developed_modules",
                     dataType: "json",
-                    data: function (term) {
-                        return {
-                            query: term,
-                            limit: 25,
-                        };
+                    data: (term) => {
+                        return {query: term, limit: 25};
                     },
-                    results: function (data) {
-                        var res = [];
-                        _.each(data, function (x) {
+                    results: (data) => {
+                        const res = [];
+                        _.each(data, (x) => {
                             res.push({id: x.id, text: x.name});
                         });
                         return {results: res};
                     },
                 },
-                initSelection: function (element, callback) {
-                    return $.ajax({
+                initSelection: (element, callback) =>
+                    $.ajax({
                         type: "GET",
                         url: "/my/account/get_favourite_modules",
                         dataType: "json",
-                        success: function (data) {
-                            var res = [];
-                            _.each(data, function (x) {
+                        success: (data) => {
+                            const res = [];
+                            _.each(data, (x) => {
                                 res.push({id: x.id, text: x.name});
                             });
                             element.val("");
                             callback(res);
                         },
-                    });
-                },
+                    }),
             });
         },
     });

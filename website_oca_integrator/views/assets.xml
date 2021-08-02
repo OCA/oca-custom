@@ -16,4 +16,12 @@ License AGPL - 3.0 or later(http: // www.gnu.org / licenses / agpl.html).
             />
         </xpath>
     </template>
+    <template id="assets_tests" inherit_id="website.assets_tests">
+        <xpath expr=".">
+            <script
+                type="text/javascript"
+                src="/website_oca_integrator/static/src/js/integrator_portal_tour.js"
+            />
+        </xpath>
+    </template>
 </odoo>
