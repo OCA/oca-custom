@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo14-addon-oca_event_badge',
         'odoo14-addon-oca_psc_team',
         'odoo14-addon-project_members',
+        'odoo14-addon-website_oca_integrator',
         'odoo14-addon-website_oca_psc_team',
     ],
     classifiers=[
