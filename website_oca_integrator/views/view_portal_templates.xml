@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2018 Surekha Technologies(https: // www.surekhatech.com)
+License AGPL - 3.0 or later(http: // www.gnu.org / licenses / agpl.html).
+-->
+<odoo>
+    <!-- Removes the access right check for summernote bundle -->
+    <!-- Taken reference from website_forum.layout  -->
+    <template
+        id="integrator_editor_access"
+        inherit_id="website.layout"
+        name="Integrator portal layout"
+    >
+        <xpath expr="//div[@id='wrapwrap']" position="before">
+            <t t-set="pageName" t-value="'website_forum'" />
+        </xpath>
+        <xpath expr="//div[@id='wrapwrap']" position="attributes">
+            <attribute name="t-att-data-forum_id">forum and forum.id</attribute>
+        </xpath>
+    </template>
+    <!-- Website portal integrator layout -->
+    <template
+        id="website_portal_integrator_details"
+        inherit_id="portal.portal_my_details"
+    >
+        <xpath expr="//div[hasclass('row')]/input[@name='redirect']" position="before">
+            <t t-if="partner.is_integrator">
+                <div
+                    t-attf-class="form-group #{error.get('favourite_module_ids') and 'has-error' or ''} col-lg-6"
+                >
+                    <label class="control-label" for="favourite_module_ids">
+                        Modules
+                    </label>
+                    <input
+                        type="hidden"
+                        name="favourite_module_ids"
+                        placeholder="Modules..."
+                        class="form-control module_js_select2"
+                        value="Modules"
+                    />
+                </div>
+                <div
+                    t-attf-class="form-group #{error.get('github_organization') and 'has-error' or ''} col-lg-6"
+                >
+                    <label class="control-label" for="github_organization">
+                        Github Login
+                    </label>
+                    <input
+                        type="text"
+                        name="github_organization"
+                        class="form-control"
+                        t-att-value="partner.github_organization"
+                    />
+                </div>
+            </t>
+            <div
+                t-attf-class="form-group #{error.get('website_short_description') and 'has-error' or ''} col-lg-6"
+            >
+                <label class="control-label" for="website_short_description">
+                    Website Short Description
+                </label>
+                <textarea
+                    name="website_short_description"
+                    class="form-control"
+                    style="height:100px"
+                    t-esc="partner.website_short_description or '' "
+                />
+            </div>
+            <div
+                t-attf-class="form-group #{error.get('website_description') and 'has-error' or ''} col-lg-12"
+            >
+                <div class="row">
+                    <label
+                        class="col-lg-12 control-label mb16"
+                        for="description"
+                    >Website Description
+                    </label>
+                    <div class="col-lg-12 mb16">
+                        <textarea
+                            name="website_description"
+                            id="website_description"
+                            style="min-height: 120px"
+                            class="form-control website_description_editor"
+                        >
+                            <t t-esc="partner.website_description" />
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

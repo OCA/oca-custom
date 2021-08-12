@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2018 Surekha Technologies (https://www.surekhatech.com)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <!-- Add integrator parameter in '/shop' url to filter only integrator's products by attributes -->
+    <template
+        id="integrator_product_attributes"
+        inherit_id="website_sale.products_attributes"
+    >
+        <xpath expr="//form[hasclass('js_attributes')]" position="inside">
+            <t t-if="integrator">
+                <input type="hidden" name="integrator" t-att-value="slug(integrator)" />
+            </t>
+        </xpath>
+    </template>
+</odoo>

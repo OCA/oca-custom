@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2018 Surekha Technologies (https://www.surekhatech.com)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <!-- Display company field -->
+    <record id="view_oca_author_form_inherit" model="ir.ui.view">
+        <field name="model">odoo.author</field>
+        <field name="inherit_id" ref="github_connector_odoo.view_oca_author_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="after">
+                <group>
+                    <field
+                        name="partner_id"
+                        attrs="{'readonly': [('name','=',False)]}"
+                    />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
