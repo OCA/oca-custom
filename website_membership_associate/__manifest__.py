@@ -8,6 +8,6 @@
     "version": "14.0.1.0.0",
     "license": "AGPL-3",
     "author": "Graeme Gellatly,Odoo Community Association (OCA)",
-    "website": "https://github.com/OCA/vertical-association",
+    "website": "https://github.com/OCA/oca-custom",
     "depends": ["website_membership"],
 }
