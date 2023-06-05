@@ -130,11 +130,13 @@ class WebsiteMembership(WebsiteMembership):
         # get google maps localization of partners
         google_map_partner_ids = []
         if request.website.is_view_active("website_membership.opt_index_google_map"):
-            google_map_partner_ids = Partner.search(
-                line_domain
-            ).commercial_partner_id.filtered(lambda s: s.is_published and s.is_company)[
-                :2000
-            ]
+            google_map_partner_ids = (
+                Partner.sudo()
+                .search(line_domain)
+                .commercial_partner_id.filtered(
+                    lambda s: s.is_published and s.is_company
+                )[:2000]
+            )
 
         search_domain = [
             ("membership_state", "=", "free"),
