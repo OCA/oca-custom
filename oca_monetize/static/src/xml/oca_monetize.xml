@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Hunki Enterprises BV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl-3.0) -->
+<template>
+    <t t-extend="Menu">
+        <t t-jquery=".o_main_navbar" t-operation="before">
+            <div class="alert-danger p-4" id="oca_monetize">
+                    You have installed modules whose authors requested that you <a href="link to subscription product on shop">buy</a> an <a href="link explaining the whole thing">OCA subscription</a>
+                    If you already have a subscription key, please fill it in the <a href="">settings</a>
+            </div>
+        </t>
+    </t>
+</template>
