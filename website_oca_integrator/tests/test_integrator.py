@@ -5,12 +5,13 @@ import datetime
 
 from dateutil.relativedelta import relativedelta
 
-from odoo.tests.common import Form
+from odoo.tests.common import Form, tagged
 from odoo.tools import config
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
+@tagged("post_install", "-at_install")
 class TestIntegratorAssign(AccountTestInvoicingCommon):
     def setUp(self):
         super().setUp()
