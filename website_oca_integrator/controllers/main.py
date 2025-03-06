@@ -199,7 +199,6 @@ class WebsiteIntegrator(http.Controller):
             if integrator.sudo().exists() and (
                 integrator.website_published or is_website_publisher
             ):
-
                 modules_list, developed_module_count = self.get_integrator_modules_list(
                     integrator
                 )

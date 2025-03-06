@@ -240,7 +240,8 @@ class ResPartner(models.Model):
                     gh_pull_request = gh_event.repo.get_pull(pr_number)
                 except Exception:
                     _logger.warning(
-                        "Error while fetching pull request #'%s' of repository '%s'/'%s'."
+                        "Error while fetching pull request "
+                        "#'%s' of repository '%s'/'%s'."
                         % (pr_number, org, gh_event.repo)
                     )
                     continue
@@ -254,7 +255,7 @@ class ResPartner(models.Model):
                         # can be technical name of module
                         if (
                             len(file_name) == 1
-                            and not file_name[0] in current_page_modules
+                            and file_name[0] not in current_page_modules
                         ):
                             module_name = file_name
                             odoo_module = self.env["odoo.module"].search(
