@@ -71,6 +71,7 @@ dependencies = [
   # TODO: add constraints in github connector module
   "PyGithub<2.0.0",
   "click-odoo-contrib",
+  "openupgradelib",
 ]
 addons_dirs = ["./"]
 
