@@ -81,7 +81,8 @@ prerelease = "allow"
 # tell uv when dependencies may change
 cache-keys = [{ file = "pyproject.toml" }, { file = "**/__manifest__.py" }]
 
-dev-dependencies = [
+[dependency-groups]
+dev = [
   "parameterized>=0.9.0",
   "pytest>8",
   "pytest-odoo>=2",
