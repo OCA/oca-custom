@@ -13,6 +13,7 @@
         "website",
         "website_crm_partner_assign",
         "website_sale",
+        "website_apps_store",
         "membership",
         "website_membership",
         "website_customer",

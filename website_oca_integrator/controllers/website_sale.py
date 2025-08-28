@@ -1,9 +1,9 @@
 # Copyright 2018 Surekha Technologies (https://www.surekhatech.com)
 # Part of Odoo. See Odoo LICENSE file for full copyright and licensing details.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-
 from odoo import http
 from odoo.http import request
+from odoo.osv.expression import FALSE_DOMAIN
 
 from odoo.addons.http_routing.models.ir_http import slug, unslug
 from odoo.addons.website.controllers.main import QueryURL
@@ -25,6 +25,22 @@ class WebsiteIntegratorSale(WebsiteSale):
             ppg = PPG
         return ppg, post
 
+    def _get_search_domain(
+        self, search, category, attrib_values, search_in_description=True, *args, **post
+    ):
+        if not search.isascii():
+            # ignoring search that contain non ascii chars
+            # most of OCA modules use english to describe it
+            # to gives more time to find a proposer defender solution
+            return FALSE_DOMAIN
+        return super()._get_search_domain(
+            search,
+            category,
+            attrib_values,
+            search_in_description=search_in_description,
+            **post,
+        )
+
     @http.route()
     def shop(self, page=0, category=None, search="", integrator="", ppg=False, **post):
         """
@@ -36,6 +52,11 @@ class WebsiteIntegratorSale(WebsiteSale):
 
         # execute below block if url contains integrator parameter
         if integrator:
+            # TODO: Avoid to re-run search again
+            # We should reuse _get_search_domain and if needs refactor
+            # a bit website_apps_store to avoid code duplication
+            # This seems not to be used that much at the moment, it's not the
+            # priority considering current performance issues
             _, integrator_id = unslug(integrator)
             integrator = (
                 request.env["res.partner"].sudo().browse(integrator_id).exists()
