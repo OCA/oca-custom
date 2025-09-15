@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = "==3.9.*"
 
 [options]
@@ -578,6 +578,7 @@ dependencies = [
     { name = "odoo14-addon-account-tax-unece" },
     { name = "odoo14-addon-apps-download" },
     { name = "odoo14-addon-apps-product-creator" },
+    { name = "odoo14-addon-base-deterministic-session-gc" },
     { name = "odoo14-addon-base-technical-features" },
     { name = "odoo14-addon-base-ubl" },
     { name = "odoo14-addon-base-ubl-payment" },
@@ -698,6 +699,7 @@ requires-dist = [
     { name = "odoo14-addon-account-tax-unece" },
     { name = "odoo14-addon-apps-download" },
     { name = "odoo14-addon-apps-product-creator" },
+    { name = "odoo14-addon-base-deterministic-session-gc" },
     { name = "odoo14-addon-base-technical-features" },
     { name = "odoo14-addon-base-ubl" },
     { name = "odoo14-addon-base-ubl-payment" },
@@ -1090,6 +1092,17 @@ dependencies = [
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a8/4f/458c23060ca76075f295e277407a1ced7e5aa72d4a4936809aed9f8e3959/odoo14_addon_apps_product_creator-14.0.1.0.1-py3-none-any.whl", hash = "sha256:a88503681c725ade7381c9139db306ece551d23f5373ef61f69ab919fc149679", size = 44170, upload-time = "2025-07-26T10:30:37.621Z" },
+]
+
+[[package]]
+name = "odoo14-addon-base-deterministic-session-gc"
+version = "14.0.1.0.1.dev5"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "odoo" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/60/b4/938841a438b94c24bc50afdc0125683883e59bfda74e9fcf6724ef42b0eb/odoo14_addon_base_deterministic_session_gc-14.0.1.0.1.dev5-py3-none-any.whl", hash = "sha256:7dcaef361530311869fd2fd8bd28f386c20f9949d94f690f334b545236116a64", size = 28883, upload-time = "2024-12-03T03:32:55.266Z" },
 ]
 
 [[package]]
