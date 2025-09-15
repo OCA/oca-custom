@@ -142,6 +142,7 @@
         "account_tax_unece",
         "apps_download",
         "apps_product_creator",
+        "base_deterministic_session_gc",
         "base_technical_features",
         "base_ubl",
         "base_ubl_payment",
