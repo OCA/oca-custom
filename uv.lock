@@ -717,7 +717,7 @@ requires-dist = [
     { name = "odoo14-addon-l10n-ch-pain-credit-transfer" },
     { name = "odoo14-addon-mass-editing" },
     { name = "odoo14-addon-mass-operation-abstract" },
-    { name = "odoo14-addon-membership-delegated-partner-line", git = "https://github.com/OCA/vertical-association?subdirectory=setup%2Fmembership_delegated_partner_line&rev=refs%2Fpull%2F151%2Fhead" },
+    { name = "odoo14-addon-membership-delegated-partner-line" },
     { name = "odoo14-addon-membership-extension" },
     { name = "odoo14-addon-mis-builder" },
     { name = "odoo14-addon-mis-builder-budget" },
@@ -1322,10 +1322,13 @@ wheels = [
 
 [[package]]
 name = "odoo14-addon-membership-delegated-partner-line"
-version = "14.0.1.0.1.dev1"
-source = { git = "https://github.com/OCA/vertical-association?subdirectory=setup%2Fmembership_delegated_partner_line&rev=refs%2Fpull%2F151%2Fhead#b2b3c7f0cd574d0f0ae0b132d9ae9e0076f50e71" }
+version = "14.0.1.0.1.dev2"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "odoo" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/9e/96/3ec4b7a4b8e7360634da1ed1503e165a468d36df42b62b35498a61f89dfd/odoo14_addon_membership_delegated_partner_line-14.0.1.0.1.dev2-py3-none-any.whl", hash = "sha256:f1f24ccf1f1f35ececef7e36bb319e56778e0001e98e5449b173522293b4c3e2", size = 29218, upload-time = "2025-09-16T09:56:41.618Z" },
 ]
 
 [[package]]
