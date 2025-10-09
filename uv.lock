@@ -584,6 +584,8 @@ dependencies = [
     { name = "odoo14-addon-base-ubl-payment" },
     { name = "odoo14-addon-base-unece" },
     { name = "odoo14-addon-bi-sql-editor" },
+    { name = "odoo14-addon-crowdfunding" },
+    { name = "odoo14-addon-crowdfunding-claim" },
     { name = "odoo14-addon-currency-rate-update" },
     { name = "odoo14-addon-date-range" },
     { name = "odoo14-addon-disable-odoo-online" },
@@ -705,6 +707,8 @@ requires-dist = [
     { name = "odoo14-addon-base-ubl-payment" },
     { name = "odoo14-addon-base-unece" },
     { name = "odoo14-addon-bi-sql-editor" },
+    { name = "odoo14-addon-crowdfunding" },
+    { name = "odoo14-addon-crowdfunding-claim" },
     { name = "odoo14-addon-currency-rate-update" },
     { name = "odoo14-addon-date-range" },
     { name = "odoo14-addon-disable-odoo-online" },
@@ -1170,6 +1174,30 @@ wheels = [
 ]
 
 [[package]]
+name = "odoo14-addon-crowdfunding"
+version = "14.0.1.0.1.dev2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "odoo" },
+    { name = "odoo14-addon-onchange-helper" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f9/cb/ef416ff4a9590ddbb51b50d17c0ec83f6ce7ef8ca58a200cdf54baa731e9/odoo14_addon_crowdfunding-14.0.1.0.1.dev2-py3-none-any.whl", hash = "sha256:934e6d14d53320a482821b3958f8a1ca18534f259df0f013d50a5c830a41d37e", size = 47914, upload-time = "2025-09-15T15:11:36.781Z" },
+]
+
+[[package]]
+name = "odoo14-addon-crowdfunding-claim"
+version = "14.0.1.0.1.dev2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "odoo" },
+    { name = "odoo14-addon-crowdfunding" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4b/66/30cc58839aebce7654df981918367114d948aad1caa0f8b0d64a3d4c1415/odoo14_addon_crowdfunding_claim-14.0.1.0.1.dev2-py3-none-any.whl", hash = "sha256:6bd5e3fd4db24eb4906a27a0696f1ed7f75b957b75998f9dcb9453a42a23314d", size = 23466, upload-time = "2025-09-15T15:11:41.351Z" },
+]
+
+[[package]]
 name = "odoo14-addon-currency-rate-update"
 version = "14.0.1.3.3.dev7"
 source = { registry = "https://pypi.org/simple" }
@@ -1416,6 +1444,17 @@ dependencies = [
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/05/46/9605a66abd5e005e049a2bafe0c44c2729577814fd0044c31b0bfc5b72c9/odoo14_addon_multi_step_wizard-14.0.1.0.1.dev10-py3-none-any.whl", hash = "sha256:8e726efc64e95028b71a1ae65a2c43330b410eaebcbc1bc39991c13ca96da760", size = 32549, upload-time = "2025-05-28T03:43:46.077Z" },
+]
+
+[[package]]
+name = "odoo14-addon-onchange-helper"
+version = "14.0.1.0.4.dev4"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "odoo" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/1e/30/84d81b718e89c8115a600efbdcf3ac37a4b23bf05158cbd11dbc8f8588ab/odoo14_addon_onchange_helper-14.0.1.0.4.dev4-py3-none-any.whl", hash = "sha256:5026ce0f264829c37838b667c86c7fe88c296c24e075ee248f2dd443b200285b", size = 31693, upload-time = "2025-01-17T03:35:07.385Z" },
 ]
 
 [[package]]

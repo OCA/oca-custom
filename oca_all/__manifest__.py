@@ -148,6 +148,8 @@
         "base_ubl_payment",
         "base_unece",
         "bi_sql_editor",
+        "crowdfunding",
+        "crowdfunding_claim",
         "currency_rate_update",
         "date_range",
         "disable_odoo_online",
