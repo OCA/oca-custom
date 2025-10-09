@@ -101,8 +101,6 @@ odoo = { git = "https://github.com/OCA/OCB", rev = "refs/pull/1299/head" }
 # unreleased dependency, add it to test-requirements.txt to let the
 # test pipeline to use it as well
 odoo-addons-design-themes = { git = "https://github.com/acsone/design-themes", branch = "14.0-with-pyproject" }
-odoo14-addon-membership-delegated-partner-line = { git = "https://github.com/OCA/vertical-association", rev = "refs/pull/151/head", subdirectory = "setup/membership_delegated_partner_line" }
-odoo14-addon-account_statement_import_online_wise = { git = "https://github.com/OCA/bank-statement-import", rev = "refs/pull/816/head", subdirectory = "setup/account_statement_import_online_wise" }
 odoo14-addon-website-apps-store =  { git = "https://github.com/OCA/apps-store", rev = "refs/pull/96/head", subdirectory = "setup/website_apps_store" }
 
 # Example to develop module from an other repository
