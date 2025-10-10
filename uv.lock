@@ -585,7 +585,6 @@ dependencies = [
     { name = "odoo14-addon-base-unece" },
     { name = "odoo14-addon-bi-sql-editor" },
     { name = "odoo14-addon-crowdfunding" },
-    { name = "odoo14-addon-crowdfunding-claim" },
     { name = "odoo14-addon-currency-rate-update" },
     { name = "odoo14-addon-date-range" },
     { name = "odoo14-addon-disable-odoo-online" },
@@ -708,7 +707,6 @@ requires-dist = [
     { name = "odoo14-addon-base-unece" },
     { name = "odoo14-addon-bi-sql-editor" },
     { name = "odoo14-addon-crowdfunding" },
-    { name = "odoo14-addon-crowdfunding-claim" },
     { name = "odoo14-addon-currency-rate-update" },
     { name = "odoo14-addon-date-range" },
     { name = "odoo14-addon-disable-odoo-online" },
@@ -1183,18 +1181,6 @@ dependencies = [
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f9/cb/ef416ff4a9590ddbb51b50d17c0ec83f6ce7ef8ca58a200cdf54baa731e9/odoo14_addon_crowdfunding-14.0.1.0.1.dev2-py3-none-any.whl", hash = "sha256:934e6d14d53320a482821b3958f8a1ca18534f259df0f013d50a5c830a41d37e", size = 47914, upload-time = "2025-09-15T15:11:36.781Z" },
-]
-
-[[package]]
-name = "odoo14-addon-crowdfunding-claim"
-version = "14.0.1.0.1.dev2"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "odoo" },
-    { name = "odoo14-addon-crowdfunding" },
-]
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/4b/66/30cc58839aebce7654df981918367114d948aad1caa0f8b0d64a3d4c1415/odoo14_addon_crowdfunding_claim-14.0.1.0.1.dev2-py3-none-any.whl", hash = "sha256:6bd5e3fd4db24eb4906a27a0696f1ed7f75b957b75998f9dcb9453a42a23314d", size = 23466, upload-time = "2025-09-15T15:11:41.351Z" },
 ]
 
 [[package]]
