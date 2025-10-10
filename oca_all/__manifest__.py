@@ -3,7 +3,7 @@
 {
     "name": "OCA All",
     "summary": "All oca modules dependencies",
-    "version": "14.0.0.0.1",
+    "version": "14.0.1.0.0",
     "development_status": "Alpha",
     "website": "https://github.com/OCA/oca-custom",
     "author": "Pierre Verkest <pierre@verkest.fr>, Odoo Community Association (OCA)",
@@ -149,7 +149,6 @@
         "base_unece",
         "bi_sql_editor",
         "crowdfunding",
-        "crowdfunding_claim",
         "currency_rate_update",
         "date_range",
         "disable_odoo_online",
