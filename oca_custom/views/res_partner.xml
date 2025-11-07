@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" ?>
 <odoo>
     <record id="res_partner_github_visible" model="ir.ui.view">
         <field name="name">res.partner.github.visible.form</field>
@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//page[@name='github']" position="attributes">
                 <!-- make the github page always visible -->
-                <attribute name="attrs" />
+                <attribute name="invisible">0</attribute>
             </xpath>
         </field>
     </record>

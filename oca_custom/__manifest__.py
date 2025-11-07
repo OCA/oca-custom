@@ -4,7 +4,7 @@
 {
     "name": "OCA Custom Settings",
     "summary": "Custom Settings for OCA Instance",
-    "version": "14.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Custom",
     "website": "https://github.com/OCA/oca-custom",
     "author": "GRAP, Akretion, Odoo Community Association (OCA)",
