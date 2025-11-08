@@ -9,7 +9,7 @@
 
 # Custom Modules for Odoo Community Association
 
-This project aims to deal with modules related to the Odoo instance of the OCA.
+This project deals with modules related to the Odoo instance of the OCA.
 
 <!-- /!\ do not modify below this line -->
 
