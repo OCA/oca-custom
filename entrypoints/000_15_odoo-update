@@ -2,5 +2,5 @@
 
 set -eux -o pipefail
 
-click-odoo-initdb --unless-initialized -n "$DB_NAME" -c /etc/odoo.cfg -m oca_all --no-cache --demo
+click-odoo-initdb --unless-initialized -n "$DB_NAME" -m oca_all --no-cache --demo
 click-odoo-update --if-exists -d "$DB_NAME" --i18n-overwrite
