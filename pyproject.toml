@@ -69,7 +69,7 @@ dependencies = [
   "xlrd==1.2.0",
   # TODO: add constraints in github connector module
   "PyGithub<2.0.0",
-  "click-odoo-contrib",
+  "click-odoo-contrib>=1.22",
   "openupgradelib",
 ]
 addons_dirs = ["./"]

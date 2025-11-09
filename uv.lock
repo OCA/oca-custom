@@ -124,15 +124,15 @@ wheels = [
 
 [[package]]
 name = "click-odoo-contrib"
-version = "1.20"
+version = "1.23"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click-odoo" },
     { name = "manifestoo-core" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/48/57/294b3e76cdb979e14c279738627b1eb1d92036466293d5e2f5ac50b80945/click_odoo_contrib-1.20.tar.gz", hash = "sha256:4d187b7df756ed9043963ed13e011bb7312e1e44def7d2fa198b8e2e0784ba68", size = 54806, upload-time = "2024-10-23T10:07:41.186Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/d3/6d/d41762d0b69bd1ebce1e9f64b4d5f23d95ca4ff52006e850caead77b38c0/click_odoo_contrib-1.23.tar.gz", hash = "sha256:7a9e1a049a5cf78a8b201686743d05d5f91098f038aad1b4aa5dd6fb06cf9a41", size = 59005, upload-time = "2025-10-31T08:26:33.9Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e7/9e/826ea21243dfd458de0e7c088b06aa605af771702990577813024d371acf/click_odoo_contrib-1.20-py3-none-any.whl", hash = "sha256:8faafc32c3f1179d49d7b06540b5c3b969e7316281d779ce73f18a2a691752c7", size = 34641, upload-time = "2024-10-23T10:07:40.023Z" },
+    { url = "https://files.pythonhosted.org/packages/ad/a7/755e8146129bc7fa88374b3e71254c57329a3e7fd049a50776025689862e/click_odoo_contrib-1.23-py3-none-any.whl", hash = "sha256:9fd66765afb18b7e7d0f91891d93f96c17323ee447be0567db7cd56002ea185f", size = 74670, upload-time = "2025-10-31T08:26:32.536Z" },
 ]
 
 [[package]]
@@ -664,7 +664,7 @@ dev = [
 requires-dist = [
     { name = "babel", specifier = "==2.9.1" },
     { name = "chardet", specifier = "==3.0.4" },
-    { name = "click-odoo-contrib" },
+    { name = "click-odoo-contrib", specifier = ">=1.22" },
     { name = "decorator", specifier = "==4.3.0" },
     { name = "docutils", specifier = "==0.14" },
     { name = "ebaysdk", specifier = "==2.1.5" },
