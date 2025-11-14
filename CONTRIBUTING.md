@@ -13,7 +13,10 @@ This one-pager guide aims to help happy volunteers to contribute to the OCA's Od
 
 ## Introduction
 
-This repository is managed by OCA's Internal Tools team: [internaltools@odoo-community.org](mailto:internaltools@odoo-community.org).
+This repository is managed by OCA's Internal Tools team:
+* email: [internaltools@odoo-community.org](mailto:internaltools@odoo-community.org)
+* [Github team page](https://github.com/orgs/OCA/teams/internal-tools)
+* [Github project Kanban](https://github.com/orgs/OCA/projects/13)
 
 Please refer to the document [Scope & Objective](https://docs.google.com/document/d/1RcOUstPJDev1bgPZcNXWiHBt5PeqraisU5bKIZatcnY/edit?pli=1&tab=t.0#heading=h.jrsgv4k2u2ao) to understand the governance and missions of the Internal Tools team within the OCA.
 Under the watch of OCA board, this document mainly explains:
