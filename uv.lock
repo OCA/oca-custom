@@ -1173,14 +1173,14 @@ wheels = [
 
 [[package]]
 name = "odoo14-addon-crowdfunding"
-version = "14.0.1.0.1.dev10"
+version = "14.0.1.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "odoo" },
     { name = "odoo14-addon-onchange-helper" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/75/d1/89eaee3cc304275d19daa0073546f03f50ab700a49d3d71b149c450b7631/odoo14_addon_crowdfunding-14.0.1.0.1.dev10-py3-none-any.whl", hash = "sha256:a2383d831cf0a97c6d5ce9c71365f97f2aafc2e78e746c652e10984cc3c203bd", size = 57229, upload-time = "2025-11-05T02:51:10.498Z" },
+    { url = "https://files.pythonhosted.org/packages/05/ac/72b8f282f88190630c6782e29af94a22096e97e6fee462b49761e2fe27bc/odoo14_addon_crowdfunding-14.0.1.1.0-py3-none-any.whl", hash = "sha256:5399f0a66f032ccdbd2701e64db184e3858463de1d59fa1b2b4a24e10b60e6d0", size = 57200, upload-time = "2025-11-09T16:34:14.304Z" },
 ]
 
 [[package]]

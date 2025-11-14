@@ -19,7 +19,7 @@ RUN set -e \
   && rm -rf /var/lib/apt/lists/*
 
 # Install uv, and configure it for optimal usage in Dockerfile.
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
+COPY --from=ghcr.io/astral-sh/uv:0.9 /uv /bin/uv
 ENV UV_PROJECT_ENVIRONMENT=$VIRTUAL_ENV
 ENV UV_LINK_MODE=copy
 ENV UV_COMPILE_BYTECODE=1
