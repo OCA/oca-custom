@@ -1101,13 +1101,13 @@ wheels = [
 
 [[package]]
 name = "odoo14-addon-base-deterministic-session-gc"
-version = "14.0.1.0.1.dev5"
+version = "14.0.1.0.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "odoo" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/60/b4/938841a438b94c24bc50afdc0125683883e59bfda74e9fcf6724ef42b0eb/odoo14_addon_base_deterministic_session_gc-14.0.1.0.1.dev5-py3-none-any.whl", hash = "sha256:7dcaef361530311869fd2fd8bd28f386c20f9949d94f690f334b545236116a64", size = 28883, upload-time = "2024-12-03T03:32:55.266Z" },
+    { url = "https://files.pythonhosted.org/packages/08/70/75adb7e79e76e66365593d685246f513d3e53794980f50beb630eb250de6/odoo14_addon_base_deterministic_session_gc-14.0.1.0.1-py3-none-any.whl", hash = "sha256:141c56d40218361eeeed43aec8ac21beebfa16c5fcdadce1b2f9ebce18689545", size = 28949, upload-time = "2025-12-05T14:50:53.523Z" },
 ]
 
 [[package]]
