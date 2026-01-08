@@ -5,10 +5,10 @@ build-backend = "hatchling.build"
 
 [project]
 name = "oca-custom"
-version = "14.0"
+version = "18.0"
 description = "Odoo by OCA"
 # readme = "README.md"
-requires-python = "==3.9.*"
+requires-python = "==3.12.*"
 dynamic = ["dependencies"]
 
 [tool.hatch.build]
@@ -23,61 +23,59 @@ packages = ["./"]
 [tool.hatch-odoo]
 # dependencies that are not in the addons manifest
 dependencies = [
-  "odoo==14.0.*",
+  "odoo==18.0.*",
   # indirect unrealeased dependencies
-  "odoo-addons-design-themes==14.0.*",
+  #"odoo-addons-design-themes==18.0.*",
   # Add some constraints to Odoo deps that should be in their setup.py
-  "Babel==2.9.1",
-  "chardet==3.0.4",
-  "decorator==4.3.0",
-  "docutils==0.14",
-  "ebaysdk==2.1.5",
-  "freezegun==0.3.15",
-  "gevent==20.9.0 ",
-  "greenlet==1.1.2",
-  "idna==2.6",
-  "Jinja2==2.11.2",
-  "libsass>=0.18.0",
-  "lxml==4.6.5",
-  "Mako==1.0.7",
-  "MarkupSafe==1.1.0",
-  "num2words==0.5.6",
-  "ofxparse==0.19",
-  "passlib==1.7.1",
+  "asn1crypto==1.5.1",
+  "Babel==2.10.3",
+  "cbor2==5.6.2",
+  "chardet==5.2.0",
+  "cryptography==42.0.8",
+  "decorator==5.1.1",
+  "docutils==0.20.1",
+  "freezegun==1.2.1",
+  "geoip2==2.9.0",
+  "gevent==24.2.1",
+  "greenlet==3.0.3",
+  "idna==3.6",
+  "Jinja2==3.1.2",
+  "libsass==0.22.0",
+  "lxml==5.2.1",
+  "lxml-html-clean",
+  "MarkupSafe==2.1.5",
+  "num2words==0.5.13",
+  "ofxparse==0.21",
+  "openpyxl==3.1.2",
+  "passlib==1.7.4",
   "pdfminer.six==20211012",
-  "Pillow==8.1.1",
-  "polib==1.1.0",
-  "psutil==5.6.6",
-  "psycopg2==2.9.10",
-  "pydot==1.4.1",
-  "PyPDF2==1.26.0",
-  "pyserial==3.4",
-  "python-dateutil==2.7.3",
+  "Pillow==10.2.0",
+  "polib==1.1.1",
+  "psutil==5.9.8",
+  "psycopg2==2.9.9",
+  "pyopenssl==24.1.0",
+  "PyPDF2==2.12.1",
+  "pyserial==3.5",
+  "python-dateutil==2.8.2",
+  "python-ldap==3.4.4",
+  "python-stdnum==1.19",
   "pytz",
-  "qrcode==6.1",
-  "reportlab==3.5.55",
-  "requests==2.21.0",
-  # requests==2.25.1; python_version > '3.9'  # (Jammy) versions < 2.25 aren't compatible w/ urllib3 1.26. Bullseye = 2.25.1. min version = 2.22.0 (Focal)",
-  # urllib3==1.26.5; python_version > '3.9'  # (Jammy) indirect / min version = 1.25.8 (Focal with security backports)",
-  "zeep==3.2.0",
-  "python-stdnum==1.8",
+  "pyusb==1.2.1",
+  "qrcode==7.4.2",
+  "reportlab==4.1.0",
+  "requests==2.31.0",
+  "rjsmin==1.2.0",
+  "urllib3==2.0.7",
   "vobject==0.9.6.1",
-  "Werkzeug==0.16.1 ",
-  # Werkzeug==2.0.2 ; python_version > '3.9'  # (Jammy)",
-  "XlsxWriter==1.1.2",
-  "xlwt==1.3.*",
-  "xlrd==1.2.0",
-  # TODO: add constraints in github connector module
-  "PyGithub<2.0.0",
-  "click-odoo-contrib",
-  "openupgradelib",
+  "Werkzeug==3.0.1",
+  "xlrd==2.0.1",
+  "XlsxWriter==3.1.9",
+  "xlwt==1.3.0",
+  "zeep==4.2.1",
 ]
 addons_dirs = ["./"]
 
 [tool.uv]
-# On OCA 14.0 series translations commits are realeased
-# in pre-release state
-prerelease = "allow"
 # tell uv when dependencies may change
 cache-keys = [{ file = "pyproject.toml" }, { file = "**/__manifest__.py" }]
 
@@ -96,12 +94,14 @@ dev = [
 
 [tool.uv.sources]
 # Use fix updating account move line update membership line
-odoo = { git = "https://github.com/OCA/OCB", rev = "refs/pull/1299/head" }
+odoo = { git = "https://github.com/OCA/OCB", rev = "refs/pull/1319/head" }
 
 # unreleased dependency, add it to test-requirements.txt to let the
 # test pipeline to use it as well
-odoo-addons-design-themes = { git = "https://github.com/acsone/design-themes", branch = "14.0-with-pyproject" }
-odoo14-addon-website-apps-store =  { git = "https://github.com/OCA/apps-store", rev = "refs/pull/96/head", subdirectory = "setup/website_apps_store" }
+odoo-addon-membership_delegated_partner_line = { git = "https://github.com/gfcapalbo/vertical-association", branch = "18.0-MIG-membership_delegated_partner_line", subdirectory = "membership_delegated_partner_line" }
+odoo-addon-github_connector_oca = { git = "https://github.com/Therp/interface-github", branch = "18.0-mig-github_connector_oca", subdirectory = "github_connector_oca" }
+odoo-addon-survey_xlsx = { git = "https://github.com/ByteMeAsap/survey", branch = "18.0-mig-survey_xlsx", subdirectory = "survey_xlsx" }
+odoo-addon-account_statement_import_online_wise = { git = "https://github.com/Therp/bank-statement-import", branch = "18.0-mig-account-statement-import-online-wise", subdirectory = "account_statement_import_online_wise" }
 
 # Example to develop module from an other repository
 # installing in editable mode
