@@ -700,7 +700,7 @@ requires-dist = [
     { name = "lxml-html-clean" },
     { name = "markupsafe", specifier = "==2.1.5" },
     { name = "num2words", specifier = "==0.5.13" },
-    { name = "odoo", git = "https://github.com/OCA/OCB" },
+    { name = "odoo", git = "https://github.com/OCA/OCB?rev=refs%2Fpull%2F1319%2Fhead" },
     { name = "odoo-addon-account-banking-pain-base", specifier = "==18.0.*" },
     { name = "odoo-addon-account-banking-sepa-credit-transfer", specifier = "==18.0.*" },
     { name = "odoo-addon-account-credit-control", specifier = "==18.0.*" },
@@ -796,7 +796,7 @@ dev = [
 [[package]]
 name = "odoo"
 version = "18.0"
-source = { git = "https://github.com/OCA/OCB#16055b5031886551238c14d54523701bcf35c0d7" }
+source = { git = "https://github.com/OCA/OCB?rev=refs%2Fpull%2F1319%2Fhead#084e0f6e7417033b633370255a441cb267943fe9" }
 dependencies = [
     { name = "asn1crypto" },
     { name = "babel" },

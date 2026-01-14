@@ -1,0 +1,7 @@
+# While running tests, coverage is trying to read configuration in pyproject.toml
+pdfminer.six==20220319
+coverage[toml]
+odoo-addon-membership-delegated-partner-line @ git+https://github.com/gfcapalbo/vertical-association.git@18.0-MIG-membership_delegated_partner_line#subdirectory=membership_delegated_partner_line
+odoo-addon-github_connector_oca @ git+https://github.com/Therp/interface-github@18.0-mig-github_connector_oca#subdirectory=github_connector_oca
+odoo-addon-survey_xlsx @ git+https://github.com/ByteMeAsap/survey@18.0-mig-survey_xlsx#subdirectory=survey_xlsx
+odoo-addon-account_statement_import_online_wise @ git+https://github.com/Therp/bank-statement-import@18.0-mig-account-statement-import-online-wise#subdirectory=account_statement_import_online_wise
