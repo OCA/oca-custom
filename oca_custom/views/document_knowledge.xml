@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="ir_attachments_view_all" model="ir.ui.view">
+        <field name="name">ir_attachments_view_all</field>
+        <field name="model">ir.attachment</field>
+        <field name="inherit_id" ref="document_knowledge.ir_attachment_view_user_documents" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='user_documents']" position="attributes">
+                <!-- make the github page always visible -->
+                <attribute name="domain">[('res_model', 'not like', 'ir.%'),  ('res_field', '!=', 0)], ('res_model', '!=', False)]</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
