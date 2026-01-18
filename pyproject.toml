@@ -76,9 +76,6 @@ dependencies = [
 addons_dirs = ["./"]
 
 [tool.uv]
-# On OCA 14.0 series translations commits are realeased
-# in pre-release state
-prerelease = "allow"
 # tell uv when dependencies may change
 cache-keys = [{ file = "pyproject.toml" }, { file = "**/__manifest__.py" }]
 
