@@ -9,8 +9,15 @@
     "website": "https://github.com/OCA/oca-custom",
     "author": "GRAP, Akretion, Odoo Community Association (OCA)",
     "license": "AGPL-3",
-    "depends": ["github_connector", "document_knowledge"],
+    "depends": [
+        "base",
+        "contacts",
+        "github_connector",
+        "document_knowledge",
+        "membership",
+    ],
     "data": [
+        "views/res_config_settings.xml",
         "views/res_partner.xml",
         "views/document_knowledge.xml",
     ],

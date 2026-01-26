@@ -57,18 +57,18 @@ Authors
 Contributors
 ------------
 
--  Sylvain LE GAL (https://twitter.com/legalsylvain)
+- Sylvain LE GAL (https://twitter.com/legalsylvain)
 
--  Benoit GUILLOT (benoit.guillot@akretion.com)
+- Benoit GUILLOT (benoit.guillot@akretion.com)
 
--  Stéphane Bidoul (stephane.bidoul@acsone.eu)
+- Stéphane Bidoul (stephane.bidoul@acsone.eu)
 
--  `Tecnativa <https://www.tecnativa.com>`__:
+- `Tecnativa <https://www.tecnativa.com>`__:
 
-      -  Vicent Cubells
-      -  Cristina Martin R.
-      -  Carlos Roca
-      -  Ernesto Tejeda
+     - Vicent Cubells
+     - Cristina Martin R.
+     - Carlos Roca
+     - Ernesto Tejeda
 
 Maintainers
 -----------
