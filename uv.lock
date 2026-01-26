@@ -608,6 +608,7 @@ dependencies = [
     { name = "cbor2" },
     { name = "chardet" },
     { name = "click-odoo-contrib" },
+    { name = "coverage" },
     { name = "cryptography" },
     { name = "decorator" },
     { name = "docutils" },
@@ -724,6 +725,7 @@ requires-dist = [
     { name = "cbor2", specifier = "==5.6.2" },
     { name = "chardet", specifier = "==5.2.0" },
     { name = "click-odoo-contrib" },
+    { name = "coverage", extras = ["toml"] },
     { name = "cryptography", specifier = "==42.0.8" },
     { name = "decorator", specifier = "==5.1.1" },
     { name = "docutils", specifier = "==0.20.1" },
@@ -794,7 +796,7 @@ requires-dist = [
     { name = "openpyxl", specifier = "==3.1.2" },
     { name = "openupgradelib" },
     { name = "passlib", specifier = "==1.7.4" },
-    { name = "pdfminer-six", specifier = "==20211012" },
+    { name = "pdfminer-six", specifier = "==20220319" },
     { name = "pillow", specifier = "==10.2.0" },
     { name = "polib", specifier = "==1.1.1" },
     { name = "psutil", specifier = "==5.9.8" },
@@ -1602,15 +1604,15 @@ wheels = [
 
 [[package]]
 name = "pdfminer-six"
-version = "20211012"
+version = "20220319"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "chardet" },
     { name = "cryptography" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ac/0a/b01677bb31bd79756f05ff3e052ad369ac0ebb2e64b47fc6d6bad290d981/pdfminer.six-20211012.tar.gz", hash = "sha256:0351f17d362ee2d48b158be52bcde6576d96460efd038a3e89a043fba6d634d7", size = 7350867, upload-time = "2021-10-12T18:49:32.183Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/a0/e2/cf4782c86fbe487da3c9aed105878a4af7fbd64c7e3f85403722e6a82dae/pdfminer.six-20220319.tar.gz", hash = "sha256:eff2ce0abeaa4df94dc3461f70eab104487c7b4a2b3c7e9fd0aeec6c5f44d6a6", size = 7356602, upload-time = "2022-03-19T20:13:16.528Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/51/2b/0a3329605203de8df990ff5427a145dc81ea3e0eff0046424d1d306d1b29/pdfminer.six-20211012-py3-none-any.whl", hash = "sha256:d3efb75c0249b51c1bf795e3a8bddf1726b276c77bf75fb136adea471ee2825b", size = 5604808, upload-time = "2021-10-12T18:49:23.832Z" },
+    { url = "https://files.pythonhosted.org/packages/9c/f6/3225aeb4bcd0a1c78d0f2fa557194c4580b2218dda63c7f65aedd74e7ecc/pdfminer.six-20220319-py3-none-any.whl", hash = "sha256:af0630f98a292bad4170f54e80f82ca81b916dd0b2c996437ec45c02f11d8762", size = 5609765, upload-time = "2022-03-19T20:13:14.369Z" },
 ]
 
 [[package]]

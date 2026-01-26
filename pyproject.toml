@@ -48,7 +48,7 @@ dependencies = [
   "ofxparse==0.21",
   "openpyxl==3.1.2",
   "passlib==1.7.4",
-  "pdfminer.six==20211012",
+  "pdfminer.six==20220319",
   "Pillow==10.2.0",
   "polib==1.1.1",
   "psutil==5.9.8",
@@ -60,6 +60,7 @@ dependencies = [
   "python-ldap==3.4.4",
   "python-stdnum==1.19",
   "pytz",
+  "coverage[toml]",
   "pyusb==1.2.1",
   "qrcode==7.4.2",
   "reportlab==4.1.0",
@@ -101,14 +102,14 @@ dev = [
 # Use fix updating account move line update membership line
 odoo = { git = "https://github.com/OCA/OCB", rev = "refs/pull/1319/head" }
 
-# unreleased dependency, add it to test-requirements.txt to let the
-# test pipeline to use it as well
+# Unreleased addon sources (git), handled via uv.sources (NOT requirements/test-requirements)
 odoo-addon-membership_delegated_partner_line = { git = "https://github.com/gfcapalbo/vertical-association", branch = "18.0-MIG-membership_delegated_partner_line", subdirectory = "membership_delegated_partner_line" }
+
 odoo-addon-account_statement_import_online_wise = { git = "https://github.com/Therp/bank-statement-import", branch = "18.0-mig-account-statement-import-online-wise", subdirectory = "account_statement_import_online_wise" }
 
-# Example to develop module from an other repository
-# installing in editable mode
-# odoo14-addon-membership-delegated-partner-line = { path = "src/vertical-association/setup/membership_delegated_partner_line", editable = true }
+# Example to develop module from another repository in editable mode
+# odoo-addon-membership-delegated-partner-line = { path = "src/vertical-association/setup/membership_delegated_partner_line", editable = true }
+
 
 [tool.pytest]
 addopts = "-v -s --cov-report term-missing"
