@@ -150,6 +150,7 @@
         "bi_sql_editor",
         "currency_rate_update",
         "crowdfunding",
+        "crowdfunding_public_pledge",
         "date_range",
         "disable_odoo_online",
         "document_page",
