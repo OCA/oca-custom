@@ -21,7 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[oca_all](oca_all/) | 14.0.0.0.1 | <a href='https://github.com/petrus-v'><img src='https://github.com/petrus-v.png' width='32' height='32' style='border-radius:50%;' alt='petrus-v'/></a> | All oca modules dependencies
+[oca_all](oca_all/) | 14.0.0.0.2 | <a href='https://github.com/petrus-v'><img src='https://github.com/petrus-v.png' width='32' height='32' style='border-radius:50%;' alt='petrus-v'/></a> | All oca modules dependencies
 [oca_custom](oca_custom/) | 14.0.1.0.0 |  | Custom Settings for OCA Instance
 [oca_event_badge](oca_event_badge/) | 14.0.1.0.0 |  | Creates Custom Event Badges based on the Partner Tags
 [oca_psc_team](oca_psc_team/) | 14.0.1.0.0 |  | This module allows you to store PSC details in project.These details will be displayed in PSC Teams in website.
