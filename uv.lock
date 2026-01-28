@@ -562,6 +562,7 @@ dependencies = [
     { name = "odoo14-addon-account-banking-sepa-credit-transfer" },
     { name = "odoo14-addon-account-credit-control" },
     { name = "odoo14-addon-account-financial-report" },
+    { name = "odoo14-addon-account-invoice-overdue-reminder" },
     { name = "odoo14-addon-account-lock-to-date" },
     { name = "odoo14-addon-account-menu" },
     { name = "odoo14-addon-account-payment-mode" },
@@ -685,6 +686,7 @@ requires-dist = [
     { name = "odoo14-addon-account-banking-sepa-credit-transfer" },
     { name = "odoo14-addon-account-credit-control" },
     { name = "odoo14-addon-account-financial-report" },
+    { name = "odoo14-addon-account-invoice-overdue-reminder" },
     { name = "odoo14-addon-account-lock-to-date" },
     { name = "odoo14-addon-account-menu" },
     { name = "odoo14-addon-account-payment-mode" },
@@ -887,6 +889,17 @@ dependencies = [
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/14/b6/f0b354124e7c5c8c9beaed720f2955e0ddcb8af2df709ccad9fd9b505e45/odoo14_addon_account_financial_report-14.0.3.14.1.dev1-py3-none-any.whl", hash = "sha256:254230806c6d3c593b56bbf124e83cf20f109064a0e4f981944cd7899859ff92", size = 312821, upload-time = "2025-03-13T02:32:02.13Z" },
+]
+
+[[package]]
+name = "odoo14-addon-account-invoice-overdue-reminder"
+version = "14.0.1.5.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "odoo" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d2/4d/8bc03820b8f11c6f81bbbee622ae99363ab1e7eef30706a6eafa8cdf02e9/odoo14_addon_account_invoice_overdue_reminder-14.0.1.5.2-py3-none-any.whl", hash = "sha256:bd04e15890e31bfa15bcd39159ccf0db6217d37b2056b522264fda3ad9e58e02", size = 121692, upload-time = "2025-01-16T14:18:10.834Z" },
 ]
 
 [[package]]
