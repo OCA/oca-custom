@@ -2,9 +2,6 @@ version = 1
 revision = 3
 requires-python = "==3.12.*"
 
-[options]
-prerelease-mode = "allow"
-
 [[package]]
 name = "asn1crypto"
 version = "1.5.1"
@@ -592,6 +589,7 @@ dependencies = [
     { name = "odoo-addon-account-banking-sepa-credit-transfer" },
     { name = "odoo-addon-account-credit-control" },
     { name = "odoo-addon-account-financial-report" },
+    { name = "odoo-addon-account-invoice-overdue-reminder" },
     { name = "odoo-addon-account-lock-to-date" },
     { name = "odoo-addon-account-payment-mode" },
     { name = "odoo-addon-account-payment-order" },
@@ -705,6 +703,7 @@ requires-dist = [
     { name = "odoo-addon-account-banking-sepa-credit-transfer", specifier = "==18.0.*" },
     { name = "odoo-addon-account-credit-control", specifier = "==18.0.*" },
     { name = "odoo-addon-account-financial-report", specifier = "==18.0.*" },
+    { name = "odoo-addon-account-invoice-overdue-reminder", specifier = "==18.0.*" },
     { name = "odoo-addon-account-lock-to-date", specifier = "==18.0.*" },
     { name = "odoo-addon-account-payment-mode", specifier = "==18.0.*" },
     { name = "odoo-addon-account-payment-order", specifier = "==18.0.*" },
@@ -889,6 +888,17 @@ dependencies = [
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/9a/c4/b93659c2ea20102575483ec464f61608d925c02ca608fe27fa54331aaa4b/odoo_addon_account_financial_report-18.0.1.4.3-py3-none-any.whl", hash = "sha256:977b185350df96d3f08c7716a9d2a7ef816978e8ed0e819f61e42641dfb83469", size = 336394, upload-time = "2025-12-31T10:54:58.032Z" },
+]
+
+[[package]]
+name = "odoo-addon-account-invoice-overdue-reminder"
+version = "18.0.1.2.0.5"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "odoo" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/82/e1/31876c971c6e8cc7ad23ec80628b246d456ba766286e6eb139161f926aca/odoo_addon_account_invoice_overdue_reminder-18.0.1.2.0.5-py3-none-any.whl", hash = "sha256:3d994116bd6ebea64ca18622521d6318be7af7a018f90b27f2e1363f31dccb34", size = 136603, upload-time = "2025-10-28T02:50:44.855Z" },
 ]
 
 [[package]]

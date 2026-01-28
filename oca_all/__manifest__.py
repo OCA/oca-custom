@@ -110,6 +110,7 @@
         "account_banking_sepa_credit_transfer",
         "account_credit_control",
         "account_financial_report",
+        "account_invoice_overdue_reminder",
         "account_lock_to_date",
         "account_payment_mode",
         "account_payment_order",
