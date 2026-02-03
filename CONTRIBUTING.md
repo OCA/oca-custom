@@ -132,6 +132,10 @@ uv sync -P odoo
 uv sync -P odoo14-addon-<module-name>
 ```
 
+Note bug https://github.com/astral-sh/uv/issues/14684, that says if multiple packages
+are sourced from the same branch/PR, we need to specify both of them as to upgrade,
+otherwise they don't get rescanned.
+
 ### Bump all dependencies to the latest version
 
 ```bash

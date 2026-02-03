@@ -102,6 +102,8 @@ odoo = { git = "https://github.com/OCA/OCB", rev = "refs/pull/1299/head" }
 # test pipeline to use it as well
 odoo-addons-design-themes = { git = "https://github.com/acsone/design-themes", branch = "14.0-with-pyproject" }
 odoo14-addon-website-apps-store =  { git = "https://github.com/OCA/apps-store", rev = "refs/pull/96/head", subdirectory = "setup/website_apps_store" }
+odoo14-addon-account-banking-pain-base = { git = "https://github.com/Therp/bank-payment", branch = "14.0-account_banking_pain_base_sepa_hybrid_extended_for_09", subdirectory = "setup/account_banking_pain_base" }
+odoo14-addon-account-banking-sepa-credit-transfer = { git = "https://github.com/Therp/bank-payment", branch = "14.0-account_banking_pain_base_sepa_hybrid_extended_for_09", subdirectory = "setup/account_banking_sepa_credit_transfer" }
 
 # Example to develop module from an other repository
 # installing in editable mode
