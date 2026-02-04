@@ -745,7 +745,7 @@ requires-dist = [
     { name = "odoo-addon-sentry", specifier = "==18.0.*" },
     { name = "odoo-addon-server-action-mass-edit", specifier = "==18.0.*" },
     { name = "odoo-addon-sql-request-abstract", specifier = "==18.0.*" },
-    { name = "odoo-addon-survey-xlsx", git = "https://github.com/ByteMeAsap/survey?subdirectory=survey_xlsx&branch=18.0-mig-survey_xlsx" },
+    { name = "odoo-addon-survey-xlsx", specifier = "==18.0.*" },
     { name = "odoo-addon-uom-unece", specifier = "==18.0.*" },
     { name = "odoo-addon-web-refresher", specifier = "==18.0.*" },
     { name = "odoo-addon-web-responsive", specifier = "==18.0.*" },
@@ -1422,11 +1422,14 @@ wheels = [
 
 [[package]]
 name = "odoo-addon-survey-xlsx"
-version = "18.0.1.0.0"
-source = { git = "https://github.com/ByteMeAsap/survey?subdirectory=survey_xlsx&branch=18.0-mig-survey_xlsx#07d26e715bd961c5599e3ff8491a4c143fab5a20" }
+version = "18.0.1.0.0.2"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "odoo" },
     { name = "odoo-addon-report-xlsx" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c6/e3/d8a79eefc62d272f91705b7521aebf3db528be1d7c14a916bcb4c27c0f8d/odoo_addon_survey_xlsx-18.0.1.0.0.2-py3-none-any.whl", hash = "sha256:69f701663d0eda80fd7fea31c7f6b03b10cc8077342aca85665cbeb9e1d45503", size = 24418, upload-time = "2026-02-02T16:55:22.082Z" },
 ]
 
 [[package]]
