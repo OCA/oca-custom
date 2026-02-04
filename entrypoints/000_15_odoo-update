@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -e
+set -x
+
+if [ "$( psql -tAc "SELECT 1 FROM pg_database WHERE datname='$DB_NAME'" )" != '1' ]
+then
+    echo "Database $DB_NAME does not exist, skipping $0"
+    echo "Database $DB_NAME does not exist, create it ! $0"
+    createdb $DB_NAME
+fi
+
+if [ "$( psql $DB_NAME -tAc "SELECT 1 FROM pg_tables WHERE tablename='ir_config_parameter'" )" != '1' ]
+then
+    echo "Database $DB_NAME not initialized, install $0"
+    dropdb $DB_NAME
+    click-odoo-initdb -n "$DB_NAME" -c /etc/odoo.cfg -m oca_all --no-cache --demo
+else
+    click-odoo-update --if-exists -d "$DB_NAME" --i18n-overwrite
+
+fi
+
+
+click-odoo-update --if-exists -d "$DB_NAME" --i18n-overwrite

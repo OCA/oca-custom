@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -e
+set -x
+
+# Configuration
+MAX_RETRIES=30  # Maximum number of attempts
+SLEEP_TIME=2    # Wait time between attempts (in seconds)
+
+# Attempt counter
+attempt=1
+pg_isready --version
+
+# Wait for PostgreSQL to be available
+until [ "$attempt" -ge "$MAX_RETRIES" ]; do
+    if pg_isready > /dev/null 2>&1; then
+        echo "PostgreSQL is available!"
+        exit 0
+    fi
+    echo "Attempt $attempt/$MAX_RETRIES: PostgreSQL is not ready yet..."
+    sleep "$SLEEP_TIME"
+    ((attempt++))
+done
+
+echo "Failure: PostgreSQL is not available after $MAX_RETRIES attempts."
+exit 1

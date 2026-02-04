@@ -1,0 +1,25 @@
+#!/bin/bash
+
+set -e
+set -x
+
+# Configuration
+MAX_RETRIES=30  # Maximum number of attempts
+SLEEP_TIME=2    # Wait time between attempts (in seconds)
+
+# Attempt counter
+attempt=1
+
+# Wait for wkhtmltopdf to be available
+until [ "$attempt" -ge "$MAX_RETRIES" ]; do
+    if wkhtmltopdf --version > /dev/null 2>&1; then
+        echo "wkhtmltopdf is available!"
+        exit 0
+    fi
+    echo "Attempt $attempt/$MAX_RETRIES: wkhtmltopdf is not ready yet..."
+    sleep "$SLEEP_TIME"
+    ((attempt++))
+done
+
+echo "Failure: wkhtmltopdf is not available after $MAX_RETRIES attempts."
+exit 1
