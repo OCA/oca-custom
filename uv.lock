@@ -651,7 +651,6 @@ dependencies = [
     { name = "odoo-addon-document-knowledge" },
     { name = "odoo-addon-document-page" },
     { name = "odoo-addon-github-connector" },
-    { name = "odoo-addon-github-connector-oca" },
     { name = "odoo-addon-github-connector-odoo" },
     { name = "odoo-addon-membership-delegated-partner-line" },
     { name = "odoo-addon-membership-extension" },
@@ -768,7 +767,6 @@ requires-dist = [
     { name = "odoo-addon-document-knowledge", specifier = "==18.0.*" },
     { name = "odoo-addon-document-page", specifier = "==18.0.*" },
     { name = "odoo-addon-github-connector", specifier = "==18.0.*" },
-    { name = "odoo-addon-github-connector-oca", git = "https://github.com/Therp/interface-github?subdirectory=github_connector_oca&branch=18.0-mig-github_connector_oca" },
     { name = "odoo-addon-github-connector-odoo", specifier = "==18.0.*" },
     { name = "odoo-addon-membership-delegated-partner-line", git = "https://github.com/gfcapalbo/vertical-association?subdirectory=membership_delegated_partner_line&branch=18.0-MIG-membership_delegated_partner_line" },
     { name = "odoo-addon-membership-extension", specifier = "==18.0.*" },
@@ -1256,15 +1254,6 @@ dependencies = [
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/d4/15/f3bbdd74884e80a828c185060226f3a0681c275aa8a782b1fabbdea33501/odoo_addon_github_connector-18.0.1.0.0.2-py3-none-any.whl", hash = "sha256:a49d9a18f63bd69933f6d5759ea2529b67f04f9ab19a22839cdafb2aafebadc8", size = 583615, upload-time = "2025-05-21T11:47:23.966Z" },
-]
-
-[[package]]
-name = "odoo-addon-github-connector-oca"
-version = "18.0.1.0.0"
-source = { git = "https://github.com/Therp/interface-github?subdirectory=github_connector_oca&branch=18.0-mig-github_connector_oca#bc3f6da8e1f5ef81b3c0b8a0a0f524dfae32d4e9" }
-dependencies = [
-    { name = "odoo" },
-    { name = "odoo-addon-github-connector-odoo" },
 ]
 
 [[package]]

@@ -134,7 +134,6 @@
         "document_knowledge",
         "document_page",
         "github_connector",
-        "github_connector_oca",
         "github_connector_odoo",
         "membership_delegated_partner_line",
         "membership_extension",

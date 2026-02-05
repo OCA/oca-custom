@@ -104,7 +104,6 @@ odoo = { git = "https://github.com/OCA/OCB", rev = "refs/pull/1319/head" }
 # unreleased dependency, add it to test-requirements.txt to let the
 # test pipeline to use it as well
 odoo-addon-membership_delegated_partner_line = { git = "https://github.com/gfcapalbo/vertical-association", branch = "18.0-MIG-membership_delegated_partner_line", subdirectory = "membership_delegated_partner_line" }
-odoo-addon-github_connector_oca = { git = "https://github.com/Therp/interface-github", branch = "18.0-mig-github_connector_oca", subdirectory = "github_connector_oca" }
 odoo-addon-account_statement_import_online_wise = { git = "https://github.com/Therp/bank-statement-import", branch = "18.0-mig-account-statement-import-online-wise", subdirectory = "account_statement_import_online_wise" }
 
 # Example to develop module from an other repository
