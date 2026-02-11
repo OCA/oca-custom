@@ -1,0 +1,43 @@
+#integrator_left .nav-link {
+    padding: 0.4rem 0.75rem;
+}
+
+#ref_content .search-query {
+    min-width: 16rem;
+}
+
+.oca-integrator-card {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.oca-integrator-card:last-child {
+    border-bottom: 0;
+}
+
+/* Compatibility for legacy Bootstrap 'media' markup still present in templates */
+.media {
+    display: flex;
+    gap: 1rem;
+}
+
+.media-body {
+    flex: 1 1 auto;
+}
+
+@media (min-width: 992px) {
+    #integrator_left {
+        position: sticky;
+        top: 6rem; /* below the header */
+        align-self: flex-start;
+    }
+}
+
+@media (max-width: 991.98px) {
+    #integrator_left {
+        position: static;
+    }
+    #ref_content .search-query {
+        min-width: 12rem;
+    }
+}

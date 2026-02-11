@@ -23,7 +23,7 @@ License AGPL - 3.0 or later(http: // www.gnu.org / licenses / agpl.html).
         id="website_portal_integrator_details"
         inherit_id="portal.portal_my_details"
     >
-        <xpath expr="//div[hasclass('row')]/input[@name='redirect']" position="before">
+        <xpath expr="//input[@name='redirect']" position="before">
             <t t-if="partner.is_integrator">
                 <div
                     t-attf-class="form-group #{error.get('favourite_module_ids') and 'has-error' or ''} col-lg-6"
@@ -31,12 +31,10 @@ License AGPL - 3.0 or later(http: // www.gnu.org / licenses / agpl.html).
                     <label class="control-label" for="favourite_module_ids">
                         Modules
                     </label>
-                    <input
-                        type="hidden"
+                    <select
                         name="favourite_module_ids"
-                        placeholder="Modules..."
-                        class="form-control module_js_select2"
-                        value="Modules"
+                        class="form-select module_js_select2"
+                        multiple="multiple"
                     />
                 </div>
                 <div

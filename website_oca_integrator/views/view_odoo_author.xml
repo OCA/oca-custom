@@ -11,10 +11,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="after">
                 <group>
-                    <field
-                        name="partner_id"
-                        attrs="{'readonly': [('name','=',False)]}"
-                    />
+                    <field name="partner_id" readonly="not name" />
                 </group>
             </xpath>
         </field>

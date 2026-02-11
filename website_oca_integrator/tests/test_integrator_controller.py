@@ -4,8 +4,6 @@
 from odoo.tests.common import HttpCase
 from odoo.tools import config
 
-from odoo.addons.http_routing.models.ir_http import slug
-
 
 class TestIntegratorController(HttpCase):
     def setUp(self):
@@ -13,8 +11,11 @@ class TestIntegratorController(HttpCase):
 
         # Trick this configuration value for avoiding an error
         config["source_code_local_path"] = "/tmp/"
-        self.country_india = self.browse_ref("base.in")
-        self.partner = self.env["res.partner"].create(
+
+        Partner = self.env["res.partner"].sudo()
+        self.country_india = self.env.ref("base.in")
+
+        self.partner = Partner.create(
             {
                 "name": "Partner Test",
                 "is_company": True,
@@ -25,18 +26,26 @@ class TestIntegratorController(HttpCase):
                 "website_published": True,
             }
         )
-        self.contact1 = self.env["res.partner"].create(
+
+        self.contact1 = Partner.create(
             {
-                "name": "Contact 2 Test",
+                "name": "Contact 1 Test",
                 "parent_id": self.partner.id,
                 "github_name": "demo-git-rusty",
+                "website_published": True,
+                "membership_state": "paid",
+                "country_id": self.country_india.id,
             }
         )
-        self.contact2 = self.env["res.partner"].create(
+
+        self.contact2 = Partner.create(
             {
                 "name": "Contact 2 Test",
                 "parent_id": self.partner.id,
                 "github_name": "demo-git-diane",
+                "website_published": True,
+                "membership_state": "paid",
+                "country_id": self.country_india.id,
             }
         )
 
@@ -48,29 +57,25 @@ class TestIntegratorController(HttpCase):
         self._test_website_page("/integrators/test-integrator")
 
     def test_integrator_page(self):
-        self._test_website_page("/integrators/country/{}".format(self.country_india.id))
+        # Avoid slug() import: Odoo model routes accept plain IDs too.
+        self._test_website_page(f"/integrators/country/{self.country_india.id}")
         self._test_website_page("/integrators")
-        self._test_website_page("/integrators?search=%s" % self.partner.name)
-        self._test_website_page("/integrators?&country_all=True")
+        self._test_website_page(f"/integrators?search={self.partner.name}")
+        self._test_website_page("/integrators?country_all=True")
 
     def test_integrator_detail_page(self):
-        self._test_website_page("/integrators/country/{}".format(self.country_india.id))
-
-        self._test_website_page("/integrators/{}".format(slug(self.partner)))
-
+        self._test_website_page(f"/integrators/country/{self.country_india.id}")
+        self._test_website_page(f"/integrators/{self.partner.id}")
         self._test_website_page(
-            "/integrators/{}?country_id={}".format(
-                slug(self.partner), self.country_india.id
-            )
+            f"/integrators/{self.partner.id}?country_id={self.country_india.id}"
         )
 
     def test_contributor_list_page(self):
         self._test_website_page(
-            "/integrators/{}/contributors/country/{}?search={}".format(
-                slug(self.partner), slug(self.country_india), self.partner.name
-            )
+            f"/integrators/{self.partner.id}/contributors/country/"
+            f"{self.country_india.id}?search={self.partner.name}"
         )
 
     def test_member_page(self):
-        self._test_website_page("/members/{}".format(slug(self.contact1)))
-        self._test_website_page("/members/{}".format(slug(self.contact2)))
+        self._test_website_page(f"/members/{self.contact1.id}")
+        self._test_website_page(f"/members/{self.contact2.id}")

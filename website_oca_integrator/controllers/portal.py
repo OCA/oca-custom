@@ -1,8 +1,6 @@
 # Copyright 2018 Surekha Technologies (https://www.surekhatech.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import json
-
 from odoo import http
 from odoo.http import request, route
 
@@ -10,19 +8,16 @@ from odoo.addons.portal.controllers.portal import CustomerPortal
 
 
 class IntegratorPortal(CustomerPortal):
-    OPTIONAL_BILLING_FIELDS = CustomerPortal.OPTIONAL_BILLING_FIELDS + [
-        "github_organization",
-        "favourite_module_ids",
-        "website_short_description",
-        "website_description",
-    ]
-
     @route()
     def account(self, redirect=None, **post):
         if post:
-            modules = post.get("favourite_module_ids")
+            modules = request.httprequest.form.getlist("favourite_module_ids")
+            if not modules:
+                modules = post.get("favourite_module_ids")
+                if modules:
+                    modules = modules.split(",")
             if modules:
-                post["favourite_module_ids"] = [int(id) for id in modules.split(",")]
+                post["favourite_module_ids"] = [int(id) for id in modules]
             else:
                 post["favourite_module_ids"] = False
         return super().account(redirect=redirect, **post)
@@ -45,7 +40,7 @@ class IntegratorPortal(CustomerPortal):
             fields=["id", "name"],
             limit=int(limit),
         )
-        return json.dumps(modules_data)
+        return request.make_json_response(modules_data)
 
     @http.route(
         "/my/account/get_favourite_modules",
@@ -59,7 +54,7 @@ class IntegratorPortal(CustomerPortal):
         integrator = request.env.user.partner_id
         modules = integrator.favourite_module_ids
         modules_data = [{"id": m.id, "name": m.name} for m in modules]
-        return json.dumps(modules_data)
+        return request.make_json_response(modules_data)
 
     def details_form_validate(self, data):
         # after adding HTML editor in portal page, if we click on

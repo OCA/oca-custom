@@ -168,7 +168,9 @@ const config = [{
 
     settings: {
         jsdoc: {
+            definedTags: ["odoo-module"],
             tagNamePreference: {
+                "odoo-module": "odoo-module",
                 arg: "param",
                 argument: "param",
                 augments: "extends",
@@ -194,7 +196,7 @@ const config = [{
     },
 
 }, {
-    files: ["**/*.esm.js", "**/*test.js"],
+    files: ["**/*.esm.js", "**/*test.js", "**/static/src/**/*.js"],
 
     languageOptions: {
         ecmaVersion: 2024,

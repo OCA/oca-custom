@@ -4,30 +4,18 @@ Copyright 2018 Surekha Technologies (https://www.surekhatech.com)
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
-    <!-- Add integrators link in footer -->
-    <template
-        id="integrator_footer"
-        inherit_id="website.footer_custom"
-        name="Footer Integrators Link"
-    >
-        <xpath expr="//div[@id='connect']/ul" position="inside">
-            <li>
-                <a href="/integrators">Integrators</a>
-            </li>
-        </xpath>
-    </template>
     <!-- Integrator layout -->
     <template id="integrator_layout" name="Integrators Layout">
         <t t-call="website.layout">
             <t t-set="additional_title">OCA Integrators</t>
             <div id="wrap">
-                <div class="oe_structure" />
+                <div id="oe_structure_integrator_layout_top" class="oe_structure" />
                 <div class="container mt16">
                     <div class="row">
-                        <t t-raw="ref_content" />
+                        <t t-out="ref_content" />
                     </div>
                 </div>
-                <div class="oe_structure" />
+                <div id="oe_structure_integrator_layout_bottom" class="oe_structure" />
             </div>
         </t>
     </template>
@@ -74,32 +62,41 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 </div>
                 <!-- integrators content -->
                 <div class="col-lg-8 offset-lg-1" id="ref_content">
-                    <div class="d-flex p-2">
+                    <div class="d-flex flex-wrap align-items-center gap-3 py-2">
                         <t t-call="website.pager" />
-                        <form action="" method="get" class="form-inline ml-auto">
-                            <div class="form-group">
+
+                        <form action="" method="get" class="flex-grow-1">
+                            <div class="input-group" role="search">
                                 <input
                                     type="text"
                                     name="search"
-                                    class="search-query form-control"
+                                    class="search-query form-control border-0 bg-light"
                                     placeholder="Search"
                                     t-att-value="searches.get('search', '')"
                                 />
+                                <button
+                                    type="submit"
+                                    aria-label="Search"
+                                    title="Search"
+                                    class="oe_search_button btn btn-light"
+                                >
+                                    <i class="oi oi-search" />
+                                </button>
                             </div>
                         </form>
                     </div>
                     <div>
                         <p t-if="not integrators">No result found</p>
                         <t t-foreach="integrators" t-as="integrator">
-                            <div class="media">
+                            <div class="d-flex gap-3 mb-4 oca-integrator-card">
                                 <a
-                                    class="pull-left"
+                                    class="flex-shrink-0 d-block"
                                     t-attf-href="/integrators/#{slug(integrator)}?#{current_grade and 'grade_id=%s&amp;' % current_grade.id}#{current_country and 'country_id=%s' % current_country.id}"
                                     t-field="integrator.image_1920"
-                                    t-options='{"widget": "image", "class": "media-object", "max_width": 128}'
+                                    t-options='{"widget": "image", "class": "img img-fluid rounded", "max_width": 128}'
                                 />
                                 <div
-                                    class="media-body o_partner_body"
+                                    class="flex-grow-1 o_partner_body"
                                     style="min-height: 64px;"
                                 >
                                     <a
@@ -122,10 +119,16 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                             t-as="sponsorship"
                                         >
                                             <img
-                                                t-att-src="'data:image/png;base64,%s'%to_text(sponsorship.sponsorship_id.image_128)"
-                                                height="50"
-                                                width="50"
+                                                t-if="sponsorship.sponsorship_id.image_128"
+                                                t-att-src="image_data_uri(sponsorship.sponsorship_id.image_128)"
+                                                style="height: 50px; width: 50px;"
+                                                t-att-title="sponsorship.grade_id and sponsorship.grade_id.name or ''"
                                                 alt=""
+                                            />
+                                            <span
+                                                t-if="sponsorship.grade_id"
+                                                class="ms-2 small text-muted"
+                                                t-field="sponsorship.grade_id.name"
                                             />
                                         </t>
                                     </t>
@@ -140,8 +143,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                                 t-attf-href="/integrators/#{slug(integrator)}#reference_column"
                                             >
                                                 <t
-                                                    t-esc="integrator.implemented_count"
-                                                />
+                                                t-esc="integrator.implemented_partner_count"
+                                            />
                                                 reference(s)
                                             </a>
                                         </small>
@@ -152,8 +155,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                                 t-attf-href="/integrators/#{slug(integrator)}#contributor_member_column"
                                             >
                                                 <t
-                                                    t-esc="integrator.contributor_count"
-                                                />
+                                                t-esc="integrator.contributor_count"
+                                            />
                                                 contributor(s)
                                             </a>
                                         </small>
@@ -230,12 +233,12 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <!-- modal end -->
                 <h3>World Map
                     <button
-                        class="btn btn-link"
-                        data-toggle="modal"
-                        data-target=".partner_map_modal"
-                    >
-                        <span class="fa fa-external-link" />
-                    </button>
+                    class="btn btn-link"
+                    data-toggle="modal"
+                    data-target=".partner_map_modal"
+                >
+                    <span class="fa fa-external-link" />
+                </button>
                 </h3>
                 <ul class="nav">
                     <iframe
@@ -257,11 +260,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             <a
                                 t-attf-href="/integrators#{current_country and '/country/%s' % slug(current_country)}"
                             >
-                                Our Integrators
+                                <i class="fa fa-chevron-left me-2" /> Our Integrators
                             </a>
-                        </li>
-                        <li class="active">
-                            <span t-field="integrator.display_name" />
                         </li>
                     </ol>
                 </div>
@@ -310,8 +310,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             <div class="well" style="padding: 4px; text-align: center;">
                                 <h4>
                                     <a
-                                        t-attf-href="/integrators/#{slug(integrator)}/contributors/"
-                                    >
+                                    t-attf-href="/integrators/#{slug(integrator)}/contributors/"
+                                >
                                         Click here
                                     </a>
                                     to view Contributors/Members
@@ -341,7 +341,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         inherit_id="website_partner.partner_detail"
         name="Integrator Github Link"
     >
-        <xpath expr="//div[hasclass('col-lg-4')]/address" position="inside">
+        <xpath expr="//div[@t-field='partner.self']" position="after">
             <t t-if="integrator and integrator.github_organization_url">
                 <div>
                     <i class="fa fa-github" style="font-size: 16px" />
@@ -358,16 +358,13 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         inherit_id="website_crm_partner_assign.grade_in_detail"
         priority="100"
     >
-        <xpath expr="//h3" position="replace">
-            <t t-if="not integrator">
-                <h3
-                    class="col-md-12 text-center text-muted"
-                    t-if="partner.grade_id and partner.grade_id.website_published"
-                >
-                    <span t-field="partner.grade_id" />
-                    Partner
-                </h3>
-            </t>
+        <xpath
+            expr="//span[@t-if='partner.grade_id and partner.grade_id.website_published']"
+            position="attributes"
+        >
+            <attribute
+                name="t-if"
+            >not integrator and partner.grade_id and partner.grade_id.website_published</attribute>
         </xpath>
     </template>
     <!-- Integrator references -->
@@ -379,7 +376,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             >References
             </h3>
             <div t-foreach="references" t-as="reference" class="media">
-                <a class="pull-left" t-attf-href="/customers/#{slug(reference)}">
+                <a
+                    class="flex-shrink-0 d-block"
+                    t-attf-href="/customers/#{slug(reference)}"
+                >
                     <span
                         t-field="reference.image_128"
                         t-options='{"widget": "image", "class": "center-block"}'
@@ -407,15 +407,15 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 >
                     Modules
                     <t t-if="display_all_modules">
-                        <a
-                            t-attf-href="/shop/?&amp;integrator=#{slug(partner)}"
-                            style="margin-top: -10px;"
-                            class="btn btn-info pull-right"
-                            role="button"
-                        >View
+                    <a
+                        t-attf-href="/shop/?&amp;integrator=#{slug(partner)}"
+                        style="margin-top: -10px;"
+                        class="btn btn-info pull-right"
+                        role="button"
+                    >View
                             All Modules
                         </a>
-                    </t>
+                </t>
                 </h3>
             </div>
             <div class="row">

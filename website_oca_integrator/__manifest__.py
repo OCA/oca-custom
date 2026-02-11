@@ -3,7 +3,7 @@
 {
     "name": "Website OCA Integrator",
     "summary": "Displays Integrators in website.",
-    "version": "14.0.1.0.1",
+    "version": "18.0.1.0.1",
     "category": "Website",
     "license": "AGPL-3",
     "website": "https://github.com/OCA/oca-custom",
@@ -11,19 +11,19 @@
     "depends": [
         "base",
         "website",
+        "web_tour",
         "website_crm_partner_assign",
         "website_sale",
-        "website_apps_store",
         "membership",
         "website_membership",
         "website_customer",
+        "github_connector",
+        "github_connector_odoo",
         "apps_product_creator",
     ],
     "data": [
         "security/ir.model.access.csv",
-        "views/assets.xml",
         "views/website_oca_integrator_templates.xml",
-        "views/website_oca_integrator_product_templates.xml",
         "views/website_oca_integrator_contributor_templates.xml",
         "views/view_portal_templates.xml",
         "views/website_oca_integrator_data.xml",
@@ -32,5 +32,14 @@
         "data/ir_cron.xml",
     ],
     "external_dependencies": {"python": ["responses"]},
+    "assets": {
+        "web.assets_frontend": [
+            "website_oca_integrator/static/src/js/integrator_portal.js",
+            "website_oca_integrator/static/src/scss/website_oca_integrator.scss",
+        ],
+        "web.assets_tests": [
+            "website_oca_integrator/static/src/js/integrator_portal_tour.js",
+        ],
+    },
     "installable": True,
 }
