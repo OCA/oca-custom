@@ -80,6 +80,9 @@ addons_dirs = ["./"]
 prerelease = "allow"
 # tell uv when dependencies may change
 cache-keys = [{ file = "pyproject.toml" }, { file = "**/__manifest__.py" }]
+build-constraint-dependencies = [
+    "setuptools<82"
+]
 
 [dependency-groups]
 dev = [
