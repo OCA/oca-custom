@@ -1,0 +1,2 @@
+- Just install and set the new url in System parameters. (website_oca_apps_new_shop.url)
+- Default shop URL is: https://apps.odoo-community.org

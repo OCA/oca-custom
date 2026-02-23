@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="website_oca_apps_new_shop" model="ir.config_parameter">
+        <field name="key">website_oca_apps_new_shop.url</field>
+        <field name="value">https://apps.odoo-community.org</field>
+    </record>
+</odoo>
