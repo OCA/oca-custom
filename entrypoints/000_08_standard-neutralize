@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 import logging
+import os
+import sys
 
 import click
 import click_odoo
@@ -23,6 +25,15 @@ def neutralize_db(env):
 @click.command()
 @click_odoo.env_options(with_rollback=False)
 def main(env):
+    running_env = os.getenv("RUNNING_ENV")
+    if not running_env:
+        _logger.info(
+            "RUNNING_ENV is not defined, please set a RUNNING_ENV and try again"
+        )
+        sys.exit(1)
+    if running_env == "prod":
+        _logger.info("%s database, no need to neutralize...", running_env)
+        sys.exit(0)
     neutralize_db(env)
 
 
