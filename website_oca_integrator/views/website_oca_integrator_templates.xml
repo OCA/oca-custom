@@ -149,18 +149,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                             </a>
                                         </small>
                                     </t>
-                                    <t t-if="integrator.contributor_count">
-                                        <small>
-                                            <a
-                                                t-attf-href="/integrators/#{slug(integrator)}#contributor_member_column"
-                                            >
-                                                <t
-                                                t-esc="integrator.contributor_count"
-                                            />
-                                                contributor(s)
-                                            </a>
-                                        </small>
-                                    </t>
                                     <t t-if="integrator.member_count">
                                         <small>
                                             <a
@@ -168,16 +156,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                             >
                                                 <t t-esc="integrator.member_count" />
                                                 member(s)
-                                            </a>
-                                        </small>
-                                    </t>
-                                    <t t-if="integrator.module_count">
-                                        <small>
-                                            <a
-                                                t-attf-href="/integrators/#{slug(integrator)}#module_column"
-                                            >
-                                                <t t-esc="integrator.module_count" />
-                                                module(s)
                                             </a>
                                         </small>
                                     </t>
@@ -325,32 +303,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 t-call="website_oca_integrator.integrator_references_block"
                             />
                         </div>
-                        <div id="module_column" class="mb16">
-                            <t
-                                t-call="website_oca_integrator.integrator_modules_list"
-                            />
-                        </div>
                     </t>
                 </t>
             </t>
         </t>
-    </template>
-    <!-- Integrator github url -->
-    <template
-        id="integrator_github_url"
-        inherit_id="website_partner.partner_detail"
-        name="Integrator Github Link"
-    >
-        <xpath expr="//div[@t-field='partner.self']" position="after">
-            <t t-if="integrator and integrator.github_organization_url">
-                <div>
-                    <i class="fa fa-github" style="font-size: 16px" />
-                    <a t-att-href="integrator.github_organization_url">
-                        <span t-field="integrator.github_organization_url" />
-                    </a>
-                </div>
-            </t>
-        </xpath>
     </template>
     <!-- Hide grade level for integrator -->
     <template
@@ -393,50 +349,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                         <span t-field="reference.self" />
                     </a>
                     <div t-field='reference.website_short_description' />
-                </div>
-            </div>
-        </t>
-    </template>
-    <!-- Integrator's module list-->
-    <template id="integrator_modules_list" name="Integrator Modules Lists">
-        <t t-if="modules_list">
-            <div class="clearfix border_bottom">
-                <h3
-                    id="modules_list"
-                    style=" margin-bottom: 20px; border-bottom: solid 1px #ccc; padding-bottom: 20px;"
-                >
-                    Modules
-                    <t t-if="display_all_modules">
-                    <a
-                        t-attf-href="/shop/?&amp;integrator=#{slug(partner)}"
-                        style="margin-top: -10px;"
-                        class="btn btn-info pull-right"
-                        role="button"
-                    >View
-                            All Modules
-                        </a>
-                </t>
-                </h3>
-            </div>
-            <div class="row">
-                <div>
-                    <div class="border_bottom">
-                        <div
-                            class="col-sm-4"
-                            t-foreach="modules_list"
-                            t-as="module"
-                            style="display: flex; align-items: center;"
-                        >
-                            <!-- if product has image then display it, otherwise display default module icon -->
-                            <img
-                                t-attf-src="#{'/web/image/product.template/%s/image' %(module.id) if module.image_1920 else '/base/static/description/icon.png'}"
-                                style="margin-right: 10px; height: 70px"
-                            />
-                            <a t-attf-href="/shop/product/#{slug(module)}">
-                                <strong t-field="module.name" />
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </t>

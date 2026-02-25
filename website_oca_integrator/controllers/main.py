@@ -96,9 +96,7 @@ class WebsiteIntegrator(http.Controller):
         # search integrators matching current search parameters
         integrator_ids = partner_obj.sudo().search(
             base_integrator_domain,
-            order="grade_id ASC, implemented_partner_count DESC,"
-            "contributor_count DESC, member_count DESC,"
-            "name ASC",
+            order="grade_id ASC, member_count DESC, name ASC",
             offset=pager["offset"],
             limit=self._references_per_page,
         )
@@ -125,42 +123,6 @@ class WebsiteIntegrator(http.Controller):
             values,
             status=integrators and 200 or 404,
         )
-
-    def get_integrator_modules_list(self, integrator):
-        """
-        Returns 5 favourite modules selected by integrator. If integrator has
-        not selected 5 modules, then returns latest 5 developed modules.
-        """
-        module_display_count = 5
-        favourite_modules = integrator.favourite_module_ids.filtered("is_published")
-        developed_modules = integrator.developed_module_ids.filtered("is_published")
-        favourite_module_count = len(favourite_modules)
-        developed_module_count = len(developed_modules)
-
-        remaining_modules = module_display_count - favourite_module_count
-
-        # if integrator has developed less than 5 modules then
-        # remaining modules are just other than favourite modules.
-        if developed_module_count < module_display_count:
-            remaining_modules = developed_module_count - favourite_module_count
-
-        if remaining_modules:
-            remaining_product_tmpl_ids = list(
-                set(developed_modules.ids) - set(favourite_modules.ids)
-            )
-            # search latest product variant of module.
-            sorted_modules = request.env["product.product"].search(
-                [("product_tmpl_id", "in", remaining_product_tmpl_ids)],
-                order="create_date desc",
-            )
-
-            sorted_modules = sorted_modules.mapped("product_tmpl_id")[
-                :remaining_modules
-            ]
-
-            favourite_modules += sorted_modules
-
-        return favourite_modules, developed_module_count
 
     def get_integrator_references(self, integrator):
         # sort integrator references by implemented date.
@@ -197,26 +159,18 @@ class WebsiteIntegrator(http.Controller):
             if integrator.sudo().exists() and (
                 integrator.website_published or is_website_publisher
             ):
-                modules_list, developed_module_count = self.get_integrator_modules_list(
-                    integrator
-                )
-
                 references = self.get_integrator_references(integrator)
 
                 sponsorship_lines = integrator.sponsorship_line_ids.sorted(
                     key=lambda r: r.date_end, reverse=True
                 )[:5]
 
-                display_all_modules = True if developed_module_count > 5 else False
-
                 values = {
                     "main_object": integrator,
                     "integrator": integrator,
                     "current_country": current_country,
                     "references": references,
-                    "modules_list": modules_list,
                     "sponsorship_lines": sponsorship_lines,
-                    "display_all_modules": display_all_modules,
                 }
                 return request.render("website_oca_integrator.integrators", values)
         return self.integrators(**post)
@@ -259,7 +213,6 @@ class WebsiteIntegrator(http.Controller):
         country_domain = [
             "|",
             ("membership_state", "=", "paid"),
-            ("github_name", "!=", False),
             ("website_published", "=", True),
             ("parent_id", "=", integrator_id),
         ]

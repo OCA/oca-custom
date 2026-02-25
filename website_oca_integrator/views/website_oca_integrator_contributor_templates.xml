@@ -215,21 +215,13 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             </t>
         </t>
     </template>
-    <!-- Contributor/Member github url and company url -->
+
     <template
-        id="contributor_github_url"
+        id="partner_detail_parent_company"
         inherit_id="website_partner.partner_detail"
-        name="Contributor Github Link"
+        name="Partner Detail Parent Company"
     >
         <xpath expr="//div[@t-field='partner.self']" position="after">
-            <t t-if="partner and partner.github_url">
-                <div>
-                    <i class="fa fa-github" style="font-size:16px" />
-                    <a t-att-href="partner.github_url">
-                        <span t-field="partner.github_url" />
-                    </a>
-                </div>
-            </t>
             <t
                 t-if="partner.parent_id.is_integrator and partner.parent_id.website_published"
             >
@@ -238,49 +230,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     <a t-attf-href="/integrators/#{slug(partner.parent_id)}">
                         <span t-field="partner.parent_id.name" />
                     </a>
-                </div>
-            </t>
-        </xpath>
-    </template>
-    <template
-        id="contributor_modules_list"
-        name="Contributor Modules Lists"
-        inherit_id="website_partner.partner_detail"
-    >
-        <xpath expr="//div[hasclass('col-lg-9')]" position="inside">
-            <t
-                t-set="product_templates"
-                t-value="partner.contributor_module_line_ids.sorted(key='date_pr_merged',reverse=True).mapped('product_template_id').filtered('website_published')"
-            />
-            <t t-if="product_templates">
-                <div class="clearfix border_bottom">
-                    <h3
-                        id="modules_list"
-                        style=" margin-bottom: 20px; border-bottom: solid 1px #ccc; padding-bottom: 20px;"
-                    >
-                        Latest Contributed Modules
-                    </h3>
-                </div>
-                <div class="row">
-                    <div>
-                        <div class="border_bottom">
-                            <div
-                                class="col-sm-4"
-                                t-foreach="product_templates"
-                                t-as="module"
-                                style="display: flex; align-items: center;"
-                            >
-                                <!-- if product has image then display it, otherwise display default module icon -->
-                                <img
-                                    t-attf-src="#{'/web/image/product.template/%s/image' %(module.id) if module.image_1920 else '/base/static/description/icon.png'}"
-                                    style="margin-right: 10px; height: 70px"
-                                />
-                                <a t-attf-href="/shop/product/#{slug(module)}">
-                                    <strong t-field="module.name" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </t>
         </xpath>

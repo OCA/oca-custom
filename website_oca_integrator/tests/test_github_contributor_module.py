@@ -87,7 +87,6 @@ class TestGithubContributorModule(TransactionCase):
                 "name": "Partner 3",
                 "is_company": True,
                 "website_published": True,
-                "github_organization": "company3_github_name",
             }
         )
         cls.contributor1 = cls.partner_model.create(

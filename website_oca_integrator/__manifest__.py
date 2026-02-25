@@ -17,9 +17,6 @@
         "membership",
         "website_membership",
         "website_customer",
-        "github_connector",
-        "github_connector_odoo",
-        "apps_product_creator",
     ],
     "data": [
         "security/ir.model.access.csv",
@@ -28,17 +25,12 @@
         "views/view_portal_templates.xml",
         "views/website_oca_integrator_data.xml",
         "views/view_res_partner.xml",
-        "views/view_odoo_author.xml",
-        "data/ir_cron.xml",
     ],
     "external_dependencies": {"python": ["responses"]},
     "assets": {
         "web.assets_frontend": [
             "website_oca_integrator/static/src/js/integrator_portal.js",
             "website_oca_integrator/static/src/scss/website_oca_integrator.scss",
-        ],
-        "web.assets_tests": [
-            "website_oca_integrator/static/src/js/integrator_portal_tour.js",
         ],
     },
     "installable": True,

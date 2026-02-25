@@ -25,7 +25,6 @@ class TestIntegratorAssign(TransactionCase):
                 "name": "Partner 1",
                 "is_company": True,
                 "website_published": True,
-                "github_organization": "company1_github_name",
                 "country_id": cls.country_india.id,
             }
         )
@@ -91,23 +90,6 @@ class TestIntegratorAssign(TransactionCase):
             self.company2.is_integrator,
             True,
             "Partner with a paid member contact should be an integrator.",
-        )
-
-    def test_contributors_count(self):
-        self.company1._compute_contributor_count()
-        self.assertEqual(
-            self.company1.contributor_count,
-            1,
-            "If a partner has a contact with github login, "
-            "contributor_count should be 1.",
-        )
-
-        self.company2._compute_contributor_count()
-        self.assertEqual(
-            self.company2.contributor_count,
-            0,
-            "If a partner has no contacts with github login, "
-            "contributor_count should be 0.",
         )
 
     def test_members_count(self):

@@ -24,33 +24,6 @@ License AGPL - 3.0 or later(http: // www.gnu.org / licenses / agpl.html).
         inherit_id="portal.portal_my_details"
     >
         <xpath expr="//input[@name='redirect']" position="before">
-            <t t-if="partner.is_integrator">
-                <div
-                    t-attf-class="form-group #{error.get('favourite_module_ids') and 'has-error' or ''} col-lg-6"
-                >
-                    <label class="control-label" for="favourite_module_ids">
-                        Modules
-                    </label>
-                    <select
-                        name="favourite_module_ids"
-                        class="form-select module_js_select2"
-                        multiple="multiple"
-                    />
-                </div>
-                <div
-                    t-attf-class="form-group #{error.get('github_organization') and 'has-error' or ''} col-lg-6"
-                >
-                    <label class="control-label" for="github_organization">
-                        Github Login
-                    </label>
-                    <input
-                        type="text"
-                        name="github_organization"
-                        class="form-control"
-                        t-att-value="partner.github_organization"
-                    />
-                </div>
-            </t>
             <div
                 t-attf-class="form-group #{error.get('website_short_description') and 'has-error' or ''} col-lg-6"
             >

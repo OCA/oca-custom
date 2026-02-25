@@ -98,15 +98,3 @@ class TestUi(odoo.tests.HttpCase):
 
         # Ensure computed fields are populated for the test partner
         self.partner._compute_developed_modules()
-
-    def test_integrator_portal(self):
-        self.start_tour("/my/account", "integrator_portal", login="integrator")
-
-        partner = self.partner.sudo()
-
-        # The favourites should always be a subset of developed modules
-        self.assertTrue(
-            set(partner.favourite_module_ids.ids).issubset(
-                set(partner.developed_module_ids.ids)
-            )
-        )
