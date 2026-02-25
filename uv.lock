@@ -647,6 +647,8 @@ dependencies = [
     { name = "odoo-addon-base-ubl" },
     { name = "odoo-addon-base-unece" },
     { name = "odoo-addon-bi-sql-editor" },
+    { name = "odoo-addon-crowdfunding" },
+    { name = "odoo-addon-crowdfunding-public-pledge" },
     { name = "odoo-addon-currency-rate-update" },
     { name = "odoo-addon-date-range" },
     { name = "odoo-addon-disable-odoo-online" },
@@ -767,6 +769,8 @@ requires-dist = [
     { name = "odoo-addon-base-ubl", specifier = "==18.0.*" },
     { name = "odoo-addon-base-unece", specifier = "==18.0.*" },
     { name = "odoo-addon-bi-sql-editor", specifier = "==18.0.*" },
+    { name = "odoo-addon-crowdfunding", git = "https://github.com/hbrunn/crowdfunding?subdirectory=crowdfunding&branch=18.0-mig-crowdfunding" },
+    { name = "odoo-addon-crowdfunding-public-pledge", git = "https://github.com/hbrunn/crowdfunding?subdirectory=crowdfunding_public_pledge&branch=18.0-mig-crowdfunding" },
     { name = "odoo-addon-currency-rate-update", specifier = "==18.0.*" },
     { name = "odoo-addon-date-range", specifier = "==18.0.*" },
     { name = "odoo-addon-disable-odoo-online", specifier = "==18.0.*" },
@@ -1205,6 +1209,24 @@ wheels = [
 ]
 
 [[package]]
+name = "odoo-addon-crowdfunding"
+version = "18.0.1.0.0.5"
+source = { git = "https://github.com/hbrunn/crowdfunding?subdirectory=crowdfunding&branch=18.0-mig-crowdfunding#12ca7cee3fe947d871c7f1cb28de497b907f9c1b" }
+dependencies = [
+    { name = "odoo" },
+    { name = "odoo-addon-onchange-helper" },
+]
+
+[[package]]
+name = "odoo-addon-crowdfunding-public-pledge"
+version = "18.0.1.0.0.3"
+source = { git = "https://github.com/hbrunn/crowdfunding?subdirectory=crowdfunding_public_pledge&branch=18.0-mig-crowdfunding#12ca7cee3fe947d871c7f1cb28de497b907f9c1b" }
+dependencies = [
+    { name = "odoo" },
+    { name = "odoo-addon-crowdfunding" },
+]
+
+[[package]]
 name = "odoo-addon-currency-rate-update"
 version = "18.0.1.0.1.15"
 source = { registry = "https://pypi.org/simple" }
@@ -1373,6 +1395,17 @@ dependencies = [
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/85/fe/9e30a8f1fd925b60c3dff782f62eedb6552ea5df541281a8970ebc3a06db/odoo_addon_multi_step_wizard-18.0.1.0.0.3-py3-none-any.whl", hash = "sha256:0a60f98419a90cc40302790a3779a6008d7863347ca69b394883006a0a26c4bc", size = 34465, upload-time = "2025-09-23T03:48:24.058Z" },
+]
+
+[[package]]
+name = "odoo-addon-onchange-helper"
+version = "18.0.1.0.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "odoo" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/8c/29/a875163303fa27a7509dcc92024f9f3e066b1636bda276416778072e308f/odoo_addon_onchange_helper-18.0.1.0.1-py3-none-any.whl", hash = "sha256:970ca3ae1ce661855da0a4c3c7dc1921aff3a402d230fea17fae47ef53361417", size = 32690, upload-time = "2025-10-09T16:47:23.908Z" },
 ]
 
 [[package]]
