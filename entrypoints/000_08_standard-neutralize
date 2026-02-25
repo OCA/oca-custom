@@ -34,7 +34,8 @@ def main(env):
     if running_env == "prod":
         _logger.info("%s database, no need to neutralize...", running_env)
         sys.exit(0)
-    neutralize_db(env)
+    _logger.info("Neutralization would run")
+    #neutralize_db(env)
 
 
 if __name__ == "__main__":
