@@ -1,0 +1,30 @@
+#!/usr/bin/env python
+import logging
+
+import click
+import click_odoo
+from click_odoo import odoo
+
+_logger = logging.getLogger(__name__)
+
+
+def neutralize_db(env):
+    if odoo.release.version_info >= (16, 0):
+        _logger.info("Neutralizing database (Odoo >= 16 detected)")
+        odoo.modules.neutralize.neutralize_database(env.cr)
+        env.cr.commit()
+    else:
+        _logger.warning(
+            "Skipping neutralization: Odoo version is %s (< 16.0)",
+            getattr(odoo.release, "version", odoo.release.version_info),
+        )
+
+
+@click.command()
+@click_odoo.env_options(with_rollback=False)
+def main(env):
+    neutralize_db(env)
+
+
+if __name__ == "__main__":
+    main()
