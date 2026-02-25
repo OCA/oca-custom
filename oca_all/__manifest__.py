@@ -135,6 +135,7 @@
         "document_page",
         "github_connector",
         "github_connector_odoo",
+        "github_connector_oca",
         "membership_delegated_partner_line",
         "membership_extension",
         "mis_builder",
@@ -158,6 +159,8 @@
         "web_refresher",
         "web_search_with_and",
         "web_widget_dropdown_dynamic",
+        "website_oca_integrator",
+        "website_sale_oca_apps",
     ],
     "installable": True,
 }
