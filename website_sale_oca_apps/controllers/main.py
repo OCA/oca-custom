@@ -12,7 +12,7 @@ from odoo.addons.website_sale.controllers.main import WebsiteSale
 class WebsiteSaleProductRedirect(WebsiteSale):
     @http.route()
     def product(self, product, category="", search="", **kwargs):
-        if product.odoo_module_id and not product.active and not product.is_published:
+        if not product.active and not product.is_published:
             new_shop_url = (
                 request.env["ir.config_parameter"]
                 .sudo()

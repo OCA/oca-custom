@@ -11,6 +11,7 @@
     "installable": True,
     "depends": ["website_sale"],
     "data": [
+        "data/ir_config_parameter.xml",
         "views/templates.xml",
     ],
 }

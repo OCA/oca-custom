@@ -21,12 +21,12 @@
             >
                 <span>The App Store has moved to a new location.</span>
                 <a
-                    class="btn btn-sm btn-primary"
+                    class="btn btn btn-primary"
                     t-att-href="new_shop_url"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Visit the new App store
+                    Visit the App store
                 </a>
             </div>
         </xpath>
