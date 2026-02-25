@@ -24,9 +24,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     <group colspan="2" col="2" invisible="not is_company">
                         <separator string="Authors" colspan="2" />
                         <field name="author_ids">
-                            <tree>
+                            <list>
                                 <field name="name" />
-                            </tree>
+                            </list>
                         </field>
                     </group>
                     <group colspan="2" col="2" invisible="not is_company">
