@@ -657,6 +657,7 @@ dependencies = [
     { name = "odoo-addon-github-connector" },
     { name = "odoo-addon-github-connector-oca" },
     { name = "odoo-addon-github-connector-odoo" },
+    { name = "odoo-addon-impersonate-login" },
     { name = "odoo-addon-membership-delegated-partner-line" },
     { name = "odoo-addon-membership-extension" },
     { name = "odoo-addon-mis-builder" },
@@ -780,6 +781,7 @@ requires-dist = [
     { name = "odoo-addon-github-connector", specifier = "==18.0.*" },
     { name = "odoo-addon-github-connector-oca", git = "https://github.com/Therp/interface-github?subdirectory=github_connector_oca&branch=18.0-mig-github_connector_oca" },
     { name = "odoo-addon-github-connector-odoo", specifier = "==18.0.*" },
+    { name = "odoo-addon-impersonate-login", specifier = "==18.0.*" },
     { name = "odoo-addon-membership-delegated-partner-line", git = "https://github.com/gfcapalbo/vertical-association?subdirectory=membership_delegated_partner_line&branch=18.0-MIG-membership_delegated_partner_line" },
     { name = "odoo-addon-membership-extension", specifier = "==18.0.*" },
     { name = "odoo-addon-mis-builder", specifier = "==18.0.*" },
@@ -1318,6 +1320,17 @@ dependencies = [
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/1f/6a/1c9df36717b3fb5c3d75fe390b7dfd8532898a7213039e69e980a46550fc/odoo_addon_github_connector_odoo-18.0.1.0.1.1-py3-none-any.whl", hash = "sha256:f83fdc39ab0981a891011986393b59859257189559e0c0ef9c75ddb4f1c6a6b9", size = 388134, upload-time = "2025-10-14T03:01:42.554Z" },
+]
+
+[[package]]
+name = "odoo-addon-impersonate-login"
+version = "18.0.1.1.0.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "odoo" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d1/fd/721e7f4858b342a74f3bb56e2ed55b8df69a8f1500a2f4f4dea8f639a9b1/odoo_addon_impersonate_login-18.0.1.1.0.1-py3-none-any.whl", hash = "sha256:ed297ba38360422e338dbc4f5b68275db34957d4e97e0f893acec9df95d639d6", size = 38666, upload-time = "2026-02-19T04:06:28.324Z" },
 ]
 
 [[package]]

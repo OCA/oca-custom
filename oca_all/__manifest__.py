@@ -136,6 +136,7 @@
         "github_connector",
         "github_connector_odoo",
         "github_connector_oca",
+        "impersonate_login",
         "membership_delegated_partner_line",
         "membership_extension",
         "mis_builder",
