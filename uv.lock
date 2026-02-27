@@ -670,6 +670,7 @@ dependencies = [
     { name = "odoo-addon-project-task-add-very-high" },
     { name = "odoo-addon-report-xlsx" },
     { name = "odoo-addon-report-xlsx-helper" },
+    { name = "odoo-addon-sale-loyalty-partner-applicability" },
     { name = "odoo-addon-sentry" },
     { name = "odoo-addon-server-action-mass-edit" },
     { name = "odoo-addon-sql-request-abstract" },
@@ -792,6 +793,7 @@ requires-dist = [
     { name = "odoo-addon-project-task-add-very-high", specifier = "==18.0.*" },
     { name = "odoo-addon-report-xlsx", specifier = "==18.0.*" },
     { name = "odoo-addon-report-xlsx-helper", specifier = "==18.0.*" },
+    { name = "odoo-addon-sale-loyalty-partner-applicability", specifier = "==18.0.*" },
     { name = "odoo-addon-sentry", specifier = "==18.0.*" },
     { name = "odoo-addon-server-action-mass-edit", specifier = "==18.0.*" },
     { name = "odoo-addon-sql-request-abstract", specifier = "==18.0.*" },
@@ -1319,6 +1321,17 @@ wheels = [
 ]
 
 [[package]]
+name = "odoo-addon-loyalty-partner-applicability"
+version = "18.0.1.0.0.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "odoo" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/cc/d5/002827ed78d95c50d3c7a6bb4dd43086ab49280dc47fc0df3ac0ae5d3295/odoo_addon_loyalty_partner_applicability-18.0.1.0.0.2-py3-none-any.whl", hash = "sha256:a38204b0fd425a98afa262929d93ad826bb9c09c1a36bd8995cbe5637de5bb0b", size = 28517, upload-time = "2025-08-29T16:29:25.882Z" },
+]
+
+[[package]]
 name = "odoo-addon-membership-delegated-partner-line"
 version = "18.0.1.0.0.1"
 source = { git = "https://github.com/gfcapalbo/vertical-association?subdirectory=membership_delegated_partner_line&branch=18.0-MIG-membership_delegated_partner_line#602a37338fe362cfb86d84faa28d66dce1bc60e7" }
@@ -1475,6 +1488,18 @@ dependencies = [
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a6/61/1e7db868f1f129eaa7a9a16788a996c773da4b431839d0cf2150f9719cec/odoo_addon_report_xlsx_helper-18.0.1.0.0.4-py3-none-any.whl", hash = "sha256:4aee9069f5af10b88b379e01fb1470a3142925dc85c473cf2842f3707ec41e3c", size = 38847, upload-time = "2025-09-09T03:47:02.251Z" },
+]
+
+[[package]]
+name = "odoo-addon-sale-loyalty-partner-applicability"
+version = "18.0.1.0.0.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "odoo" },
+    { name = "odoo-addon-loyalty-partner-applicability" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/14/a3/c6f356c47f5af202abf958a5498f759c0f911a380d5ba5d286f2befbedd8/odoo_addon_sale_loyalty_partner_applicability-18.0.1.0.0.2-py3-none-any.whl", hash = "sha256:fccf0fd83885baeda3ebf5fb228bd738ece937454eecd6620c880e4e4fe17230", size = 28475, upload-time = "2025-09-05T06:26:28.674Z" },
 ]
 
 [[package]]
