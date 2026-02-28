@@ -1214,8 +1214,8 @@ wheels = [
 
 [[package]]
 name = "odoo-addon-crowdfunding"
-version = "18.0.1.0.0.5"
-source = { git = "https://github.com/hbrunn/crowdfunding?subdirectory=crowdfunding&branch=18.0-mig-crowdfunding#12ca7cee3fe947d871c7f1cb28de497b907f9c1b" }
+version = "18.0.1.0.0.6"
+source = { git = "https://github.com/hbrunn/crowdfunding?subdirectory=crowdfunding&branch=18.0-mig-crowdfunding#b300e33302f55324470859a168515104d1e79f12" }
 dependencies = [
     { name = "odoo" },
     { name = "odoo-addon-onchange-helper" },
@@ -1224,7 +1224,7 @@ dependencies = [
 [[package]]
 name = "odoo-addon-crowdfunding-public-pledge"
 version = "18.0.1.0.0.3"
-source = { git = "https://github.com/hbrunn/crowdfunding?subdirectory=crowdfunding_public_pledge&branch=18.0-mig-crowdfunding#12ca7cee3fe947d871c7f1cb28de497b907f9c1b" }
+source = { git = "https://github.com/hbrunn/crowdfunding?subdirectory=crowdfunding_public_pledge&branch=18.0-mig-crowdfunding#b300e33302f55324470859a168515104d1e79f12" }
 dependencies = [
     { name = "odoo" },
     { name = "odoo-addon-crowdfunding" },
