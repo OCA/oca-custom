@@ -15,7 +15,7 @@ MEMBER_STATES = {"paid"}
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    github_name = fields.Char(readonly=False)
+    github_name = fields.Char(readonly=False, copy=False)
 
     def _cfg_id(self, key: str) -> int | None:
         val = self.env["ir.config_parameter"].sudo().get_param(PARAM_PREFIX + key)
