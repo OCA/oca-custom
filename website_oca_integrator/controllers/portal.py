@@ -8,6 +8,18 @@ from odoo.addons.portal.controllers.portal import CustomerPortal
 
 
 class IntegratorPortal(CustomerPortal):
+    def _get_optional_fields(self):
+        fields = list(super()._get_optional_fields())
+        for f in [
+            "website_short_description",
+            "website_description",
+            "favourite_module_ids",
+            "github_organization",
+        ]:
+            if f not in fields:
+                fields.append(f)
+        return fields
+
     @route()
     def account(self, redirect=None, **post):
         if post:
