@@ -120,6 +120,7 @@
         "account_statement_import_base",
         "account_statement_import_file",
         "account_statement_import_file_reconcile_oca",
+        "account_statement_import_online_stripe",
         "account_statement_import_online_wise",
         "account_statement_import_online_paypal",
         "account_statement_import_sheet_file",

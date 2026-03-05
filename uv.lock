@@ -641,6 +641,7 @@ dependencies = [
     { name = "odoo-addon-account-statement-import-file" },
     { name = "odoo-addon-account-statement-import-file-reconcile-oca" },
     { name = "odoo-addon-account-statement-import-online-paypal" },
+    { name = "odoo-addon-account-statement-import-online-stripe" },
     { name = "odoo-addon-account-statement-import-online-wise" },
     { name = "odoo-addon-account-statement-import-sheet-file" },
     { name = "odoo-addon-account-tax-unece" },
@@ -771,6 +772,7 @@ requires-dist = [
     { name = "odoo-addon-account-statement-import-file", specifier = "==18.0.*" },
     { name = "odoo-addon-account-statement-import-file-reconcile-oca", specifier = "==18.0.*" },
     { name = "odoo-addon-account-statement-import-online-paypal", specifier = "==18.0.*" },
+    { name = "odoo-addon-account-statement-import-online-stripe", specifier = "==18.0.*" },
     { name = "odoo-addon-account-statement-import-online-wise", specifier = "==18.0.*" },
     { name = "odoo-addon-account-statement-import-sheet-file", specifier = "==18.0.*" },
     { name = "odoo-addon-account-tax-unece", specifier = "==18.0.*" },
@@ -1170,6 +1172,18 @@ dependencies = [
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/50/f6/fcce33781f7fb924584cc0b2107322a45a17db216afa5c363b673296b752/odoo_addon_account_statement_import_online_paypal-18.0.1.0.2-py3-none-any.whl", hash = "sha256:b53f8baae23caf8d52a01226bfe7c686eee2544c26988bc73b0f0b41144ec967", size = 50836, upload-time = "2025-10-07T13:56:22.993Z" },
+]
+
+[[package]]
+name = "odoo-addon-account-statement-import-online-stripe"
+version = "18.0.1.0.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "odoo" },
+    { name = "odoo-addon-account-statement-import-online" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/cd/b4/c4ba23c66d254e68d3caa713451c510e54c4ab0c60b072a63535903826c3/odoo_addon_account_statement_import_online_stripe-18.0.1.0.1-py3-none-any.whl", hash = "sha256:353442d30ac1996a1298435043facb838c1fc530a9b59dc37d1f550313d80204", size = 28299, upload-time = "2025-10-16T16:49:44Z" },
 ]
 
 [[package]]
