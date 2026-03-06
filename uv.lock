@@ -773,7 +773,7 @@ requires-dist = [
     { name = "odoo-addon-account-statement-import-file-reconcile-oca", specifier = "==18.0.*" },
     { name = "odoo-addon-account-statement-import-online-paypal", specifier = "==18.0.*" },
     { name = "odoo-addon-account-statement-import-online-stripe", specifier = "==18.0.*" },
-    { name = "odoo-addon-account-statement-import-online-wise", specifier = "==18.0.*" },
+    { name = "odoo-addon-account-statement-import-online-wise", git = "https://github.com/Therp/bank-statement-import?subdirectory=account_statement_import_online_wise&branch=18.0-fix-account-statement-import-online-wise" },
     { name = "odoo-addon-account-statement-import-sheet-file", specifier = "==18.0.*" },
     { name = "odoo-addon-account-tax-unece", specifier = "==18.0.*" },
     { name = "odoo-addon-account-usability", specifier = "==18.0.*" },
@@ -1188,16 +1188,13 @@ wheels = [
 
 [[package]]
 name = "odoo-addon-account-statement-import-online-wise"
-version = "18.0.1.1.0.1"
-source = { registry = "https://pypi.org/simple" }
+version = "18.0.1.1.0.2"
+source = { git = "https://github.com/Therp/bank-statement-import?subdirectory=account_statement_import_online_wise&branch=18.0-fix-account-statement-import-online-wise#73634e213411e620b277fc5761d8984f4aa18f44" }
 dependencies = [
     { name = "cryptography" },
     { name = "odoo" },
     { name = "odoo-addon-account-statement-import-online" },
     { name = "odoo-addon-web-widget-dropdown-dynamic" },
-]
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/b2/d0/8419f5f26783c2844a9f02a088b65a7e41f8adb3d577c7c02646dff3dc7a/odoo_addon_account_statement_import_online_wise-18.0.1.1.0.1-py3-none-any.whl", hash = "sha256:5c1787f78389b7b7adbb7800b3396c649740575b53f0d2705a454269f5097df3", size = 38124, upload-time = "2026-03-03T02:44:46.945Z" },
 ]
 
 [[package]]

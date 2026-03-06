@@ -6,3 +6,4 @@ odoo-addon-github_connector_oca @ git+https://github.com/Therp/interface-github.
 odoo-addon-apps_product_creator @ git+https://github.com/Therp/apps-store.git@18.0-mig-apps_product_creator#subdirectory=apps_product_creator
 odoo-addon-crowdfunding @ git+https://github.com/hbrunn/crowdfunding.git@18.0-mig-crowdfunding#subdirectory=crowdfunding
 odoo-addon-crowdfunding_public_pledge @ git+https://github.com/hbrunn/crowdfunding.git@18.0-mig-crowdfunding#subdirectory=crowdfunding_public_pledge
+odoo-addon-account_statement_import_online_wise @ git+https://github.com/Therp/bank-statement-import@18.0-fix-account-statement-import-online-wise#subdirectory=account_statement_import_online_wise
