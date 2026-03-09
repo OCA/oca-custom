@@ -1,0 +1,1 @@
+from . import vcp_odoo_module_version_serializer

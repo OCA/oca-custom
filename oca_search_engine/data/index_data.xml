@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="oca_typesense_index_module" model="se.index">
+        <field name="backend_id" ref="oca_typesense_backend" />
+        <field name="name">oca_typesense_backend</field>
+        <field name="lang_id" ref="base.lang_en" />
+        <field name="model_id" ref="vcp_odoo.model_vcp_odoo_module_version" />
+        <field name="serializer_type">vcp_odoo_module_version_exports</field>
+    </record>
+</odoo>
