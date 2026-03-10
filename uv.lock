@@ -1185,7 +1185,7 @@ wheels = [
 [[package]]
 name = "odoo-addon-account-statement-import-online-wise"
 version = "18.0.1.1.0.2"
-source = { git = "https://github.com/Therp/bank-statement-import?subdirectory=account_statement_import_online_wise&branch=18.0-fix-account-statement-import-online-wise#73634e213411e620b277fc5761d8984f4aa18f44" }
+source = { git = "https://github.com/Therp/bank-statement-import?subdirectory=account_statement_import_online_wise&branch=18.0-fix-account-statement-import-online-wise#f0d25570d55934eaa2eedddedbd9f1629ecc87c0" }
 dependencies = [
     { name = "cryptography" },
     { name = "odoo" },
