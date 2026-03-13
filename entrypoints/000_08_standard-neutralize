@@ -31,11 +31,11 @@ def main(env):
             "RUNNING_ENV is not defined, please set a RUNNING_ENV and try again"
         )
         sys.exit(1)
-    if running_env == "prod":
+    if running_env == "prod" or "prod" in env.registry.db_name:
         _logger.info("%s database, no need to neutralize...", running_env)
         sys.exit(0)
-    _logger.info("Neutralization would run")
-    # neutralize_db(env)
+
+    neutralize_db(env)
 
 
 if __name__ == "__main__":
