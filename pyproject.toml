@@ -100,8 +100,9 @@ dev = [
 
 
 [tool.uv.sources]
-# Use fix updating account move line update membership line
-odoo = { git = "https://github.com/OCA/OCB", rev = "refs/pull/1319/head" }
+# Include odoo patch for updating account move line update membership line
+# Include odoo patch for providing the right unsubscribe link in mail group mails
+odoo = { git = "https://github.com/Therp/OCB.git", rev = "refs/pull/2/head" }
 odoo-addon-apps_product_creator = { git = "https://github.com/Therp/apps-store",branch = "18.0-mig-apps_product_creator",subdirectory = "apps_product_creator"}
 
 # Unreleased addon sources (git), handled via uv.sources (NOT requirements/test-requirements)

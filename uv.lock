@@ -755,7 +755,7 @@ requires-dist = [
     { name = "lxml-html-clean" },
     { name = "markupsafe", specifier = "==2.1.5" },
     { name = "num2words", specifier = "==0.5.13" },
-    { name = "odoo", git = "https://github.com/OCA/OCB?rev=refs%2Fpull%2F1319%2Fhead" },
+    { name = "odoo", git = "https://github.com/Therp/OCB.git?rev=refs%2Fpull%2F2%2Fhead" },
     { name = "odoo-addon-account-banking-pain-base", git = "https://github.com/Therp/bank-payment?subdirectory=account_banking_pain_base&branch=18.0-mig-account_banking_pain_base_sepa_hybrid_extended_for_09" },
     { name = "odoo-addon-account-banking-sepa-credit-transfer", git = "https://github.com/Therp/bank-payment?subdirectory=account_banking_sepa_credit_transfer&branch=18.0-mig-account_banking_pain_base_sepa_hybrid_extended_for_09" },
     { name = "odoo-addon-account-credit-control", specifier = "==18.0.*" },
@@ -868,7 +868,7 @@ dev = [
 [[package]]
 name = "odoo"
 version = "18.0"
-source = { git = "https://github.com/OCA/OCB?rev=refs%2Fpull%2F1319%2Fhead#084e0f6e7417033b633370255a441cb267943fe9" }
+source = { git = "https://github.com/Therp/OCB.git?rev=refs%2Fpull%2F2%2Fhead#a709d930ca83735db81025175e378530e9549116" }
 dependencies = [
     { name = "asn1crypto" },
     { name = "babel" },
