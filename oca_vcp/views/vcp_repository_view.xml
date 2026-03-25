@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="vcp_repository_form_view" model="ir.ui.view">
+        <field name="model">vcp.repository</field>
+        <field name="inherit_id" ref="vcp_management.vcp_repository_form_view" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="category_id" />
+            </field>
+        </field>
+    </record>
+
+    <record id="vcp_repository_search_view" model="ir.ui.view">
+        <field name="model">vcp.repository</field>
+        <field name="inherit_id" ref="vcp_management.vcp_repository_search_view" />
+        <field name="arch" type="xml">
+            <filter name="filter_not_active" position="after">
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Category"
+                        name="category"
+                        domain="[]"
+                        context="{'group_by': 'category_id'}"
+                    />
+                </group>
+            </filter>
+        </field>
+    </record>
+</odoo>

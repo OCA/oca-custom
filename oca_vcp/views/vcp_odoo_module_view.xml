@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="vcp_odoo_module_view_form" model="ir.ui.view">
+        <field name="model">vcp.odoo.module</field>
+        <field name="inherit_id" ref="vcp_odoo.vcp_odoo_module_form_view" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="must_have" />
+            </field>
+        </field>
+    </record>
+</odoo>

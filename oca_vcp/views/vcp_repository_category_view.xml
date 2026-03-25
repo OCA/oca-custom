@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="vcp_repository_category_view_list" model="ir.ui.view">
+        <field name="model">vcp.repository.category</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+            </list>
+        </field>
+    </record>
+
+    <record id="vcp_repository_category_view_form" model="ir.ui.view">
+        <field name="model">vcp.repository.category</field>
+        <field name="arch" type="xml">
+            <form>
+                <header />
+                <sheet>
+                    <field name="name" />
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="vcp_repository_category_view_search" model="ir.ui.view">
+        <field name="model">vcp.repository.category</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="vcp_repository_category_action">
+        <field name="name">Label</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">vcp.repository.category</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="vcp_repository_category_view_search" />
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem
+        id="vcp_repository_category_menu"
+        parent="vcp_management.vcp_settings_menu"
+        sequence="40"
+        action="vcp_repository_category_action"
+    />
+</odoo>

@@ -16,6 +16,7 @@ RUN set -e \
        # github_connector* Odoo modules
        cloc \
        git \
+       pandoc \
   && apt -y clean \
   && rm -rf /var/lib/apt/lists/*
 
