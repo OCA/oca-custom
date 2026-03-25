@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 AKRETION
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <data noupdate="1">
+        <record id="mail_activity_review_sponsor_oca" model="mail.activity.type">
+            <field name="name">Review sponsor website information</field>
+            <field name="icon">fa-check</field>
+            <field name="res_model">res.partner</field>
+        </record>
+    </data>
+</odoo>

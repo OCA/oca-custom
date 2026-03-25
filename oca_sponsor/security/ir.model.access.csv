@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sponsorship_line_user,sponsorship.line.user,model_sponsorship_line,base.group_user,1,0,0,0
+access_sponsorship_line_portal,sponsorship.line.portal,model_sponsorship_line,base.group_portal,1,0,0,0
+access_sponsorship_line_public,sponsorship.line.public,model_sponsorship_line,base.group_public,1,0,0,0
+access_sponsorship_line_manager_contact,sponsorship.line.manager.contact,model_sponsorship_line,base.group_partner_manager,1,1,1,1
+access_sponsorship_line_manager_membership,sponsorship.line.manager.membership,model_sponsorship_line,membership_extension.group_membership_manager,1,1,1,1
+access_res_partner_grade_user,res.partner.grade,model_res_partner_grade,base.group_user,1,0,0,0
+access_res_partner_grade_portal,res.partner.grade,model_res_partner_grade,base.group_portal,1,0,0,0
+access_res_partner_grade_public,res.partner.grade,model_res_partner_grade,base.group_public,1,0,0,0
+access_res_partner_grade_manager_contact,res.partner.grade.manager.contact,model_res_partner_grade,base.group_partner_manager,1,1,1,1
+access_res_partner_grade_manager_membership,res.partner.grade.manager.membership,model_res_partner_grade,membership_extension.group_membership_manager,1,1,1,1

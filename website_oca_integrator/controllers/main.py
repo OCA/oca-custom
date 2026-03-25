@@ -203,9 +203,9 @@ class WebsiteIntegrator(http.Controller):
 
                 references = self.get_integrator_references(integrator)
 
-                sponsorship_lines = integrator.sponsorship_line_ids.sorted(
-                    key=lambda r: r.date_end, reverse=True
-                )[:5]
+                # sponsorship_lines = integrator.sponsorship_line_ids.sorted(
+                #     key=lambda r: r.date_end, reverse=True
+                # )[:5]
 
                 display_all_modules = True if developed_module_count > 5 else False
 
@@ -215,7 +215,7 @@ class WebsiteIntegrator(http.Controller):
                     "current_country": current_country,
                     "references": references,
                     "modules_list": modules_list,
-                    "sponsorship_lines": sponsorship_lines,
+                    # "sponsorship_lines": sponsorship_lines,
                     "display_all_modules": display_all_modules,
                 }
                 return request.render("website_oca_integrator.integrators", values)

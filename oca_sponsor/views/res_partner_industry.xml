@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 AKRETION
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <!-- res.partner.industry: Form -->
+    <record id="res_partner_industry_view_form" model="ir.ui.view">
+        <field name="name">res.partner.industry.form.oca_sponsor</field>
+        <field name="model">res.partner.industry</field>
+        <field name="inherit_id" ref="base.res_partner_industry_view_form" />
+        
+        <field name="arch" type="xml">
+            <group position="inside">
+                <field name="description" />
+            </group>
+        </field>
+    </record>
+    
+    <!-- res.partner.industry: List -->
+    <record id="res_partner_industry_view_tree" model="ir.ui.view">
+        <field name="name">res.partner.industry.list.oca_sponsor</field>
+        <field name="model">res.partner.industry</field>
+        <field name="inherit_id" ref="base.res_partner_industry_view_tree" />
+
+        <field name="arch" type="xml">
+            <!-- And add sequence -->
+            <field name="name" position="before">
+                <field name="sequence" widget="handle" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -58,25 +58,4 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             </data>
         </field>
     </record>
-    <!-- Add Sponsorship tab -->
-    <record id="view_crm_partner_geo_form_inherit" model="ir.ui.view">
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base_geolocalize.view_crm_partner_geo_form" />
-        <field name="arch" type="xml">
-            <page name="geo_location" position="after">
-                <page name="sponsorship" string="Sponsorship">
-                    <group>
-                        <field name="sponsorship_line_ids">
-                            <list editable="bottom">
-                                <field name="date_from" />
-                                <field name="date_end" />
-                                <field name="grade_id" />
-                                <field name="sponsorship_id" />
-                            </list>
-                        </field>
-                    </group>
-                </page>
-            </page>
-        </field>
-    </record>
 </odoo>

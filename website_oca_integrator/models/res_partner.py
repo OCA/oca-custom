@@ -71,12 +71,6 @@ class ResPartner(models.Model):
         readonly=True,
     )
 
-    sponsorship_line_ids = fields.One2many(
-        string="Sponsorship Activities",
-        comodel_name="sponsorship.line",
-        inverse_name="partner_id",
-    )
-
     contributor_module_line_ids = fields.One2many(
         string="Contributed Modules",
         comodel_name="contributor.module.line",
