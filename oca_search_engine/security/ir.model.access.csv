@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_vcp_oca_psc,vcp.oca.psc.user,model_vcp_oca_psc,vcp_management.group_vcp_user,1,1,1,1

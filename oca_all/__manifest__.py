@@ -172,8 +172,14 @@
         "web_refresher",
         "web_search_with_and",
         "web_widget_dropdown_dynamic",
-        "website_oca_integrator",
         "website_sale_hide_empty_category",
+        # Custom
+        "oca_custom",
+        "oca_membership",
+        "oca_search_engine",
+        "oca_sponsor",
+        "oca_website",
+        "website_oca_integrator",
         "website_sale_oca_apps",
         # OCA CUSTOM
         "oca_website",

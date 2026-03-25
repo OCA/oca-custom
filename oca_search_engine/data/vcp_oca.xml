@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 AKRETION
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="vcp_platform_oca" model="vcp.platform">
+        <field name="name">OCA</field>
+        <field name="host_id" ref="vcp_github.vcp_github_host" />
+        <field name="scheduled_information_update" eval="True" />
+    </record>
+    <record id="vcp_repository_repo_oca_maintainer_conf" model="vcp.repository">
+        <field name="name">repo-maintainer-conf</field>
+        <field name="platform_id" ref="oca_search_engine.vcp_platform_oca" />
+        <field name="from_date" eval="DateTime.today()" />
+    </record>
+    <record id="vcp_branch_master" model="vcp.branch">
+        <field name="name">master</field>
+        <field name="platform_id" ref="oca_search_engine.vcp_platform_oca" />
+    </record>
+
+    <record id="vcp_rule_oca_psc_update" model="vcp.rule">
+        <field name="name">Update PSC list &amp; members (OCA)</field>
+        <field name="rule_type">oca_psc_update</field>
+        <field name="branch_pattern">master</field>
+        <field name="paths">
+/conf/psc/*.yml
+/conf/repo/*.yml
+</field>
+    </record>
+    <record id="vcp_branch_repo_oca_maintainer_conf_master" model="vcp.repository.branch">
+        <field name="repository_id" ref="vcp_repository_repo_oca_maintainer_conf" />
+        <field name="branch_id" ref="vcp_branch_master" />
+        <field name="rule_ids" eval="[(4, ref('oca_search_engine.vcp_rule_oca_psc_update'))]" />
+    </record>
+</odoo>

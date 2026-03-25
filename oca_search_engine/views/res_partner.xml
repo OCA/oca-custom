@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 AKRETION
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <!-- res.partner: Search -->
+    <record id="view_res_partner_filter" model="ir.ui.view">
+        <field name="name">res.partner.select.oca_search_engine</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+
+        <field name="arch" type="xml">
+            <separator name="membership" position="after">
+                <filter string="Published" name="is_published" domain="[
+                    ('can_be_published', '=', True), ('is_published', '=', True)
+                ]" />
+                <filter string="Integrator" name="is_integrator" domain="[('is_integrator', '=', True)]" />
+            </separator>
+        </field>
+    </record>
+
+    <!-- res.partner: Form : add "is_published" toggle -->
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form.oca_search_engine</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        
+        <field name="arch" type="xml">
+            <field name="category_id" position="after">
+                <field name="is_published" widget="boolean_toggle" invisible="not can_be_published" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

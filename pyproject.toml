@@ -118,12 +118,14 @@ odoo-addon-vcp-github = { git = "https://github.com/dixmit/version-control-platf
 odoo-addon-vcp-odoo = { git = "https://github.com/dixmit/version-control-platform", branch="18.0-add-vcp", subdirectory="vcp_odoo" }
 odoo-addon-vcp-git = { git = "https://github.com/dixmit/version-control-platform", branch="18.0-add-vcp", subdirectory="vcp_git" }
 
-# VCP module mode dev
+odoo-addon-base-url = { git = "https://github.com/akretion/server-tools", branch="18.0-add-url-2", subdirectory="base_url" }
+
+# VCP + base_url module mode dev
 #odoo-addon-vcp-management = { path = "/external-src/version-control-platform/vcp_management", editable = true }
 #odoo-addon-vcp-github = { path = "/external-src/version-control-platform/vcp_github", editable = true }
 #odoo-addon-vcp-git = { path = "/external-src/version-control-platform/vcp_git", editable = true }
 #odoo-addon-vcp-odoo = { path = "/external-src/version-control-platform/vcp_odoo", editable = true }
-
+#odoo-addon-base-url = { path = "/external-src/server-tools/base_url", editable = true }
 
 
 # Example to develop module from another repository in editable mode

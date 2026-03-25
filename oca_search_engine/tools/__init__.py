@@ -1,1 +1,3 @@
-from . import vcp_odoo_module_version_serializer
+from .vcp_odoo_module_version_serializer import VcpOdooModuleVersionSerializer
+from .res_partner_serializer import CompanySerializer, PersonSerializer
+from .vcp_psc_team_serializer import PscSerializer

@@ -62,7 +62,7 @@
                     name="action_open_blog_post"
                     icon="fa-globe"
                 >
-                    <field name="blog_post_count" string="Blog posts" widget="statinfo"/>
+                    <field name="blog_post_count" string="Blog posts" widget="statinfo" />
                 </button>
             </div>
 

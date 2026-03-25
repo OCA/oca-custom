@@ -23,14 +23,27 @@
         "oca_vcp",
         "connector_typesense",
         "search_engine_serializer_pydantic",
+        # custom
+        "oca_sponsor",
+        "oca_membership",
+        "website_oca_integrator",
         # following dependency are needed by uv to resolve the dep
         # correctly as module are not merged
         "vcp_management",
         "vcp_git",
+        "shopinvader_base_url", # TODO: switch to 'base_url' @arnaudlayec @sebastienbeau
     ],
     "data": [
+        # data
         "data/backend_data.xml",
         "data/index_data.xml",
+        "data/membership_category_data.xml",
+        "data/vcp_oca.xml",
+        # security
+        "security/ir.model.access.csv",
+        # views
+        "views/res_partner.xml",
     ],
     "demo": [],
+    "post_init_hook": "post_init_hook",
 }

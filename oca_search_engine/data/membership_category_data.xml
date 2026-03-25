@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 AKRETION
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="membership_category_contributor_oca" model="membership.membership_category">
+        <!-- Fake 'Contributor' category to be display on website page -->
+        <field name="name">Contributor</field>
+        <field name="sequence">15</field>
+        <field name="implied_ids" eval="[(4, ref('membership_extension.membership_category_member'))]"/>
+    </record>
+</odoo>
