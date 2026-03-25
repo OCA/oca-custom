@@ -78,7 +78,6 @@ dependencies = [
   "PyGithub<2.0.0",
   "click-odoo-contrib",
   "openupgradelib",
-
 ]
 addons_dirs = ["./"]
 
@@ -96,6 +95,7 @@ dev = [
   "manifestoo>=1.0",
   "odoo-test-helper",
   "websocket-client",
+  "vcrpy-unittest",
 ]
 
 
@@ -111,6 +111,20 @@ odoo-addon-github_connector_oca = { git = "https://github.com/Therp/interface-gi
 odoo-addon-account_statement_import_online_wise = { git = "https://github.com/Therp/bank-statement-import", branch="18.0-fix-account-statement-import-online-wise", subdirectory = "account_statement_import_online_wise" }
 odoo-addon-account_banking_pain_base = { git = "https://github.com/Therp/bank-payment", branch = "18.0-mig-account_banking_pain_base_sepa_hybrid_extended_for_09", subdirectory = "account_banking_pain_base" }
 odoo-addon-account_banking_sepa_credit_transfer = { git = "https://github.com/Therp/bank-payment", branch = "18.0-mig-account_banking_pain_base_sepa_hybrid_extended_for_09", subdirectory = "account_banking_sepa_credit_transfer" }
+
+# VCP module
+odoo-addon-vcp-management = { git = "https://github.com/dixmit/version-control-platform", branch="18.0-add-vcp", subdirectory="vcp_management" }
+odoo-addon-vcp-github = { git = "https://github.com/dixmit/version-control-platform", branch="18.0-add-vcp", subdirectory="vcp_github" }
+odoo-addon-vcp-odoo = { git = "https://github.com/dixmit/version-control-platform", branch="18.0-add-vcp", subdirectory="vcp_odoo" }
+odoo-addon-vcp-git = { git = "https://github.com/dixmit/version-control-platform", branch="18.0-add-vcp", subdirectory="vcp_git" }
+
+# VCP module mode dev
+#odoo-addon-vcp-management = { path = "/external-src/version-control-platform/vcp_management", editable = true }
+#odoo-addon-vcp-github = { path = "/external-src/version-control-platform/vcp_github", editable = true }
+#odoo-addon-vcp-git = { path = "/external-src/version-control-platform/vcp_git", editable = true }
+#odoo-addon-vcp-odoo = { path = "/external-src/version-control-platform/vcp_odoo", editable = true }
+
+
 
 # Example to develop module from another repository in editable mode
 # odoo-addon-membership-delegated-partner-line = { path = "src/vertical-association/setup/membership_delegated_partner_line", editable = true }
