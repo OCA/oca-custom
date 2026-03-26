@@ -50,9 +50,8 @@ RUN set -e \
 # but not the project
 ARG DISTRO
 RUN --mount=type=cache,target=/root/.cache/uv,id=uv-${DISTRO} \
-    --mount=type=bind,source=uv.lock,target=uv.lock \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
-    uv sync --frozen --no-install-project
+    uv sync --no-install-project
 
 ###############################################################
 # In this runtime stage, we install the app in editable mode,
@@ -69,6 +68,6 @@ WORKDIR /app
 RUN python -m compileall .
 ARG DISTRO
 RUN --mount=type=cache,target=/root/.cache/uv,id=uv-${DISTRO} \
-    uv sync --locked --no-dev
+    uv sync --no-dev
 
 COPY entrypoints/* /odoo/start-entrypoint.d/
