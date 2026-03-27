@@ -15,6 +15,7 @@
         # Odoo
         "account",
         "account_payment",
+        "account_payment_method_base_mode",
         "analytic",
         "attachment_indexation",
         "auth_oauth",

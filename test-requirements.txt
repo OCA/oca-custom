@@ -9,3 +9,4 @@ odoo-addon-crowdfunding_public_pledge @ git+https://github.com/hbrunn/crowdfundi
 odoo-addon-account_statement_import_online_wise @ git+https://github.com/Therp/bank-statement-import@18.0-fix-account-statement-import-online-wise#subdirectory=account_statement_import_online_wise
 odoo-addon-account_banking_pain_base @ git+https://github.com/Therp/bank-payment.git@18.0-mig-account_banking_pain_base_sepa_hybrid_extended_for_09#subdirectory=account_banking_pain_base
 odoo-addon-account_banking_sepa_credit_transfer @ git+https://github.com/Therp/bank-payment.git@18.0-mig-account_banking_pain_base_sepa_hybrid_extended_for_09#subdirectory=account_banking_sepa_credit_transfer
+odoo-addon-account_payment_method_base_mode @ git+https://github.com/Therp/bank-payment.git@18.0-add-account_payment_method_base_mode#subdirectory=account_payment_method_base_mode

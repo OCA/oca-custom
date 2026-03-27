@@ -630,6 +630,7 @@ dependencies = [
     { name = "odoo-addon-account-financial-report" },
     { name = "odoo-addon-account-invoice-overdue-reminder" },
     { name = "odoo-addon-account-lock-to-date" },
+    { name = "odoo-addon-account-payment-method-base-mode" },
     { name = "odoo-addon-account-payment-mode" },
     { name = "odoo-addon-account-payment-order" },
     { name = "odoo-addon-account-payment-partner" },
@@ -762,6 +763,7 @@ requires-dist = [
     { name = "odoo-addon-account-financial-report", specifier = "==18.0.*" },
     { name = "odoo-addon-account-invoice-overdue-reminder", specifier = "==18.0.*" },
     { name = "odoo-addon-account-lock-to-date", specifier = "==18.0.*" },
+    { name = "odoo-addon-account-payment-method-base-mode", git = "https://github.com/Therp/bank-payment?subdirectory=account_payment_method_base_mode&branch=18.0-add-account_payment_method_base_mode" },
     { name = "odoo-addon-account-payment-mode", specifier = "==18.0.*" },
     { name = "odoo-addon-account-payment-order", specifier = "==18.0.*" },
     { name = "odoo-addon-account-payment-partner", specifier = "==18.0.*" },
@@ -988,6 +990,16 @@ dependencies = [
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/8b/90/6bd94d2cf8a42b09c4c38bf51fc3546b52c0e0c33c1b47f9e63e5abcd859/odoo_addon_account_payment_method_base-18.0.1.0.0.7-py3-none-any.whl", hash = "sha256:6cf8a189f564978bbc50d154659ae779c380438a5ada46e2fc9189181bb2e895", size = 25486, upload-time = "2025-06-25T02:38:00.988Z" },
+]
+
+[[package]]
+name = "odoo-addon-account-payment-method-base-mode"
+version = "18.0.1.0.0"
+source = { git = "https://github.com/Therp/bank-payment?subdirectory=account_payment_method_base_mode&branch=18.0-add-account_payment_method_base_mode#3af732e133fe923ed4ec767e24f057491a059bb8" }
+dependencies = [
+    { name = "odoo" },
+    { name = "odoo-addon-account-payment-method-base" },
+    { name = "odoo-addon-account-payment-mode" },
 ]
 
 [[package]]
