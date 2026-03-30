@@ -7,11 +7,11 @@ from extendable_pydantic import StrictExtendableBaseModel
 
 
 class VcpRepositoryCategory(StrictExtendableBaseModel):
-
     name: str
+    url_key: str
 
     @classmethod
     def from_record(cls, odoo_rec):
         return cls.model_construct(
-            name=odoo_rec.name,
+            name=odoo_rec.name, url_key=odoo_rec.env["ir.http"]._slugify(odoo_rec.name)
         )

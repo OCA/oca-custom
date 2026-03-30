@@ -4,9 +4,13 @@
 
 
 from extendable_pydantic import StrictExtendableBaseModel
+
+from .vcp_odoo_author import VcpOdooAuthor
+from .vcp_odoo_maintainer import VcpOdooMaintainer
 from .vcp_repository import VcpRepository
 
 # Gestion des redirections !
+
 
 class VcpOdooModuleVersion(StrictExtendableBaseModel):
     id: int
@@ -15,17 +19,15 @@ class VcpOdooModuleVersion(StrictExtendableBaseModel):
     repo: VcpRepository
     version: str
     serie: str
-    dependencies: list # des url key
+    dependencies: list
     license: str
     summary: str
-    maturity: str
-    #    authors: list (Author) # TODO uniquement une liste de nom en V1
+    development_status: str
+    authors: list[VcpOdooAuthor]
     github_url: str
     runboat_url: str
     readme_fragments: list
-    #    contributors: list (liste de membre) [name, email, société)
-    #                  on va extraire le readme de Contributors pour le structurer
-    #    maintainers: list (liste de membre)
+    maintainers: list[VcpOdooMaintainer]
     icon_url: str
     must_have: bool
 
@@ -35,7 +37,7 @@ class VcpOdooModuleVersion(StrictExtendableBaseModel):
             "https://runboat.odoo-community.org/webui/builds.html?"
             f"repo=OCA/{odoo_rec.repository_branch_id.repository_id.name}"
             f"&target_branch={odoo_rec.repository_branch_id.branch_id.name}"
-            )
+        )
 
     @classmethod
     def from_record(cls, odoo_rec):
@@ -48,10 +50,18 @@ class VcpOdooModuleVersion(StrictExtendableBaseModel):
             version=odoo_rec.version,
             license=odoo_rec.license,
             summary=odoo_rec.summary,
-            #maturity=odoo_rec.maturity,
+            development_status=odoo_rec.development_status,
+            authors=[
+                VcpOdooAuthor.from_record(author)
+                for author in odoo_rec.author_ids
+                if author.name != "Odoo Community Association (OCA)"
+            ],
             github_url=odoo_rec.website,
             runboat_url=cls._get_runboat_url(odoo_rec),
             readme_fragments=odoo_rec.readme_fragments,
+            maintainers=[
+                VcpOdooMaintainer.from_record(user) for user in odoo_rec.maintainer_ids
+            ],
             dependencies=odoo_rec.depends_on_module_ids.mapped("name"),
             icon_url=odoo_rec.icon_url,
             must_have=odoo_rec.module_id.must_have,

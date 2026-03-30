@@ -2,23 +2,20 @@
 # @author Sébastien BEAU <sebastien.beau@akretion.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-
 from extendable_pydantic import StrictExtendableBaseModel
 
-from .vcp_repository_category import VcpRepositoryCategory
 
-
-class VcpRepository(StrictExtendableBaseModel):
+class VcpOdooAuthor(StrictExtendableBaseModel):
     name: str
-    url: str
-    description: str
-    category: VcpRepositoryCategory
+    url_key: str
 
     @classmethod
     def from_record(cls, odoo_rec):
         return cls.model_construct(
             name=odoo_rec.name,
-            description=odoo_rec.description,
-            url=odoo_rec._get_repository_url(),
-            category=VcpRepositoryCategory.from_record(odoo_rec.category_id),
+            url_key=(
+                odoo_rec.partner_id.website_published
+                and odoo_rec.env["ir.http"]._slugify(odoo_rec.partner_id.name)
+            )
+            or "",
         )

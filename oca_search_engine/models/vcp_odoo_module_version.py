@@ -22,4 +22,3 @@ class VcpOdooModuleVersion(models.Model):
     def write(self, vals):
         self._se_mark_to_update()
         return super().write(vals)
-
