@@ -12,20 +12,23 @@
     "license": "AGPL-3",
     "category": "Custom",
     "depends": [
-        "membership_extension", # for security group
+        "mail_activity_team", # for sponsor review process
         "website_blog",
     ],
     "data": [
-        # security
+        "data/mail_activity_team.xml",
         "security/ir.model.access.csv",
-        # data
-        "data/mail_activity_data.xml",
-        # views
         "views/blog_post.xml",
+        "views/mail_activity.xml",
         "views/res_partner_industry.xml",
         "views/res_partner.xml",
         "views/sponsorship_line.xml",
     ],
+    'assets': {
+        'web.assets_backend': [
+            'oca_sponsor/static/src/**/*',
+        ]
+    },
     "installable": True,
     "application": False,
     "development_status": "Alpha",

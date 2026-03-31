@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 AKRETION
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <!-- Activities: always show both user's and team's -->
+    <record id="mail_activity_view_search" model="ir.ui.view">
+        <field name="name">mail.activity.view.search.oca_sponsor</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail.mail_activity_view_search" />
+        
+        <field name="arch" type="xml">
+            <filter name="filter_user_id_uid" position="attributes">
+                <attribute name="domain">[
+                    '|', ('user_id', '=', uid), ('team_id.member_ids', '=', uid)
+                ]</attribute>
+            </filter>
+        </field>
+    </record>
+
+</odoo>

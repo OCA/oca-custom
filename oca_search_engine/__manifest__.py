@@ -36,7 +36,6 @@
     "data": [
         "data/backend_data.xml",
         "data/index_data.xml",
-        "data/membership_category_data.xml",
         "views/res_partner.xml",
     ],
     "demo": [],

@@ -9,7 +9,6 @@ class MembershipCategory(models.Model):
     _order = "sequence"
 
     sequence = fields.Integer("Sequence")
-    active = fields.Boolean("Active", default=True)
     implied_ids = fields.Many2many(
         string="Implied roles",
         comodel_name="membership.membership_category",
@@ -18,6 +17,3 @@ class MembershipCategory(models.Model):
         column2="implied_category_id",
         help="Implied roles by this one",
     )
-
-    def _get_with_implied(self):
-        return self + self.implied_ids

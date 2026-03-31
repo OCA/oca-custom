@@ -9,5 +9,5 @@ class MailGroup(models.Model):
     is_working_group = fields.Boolean(
         string="Is a Working Group",
         default=False,
-        help="Working Group are visible on the website page, on member profile.",
+        help="Working Group are visible on the website page, on members profile.",
     )

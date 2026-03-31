@@ -131,7 +131,7 @@ class Person(PersonBase):
 
     @classmethod
     def _get_roles(cls, record):
-        categories = record.membership_category_id._get_with_implied()
+        roles = record.membership_category_ids.sorted("sequence", reverse=True).read(["name"])
         if False and record.contributor_count: # TODO review with @sebastienbeau correct field name?
-            categories |= record.env.ref("oca_search_engine.membership_category_contributor_oca")
-        return categories.sorted("sequence", reverse=True).read(["name"])
+            roles.append({"id": -1, "name": _("Contributor")})
+        return roles

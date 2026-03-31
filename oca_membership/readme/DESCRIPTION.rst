@@ -7,7 +7,8 @@ This module adds several independant features.
   be updated by the association' secretary when members roles change,
   like on election, before the memberships are renewed.
 
-- **Communities (Mailing List & Working Group)**
-  New menu "Communities" in *Membership* app to manage the Mailing List and
-  Working Group (underlying feature: Mail Groups).
-  Contacts may are added to Mail Groups through their Tags.
+- **Working Group**
+  New menu "Working Group" in *Membership* app. They are native Odoo objects
+  *Mail Groups* `mail.group` with custom boolean *Is a Working Group* enabled.
+  When creating a *Mail Group*, create a *Partner Tag* with the same name. Then,
+  to add Members to a *Mail Group*, add the same tag to them.

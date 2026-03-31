@@ -6,12 +6,12 @@ from odoo import fields, models
 class ResPartnerGrade(models.Model):
     """Reproduce original data model of 'website_crm_partner_assign',
     but only for membership (grade) and without the CRM part, to free
-    this dependency (+ to `base_geolocalize`).
+    this weird dependency (e.g. it implies `base_geolocalize` & other non-wanted modules).
     
     We don't re-define the list/form/search ir.ui.view to avoid conflict
     with native module, in case it is installed in parallel.
     
-    *ALTERNATIVE*: create a `membership.sponsorship.category` with a migration
+    *ALTERNATIVE*: we could create a `membership.sponsorship.category` with a migration
     script copying data from `res.partner.grade`
     """
 
@@ -22,3 +22,5 @@ class ResPartnerGrade(models.Model):
     sequence = fields.Integer("Sequence")
     active = fields.Boolean("Active", default=True)
     name = fields.Char("Level Name", translate=True)
+    partner_weight = fields.Integer('Level Weight', default=1,
+        help="Gives the probability to assign a lead to this partner. (0 means no assignment.)")

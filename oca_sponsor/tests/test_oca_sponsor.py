@@ -22,9 +22,8 @@ class TestOcaSponsor(TransactionCase):
         ])
 
         # Users & partners
-        cls.group_manager = "membership_extension.group_membership_manager"
-        cls.manager = new_test_user(cls.env, "manager", groups="base.group_user," + cls.group_manager)
-        cls.manager2 = new_test_user(cls.env, "manager2", groups="base.group_user," + cls.group_manager)
+        cls.manager = new_test_user(cls.env, "manager", groups="base.group_user")
+        cls.env.ref("oca_sponsor.mail_activity_team_sponsor_reviewers").member_ids |= cls.manager
         cls.portal_user = new_test_user(cls.env, "sponsor", groups="base.group_portal")
         cls.sponsor = cls.portal_user.partner_id
         cls.sponsor.write({
@@ -33,7 +32,7 @@ class TestOcaSponsor(TransactionCase):
         })
 
 
-    def test_is_sponsor(self):
+    def test_is_sponsor_search(self):
         self.assertTrue(self.sponsor.is_sponsor)
         self.assertIn(
             self.sponsor,
@@ -56,24 +55,14 @@ class TestOcaSponsor(TransactionCase):
 
     @users("sponsor")
     def test_industry_id_to_ids(self):
-        """Ensure `industry_id` is synced in `industry_ids`"""
+        """Ensure `industry_id` is synced in `industry_ids` (same than country)"""
         self.sponsor.sponsor_industry_ids = False
         self.sponsor.industry_id = self.industry_a
         self.assertEqual(self.sponsor.sponsor_industry_ids, self.industry_a)
 
-    def test_industry_ids_to_id(self):
-        """Ensure `industry_id` is defined (if empty) from `industry_ids`"""
-        self.sponsor.industry_id = False
-        self.sponsor.sponsor_industry_ids = self.industry_a
-        self.assertEqual(self.sponsor.industry_id, self.industry_a)
-
-        # Add another industry: no change
-        self.sponsor.sponsor_industry_ids |= self.industry_b
-        self.assertEqual(self.sponsor.industry_id, self.industry_a)
-
     @users("sponsor")
     def test_sponsor_review_irrelevant_fields(self):
-        """Not 'to review' on irrelevant fields"""
+        """No 'review' mode when changing non-sponsor fields"""
         self.assertFalse(self.sponsor.sponsor_to_review)
         self.sponsor.comment = "Not a website field"
         self.assertFalse(self.sponsor.sponsor_to_review)
@@ -88,34 +77,23 @@ class TestOcaSponsor(TransactionCase):
     def test_sponsor_review_relevant(self):
         """Mark to review when relevant (portal + fields) & create activities"""
         # Marked as to review
-        self.sponsor.with_user(self.portal_user).sudo().website_long_description = "<bad things>"
+        self.sponsor.with_user(self.portal_user).sudo().website_long_description = "text to review"
         self.assertTrue(self.sponsor.sponsor_to_review)
+        self.assertIn(self.manager, self.sponsor.activity_ids.member_ids)
 
-        # Activity
-        def _get_activities():
-            activity_type = self.env.ref("oca_sponsor.mail_activity_review_sponsor_oca")
-            activities = self.sponsor.activity_ids
-            return activities.filtered(lambda x: x.activity_type_id == activity_type)
-
-        admins = self.env.ref(self.group_manager).users
-        self.assertEqual(_get_activities().mapped("user_id"), admins)
-
-        # No duplicate activity on 2nd+ updates
-        self.website_short_description = "Quick update"
-        self.assertEqual(_get_activities().mapped("user_id"), admins)
-
+        # Approval
         self.sponsor.with_user(self.manager).button_sponsor_review_accept()
-        self.assertEqual(self.sponsor.sponsor_to_review, False)
-        self.assertEqual(len(_get_activities()), 0)
+        self.assertFalse(self.sponsor.sponsor_to_review)
+        self.assertNotIn(self.manager, self.sponsor.activity_ids.member_ids)
 
     def test_search_fetch_partner_order_with_context(self):
         """Sponsors to be reviewed are displayed first"""
         ResPartner = self.env["res.partner"]
-        sponsor2 = ResPartner.create({
+        sponsor2 = ResPartner.create([{
             "name": "Sponsor Corp 2",
             "grade_id": self.grade.id,
             "is_company": True,
-        })
+        }])
 
         def _get_first_sponsor():
             return ResPartner.with_context(membership_sponsor=True).search_fetch(

@@ -14,6 +14,7 @@
             <filter name="type_company" position="after">
                 <separator name="membership" />
                 <filter string="Sponsors" name="is_sponsor" domain="[('is_sponsor', '=', True)]" />
+                <filter string="Sponsors to review" name="sponsor_to_review" domain="[('is_sponsor', '=', True), ('sponsor_to_review', '=', True)]" />
             </filter>
 
             <!-- Group By -->
@@ -40,7 +41,7 @@
             </widget>
         </field>
     </record>
-            
+
     <!-- res.partner Form : add "Sponsorship" page -->
     <record id="view_partner_form" model="ir.ui.view">
         <field name="name">res.partner.form.oca_sponsor</field>
@@ -61,6 +62,7 @@
                     class="oe_stat_button"
                     name="action_open_blog_post"
                     icon="fa-globe"
+                    invisible="not is_sponsor"
                 >
                     <field name="blog_post_count" string="Blog posts" widget="statinfo" />
                 </button>
@@ -69,13 +71,14 @@
             <!-- Add dedicated "Sponsorship" page -->
             <page name="membership" position="after">
                 <page name="sponsorship" string="Sponsorship" invisible="not is_company">
-
-                    <button name="button_sponsor_review_accept" type="object"
-                        string="Publish new changes to the website"
-                        invisible="not sponsor_to_review"
-                        class="btn btn-warning"
-                        icon="fa-paper-plane"
-                        groups="membership_extension.group_membership_manager"
+                    
+                    <button name="button_sponsor_review_accept"
+                        type="object"
+                        string="Review sponsor"
+                        icon="fa-check"
+                        class="btn btn-success"
+                        invisible="not is_sponsor_reviewer or not sponsor_to_review"
+                        help="Accept the changes in sponsor data and publish them to the website."
                     />
                     
                     <!-- Sponsor fields -->
@@ -118,6 +121,7 @@
         <field name="name">Sponsors</field>
         <field name="res_model">res.partner</field>
         <field name="view_mode">kanban,list,form</field>
+        <field name="domain">[("is_company", "=", True)]</field>
         <field name="context">{
             "search_default_is_sponsor": 1,
             "membership_sponsor": 1,
@@ -125,7 +129,6 @@
     </record>
     <menuitem
         id="menu_membership_sponsor"
-        name="Sponsors"
         sequence="20"
         parent="membership.menu_association"
         action="action_membership_sponsor"

@@ -12,42 +12,28 @@ class ResPartner(models.Model):
         help="Role for next subscribed membership",
         default=lambda self: self._default_membership_category_id(),
     )
+    membership_category_ids = fields.Many2many(
+        string="Active roles",
+        # `_compute_membership_state` is inherited too
+    )
     mail_group_member_ids = fields.One2many(
-        string="Mailing list membership",
         comodel_name="mail.group.member",
         inverse_name="partner_id",
-        domain=[("mail_group_id.is_working_group", "=", True)],
-    )
-    working_group_ids = fields.One2many(
-        # UI fields
-        string="Working Groups",
-        comodel_name="mail.group",
-        compute="_compute_working_group_ids",
-        inverse="_inverse_working_group_ids",
     )
 
     def _default_membership_category_id(self):
         return self.env["membership.membership_category"].search([], limit=1).id
 
-    @api.depends("mail_group_member_ids.mail_group_id")
-    def _compute_working_group_ids(self):
+    @api.depends("membership_category_ids.implied_ids")
+    def _compute_membership_state(self):
+        """Change `membership_category_ids` so it displays current role
+        plus implied roles, e.g. a 'Delegate' is also a 'Member'
+        (for the website, and the backend)"""
+        res = super()._compute_membership_state()
         for partner in self:
-            partner.working_group_ids = partner._get_working_groups()
-
-    def _inverse_working_group_ids(self):
-        """Create or remove membership in mail_group"""
-        for partner in self:
-            user_input = partner.working_group_ids
-            before = partner._get_working_groups()
-            added = user_input - before
-            removed = before - user_input
-            if added:
-                for mail_group in added:
-                    mail_group.sudo()._join_group(partner.email, partner.id)
-            if removed:
-                partner.mail_group_member_ids.filtered(
-                    lambda x: x.mail_group_id in removed
-                ).unlink()
+            partner.membership_category_ids |= partner.membership_category_ids.implied_ids
+        return res
 
     def _get_working_groups(self):
-        return self.mail_group_member_ids.mail_group_id
+        """For website"""
+        return self.mail_group_member_ids.mail_group_id.filtered("is_working_group")

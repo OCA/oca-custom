@@ -1,1 +1,1 @@
-from . import test_oca_sponsor
+from . import test_oca_membership

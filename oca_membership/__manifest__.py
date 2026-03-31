@@ -16,9 +16,7 @@
         "membership_extension", # for membership.category
     ],
     "data": [
-        # data
         "data/membership_category_data.xml",
-        # views
         "views/mail_group.xml",
         "views/membership_category.xml",
         "views/res_partner.xml",

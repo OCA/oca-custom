@@ -21,13 +21,9 @@ class ResPartner(models.Model):
         compute="_compute_can_be_published",
         search="_search_can_be_published",
     )
-    mail_group_member_ids = fields.One2many(
-        comodel_name="mail.group.member",
-        inverse_name="partner_id",
-    )
     
     #====== Search engine sync logics ======#
-    def _sync_with_oca_search_engine(self, vals={}):
+    def _add_to_oca_search_engine(self, vals={}):
         """Add, update or remove partners in index (persons & companies)"""
         def _add_or_remove(mode, partners):
             method = "_add_to_index" if mode == "add" else "_remove_from_index"
@@ -92,17 +88,17 @@ class ResPartner(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         records = super().create(vals_list)
-        records._sync_with_oca_search_engine()
+        records._add_to_oca_search_engine()
         return records
     
     def copy(self, default={}):
         records = super().copy(default)
-        records._sync_with_oca_search_engine()
+        records._add_to_oca_search_engine()
         return records
 
     def write(self, vals):
         res = super().write(vals)
-        self._sync_with_oca_search_engine(vals)
+        self._add_to_oca_search_engine(vals)
         return res
 
     #===== Business logics =====#

@@ -10,17 +10,9 @@
         <field name="inherit_id" ref="membership_extension.view_partner_form"/>
         
         <field name="arch" type="xml">
-            <!-- Display target `membership_category_id` in place of history of `membership_category_ids` -->
-            <xpath expr="//field[@name='membership_category_ids' and @widget='many2many_tags']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
+            <!-- Add `membership_category_id` -->
             <xpath expr="//field[@name='membership_category_ids' and @widget='many2many_tags']" position="before">
                 <field name="membership_category_id" />
-            </xpath>
-
-            <!-- Add `working_group_ids` -->
-            <xpath expr="//page[@name='membership']/group/group" position="inside">
-                <field name="working_group_ids" widget="many2many_tags" />
             </xpath>
         </field>
     </record>
