@@ -2,7 +2,7 @@
 <!-- Copyright 2026 AKRETION
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
-    <record id="vcp_platform_oca" model="vcp.platform">
+    <!-- <record id="vcp_platform_oca" model="vcp.platform">
         <field name="name">OCA</field>
         <field name="host_id" ref="vcp_github.vcp_github_host" />
         <field name="scheduled_information_update" eval="True" />
@@ -30,5 +30,5 @@
         <field name="repository_id" ref="vcp_repository_repo_oca_maintainer_conf" />
         <field name="branch_id" ref="vcp_branch_master" />
         <field name="rule_ids" eval="[(4, ref('oca_search_engine.vcp_rule_oca_psc_update'))]" />
-    </record>
+    </record> -->
 </odoo>

@@ -101,8 +101,8 @@ class Person(PersonBase):
     url_key: str
     # role & psc
     roles: list[Role]
-    psc: int
-    psc_list: list[Team]
+    # psc: int
+    # psc_list: list[Team]
     work_group_list: list[Team]
     # github indicators
     collaborator_index: int
@@ -111,7 +111,7 @@ class Person(PersonBase):
 
     @classmethod
     def _model_construct_dict(cls, record):
-        psc = record.vcp_user_ids.vcp_oca_psc_ids
+        # psc = record.vcp_user_ids.vcp_oca_psc_ids
         return super()._model_construct_dict(record) | {
             # github indicators
             "translations": 0,
@@ -120,7 +120,7 @@ class Person(PersonBase):
             "module_contribution_ids": record.contributor_module_line_ids.ids or [],
             # role
             "roles": cls._get_roles(record),
-            # psc (obsolete )
+            # psc (obsolete)
             # "psc": len(psc),
             # "psc_list": psc.read(["name", "description"]),
             "work_group_list": (

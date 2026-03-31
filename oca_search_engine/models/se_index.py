@@ -8,7 +8,7 @@ from odoo.exceptions import ValidationError
 from ..tools import (
     CompanySerializer,
     PersonSerializer,
-    PscSerializer,
+    # PscSerializer,
     VcpOdooModuleVersionSerializer,
 )
 
@@ -21,13 +21,13 @@ class SeIndex(models.Model):
             ("vcp_odoo_module_version_exports", "Odoo Modules"),
             ("companies_exports", "Companies (sponsors & integrators)"),
             ("persons_exports", "Persons (members & contributors)"),
-            ("pscs_exports", "PSCs (Project Steering Teams)"),
+            # ("pscs_exports", "PSCs (Project Steering Teams)"),
         ],
         ondelete={
             "vcp_odoo_module_version_exports": "cascade",
             "companies_exports": "cascade",
             "persons_exports": "cascade",
-            "pscs_exports": "cascade",
+            # "pscs_exports": "cascade",
         },
     )
 
@@ -36,7 +36,7 @@ class SeIndex(models.Model):
         mapped_models = {
             "companies_exports": "res.partner",
             "persons_exports": "res.partner",
-            "pscs_exports": "vcp.oca.psc",
+            # "pscs_exports": "vcp.oca.psc",
             "vcp_odoo_module_version_exports": "vcp.odoo.module.version",
         }
         for se_index in self:
@@ -49,7 +49,7 @@ class SeIndex(models.Model):
         mapped_serializer = {
             "companies_exports": CompanySerializer(),
             "persons_exports": PersonSerializer(),
-            "pscs_exports": PscSerializer(),
+            # "pscs_exports": PscSerializer(),
             "vcp_odoo_module_version_exports": VcpOdooModuleVersionSerializer()
         }
         return (

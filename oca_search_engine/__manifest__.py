@@ -34,14 +34,9 @@
         "shopinvader_base_url", # TODO: switch to 'base_url' @arnaudlayec @sebastienbeau
     ],
     "data": [
-        # data
         "data/backend_data.xml",
         "data/index_data.xml",
         "data/membership_category_data.xml",
-        "data/vcp_oca.xml",
-        # security
-        "security/ir.model.access.csv",
-        # views
         "views/res_partner.xml",
     ],
     "demo": [],

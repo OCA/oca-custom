@@ -8,7 +8,6 @@ from odoo import fields, models
 
 class VcpOdooModuleVersion(models.Model):
     _inherit = "vcp.odoo.module.version"
-    _name = "vcp.odoo.module.version"
 
     readme_fragments = fields.Json()
     icon_url = fields.Char()

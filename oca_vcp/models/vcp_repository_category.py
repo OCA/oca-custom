@@ -8,5 +8,6 @@ from odoo import fields, models
 
 class VcpRepositoryCategory(models.Model):
     _name = "vcp.repository.category"
+    _description = "Repository Category"
 
     name = fields.Char()

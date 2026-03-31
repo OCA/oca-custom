@@ -21,6 +21,7 @@
         "vcp_github",
     ],
     "data": [
+        # "data/vcp_oca_psc.xml",
         "security/ir.model.access.csv",
         "views/vcp_odoo_module_view.xml",
         "views/vcp_repository_view.xml",

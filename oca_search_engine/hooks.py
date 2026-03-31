@@ -9,7 +9,7 @@ def post_init_hook(env):
     _init_indexing(env)
 
 def _init_indexing(env):
-    models = {"res.partner", "vcp.oca.psc"}
+    models = {"res.partner"} # "vcp.oca.psc"
     for model in models:
         records = env[model].search([])
         records._add_to_oca_search_engine()

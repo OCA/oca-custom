@@ -7,6 +7,7 @@ from odoo import models, fields, api, Command
 
 INDEX_PSCS = "oca_search_engine.oca_typesense_index_pscs"
 
+
 class VcpOcaPsc(models.Model):
     _name = "vcp.oca.psc"
     _inherit = ["se.indexable.record"]
@@ -50,7 +51,7 @@ class VcpOcaPsc(models.Model):
         self._add_to_oca_search_engine()
         return res
 
-    #===== VPC Logics =====#
+    #===== Logics =====#
     def _update_from_source(self, branch, mapped_pscs):
         """Update Odoo data from data source"""
         # Fetch data
@@ -78,6 +79,9 @@ class VcpOcaPsc(models.Model):
 
 
     def _prepare_team_vals(self, name, psc_dict, host_users, platform):
+        """Return `vals` for create
+        Also create any missing users, since one could be PSC with no contribution
+        For Repo: assumes they already exist (created by another rule)"""
         # Users
         psc_logins = set(psc_dict.get("members", []) + psc_dict.get("representatives", []))
         psc_users = host_users.filtered(lambda x: x.name in psc_logins)
@@ -86,24 +90,10 @@ class VcpOcaPsc(models.Model):
         psc_users |= self.env["vcp.user"].browse(created_ids)
         
         # Repositories
-        psc_repos_dict = psc_dict.get("repos", {})
-        psc_repos = self.env["vcp.repository"]
-        if psc_repos_dict:
-            for repo in platform.repository_ids:
-                if repo.name in psc_repos_dict:
-                    psc_repos |= repo
-                    psc_repos_dict.pop(repo.name)
-            to_create = [
-                {
-                    "name": repo_name,
-                    "description": description,
-                    "platform_id": platform.id,
-                    "from_date": fields.Datetime.now(),
-                }
-                for repo_name, description in psc_repos_dict.items()
-            ]
-            if to_create:
-                psc_repos |= self.env["vcp.repository"].create(to_create)
+        psc_repos_names = psc_dict.get("repos", {}).keys()
+        psc_repos = platform.repository_ids.filtered(
+            lambda x: x.name in psc_repos_names
+        )
 
         return {
             "name": name,
