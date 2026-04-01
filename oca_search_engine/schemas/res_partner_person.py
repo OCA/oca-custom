@@ -2,42 +2,96 @@
 # @author Arnaud LAYEC <arnaud.layec@akretion.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from typing import TypedDict
-from .res_partner_company import Country
-
 from extendable_pydantic import StrictExtendableBaseModel
+from .res_partner_common import Country, AvatarUrls
 
-class Contact(TypedDict):
-    email: str | None
-    phone: str | None
-    address: str | None
-    city: str | None
-    website: str | None
 
-class Team(TypedDict):
-    id: int
-    name: str
-    description: str | None
-
-class Role(TypedDict):
+class Role(StrictExtendableBaseModel):
     id: int
     name: str
 
-# class ParentCompany(TypedDict):
-#     id: int
-#     name: str
-#     url_key: str
+    @classmethod
+    def from_record(cls, record):
+        return cls.model_construct(
+            id=record.id,
+            name=record.name,
+        )
+
+class Team(StrictExtendableBaseModel):
+    """For Working Groups and PSC"""
+    id: int
+    name: str
+    description: str
+
+    @classmethod
+    def from_record(cls, record):
+        return cls.model_construct(
+            id=record.id,
+            name=record.name,
+            description=record.description or "",
+        )
+
+class ContactInfo(StrictExtendableBaseModel):
+    email: str
+    phone: str
+    website: str
+    city: str
+    address: str
+
+    @classmethod
+    def from_record(cls, record):
+        return cls.model_construct(
+            email=record.is_published_email and record.email or "",
+            phone=record.is_published_phone and (record.phone or record.mobile) or "",
+            website=record.is_published_website and record.website or "",
+            city=(
+                "%(city)s %(state_code)s %(zip)s" % {
+                    "city": record.city,
+                    "state_code": record.state_id.code,
+                    "zip": record.zip,
+                }
+                if record.is_published_address and any([record.city, record.state_id.code, record.zip])
+                else ""
+            ),
+            address=(
+                "%(street)s\n%(street2)s" % {
+                    "street": record.street,
+                    "street2": record.street2,
+                }
+                if record.is_published_address and (record.street or record.street2)
+                else ""
+            )
+        )
+
+class ParentCompany(StrictExtendableBaseModel):
+    id: int
+    name: str
+    url_key: str
+
+    @classmethod
+    def from_record(cls, record):
+        if not record.parent_id.is_company or not record.commercial_company_name:
+            return {}
+        else:
+            record.parent_id._update_url_key(lang=record.env.context.get("lang"))
+            cls.model_construct(
+                id=record.parent_id.id,
+                name=record.commercial_company_name.strip() or "",
+                url_key=record.parent_id.url_key,
+            )
+
 
 class PersonBase(StrictExtendableBaseModel):
     """Intermediate 'Person' Class, used in PSC members"""
     id: int
     name: str
     company: dict
-    contact: Contact
+    contact: ContactInfo
     country: Country
+
     # github
-    username: str
-    avatar_url: str | None
+    github_users: list[str]
+    logo_urls: AvatarUrls
 
     @classmethod
     def from_record(cls, record):
@@ -47,64 +101,27 @@ class PersonBase(StrictExtendableBaseModel):
     
     @classmethod
     def _model_construct_dict(cls, record):
+        """Dict to permit inheritance in `Person`"""
         return {
             "id": record.id,
             "name": record.name,
-            "company": (
-                {}
-                if not record.parent_id.is_company or not record.commercial_company_name
-                else {
-                    "id": record.parent_id.id,
-                    "name": record.commercial_company_name.strip() or "",
-                    "url_key": record.parent_id.url_key,
-                }
-            ),
-            "contact": cls._get_contact(record),
-            "country": cls._get_country(record),
+            "company": ParentCompany.from_record(record),
+            "contact": ContactInfo.from_record(record),
+            "country": Country.from_record(record.country_id),
             # github, TODO @sebastienbeau
-            "username": "record.github_username" or None,
-            "avatar_url": "record.github_avatar_url" or None,
+            "github_users": record.vcp_user_ids.mapped("name"),
+            "logo_urls": AvatarUrls.from_record(record),
             # technical website fields
             "url_key": record.url_key,
         }
 
-    @classmethod
-    def _get_contact(cls, record):
-        return {
-            "email": record.email or "",
-            "phone": record.phone or record.mobile or "",
-            "website": record.website or "",
-            "city": (
-                "%(city)s %(state_code)s %(zip)s" % {
-                    "city": record.city,
-                    "state_code": record.state_id.code,
-                    "zip": record.zip,
-                }
-            ).strip() or "",
-            "address": (
-                "%(street)s\n%(street2)s" % {
-                    "street": record.street,
-                    "street2": record.street2,
-                }
-            ).strip() or "",
-        }
-
-    @classmethod
-    def _get_country(cls, record):
-        return "" if not record.country_id else {
-            "code": record.country_id.code,
-            "label": record.country_id.name,
-        }
-
 class Person(PersonBase):
-    # technical website fields
     url_key: str
-    # role & psc
     roles: list[Role]
     # psc: int
     # psc_list: list[Team]
     work_group_list: list[Team]
-    # github indicators
+
     collaborator_index: int
     modules_maintained: int
     module_contribution_ids: list[int]
@@ -117,21 +134,27 @@ class Person(PersonBase):
             "translations": 0,
             "collaborator_index": 0,
             "modules_maintained": 0,
-            "module_contribution_ids": record.contributor_module_line_ids.ids or [],
             # role
             "roles": cls._get_roles(record),
             # psc (obsolete)
             # "psc": len(psc),
             # "psc_list": psc.read(["name", "description"]),
-            "work_group_list": (
-                record.mail_group_member_ids.mail_group_id
-                .filtered("is_working_group").read(["name", "description"])
-            )
+            "work_group_list": [
+                Team.from_record(record)
+                for record in record._get_working_groups()
+            ]
         }
 
     @classmethod
     def _get_roles(cls, record):
-        roles = record.membership_category_ids.sorted("sequence", reverse=True).read(["name"])
+        """Add fake role `Contributor` to display it on the website (only)"""
+        res = [
+            Role.from_record(x)
+            for x in record.membership_category_ids.sorted("sequence", reverse=True)
+        ]
         if False and record.contributor_count: # TODO review with @sebastienbeau correct field name?
-            roles.append({"id": -1, "name": _("Contributor")})
-        return roles
+            res.append({
+                "id": -1,
+                "name": _("Contributor"),
+            })
+        return res

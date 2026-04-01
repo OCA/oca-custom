@@ -22,7 +22,7 @@ class TestOcaSponsor(TransactionCase):
         ])
 
         # Users & partners
-        cls.manager = new_test_user(cls.env, "manager", groups="base.group_user")
+        cls.manager = new_test_user(cls.env, "manager", groups="base.group_user,base.group_partner_manager")
         cls.env.ref("oca_sponsor.mail_activity_team_sponsor_reviewers").member_ids |= cls.manager
         cls.portal_user = new_test_user(cls.env, "sponsor", groups="base.group_portal")
         cls.sponsor = cls.portal_user.partner_id
@@ -71,7 +71,7 @@ class TestOcaSponsor(TransactionCase):
     def test_sponsor_review_membership_manager(self):
         """Membership Managers do not trigger `sponsor_to_review`"""
         self.assertFalse(self.sponsor.sponsor_to_review)
-        self.sponsor.website_long_description = "Changed by internal"
+        self.sponsor.with_user(self.manager).website_long_description = "Changed by internal"
         self.assertFalse(self.sponsor.sponsor_to_review)
     
     def test_sponsor_review_relevant(self):
@@ -79,12 +79,12 @@ class TestOcaSponsor(TransactionCase):
         # Marked as to review
         self.sponsor.with_user(self.portal_user).sudo().website_long_description = "text to review"
         self.assertTrue(self.sponsor.sponsor_to_review)
-        self.assertIn(self.manager, self.sponsor.activity_ids.member_ids)
+        self.assertIn(self.manager, self.sponsor.activity_team_user_ids)
 
         # Approval
         self.sponsor.with_user(self.manager).button_sponsor_review_accept()
         self.assertFalse(self.sponsor.sponsor_to_review)
-        self.assertNotIn(self.manager, self.sponsor.activity_ids.member_ids)
+        self.assertNotIn(self.manager, self.sponsor.activity_team_user_ids)
 
     def test_search_fetch_partner_order_with_context(self):
         """Sponsors to be reviewed are displayed first"""

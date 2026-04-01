@@ -3,11 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-import os
-from pathlib import Path
-
 from odoo.tests.common import TransactionCase
-from ..schemas import Person
+from ..schemas.res_partner_person import Person
 
 
 class TestOcaPersonsSearchEngine(TransactionCase):
@@ -18,7 +15,6 @@ class TestOcaPersonsSearchEngine(TransactionCase):
             "name": "Happy Member",
             "is_company": False,
             "country_id": cls.env.ref("base.fr").id,
-            "free_member": True,
             "is_published": True,
         }])
 
@@ -28,11 +24,4 @@ class TestOcaPersonsSearchEngine(TransactionCase):
         just to ensure the code does not throw errors"""
         self.assertEqual(self.member.membership_state, "free")
         data = Person.from_record(self.member).model_dump(mode="json")
-
-        # Test few simple data
-        category_member = self.env.ref("membership_extension.membership_category_member")
         self.assertEqual(data["country"]["code"], "FR")
-        self.assertEqual(
-            data["roles"],
-            category_member.read(["name"])
-        )

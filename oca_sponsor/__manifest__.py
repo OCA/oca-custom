@@ -13,6 +13,7 @@
     "category": "Custom",
     "depends": [
         "mail_activity_team", # for sponsor review process
+        "membership_extension", # for security groups
         "website_blog",
     ],
     "data": [

@@ -1,11 +1,16 @@
 # Copyright 2026 AKRETION
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models, api
+from odoo import fields, models, api, _
 
 class ResPartner(models.Model):
     _inherit = ["res.partner"]
 
+    is_member = fields.Boolean(
+        string="Is currently a member",
+        compute="_compute_is_member",
+        search="_search_is_member",
+    )
     membership_category_id = fields.Many2one(
         comodel_name="membership.membership_category",
         string="Target role",
@@ -24,6 +29,7 @@ class ResPartner(models.Model):
     def _default_membership_category_id(self):
         return self.env["membership.membership_category"].search([], limit=1).id
 
+    #===== Compute =====#
     @api.depends("membership_category_ids.implied_ids")
     def _compute_membership_state(self):
         """Change `membership_category_ids` so it displays current role
@@ -33,7 +39,28 @@ class ResPartner(models.Model):
         for partner in self:
             partner.membership_category_ids |= partner.membership_category_ids.implied_ids
         return res
+    
+    @api.depends("membership_state")
+    def _compute_is_member(self):
+        member_states = self._membership_member_states()
+        for partner in self:
+            partner.is_member = bool(partner.membership_state in member_states)
+    @api.model
+    def _search_is_member(self, operator, value):
+        if operator not in ('=', '!=') or not isinstance(value, bool):
+            raise NotImplementedError(_("Operation not supported."))
+        operator = (
+            "in"
+            if operator == "=" and value or not operator == "!=" and not value
+            else "not in"
+        )
+        return [('membership_state', operator, self._membership_member_states())]
 
+    #===== Business logics =====#
     def _get_working_groups(self):
-        """For website"""
+        """For `oca_search_engine"""
         return self.mail_group_member_ids.mail_group_id.filtered("is_working_group")
+
+    def _get_company_members(self):
+        """Members of a company"""
+        return self.filtered("is_company").child_ids.filtered("is_member")

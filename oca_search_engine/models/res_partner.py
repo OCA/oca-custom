@@ -17,11 +17,15 @@ class ResPartner(models.Model):
              "Automatically enabled for companies (sponsors and integrators).\n"
              "To enable manually for individuals (members).",
     )
+    is_published_email = fields.Boolean(string="Publish email", default=True)
+    is_published_phone = fields.Boolean(string="Publish phone", default=True)
+    is_published_address = fields.Boolean(string="Publish address", default=True)
+    is_published_website = fields.Boolean(string="Publish website", default=True)
     can_be_published = fields.Boolean(
         compute="_compute_can_be_published",
         search="_search_can_be_published",
     )
-    
+
     #====== Search engine sync logics ======#
     def _add_to_oca_search_engine(self, vals={}):
         """Add, update or remove partners in index (persons & companies)"""
@@ -32,15 +36,17 @@ class ResPartner(models.Model):
             getattr(companies, method)(self.env.ref(INDEX_COMPANIES))
             getattr(individuals, method)(self.env.ref(INDEX_PERSONS))
 
-        self._autopublish_companies(vals)
-        to_synch = self.filtered(lambda x: x._filter_add_to_oca_search_engine())
-        _add_or_remove("add", to_synch)
-        _add_or_remove("remove", self - to_synch)
-    
+        if vals and "is_published" in vals and not vals["is_published"]:
+            _add_or_remove("remove", self)
+        else:
+            self._autopublish_companies(vals)
+            to_synch = self.filtered(lambda x: x._filter_add_to_oca_search_engine())
+            _add_or_remove("add", to_synch)
+
     def _filter_add_to_oca_search_engine(self):
         """`is_published` is a manual field in Odoo to start or stop the partner sync"""
         return self.can_be_published and self.is_published
-    
+
     def _autopublish_companies(self, vals):
         """Auto-publish new integrators and new sponsors
         (but not members: because of individual acceptance),
@@ -56,7 +62,11 @@ class ResPartner(models.Model):
         # 'sudo' to bypass AccessError of 'website.published.multi.mixin'
 
     #====== Compute ======#
-    @api.depends("is_integrator", "grade_id", "membership_state")
+    @api.depends(
+        "grade_id", "sponsor_to_review",
+        "is_integrator",
+        "membership_state"
+    )
     def _compute_can_be_published(self):
         """Technical field enabling or not `is_published`, this last being editable by internal users"""
         for partner in self:
@@ -71,7 +81,7 @@ class ResPartner(models.Model):
                 self.membership_state in ["free", "paid"]
             )
         )
-    
+
     @api.model
     def _search_can_be_published(self, operator, value):
         if operator != "=" or not isinstance(value, bool) or not value:

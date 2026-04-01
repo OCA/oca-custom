@@ -6,7 +6,7 @@
 from odoo.addons.oca_sponsor.tests.test_oca_sponsor import (
     TestOcaSponsor
 )
-from ..schemas import Company
+from ..schemas.res_partner_company import Company
 
 
 class TestOcaCompaniesSearchEngine(TestOcaSponsor):
@@ -36,13 +36,13 @@ class TestOcaCompaniesSearchEngine(TestOcaSponsor):
 
 
     def _in_index(self, partner, with_sync_active=False):
-        in_index = partner._get_bindings().filtered(
-            lambda x: x.state not in ["to_delete", "deleting"]
-        )
         if with_sync_active:
-            return in_index and partner._filter_add_to_oca_search_engine()
-        else:
-            return in_index
+            partner = partner.filtered(lambda x: x._filter_add_to_oca_search_engine())
+        return bool(
+            partner._get_bindings().filtered(
+                lambda x: x.state not in ["to_delete", "deleting"]
+            )
+        )
     
     def test_standard_partner(self):
         """A standard partner is not published (can_be_published)"""
@@ -89,9 +89,9 @@ class TestOcaCompaniesSearchEngine(TestOcaSponsor):
         self.assertFalse(self._in_index(partner))
 
     def test_sponsor_to_review_not_in_index(self):
-        """Sponsor with pending review *is* in index, but its synced is paused"""
+        """Sponsor with pending review *is* in index, but its synchro is paused"""
         self.assertTrue(self._in_index(self.sponsor, with_sync_active=True))
         self.sponsor.with_user(self.portal_user).sudo().website_long_description = "Updated from portal"
         self.assertTrue(self.sponsor.sponsor_to_review)
-        self.assertTrue(self._in_index(self.sponsor, with_sync_active=False))
+        self.assertTrue( self._in_index(self.sponsor, with_sync_active=False))
         self.assertFalse(self._in_index(self.sponsor, with_sync_active=True))

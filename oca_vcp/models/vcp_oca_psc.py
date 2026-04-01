@@ -8,6 +8,17 @@ from odoo import models, fields, api, Command
 INDEX_PSCS = "oca_search_engine.oca_typesense_index_pscs"
 
 
+class VcpUser(models.Model):
+    _inherit = ["vcp.user"]
+
+    vcp_oca_psc_ids = fields.Many2many(
+        comodel_name="vcp.oca.psc",
+        relation="vcp_oca_psc_user_rel",
+        column1="user_id",
+        column2="team_id",
+    )
+
+
 class VcpOcaPsc(models.Model):
     _name = "vcp.oca.psc"
     _inherit = ["se.indexable.record"]

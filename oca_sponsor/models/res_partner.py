@@ -201,9 +201,9 @@ class ResPartner(models.Model):
         `notify=False`: remove the activity at review validation"""
         reviewer_team = self._get_sponsor_reviewer_team()
         if not notify:
-            self.activity_ids.filtered(lambda x: x.team_id == reviewer_team).unlink()
+            self.activity_ids.filtered(lambda x: x.team_id == reviewer_team).sudo().unlink()
         else:
-            self.activity_schedule(
+            self.sudo().activity_schedule(
                 team_id=reviewer_team.id,
                 note=_("The sponsor changed its information from its profile. "
                        "Please review those changes to publish them on the website."

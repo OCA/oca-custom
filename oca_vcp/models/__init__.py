@@ -3,5 +3,4 @@ from . import vcp_odoo_module_version
 from . import vcp_repository
 from . import vcp_repository_category
 from . import vcp_rule
-# from . import vcp_user
 # from . import vcp_oca_psc
