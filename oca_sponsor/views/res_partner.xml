@@ -49,6 +49,13 @@
         <field name="inherit_id" ref="membership.view_partner_form"/>
 
         <field name="arch" type="xml">
+            <form position="attributes">
+                <attribute name="js_class">res_partner_form</attribute>
+            </form>
+            <form position="inside">
+                <field name="html_field_history_metadata" invisible="1"/>
+            </form>
+
             <sheet position="before">
                 <div class="alert alert-warning" role="alert" name="warning_sponsor_review" invisible="not sponsor_to_review">
                     Sponsor information are pending a review to be updated on the website.
@@ -70,7 +77,7 @@
 
             <!-- Add dedicated "Sponsorship" page -->
             <page name="membership" position="after">
-                <page name="sponsorship" string="Sponsorship" invisible="not is_company">
+                <page name="sponsorship" string="Sponsorship" invisible="not is_company or sponsor_parent_id">
                     
                     <button name="button_sponsor_review_accept"
                         type="object"
@@ -80,11 +87,13 @@
                         invisible="not is_sponsor_reviewer or not sponsor_to_review"
                         help="Accept the changes in sponsor data and publish them to the website."
                     />
-                    
-                    <!-- Sponsor fields -->
+
+                    <!-- Configuration -->
                     <group name="oca_sponsor_config" string="Sponsor configuration" col="12">
                         <group colspan="5">
                             <field name="grade_id" />
+                            <field name="sponsor_name" />
+                            <field name="sponsor_child_ids" widget="many2many_tags" options="{'create': False}" />
                             <field name="sponsor_country_ids" widget="many2many_tags" />
                             <field name="sponsor_industry_ids" widget="many2many_tags" />
                         </group>
@@ -96,12 +105,8 @@
                         </group>
                     </group>
 
-                    <!-- Website description -->
+                    <!-- Website descriptions -->
                     <group name="oca_sponsor_description" string="Sponsor presentation">
-                        <p colspan="2">
-                            Below descriptions are in plain text, without formatting.
-                        </p>
-
                         <label for="website_description_why_sponsoring" />
                         <field name="website_description_why_sponsoring" nolabel="1" colspan="2" />
 

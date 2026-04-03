@@ -11,8 +11,6 @@ class IntegratorPortal(CustomerPortal):
     def _get_optional_fields(self):
         fields = list(super()._get_optional_fields())
         for f in [
-            "website_short_description",
-            "website_description",
             "favourite_module_ids",
             "github_organization",
         ]:

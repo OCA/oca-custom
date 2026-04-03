@@ -2,8 +2,10 @@
 # @author Arnaud LAYEC <arnaud.layec@akretion.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from odoo import exceptions
+from typing import Union
 from extendable_pydantic import StrictExtendableBaseModel
-from .res_partner_common import Country, AvatarUrls
+from .res_partner_common import Country, LogoUrls
     
 class SponsorshipLevel(StrictExtendableBaseModel):
     id: int
@@ -75,7 +77,7 @@ class Company(StrictExtendableBaseModel):
     website: str
     is_integrator: bool
     countries: list[Country]
-    logo_urls: AvatarUrls
+    logo_urls: Union[LogoUrls, dict]
     # github indicators
     contributors_count: int
     contributors_index: int
@@ -89,13 +91,21 @@ class Company(StrictExtendableBaseModel):
 
     @classmethod
     def from_record(cls, record):
+        if record.sponsor_to_review:
+            # This Exception is catched by `recompute_json` and set the bindings'
+            # `state` of the to-be-reviewed sponsors in error
+            raise exceptions.ValidationError(
+                "The information of this sponsor were updated and are pending a "
+                "review, thus this operation was blocked."
+            )
+
         # ensure url is up to date
         record._update_url_key(lang=record.env.context.get("lang"))
         members = record._get_company_members()
         github_users = record.child_ids.vcp_user_ids
         return cls.model_construct(
             id=record.id,
-            name=record.name.strip() or "",
+            name=record.sponsor_name.strip() or record.name.strip() or "",
             email=record.email or "",
             phone=record.phone or "",
             website=record.website or None,
@@ -103,7 +113,7 @@ class Company(StrictExtendableBaseModel):
             countries=[
                 Country.from_record(country) for country in record.sponsor_country_ids
             ],
-            logo_urls=AvatarUrls.from_record(record),
+            logo_urls=LogoUrls.from_record(record),
             # github indicators
             # "contributors_count=record.contributors_count or 0,
             # "contributors_index=record.contributors_index or 0,

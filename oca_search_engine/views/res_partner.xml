@@ -11,9 +11,7 @@
 
         <field name="arch" type="xml">
             <separator name="membership" position="after">
-                <filter string="Published" name="is_published" domain="[
-                    ('can_be_published', '=', True), ('is_published', '=', True)
-                ]" />
+                <filter string="Published" name="is_published" domain="[('is_published', '=', True)]" />
                 <filter string="Integrator" name="is_integrator" domain="[('is_integrator', '=', True)]" />
             </separator>
         </field>
@@ -26,9 +24,17 @@
         <field name="inherit_id" ref="base.view_partner_form"/>
         
         <field name="arch" type="xml">
-            <field name="category_id" position="after">
-                <field name="is_published" widget="boolean_toggle" invisible="not can_be_published" />
-            </field>
+            <notebook position="inside">
+                <page string="Website" name="website">
+                    <group name="website">
+                        <field name="is_published" widget="boolean_toggle" />
+                        <field name="is_published_email" widget="boolean_toggle" invisible="not is_published" />
+                        <field name="is_published_phone" widget="boolean_toggle" invisible="not is_published" />
+                        <field name="is_published_address" widget="boolean_toggle" invisible="not is_published" />
+                        <field name="is_published_website" widget="boolean_toggle" invisible="not is_published" />
+                    </group>
+                </page>
+            </notebook>
         </field>
     </record>
 

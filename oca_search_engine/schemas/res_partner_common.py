@@ -16,7 +16,7 @@ class Country(StrictExtendableBaseModel):
             label=record.name,
         )
 
-class AvatarUrls(StrictExtendableBaseModel):
+class LogoUrls(StrictExtendableBaseModel):
     alt: str
     l: str
     m: str
@@ -24,9 +24,20 @@ class AvatarUrls(StrictExtendableBaseModel):
 
     @classmethod
     def from_record(cls, record):
-        return cls.model_construct(
-            alt=record.name,
-            l=record._get_avatar_url(size=1920),
-            m=record._get_avatar_url(size=512),
-            s=record._get_avatar_url(size=128),
-        )
+        if cls._is_default_avatar(record):
+            return {}
+        else:
+            return cls.model_construct(
+                alt=record.name,
+                l=cls._get_full_url(record, size=1920),
+                m=cls._get_full_url(record, size=512),
+                s=cls._get_full_url(record, size=128),
+            )
+
+    @classmethod
+    def _is_default_avatar(cls, record):
+        return not record.image_1920
+
+    @classmethod
+    def _get_full_url(cls, record, size):
+        return f'{record.get_base_url()}/web/image/res.partner/{record.id}/image_{size}'

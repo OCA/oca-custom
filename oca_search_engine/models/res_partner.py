@@ -61,8 +61,3 @@ class ResPartner(models.Model):
         res = super().write(vals)
         self._add_to_oca_search_engine(vals)
         return res
-
-    #===== Business logics =====#
-    def _get_avatar_url(self, size):
-        self.ensure_one()
-        return f'{self.get_base_url()}/web/image/res.partner/{self.id}/avatar_{size}'

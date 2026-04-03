@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="oca_search_engine.portal_my_details" inherit_id="portal.portal_my_details">
+        <form position="before">
+            <t t-set="show_publish_fields" t-value="partner.is_member or partner.is_integrator" />
+        </form>
+    </template>
+
+    <template id="oca_search_engine.portail_my_details_side_content" inherit_id="oca_sponsor.portail_my_details_side_content">
+        <div position="inside">
+            <div name="privacy" t-if="show_publish_fields">
+                <h4>Privacy settings</h4>
+
+                <div class="mb-3">
+                    <label class="col-form-label" for="is_published">Show my profile on the website</label>
+                    <select name="is_published" class="form-select">
+                        <option value="0">Do not publish my profile (no information)</option>
+                        <option value="1" t-att-selected="partner.is_published">Publish my profile</option>
+                    </select>
+                </div>
+                
+                <div class="mb-1">
+                    <input
+                        type="checkbox"
+                        name="is_published_email"
+                        id="is_published_email"
+                        class="form-check-input"
+                        t-att-checked="partner.is_published_email"
+                    />
+                    <label for="is_published_email">Publish email on the website</label>
+                </div>
+
+                <div class="mb-1">
+                    <input
+                        type="checkbox"
+                        name="is_published_phone"
+                        id="is_published_phone"
+                        class="form-check-input"
+                        t-att-checked="partner.is_published_phone"
+                    />
+                    <label for="is_published_phone">Publish phone on the website</label>
+                </div>
+
+                <div class="mb-1">
+                    <input
+                        type="checkbox"
+                        name="is_published_address"
+                        id="is_published_address"
+                        class="form-check-input"
+                        t-att-checked="partner.is_published_address"
+                    />
+                    <label for="is_published_address">Publish location the website (address &amp; city)</label>
+                </div>
+
+                <div class="mb-1">
+                    <input
+                        type="checkbox"
+                        name="is_published_website"
+                        id="is_published_website"
+                        class="form-check-input"
+                        t-att-checked="partner.is_published_website"
+                    />
+                    <label for="is_published_website">Publish URL on the website</label>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="portal_my_details_fields" inherit_id="portal.portal_my_details_fields">
+        <xpath expr="//input[@name='phone']/parent::div" position="after">
+            <div t-attf-class="mb-3 #{error.get('phone') and 'o_has_error' or ''} col-xl-6">
+                <label class="col-form-label" for="website">Website URL</label>
+                <input type="url" name="website" t-attf-class="form-control #{error.get('website') and 'is-invalid' or ''}" t-att-value="partner.website" />
+            </div>
+        </xpath>
+    </template>
+</odoo>

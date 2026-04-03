@@ -21,6 +21,7 @@
         "security/ir.model.access.csv",
         "views/blog_post.xml",
         "views/mail_activity.xml",
+        "views/portal_templates.xml",
         "views/res_partner_industry.xml",
         "views/res_partner.xml",
         "views/sponsorship_line.xml",

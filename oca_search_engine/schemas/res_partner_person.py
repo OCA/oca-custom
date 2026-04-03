@@ -2,8 +2,9 @@
 # @author Arnaud LAYEC <arnaud.layec@akretion.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from typing import Union
 from extendable_pydantic import StrictExtendableBaseModel
-from .res_partner_common import Country, AvatarUrls
+from .res_partner_common import Country, LogoUrls
 
 
 class Role(StrictExtendableBaseModel):
@@ -91,7 +92,7 @@ class PersonBase(StrictExtendableBaseModel):
 
     # github
     github_users: list[str]
-    logo_urls: AvatarUrls
+    logo_urls: Union[LogoUrls, dict]
 
     @classmethod
     def from_record(cls, record):
@@ -112,7 +113,7 @@ class PersonBase(StrictExtendableBaseModel):
             ),
             # github, TODO @sebastienbeau
             "github_users": record.vcp_user_ids.mapped("name"),
-            "logo_urls": AvatarUrls.from_record(record),
+            "logo_urls": LogoUrls.from_record(record),
             # technical website fields
             "url_key": record.url_key,
         }
