@@ -7,6 +7,17 @@ from odoo import api, models
 class ResUsers(models.Model):
     _inherit = ["res.users"]
 
+    def _is_sponsor_reviewer(self):
+        return self in self._get_sponsor_reviewer_team().member_ids
+
+    @api.model
+    def _get_sponsor_reviewer_team(self):
+        team_id = self.env['ir.model.data']._xmlid_to_res_id(
+            "oca_sponsor.mail_activity_team_sponsor_reviewers",
+            raise_if_not_found=False,
+        )
+        return self.env["mail.activity.team"].browse(team_id)
+
     @api.model
     def _get_activity_groups(self):
         """Team activities are not counted in the Systray, unless user clicks on it

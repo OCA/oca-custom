@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# Usage: click-odoo -d <database> 002_new_website_init.py
+
 import click, click_odoo
 
 from click_odoo import odoo

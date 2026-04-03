@@ -100,20 +100,15 @@ class ResPartner(models.Model):
         if operator == "!=" and value or operator == "=" and not value:
             _not = [NOT_OPERATOR]
         return _not + [("grade_id", "!=", False)]
-    
-    @api.depends_context("uid")
-    def _compute_is_sponsor_reviewer(self):
-        self.is_sponsor_reviewer = self.env.user in self._get_sponsor_reviewer_team().member_ids
-    @api.model
-    def _get_sponsor_reviewer_team(self):
-        return self.env.ref("oca_sponsor.mail_activity_team_sponsor_reviewers")
 
     @api.depends("country_id", "grade_id")
     def _compute_sponsor_country_ids(self):
         self._compute_sponsor_replace_in("country_id", "sponsor_country_ids")
+
     @api.depends("industry_id", "grade_id")
     def _compute_sponsor_industry_ids(self):
         self._compute_sponsor_replace_in("industry_id", "sponsor_industry_ids")
+
     def _compute_sponsor_replace_in(self, origin_field, sponsor_field):
         """Replace `sponsor._origin[field]` by `sponsor[field]`
         in `sponsor[sponsor_field]`, or add it if no origin value"""
@@ -125,7 +120,7 @@ class ResPartner(models.Model):
                 sponsor[sponsor_field] = [Command.link(new.id)]
             if old and old != new and old in current:
                 sponsor[sponsor_field] = [Command.unlink(old.id)]
-    
+
     @api.depends("blog_post_ids")
     def _compute_blog_post_count(self):
         for partner in self:
@@ -181,25 +176,27 @@ class ResPartner(models.Model):
         return action
 
     def button_sponsor_review_accept(self):
-        if not self.is_sponsor_reviewer:
+        if not self.env.user._is_sponsor_reviewer():
             raise exceptions.AccessError(_("You are not a Sponsor Reviewer."))
         self._sponsor_review_accept()
-    
+
     #===== Business logics =====#
     def _set_sponsor_to_review(self):
         """Pause the syncing of new sponsors data until their review,
         when their data are updated from the portal,
         and notify reviewers with an activity"""
-        if not self.is_sponsor_reviewer:
-            sponsors = self.filtered(lambda x: x.is_sponsor and not x.sponsor_to_review)
-            if sponsors:
-                sponsors.sponsor_to_review = True
-                sponsors._sponsor_reviewers_notify()
+        if self.env.user._is_sponsor_reviewer():
+            return
+        
+        sponsors = self.filtered(lambda x: x.is_sponsor and not x.sponsor_to_review)
+        if sponsors:
+            sponsors.sponsor_to_review = True
+            sponsors._sponsor_reviewers_notify()
 
     def _sponsor_reviewers_notify(self, notify=True):
         """`notify=True`: notify the reviewers when review starts
         `notify=False`: remove the activity at review validation"""
-        reviewer_team = self._get_sponsor_reviewer_team()
+        reviewer_team = self.env["res.users"]._get_sponsor_reviewer_team()
         if not notify:
             self.activity_ids.filtered(lambda x: x.team_id == reviewer_team).sudo().unlink()
         else:
@@ -211,8 +208,8 @@ class ResPartner(models.Model):
             )
 
     def _sponsor_review_accept(self):
+        self._sponsor_reviewers_notify(notify=False)
         self.sudo().write({ # 'sudo' to bypass AccessError of 'website.published.multi.mixin'
             "is_published": True,
             "sponsor_to_review": False,
         })
-        self._sponsor_reviewers_notify(notify=False)

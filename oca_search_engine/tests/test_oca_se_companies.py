@@ -36,22 +36,12 @@ class TestOcaCompaniesSearchEngine(TestOcaSponsor):
 
 
     def _in_index(self, partner, with_sync_active=False):
+        not_states = ["to_delete", "deleting"]
         if with_sync_active:
-            partner = partner.filtered(lambda x: x._filter_add_to_oca_search_engine())
-        return bool(
-            partner._get_bindings().filtered(
-                lambda x: x.state not in ["to_delete", "deleting"]
-            )
-        )
-    
-    def test_standard_partner(self):
-        """A standard partner is not published (can_be_published)"""
-        partner = self.env["res.partner"].create({
-            "name": "Standard Corp",
-            "is_company": True,
-            "is_published": True,
-        })
-        self.assertFalse(self._in_index(partner))
+            not_states += ["recompute_error", "invalid_data"]
+
+        bindings = partner._get_bindings()
+        return not bool(bindings.filtered(lambda x: x.state in not_states))
 
     def test_becomes_integrator_autopublished(self):
         """A sponsor or a partner becoming sponsor is auto-published"""
@@ -61,7 +51,6 @@ class TestOcaCompaniesSearchEngine(TestOcaSponsor):
             "is_company": True,
             "grade_id": self.grade.id,
         })
-        self.assertTrue(partner.can_be_published)
         self.assertTrue(partner.is_published)
         self.assertTrue(self._in_index(partner, with_sync_active=True))
 
@@ -72,10 +61,6 @@ class TestOcaCompaniesSearchEngine(TestOcaSponsor):
         })
         partner2.grade_id = self.grade
         self.assertTrue(self._in_index(partner2, with_sync_active=True))
-
-        # test _search_can_be_published
-        results = self.env["res.partner"].search([("can_be_published", "=", True)])
-        self.assertIn(partner2, results)
 
     def test_partner_unpublished(self):
         """Any published partner can be unpublished with `is_published`"""
@@ -93,5 +78,8 @@ class TestOcaCompaniesSearchEngine(TestOcaSponsor):
         self.assertTrue(self._in_index(self.sponsor, with_sync_active=True))
         self.sponsor.with_user(self.portal_user).sudo().website_long_description = "Updated from portal"
         self.assertTrue(self.sponsor.sponsor_to_review)
+
+        self.sponsor._get_bindings().recompute_json() # this **logs** an Exception in console, without raising
+        # transitory state
         self.assertTrue( self._in_index(self.sponsor, with_sync_active=False))
         self.assertFalse(self._in_index(self.sponsor, with_sync_active=True))

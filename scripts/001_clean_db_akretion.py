@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# Usage: click-odoo -d <database> 001_clean_db_akretion.py
+
 import click, click_odoo
 
 import logging

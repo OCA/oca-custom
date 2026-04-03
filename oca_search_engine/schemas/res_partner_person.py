@@ -70,14 +70,14 @@ class ParentCompany(StrictExtendableBaseModel):
 
     @classmethod
     def from_record(cls, record):
-        if not record.parent_id.is_company or not record.commercial_company_name:
+        if not record.commercial_company_name:
             return {}
         else:
-            record.parent_id._update_url_key(lang=record.env.context.get("lang"))
-            cls.model_construct(
-                id=record.parent_id.id,
+            record.commercial_partner_id._update_url_key(lang=record.env.context.get("lang"))
+            return cls.model_construct(
+                id=record.commercial_partner_id.id,
                 name=record.commercial_company_name.strip() or "",
-                url_key=record.parent_id.url_key,
+                url_key=record.commercial_partner_id.url_key,
             )
 
 
@@ -85,9 +85,9 @@ class PersonBase(StrictExtendableBaseModel):
     """Intermediate 'Person' Class, used in PSC members"""
     id: int
     name: str
-    company: dict
+    company: Union[ParentCompany, dict] # allow {}
     contact: ContactInfo
-    country: Country
+    country: Union[Country, dict]
 
     # github
     github_users: list[str]
@@ -107,7 +107,9 @@ class PersonBase(StrictExtendableBaseModel):
             "name": record.name,
             "company": ParentCompany.from_record(record),
             "contact": ContactInfo.from_record(record),
-            "country": Country.from_record(record.country_id),
+            "country": (
+                Country.from_record(record.country_id) if record.country_id else {}
+            ),
             # github, TODO @sebastienbeau
             "github_users": record.vcp_user_ids.mapped("name"),
             "logo_urls": AvatarUrls.from_record(record),

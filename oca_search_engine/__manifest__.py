@@ -31,7 +31,7 @@
         # correctly as module are not merged
         "vcp_management",
         "vcp_git",
-        "shopinvader_base_url", # TODO: switch to 'base_url' @arnaudlayec @sebastienbeau
+        "base_url",
     ],
     "data": [
         "data/backend_data.xml",

@@ -9,7 +9,7 @@ class ResPartner(models.Model):
     is_member = fields.Boolean(
         string="Is currently a member",
         compute="_compute_is_member",
-        search="_search_is_member",
+        store=True,
     )
     membership_category_id = fields.Many2one(
         comodel_name="membership.membership_category",
@@ -45,16 +45,6 @@ class ResPartner(models.Model):
         member_states = self._membership_member_states()
         for partner in self:
             partner.is_member = bool(partner.membership_state in member_states)
-    @api.model
-    def _search_is_member(self, operator, value):
-        if operator not in ('=', '!=') or not isinstance(value, bool):
-            raise NotImplementedError(_("Operation not supported."))
-        operator = (
-            "in"
-            if operator == "=" and value or not operator == "!=" and not value
-            else "not in"
-        )
-        return [('membership_state', operator, self._membership_member_states())]
 
     #===== Business logics =====#
     def _get_working_groups(self):

@@ -21,31 +21,20 @@ class ResPartner(models.Model):
     is_published_phone = fields.Boolean(string="Publish phone", default=True)
     is_published_address = fields.Boolean(string="Publish address", default=True)
     is_published_website = fields.Boolean(string="Publish website", default=True)
-    can_be_published = fields.Boolean(
-        compute="_compute_can_be_published",
-        search="_search_can_be_published",
-    )
 
     #====== Search engine sync logics ======#
     def _add_to_oca_search_engine(self, vals={}):
-        """Add, update or remove partners in index (persons & companies)"""
-        def _add_or_remove(mode, partners):
-            method = "_add_to_index" if mode == "add" else "_remove_from_index"
-            companies = partners.filtered("is_company")
-            individuals = partners - companies
-            getattr(companies, method)(self.env.ref(INDEX_COMPANIES))
-            getattr(individuals, method)(self.env.ref(INDEX_PERSONS))
+        """Add, update or remove partners in 'Company' or 'Person' index"""
+        companies = self.filtered("is_company")
+        persons = self - companies
 
         if vals and "is_published" in vals and not vals["is_published"]:
-            _add_or_remove("remove", self)
+            companies._remove_from_index(self.env.ref(INDEX_COMPANIES))
+            persons._remove_from_index(self.env.ref(INDEX_PERSONS))
         else:
-            self._autopublish_companies(vals)
-            to_synch = self.filtered(lambda x: x._filter_add_to_oca_search_engine())
-            _add_or_remove("add", to_synch)
-
-    def _filter_add_to_oca_search_engine(self):
-        """`is_published` is a manual field in Odoo to start or stop the partner sync"""
-        return self.can_be_published and self.is_published
+            companies._autopublish_companies(vals)
+            companies._add_to_index(self.env.ref(INDEX_COMPANIES))
+            persons._add_to_index(self.env.ref(INDEX_PERSONS))
 
     def _autopublish_companies(self, vals):
         """Auto-publish new integrators and new sponsors
@@ -57,52 +46,14 @@ class ResPartner(models.Model):
             return
 
         self.filtered(
-            lambda x: x.is_company and x.can_be_published and not x.is_published
+            lambda x: x.is_company and not x.is_published
         ).sudo().is_published = True
         # 'sudo' to bypass AccessError of 'website.published.multi.mixin'
 
-    #====== Compute ======#
-    @api.depends(
-        "grade_id", "sponsor_to_review",
-        "is_integrator",
-        "membership_state"
-    )
-    def _compute_can_be_published(self):
-        """Technical field enabling or not `is_published`, this last being editable by internal users"""
-        for partner in self:
-            partner.can_be_published = partner._get_can_be_published()
-    
-    def _get_can_be_published(self):
-        """`sponsor_to_review` is prioritary to prevent unreviewed data on the website"""
-        return (
-            (not self.is_sponsor or not self.sponsor_to_review) and (
-                self.is_integrator or
-                self.is_sponsor or
-                self.membership_state in ["free", "paid"]
-            )
-        )
-
-    @api.model
-    def _search_can_be_published(self, operator, value):
-        if operator != "=" or not isinstance(value, bool) or not value:
-            raise NotImplementedError("Operation not supported.")
-        return [
-            "|", ("is_sponsor", "=", False), ("sponsor_to_review", "=", False),
-            "|", "|",
-                ("is_integrator", "=", True),
-                ("is_sponsor", "=", True),
-                ("membership_state", "in", ["free", "paid"]),
-        ]
-    
     #====== CRUD ======#
     @api.model_create_multi
     def create(self, vals_list):
         records = super().create(vals_list)
-        records._add_to_oca_search_engine()
-        return records
-    
-    def copy(self, default={}):
-        records = super().copy(default)
         records._add_to_oca_search_engine()
         return records
 
