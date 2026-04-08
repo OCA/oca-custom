@@ -8,6 +8,10 @@
         <field name="inherit_id" ref="membership_extension.membership_category_tree_view" />
         
         <field name="arch" type="xml">
+            <field name="name" position="before">
+                <field name="sequence" widget="handle" />
+            </field>
+
             <list position="inside">
                 <field name="implied_ids" widget="many2many_tags" />
             </list>

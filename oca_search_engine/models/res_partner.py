@@ -11,17 +11,6 @@ class ResPartner(models.Model):
     _name = "res.partner"
     _inherit = ["res.partner", "se.indexable.record", "abstract.url"]
 
-    is_published = fields.Boolean(
-        tracking=True,
-        help="Whether this contact publicly appears on the website.\n"
-             "Automatically enabled for companies (sponsors and integrators).\n"
-             "To enable manually for individuals (members).",
-    )
-    is_published_email = fields.Boolean(string="Publish email", default=True)
-    is_published_phone = fields.Boolean(string="Publish phone", default=True)
-    is_published_address = fields.Boolean(string="Publish address", default=True)
-    is_published_website = fields.Boolean(string="Publish website", default=True)
-
     #====== Search engine sync logics ======#
     def _add_to_oca_search_engine(self, vals={}):
         """Add, update or remove partners in 'Company' or 'Person' index"""
@@ -61,3 +50,10 @@ class ResPartner(models.Model):
         res = super().write(vals)
         self._add_to_oca_search_engine(vals)
         return res
+
+    #===== Business logics =====#
+    def _get_working_groups(self):
+        return self.mail_group_member_ids.mail_group_id.filtered("is_working_group")
+
+    def _get_company_members(self):
+        return self.filtered("is_company").child_ids.filtered("is_member")

@@ -18,7 +18,7 @@
             <t t-call="oca_sponsor.portail_my_details_side_content" />
         </xpath>
     </template>
-    
+
     <template id="oca_sponsor.portal_my_details_sponsorship">
         <h3 class="mt-5">Sponsorship</h3>
 

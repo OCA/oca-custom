@@ -36,8 +36,6 @@
     "data": [
         "data/backend_data.xml",
         "data/index_data.xml",
-        "views/res_partner.xml",
-        "views/portal_templates.xml",
     ],
     "demo": [],
     "post_init_hook": "post_init_hook",

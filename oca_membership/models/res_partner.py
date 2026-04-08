@@ -1,14 +1,21 @@
 # Copyright 2026 AKRETION
+# @author Arnaud LAYEC <arnaud.layec@akretion.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models, api, _
+from odoo import fields, models, api, Command, _
 
 class ResPartner(models.Model):
     _inherit = ["res.partner"]
 
     is_member = fields.Boolean(
-        string="Is currently a member",
+        string="Member",
+        help="Is currently a member of the assocation",
         compute="_compute_is_member",
+        store=True,
+    )
+    is_integrator = fields.Boolean(
+        string="Integrator",
+        compute="_compute_is_integrator",
         store=True,
     )
     membership_category_id = fields.Many2one(
@@ -19,12 +26,19 @@ class ResPartner(models.Model):
     )
     membership_category_ids = fields.Many2many(
         string="Active roles",
-        # `_compute_membership_state` is inherited too
+        compute="_compute_membership_state",
     )
-    mail_group_member_ids = fields.One2many(
-        comodel_name="mail.group.member",
-        inverse_name="partner_id",
+    # website privacy
+    is_published = fields.Boolean(
+        tracking=True,
+        help="Whether this contact publicly appears on the website.\n"
+             "Automatically enabled for companies (sponsors and integrators).\n"
+             "To enable manually for individuals (members).",
     )
+    is_published_email = fields.Boolean(string="Publish email", default=True)
+    is_published_phone = fields.Boolean(string="Publish phone", default=True)
+    is_published_address = fields.Boolean(string="Publish address", default=True)
+    is_published_website = fields.Boolean(string="Publish website", default=True)
 
     def _default_membership_category_id(self):
         return self.env["membership.membership_category"].search([], limit=1).id
@@ -32,25 +46,36 @@ class ResPartner(models.Model):
     #===== Compute =====#
     @api.depends("membership_category_ids.implied_ids")
     def _compute_membership_state(self):
-        """Change `membership_category_ids` so it displays current role
-        plus implied roles, e.g. a 'Delegate' is also a 'Member'
-        (for the website, and the backend)"""
+        """Add in `membership_category_ids` the current role and its implied roles
+        Example: a 'Delegate' is also a 'Member'"""
         res = super()._compute_membership_state()
         for partner in self:
             partner.membership_category_ids |= partner.membership_category_ids.implied_ids
         return res
-    
+
     @api.depends("membership_state")
     def _compute_is_member(self):
         member_states = self._membership_member_states()
         for partner in self:
             partner.is_member = bool(partner.membership_state in member_states)
 
-    #===== Business logics =====#
-    def _get_working_groups(self):
-        """For `oca_search_engine"""
-        return self.mail_group_member_ids.mail_group_id.filtered("is_working_group")
+    @api.depends(
+        "child_ids",
+        "child_ids.github_name",
+        "child_ids.membership_state",
+        "child_ids.parent_id",
+    )
+    def _compute_is_integrator(self):
+        """Integrators are companies having contributors or members"""
+        for partner in self:
+            partner.is_integrator = (
+                partner.is_company and any(
+                    child._is_contributor() or child.is_member
+                    for child in partner.child_ids
+                )
+            )
 
-    def _get_company_members(self):
-        """Members of a company"""
-        return self.filtered("is_company").child_ids.filtered("is_member")
+    #===== Logics =====#
+    def _is_contributor(self):
+        """Partner with any commit, pull request or message on Github"""
+        return bool(self.vcp_user_ids)

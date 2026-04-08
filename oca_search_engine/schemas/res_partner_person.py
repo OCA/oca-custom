@@ -2,6 +2,7 @@
 # @author Arnaud LAYEC <arnaud.layec@akretion.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from odoo import _
 from typing import Union
 from extendable_pydantic import StrictExtendableBaseModel
 from .res_partner_common import Country, LogoUrls
@@ -14,8 +15,8 @@ class Role(StrictExtendableBaseModel):
     @classmethod
     def from_record(cls, record):
         return cls.model_construct(
-            id=record.id,
-            name=record.name,
+            id=record["id"],
+            name=record["name"],
         )
 
 class Team(StrictExtendableBaseModel):
@@ -155,9 +156,9 @@ class Person(PersonBase):
             Role.from_record(x)
             for x in record.membership_category_ids.sorted("sequence", reverse=True)
         ]
-        if False and record.contributor_count: # TODO review with @sebastienbeau correct field name?
-            res.append({
+        if record._is_contributor():
+            res.append(Role.from_record({
                 "id": -1,
                 "name": _("Contributor"),
-            })
+            }))
         return res

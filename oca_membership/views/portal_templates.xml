@@ -18,7 +18,7 @@
                         <option value="1" t-att-selected="partner.is_published">Publish my profile</option>
                     </select>
                 </div>
-                
+
                 <div class="mb-1">
                     <input
                         type="checkbox"

@@ -11,8 +11,7 @@
 
         <field name="arch" type="xml">
             <!-- Default filters -->
-            <filter name="type_company" position="after">
-                <separator name="membership" />
+            <filter name="is_integrator" position="after">
                 <filter string="Sponsors" name="is_sponsor" domain="[('is_sponsor', '=', True)]" />
                 <filter string="Sponsors to review" name="sponsor_to_review" domain="[('is_sponsor', '=', True), ('sponsor_to_review', '=', True)]" />
             </filter>
@@ -59,6 +58,14 @@
             <sheet position="before">
                 <div class="alert alert-warning" role="alert" name="warning_sponsor_review" invisible="not sponsor_to_review">
                     Sponsor information are pending a review to be updated on the website.
+
+                    <button name="button_sponsor_review_accept"
+                        type="object"
+                        string="Accept changes"
+                        icon="fa-check"
+                        class="btn btn-success"
+                        invisible="not is_sponsor_reviewer or not sponsor_to_review"
+                    />
                 </div>
             </sheet>
 
@@ -78,15 +85,6 @@
             <!-- Add dedicated "Sponsorship" page -->
             <page name="membership" position="after">
                 <page name="sponsorship" string="Sponsorship" invisible="not is_company or sponsor_parent_id">
-                    
-                    <button name="button_sponsor_review_accept"
-                        type="object"
-                        string="Review sponsor"
-                        icon="fa-check"
-                        class="btn btn-success"
-                        invisible="not is_sponsor_reviewer or not sponsor_to_review"
-                        help="Accept the changes in sponsor data and publish them to the website."
-                    />
 
                     <!-- Configuration -->
                     <group name="oca_sponsor_config" string="Sponsor configuration" col="12">

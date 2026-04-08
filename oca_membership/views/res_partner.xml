@@ -3,6 +3,21 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
 
+    <!-- res.partner: Search -->
+    <record id="view_res_partner_filter" model="ir.ui.view">
+        <field name="name">res.partner.select.oca_search_engine</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+
+        <field name="arch" type="xml">
+            <filter name="type_company" position="after">
+                <separator name="membership" />
+                <filter string="Published" name="is_published" domain="[('is_published', '=', True)]" />
+                <filter string="Integrator" name="is_integrator" domain="[('is_integrator', '=', True)]" />
+            </filter>
+        </field>
+    </record>
+
     <!-- res.partner Form (membership_extension) -->
     <record id="view_partner_form" model="ir.ui.view">
         <field name="name">res.partner.form.membership_extension.oca_membership</field>
@@ -14,6 +29,30 @@
             <xpath expr="//field[@name='membership_category_ids' and @widget='many2many_tags']" position="before">
                 <field name="membership_category_id" />
             </xpath>
+            <!-- Hide `membership_category_ids` -->
+            <xpath expr="//field[@name='membership_category_ids' and @widget='many2many_tags']" position="attrbiutes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+    <!-- res.partner: Form (base): add "is_published" toggles -->
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form.oca_search_engine</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Website" name="website">
+                    <group name="website">
+                        <field name="is_published" widget="boolean_toggle" />
+                        <field name="is_published_email" widget="boolean_toggle" invisible="not is_published" />
+                        <field name="is_published_phone" widget="boolean_toggle" invisible="not is_published" />
+                        <field name="is_published_address" widget="boolean_toggle" invisible="not is_published" />
+                        <field name="is_published_website" widget="boolean_toggle" invisible="not is_published" />
+                    </group>
+                </page>
+            </notebook>
         </field>
     </record>
 

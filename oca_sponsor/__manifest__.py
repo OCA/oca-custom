@@ -13,6 +13,7 @@
     "category": "Custom",
     "depends": [
         "mail_activity_team", # for sponsor review process
+        "oca_membership",
         "membership_extension", # for security groups
         "website_blog",
     ],
