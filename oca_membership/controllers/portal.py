@@ -23,6 +23,7 @@ class CustomerPortalPublish(CustomerPortal):
             "is_published_phone",
             "is_published_address",
             "is_published_website",
+            "is_avatar_github",
         ]
 
     def details_form_validate(self, data, partner_creation=False):
@@ -33,6 +34,7 @@ class CustomerPortalPublish(CustomerPortal):
             data[field] = field in data and data[field] in ("1", "on")
 
         # Avatar
+        avatar_update = False
         image_file = request.httprequest.files.get("image_1920")
         if image_file and image_file.filename:
             mimetype = image_file.mimetype or ""
@@ -43,15 +45,18 @@ class CustomerPortalPublish(CustomerPortal):
                 error["image_1920"] = _(
                     "File is too big (%d Mo max).", AVATAR_MAX_SIZE / 1024 / 1024
                 )
-            else:
+            elif content:
                 data["image_1920"] = base64.b64encode(content)
+                avatar_update = True
             image_file.seek(0)
+        if not avatar_update:
+            data.pop("image_1920")
 
         return error, error_message
 
     def _get_optional_fields(self):
         return (
             super()._get_optional_fields()
-            + ["website"]
+            + ["website", "github_user"]
             + self._get_is_published_fields()
         )

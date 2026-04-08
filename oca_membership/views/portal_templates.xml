@@ -28,7 +28,7 @@
     >
         <xpath expr="//input[@name='phone']/parent::div" position="after">
             <div
-                t-attf-class="mb-3 #{error.get('phone') and 'o_has_error' or ''} col-xl-6"
+                t-attf-class="mb-3 #{error.get('website') and 'o_has_error' or ''} col-xl-6"
             >
                 <label class="col-form-label" for="website">Website URL</label>
                 <input
@@ -36,6 +36,18 @@
                     name="website"
                     t-attf-class="form-control #{error.get('website') and 'is-invalid' or ''}"
                     t-att-value="partner.website"
+                />
+            </div>
+
+            <div
+                t-attf-class="mb-3 #{error.get('github_user') and 'o_has_error' or ''} col-xl-6"
+            >
+                <label class="col-form-label" for="github_user">Github user</label>
+                <input
+                    type="text"
+                    name="github_user"
+                    t-attf-class="form-control #{error.get('github_user') and 'is-invalid' or ''}"
+                    t-att-value="partner.github_user"
                 />
             </div>
         </xpath>
@@ -53,14 +65,28 @@
                     />
                 </div>
 
-                <input
-                    type="file"
-                    name="image_1920"
-                    id="image_1920"
-                    accept="image/jpeg,image/png"
-                    class="form-control"
-                />
-                <div class="form-text">JPG or PNG, max 2 Mo.</div>
+                <div class="mb-2">
+                    <input
+                        type="checkbox"
+                        name="is_avatar_github"
+                        id="is_avatar_github"
+                        class="form-check-input"
+                        t-att-checked="partner.is_avatar_github"
+                    />
+                    <label for="is_avatar_github">Fetch the avatar from Github</label>
+                </div>
+
+                <div class="mb-2" t-if="not partner.is_avatar_github">
+                    <label for="image_1920">Or upload your avatar</label>
+                    <input
+                        type="file"
+                        name="image_1920"
+                        id="image_1920"
+                        accept="image/jpeg,image/png"
+                        class="form-control"
+                    />
+                    <div class="form-text">JPG or PNG, max 2 Mo.</div>
+                </div>
 
                 <!-- Affichage des erreurs -->
                 <div t-if="error.get('avatar')" class="invalid-feedback d-block">
