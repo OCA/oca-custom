@@ -16,6 +16,7 @@
             </field>
 
             <list position="inside">
+                <field name="color" widget="color_picker" />
                 <field name="implied_ids" widget="many2many_tags" />
             </list>
         </field>

@@ -3,7 +3,6 @@
 
 from odoo import Command, _, api, exceptions, fields, models
 from odoo.osv.expression import NOT_OPERATOR
-from odoo.tools.safe_eval import safe_eval
 
 SPONSOR_WEBSITE_FIELDS = [
     # editable fields by the sponsor from the portal
@@ -209,21 +208,6 @@ class ResPartner(models.Model):
         return super().search_fetch(domain, field_names, offset, limit, order)
 
     # ===== Actions & buttons =====#
-    def action_open_blog_post(self):
-        action = self.env.ref("website_blog.action_blog_post").sudo().read([])[0]
-        action.update(
-            {
-                "domain": [("author_id", "=", self.id)],
-                "context": (
-                    safe_eval(action.get("context", "{}"))
-                    | {
-                        "default_author_id": self.id,
-                    }
-                ),
-            }
-        )
-        return action
-
     def button_sponsor_review_accept(self):
         if not self.env.user._is_sponsor_reviewer():
             raise exceptions.AccessError(_("You are not a Sponsor Reviewer."))

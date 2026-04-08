@@ -159,7 +159,7 @@ class Person(PersonBase):
             Role.from_record(x)
             for x in record.membership_category_ids.sorted("sequence", reverse=True)
         ]
-        if record._is_contributor():
+        if record.is_contributor:
             res.append(
                 Role.from_record(
                     {

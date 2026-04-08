@@ -174,7 +174,6 @@
         "web_widget_dropdown_dynamic",
         "website_sale_hide_empty_category",
         # Custom
-        "oca_custom",
         "oca_membership",
         "oca_search_engine",
         "oca_sponsor",

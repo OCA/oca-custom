@@ -14,6 +14,17 @@ class ResPartner(models.Model):
         compute="_compute_is_member",
         store=True,
     )
+    is_elected = fields.Boolean(
+        string="Elected",
+        compute="_compute_is_elected",
+        search="_search_is_elected",
+    )
+    is_contributor = fields.Boolean(
+        string="Contributor",
+        help="Has participated in Github, with a comment, a commit, ...",
+        compute="_compute_is_contributor",
+        store=True,
+    )
     is_integrator = fields.Boolean(
         string="Integrator",
         compute="_compute_is_integrator",
@@ -21,13 +32,14 @@ class ResPartner(models.Model):
     )
     membership_category_id = fields.Many2one(
         comodel_name="membership.membership_category",
-        string="Target role",
-        help="Role for next subscribed membership",
-        default=lambda self: self._default_membership_category_id(),
+        string="Current category",
+        default=lambda self: self._get_default_membership_category().id,
+        help="This field may reflect a Role in the association. Changing it is "
+             "immediatly reflected on Membership Categories.",
     )
     membership_category_ids = fields.Many2many(
-        string="Active roles",
         compute="_compute_membership_state",
+        help="Categories of active membership lines plus Current Category.",
     )
     # Mail Groups: needed for for `oca_search_engine`,
     # rest is in `oca_membership_groups`
@@ -42,31 +54,45 @@ class ResPartner(models.Model):
         "Automatically enabled for companies (sponsors and integrators).\n"
         "To enable manually for individuals (members).",
     )
-    is_published_email = fields.Boolean(string="Publish email")
-    is_published_phone = fields.Boolean(string="Publish phone")
-    is_published_address = fields.Boolean(string="Publish address")
-    is_published_website = fields.Boolean(string="Publish website")
+    is_published_email = fields.Boolean(string="Publish email", default=True)
+    is_published_phone = fields.Boolean(string="Publish phone", default=True)
+    is_published_address = fields.Boolean(string="Publish address", default=True)
+    is_published_website = fields.Boolean(string="Publish website", default=True)
 
-    def _default_membership_category_id(self):
-        return self.env["membership.membership_category"].search([], limit=1).id
+    @api.model
+    def _get_default_membership_category(self):
+        return self.env["membership.membership_category"].search([], limit=1)
 
     # ===== Compute =====#
-    @api.depends("membership_category_ids.implied_ids")
-    def _compute_membership_state(self):
-        """Add in `membership_category_ids` the current role and its implied roles
-        Example: a 'Delegate' is also a 'Member'"""
-        res = super()._compute_membership_state()
-        for partner in self:
-            partner.membership_category_ids |= (
-                partner.membership_category_ids.implied_ids
-            )
-        return res
-
     @api.depends("membership_state")
     def _compute_is_member(self):
         member_states = self._membership_member_states()
         for partner in self:
             partner.is_member = bool(partner.membership_state in member_states)
+
+    @api.depends("is_member")
+    def _compute_is_elected(self):
+        default_category = self._get_default_membership_category()
+        for partner in self:
+            partner.is_elected = (
+                partner.membership_category_id
+                and partner.membership_category_id != default_category
+            )
+    
+    @api.model
+    def _search_is_elected(self, operator, value):
+        if operator != "=" or not isinstance(value, bool) or not value:
+            raise NotImplementedError()
+
+        default_category = self._get_default_membership_category()
+        return [
+            ("membership_category_id", "not in", [False, default_category.id]),
+        ]
+
+    @api.depends("vcp_user_ids")
+    def _compute_is_contributor(self):
+        for partner in self:
+            partner.is_contributor = bool(partner.vcp_user_ids)
 
     @api.depends(
         "child_ids",
@@ -78,11 +104,21 @@ class ResPartner(models.Model):
         """Integrators are companies having contributors or members"""
         for partner in self:
             partner.is_integrator = partner.is_company and any(
-                child._is_contributor() or child.is_member
+                child.is_contributor or child.is_member
                 for child in partner.child_ids
             )
 
-    # ===== Logics =====#
-    def _is_contributor(self):
-        """Partner with any commit, pull request or message on Github"""
-        return bool(self.vcp_user_ids)
+    @api.depends(
+        "membership_category_id",
+        "membership_category_ids.implied_ids",
+    )
+    def _compute_membership_state(self):
+        """Add in `membership_category_ids` the current role and its implied roles
+        Example: a 'Delegate' is also a 'Member'"""
+        res = super()._compute_membership_state()
+        for partner in self:
+            categories = partner.membership_category_ids
+            if partner.is_member and partner.membership_category_id:
+                categories |= partner.membership_category_id
+            partner.membership_category_ids = categories | categories.implied_ids
+        return res

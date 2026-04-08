@@ -28,11 +28,15 @@
         <field name="inherit_id" ref="mail_group.mail_group_view_form" />
 
         <field name="arch" type="xml">
-            <field name="moderator_ids" position="after">
-                <field name="is_working_group" widget="boolean_toggle" />
-                <field name="membership_category_ids" widget="many2many_tags" invisible="not membership_category_ids" />
-                <field name="grace_days" invisible="not membership_category_ids" />
-            </field>
+            <notebook position="inside">
+                <page name="Membership">
+                    <group>
+                        <field name="is_working_group" widget="boolean_toggle" />
+                        <field name="grace_days" invisible="not membership_category_ids" />
+                        <field name="membership_category_ids" widget="many2many_tags" readonly="1" invisible="not membership_category_ids" />
+                    </group>
+                </page>
+            </notebook>
         </field>
     </record>
     <!-- Search -->
@@ -62,6 +66,6 @@
         id="menu_membership_mail_group"
         sequence="30"
         parent="membership.menu_association"
-        action="oca_membership.mail_group_action_groups"
+        action="oca_membership_groups.mail_group_action_groups"
     />
 </odoo>

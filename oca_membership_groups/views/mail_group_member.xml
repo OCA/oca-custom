@@ -9,9 +9,23 @@
         <field name="inherit_id" ref="mail_group.mail_group_member_view_tree" />
 
         <field name="arch" type="xml">
-            <field name="partner_id" position="after">
+            <list position="inside">
+                <field name="grace_date_start" optional="hide" />
                 <field name="grace_date_deadline" widget="remaining_days" invisible="not grace_date_start" />
-            </field>
+            </list>
+        </field>
+    </record>
+
+    <record id="mail_group_member_view_search" model="ir.ui.view">
+        <field name="name">mail.group.member.view.search.membership_groups</field>
+        <field name="model">mail.group.member</field>
+        <field name="inherit_id" ref="mail_group.mail_group_member_view_search" />
+        <field name="arch" type="xml">
+            <search position="inside">
+                <filter string="Unsubscribed (archived)" name="inactive" domain="[('active', '=', False)]" />
+                <separator />
+                <filter string="In grace period" name="grace" domain="[('grace_date_start', '!=', False)]" />
+            </search>
         </field>
     </record>
 

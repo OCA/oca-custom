@@ -2,11 +2,11 @@
 <!-- Copyright 2026 AKRETION
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-    <!-- res.partner Search -->
-    <record id="view_res_partner_filter" model="ir.ui.view">
-        <field name="name">res.partner.select.oca_sponsor</field>
+    <!-- Search -->
+    <record id="view_res_partner_member_filter" model="ir.ui.view">
+        <field name="name">res.partner.select.membership_extension.oca_sponsor</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="oca_membership.view_res_partner_filter" />
+        <field name="inherit_id" ref="oca_membership.view_res_partner_member_filter" />
 
         <field name="arch" type="xml">
             <!-- Default filters -->
@@ -35,7 +35,7 @@
         </field>
     </record>
 
-    <!-- res.partner Kanban -->
+    <!-- Kanban -->
     <record model="ir.ui.view" id="res_partner_kanban_view">
         <field name="name">res.partner.kanban.oca_sponsor</field>
         <field name="model">res.partner</field>
@@ -53,7 +53,7 @@
         </field>
     </record>
 
-    <!-- res.partner Form : add "Sponsorship" page -->
+    <!-- Form : add "Sponsorship" page -->
     <record id="view_partner_form" model="ir.ui.view">
         <field name="name">res.partner.form.oca_sponsor</field>
         <field name="model">res.partner</field>
@@ -89,9 +89,13 @@
             <!-- Add Smart Button for blog posts -->
             <div name="button_box" position="inside">
                 <button
-                    type="object"
+                    type="action"
+                    name="%(website_blog.action_blog_post)d"
+                    context="{
+                        'default_author_id': id,
+                        'search_default_author_id': id,
+                    }"
                     class="oe_stat_button"
-                    name="action_open_blog_post"
                     icon="fa-globe"
                     invisible="not is_sponsor"
                 >
