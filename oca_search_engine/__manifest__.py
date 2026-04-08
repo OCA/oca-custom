@@ -25,7 +25,7 @@
         "search_engine_serializer_pydantic",
         # custom
         "oca_sponsor",
-        "oca_membership",
+        "oca_membership_groups",
         "website_oca_integrator",
         # following dependency are needed by uv to resolve the dep
         # correctly as module are not merged

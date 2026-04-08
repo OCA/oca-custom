@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 AKRETION
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <!-- res.partner Form (membership_extension) -->
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form.membership_extension.oca_membership_groups</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="membership_extension.view_partner_form"/>
+        
+        <field name="arch" type="xml">
+            <!-- Add `mail_group_ids` -->
+            <xpath expr="//field[@name='membership_category_ids' and @widget='many2many_tags']" position="after">
+                <field name="mail_group_ids" widget="many2many_tags" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -10,23 +10,14 @@
 
         <field name="arch" type="xml">
             <field name="description" position="before">
-                <div class="flex" invisible="not is_working_group">
-                    <span
-                        class="o_badge badge rounded-pill o_tag o_tag_color_4"
-                    >Working Group</span>
+                <div class="flex" invisible="not is_working_group and not membership_category_ids">
+                    <span class="o_badge badge rounded-pill o_tag o_tag_color_4" invisible="not is_working_group">
+                        Working Group
+                    </span>
+                    <span class="o_badge badge rounded-pill o_tag o_tag_color_4" invisible="not membership_category_ids">
+                        Membership
+                    </span>
                 </div>
-            </field>
-        </field>
-    </record>
-    <!-- List -->
-    <record id="mail_group_view_list" model="ir.ui.view">
-        <field name="name">mail.group.view.list.oca_membership</field>
-        <field name="model">mail.group</field>
-        <field name="inherit_id" ref="mail_group.mail_group_view_list" />
-
-        <field name="arch" type="xml">
-            <field name="moderation" position="after">
-                <field name="is_working_group" />
             </field>
         </field>
     </record>
@@ -37,8 +28,10 @@
         <field name="inherit_id" ref="mail_group.mail_group_view_form" />
 
         <field name="arch" type="xml">
-            <field name="moderation" position="after">
+            <field name="moderator_ids" position="after">
                 <field name="is_working_group" widget="boolean_toggle" />
+                <field name="membership_category_ids" widget="many2many_tags" invisible="not membership_category_ids" />
+                <field name="grace_days" invisible="not membership_category_ids" />
             </field>
         </field>
     </record>
@@ -59,20 +52,16 @@
         </field>
     </record>
 
-    <!-- New entry menu 'Working Groups' in Membership app -->
-    <record id="mail_group_action_working_groups" model="ir.actions.act_window">
-        <field name="name">Working Groups</field>
+    <!-- New entry menu 'Groups' in Membership app -->
+    <record id="mail_group_action_groups" model="ir.actions.act_window">
+        <field name="name">Groups</field>
         <field name="res_model">mail.group</field>
         <field name="view_mode">kanban,list,form</field>
-        <field name="context">{
-            'default_is_working_group': True,
-            'search_default_is_working_group': True,
-        }</field>
     </record>
     <menuitem
         id="menu_membership_mail_group"
         sequence="30"
         parent="membership.menu_association"
-        action="oca_membership.mail_group_action_working_groups"
+        action="oca_membership.mail_group_action_groups"
     />
 </odoo>
