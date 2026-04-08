@@ -40,6 +40,11 @@ Custom OCA for exporting public data in typesense
 .. contents::
    :local:
 
+Usage
+=====
+
+
+
 Bug Tracker
 ===========
 
@@ -57,6 +62,12 @@ Authors
 -------
 
 * Akretion
+
+Contributors
+------------
+
+- Sébastien BEAU (sebastien.beau@akretion.com)
+- Arnaud LAYEC (arnaud.layec@akretion.com)
 
 Maintainers
 -----------

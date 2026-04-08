@@ -2,11 +2,14 @@
 # @author Arnaud LAYEC <arnaud.layec@akretion.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import exceptions
-from typing import Union
+
 from extendable_pydantic import StrictExtendableBaseModel
+
+from odoo import exceptions
+
 from .res_partner_common import Country, LogoUrls
-    
+
+
 class SponsorshipLevel(StrictExtendableBaseModel):
     id: int
     rank: int
@@ -20,6 +23,7 @@ class SponsorshipLevel(StrictExtendableBaseModel):
             rank=record.sequence,
         )
 
+
 class Industry(StrictExtendableBaseModel):
     name: str
     description: str
@@ -30,6 +34,7 @@ class Industry(StrictExtendableBaseModel):
             name=record.name,
             description=record.description or "",
         )
+
 
 class BlogPost(StrictExtendableBaseModel):
     title: str
@@ -43,8 +48,9 @@ class BlogPost(StrictExtendableBaseModel):
             title=record.name,
             teaser=record.teaser,
             relative_url=record.website_url,
-            cover_url=record._get_background_url(), # can also pass 'height' and 'width'
+            cover_url=record._get_background_url(),
         )
+
 
 class Sponsorship(StrictExtendableBaseModel):
     description_long: str
@@ -62,12 +68,14 @@ class Sponsorship(StrictExtendableBaseModel):
             description_why_oca=record.website_description_why_sponsoring or "",
             level=SponsorshipLevel.from_record(record.grade_id),
             industries=[
-                Industry.from_record(industry) for industry in record.sponsor_industry_ids
+                Industry.from_record(industry)
+                for industry in record.sponsor_industry_ids
             ],
             stories=[
                 BlogPost.from_record(blog_post) for blog_post in record.blog_post_ids
             ],
         )
+
 
 class Company(StrictExtendableBaseModel):
     id: int
@@ -77,7 +85,7 @@ class Company(StrictExtendableBaseModel):
     website: str
     is_integrator: bool
     countries: list[Country]
-    logo_urls: Union[LogoUrls, dict]
+    logo_urls: LogoUrls | dict
     # github indicators
     contributors_count: int
     contributors_index: int
@@ -95,14 +103,15 @@ class Company(StrictExtendableBaseModel):
             # This Exception is catched by `recompute_json` and set the bindings'
             # `state` of the to-be-reviewed sponsors in error
             raise exceptions.ValidationError(
-                "The information of this sponsor were updated and are pending a "
-                "review, thus this operation was blocked."
+                record.env._(
+                    "The information of this sponsor were updated and are pending a "
+                    "review, thus this operation was blocked."
+                )
             )
 
         # ensure url is up to date
         record._update_url_key(lang=record.env.context.get("lang"))
         members = record._get_company_members()
-        github_users = record.child_ids.vcp_user_ids
         return cls.model_construct(
             id=record.id,
             name=record.sponsor_name.strip() or record.name.strip() or "",
@@ -127,5 +136,7 @@ class Company(StrictExtendableBaseModel):
             url_key=record.url_key,
             redirect_url_key=record.redirect_url_key,
             # sponsorship
-            sponsorship=None if not record.is_sponsor else Sponsorship.from_record(record),
+            sponsorship=None
+            if not record.is_sponsor
+            else Sponsorship.from_record(record),
         )

@@ -2,7 +2,6 @@
 <!-- Copyright 2026 AKRETION
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <!-- Kanban -->
     <record id="mail_group_view_kanban" model="ir.ui.view">
         <field name="name">mail.group.view.kanban.oca_membership</field>
@@ -12,7 +11,9 @@
         <field name="arch" type="xml">
             <field name="description" position="before">
                 <div class="flex" invisible="not is_working_group">
-                    <span class="o_badge badge rounded-pill o_tag o_tag_color_4">Working Group</span>
+                    <span
+                        class="o_badge badge rounded-pill o_tag o_tag_color_4"
+                    >Working Group</span>
                 </div>
             </field>
         </field>
@@ -34,7 +35,7 @@
         <field name="name">mail.group.view.form.oca_membership</field>
         <field name="model">mail.group</field>
         <field name="inherit_id" ref="mail_group.mail_group_view_form" />
-        
+
         <field name="arch" type="xml">
             <field name="moderation" position="after">
                 <field name="is_working_group" widget="boolean_toggle" />
@@ -46,10 +47,14 @@
         <field name="name">mail.group.view.search.oca_membership</field>
         <field name="model">mail.group</field>
         <field name="inherit_id" ref="mail_group.mail_group_view_search" />
-        
+
         <field name="arch" type="xml">
             <filter name="moderation" position="after">
-                <filter string="Working Groups" name="is_working_group" domain="[('is_working_group', '=', True)]" />
+                <filter
+                    string="Working Groups"
+                    name="is_working_group"
+                    domain="[('is_working_group', '=', True)]"
+                />
             </filter>
         </field>
     </record>
@@ -70,5 +75,4 @@
         parent="membership.menu_association"
         action="oca_membership.mail_group_action_working_groups"
     />
-
 </odoo>

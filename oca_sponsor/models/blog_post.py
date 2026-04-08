@@ -2,11 +2,13 @@
 # @author Arnaud LAYEC <arnaud.layec@akretion.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import models, api
+from odoo import api, models
+
 
 class BlogPost(models.Model):
     """Play review process at any update of a sponsor's blog,
     except if the update is done by a reviewer"""
+
     _inherit = ["blog.post"]
 
     @api.model_create_multi

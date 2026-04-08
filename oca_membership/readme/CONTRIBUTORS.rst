@@ -1,1 +1,0 @@
-- Arnaud LAYEC (arnaud.layec@akretion.com)

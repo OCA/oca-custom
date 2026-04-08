@@ -2,13 +2,14 @@
 # Usage: click-odoo -d <database> 003_reset_default_avatar.py
 # claude.ai generated
 
-import click, click_odoo
-
 import base64
 import hashlib
+import logging
 import urllib.request
 
-import logging
+import click
+import click_odoo
+
 _logger = logging.getLogger(__file__)
 
 BATCH_SIZE = 100
@@ -31,10 +32,12 @@ DEFAULT_AVATAR_URLS = [
     "https://oca.akretion.com/web/image/res.partner/11518/avatar_1920",
 ]
 
+
 @click.command()
-@click_odoo.env_options(default_log_level='info')
+@click_odoo.env_options(default_log_level="info")
 def main(env):
     _reset_default_avatar(env)
+
 
 def _reset_default_avatar(env):
     # 1. Récupérer les hash des avatars par défaut
@@ -48,7 +51,7 @@ def _reset_default_avatar(env):
     if not all_ids:
         _logger.info("Aucun partenaire avec une image_1920, rien à faire.")
         return
-    
+
     # 3. Traitement par batch avec commit intermédiaire
     total = len(all_ids)
     total_cleaned = 0
@@ -99,7 +102,9 @@ def get_default_avatar_hashes():
     On hash les bytes bruts (décodés depuis la réponse HTTP).
     """
     hashes = {}  # hash -> url (pour les logs)
-    _logger.info("Téléchargement des %d avatars par défaut...", len(DEFAULT_AVATAR_URLS))
+    _logger.info(
+        "Téléchargement des %d avatars par défaut...", len(DEFAULT_AVATAR_URLS)
+    )
     for url in DEFAULT_AVATAR_URLS:
         md5, image_bytes = fetch_image_hash(url)
         if md5:
@@ -109,6 +114,7 @@ def get_default_avatar_hashes():
             _logger.warning("  ✗ Échec pour %s", url)
     _logger.info("%d hash récupérés.", len(hashes))
     return hashes
+
 
 def fetch_image_hash(url):
     """Télécharge une image depuis une URL et retourne son hash MD5."""
@@ -121,16 +127,20 @@ def fetch_image_hash(url):
         _logger.error("Impossible de télécharger l'image depuis %s : %s", url, e)
         return None, None
 
+
 def iter_partner_ids(env):
     """Retourne la liste complète des IDs de res.partner ayant une image_1920."""
     _logger.info("Récupération des IDs des partenaires avec une image_1920 définie...")
     # On ne récupère que les IDs pour ne pas tout charger en mémoire
-    partners = env["res.partner"].with_context(active_test=False).search(
-        [("image_1920", "!=", False)]
+    partners = (
+        env["res.partner"]
+        .with_context(active_test=False)
+        .search([("image_1920", "!=", False)])
     )
     ids = partners.ids
     _logger.info("%d partenaire(s) trouvé(s) avec une image_1920.", len(ids))
     return ids
+
 
 def process_batch(env, partner_ids, default_hashes):
     """
@@ -155,7 +165,8 @@ def process_batch(env, partner_ids, default_hashes):
 
             if image_md5 in default_hashes:
                 _logger.info(
-                    "  → Partenaire %d (%s) : correspond à l'avatar par défaut %s -> remise à zéro.",
+                    "  → Partenaire %d (%s) : correspond à l'avatar par "
+                    "défaut %s -> remise à zéro.",
                     partner.id,
                     partner.display_name,
                     default_hashes[image_md5],
@@ -172,6 +183,7 @@ def process_batch(env, partner_ids, default_hashes):
             )
 
     return cleaned
+
 
 if __name__ == "__main__":
     main()

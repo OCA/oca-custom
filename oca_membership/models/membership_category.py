@@ -4,13 +4,13 @@
 
 from odoo import fields, models
 
+
 class MembershipCategory(models.Model):
     _inherit = ["membership.membership_category"]
     _description = "Membership role"
     _order = "sequence"
 
     sequence = fields.Integer(
-        string="Sequence",
         help="First category will the default one for new members.",
     )
     implied_ids = fields.Many2many(

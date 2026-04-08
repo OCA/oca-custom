@@ -12,7 +12,7 @@ class ResUsers(models.Model):
 
     @api.model
     def _get_sponsor_reviewer_team(self):
-        team_id = self.env['ir.model.data']._xmlid_to_res_id(
+        team_id = self.env["ir.model.data"]._xmlid_to_res_id(
             "oca_sponsor.mail_activity_team_sponsor_reviewers",
             raise_if_not_found=False,
         )
@@ -32,15 +32,19 @@ class ResUsers(models.Model):
             ResUsers, self.with_context(team_activities=True)
         )._get_activity_groups()
 
-        states = ["total"] + [x[0] for x in self.env["mail.activity"]._fields["state"].selection]
+        states = ["total"] + [
+            x[0] for x in self.env["mail.activity"]._fields["state"].selection
+        ]
         merged_activities = {}
         for activity in user_activities + team_activities:
             model = activity["model"]
-            if not model in merged_activities:
+            if model not in merged_activities:
                 merged_activities[model] = activity
             else:
                 for state in states:
                     if state + "_count" in activity:
-                        merged_activities[model][state + "_count"] += activity[state + "_count"]
+                        merged_activities[model][state + "_count"] += activity[
+                            state + "_count"
+                        ]
 
         return list(merged_activities.values())

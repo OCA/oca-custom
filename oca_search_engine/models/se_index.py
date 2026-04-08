@@ -50,9 +50,6 @@ class SeIndex(models.Model):
             "companies_exports": CompanySerializer(),
             "persons_exports": PersonSerializer(),
             # "pscs_exports": PscSerializer(),
-            "vcp_odoo_module_version_exports": VcpOdooModuleVersionSerializer()
+            "vcp_odoo_module_version_exports": VcpOdooModuleVersionSerializer(),
         }
-        return (
-            mapped_serializer.get(self.serializer_type)
-            or super()._get_serializer()
-        )
+        return mapped_serializer.get(self.serializer_type) or super()._get_serializer()

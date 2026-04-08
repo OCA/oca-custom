@@ -2,7 +2,8 @@
 # @author Arnaud LAYEC <arnaud.layec@akretion.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models, api, Command, _
+from odoo import api, fields, models
+
 
 class ResPartner(models.Model):
     _inherit = ["res.partner"]
@@ -32,8 +33,8 @@ class ResPartner(models.Model):
     is_published = fields.Boolean(
         tracking=True,
         help="Whether this contact publicly appears on the website.\n"
-             "Automatically enabled for companies (sponsors and integrators).\n"
-             "To enable manually for individuals (members).",
+        "Automatically enabled for companies (sponsors and integrators).\n"
+        "To enable manually for individuals (members).",
     )
     is_published_email = fields.Boolean(string="Publish email", default=True)
     is_published_phone = fields.Boolean(string="Publish phone", default=True)
@@ -43,14 +44,16 @@ class ResPartner(models.Model):
     def _default_membership_category_id(self):
         return self.env["membership.membership_category"].search([], limit=1).id
 
-    #===== Compute =====#
+    # ===== Compute =====#
     @api.depends("membership_category_ids.implied_ids")
     def _compute_membership_state(self):
         """Add in `membership_category_ids` the current role and its implied roles
         Example: a 'Delegate' is also a 'Member'"""
         res = super()._compute_membership_state()
         for partner in self:
-            partner.membership_category_ids |= partner.membership_category_ids.implied_ids
+            partner.membership_category_ids |= (
+                partner.membership_category_ids.implied_ids
+            )
         return res
 
     @api.depends("membership_state")
@@ -68,14 +71,12 @@ class ResPartner(models.Model):
     def _compute_is_integrator(self):
         """Integrators are companies having contributors or members"""
         for partner in self:
-            partner.is_integrator = (
-                partner.is_company and any(
-                    child._is_contributor() or child.is_member
-                    for child in partner.child_ids
-                )
+            partner.is_integrator = partner.is_company and any(
+                child._is_contributor() or child.is_member
+                for child in partner.child_ids
             )
 
-    #===== Logics =====#
+    # ===== Logics =====#
     def _is_contributor(self):
         """Partner with any commit, pull request or message on Github"""
         return bool(self.vcp_user_ids)

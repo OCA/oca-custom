@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pypandoc
 
-from odoo import models, fields
+from odoo import models
 
 _logger = logging.getLogger(__name__)
 
@@ -91,8 +91,10 @@ class VcpRule(models.Model):
     #                 if dirname == "psc":
     #                     mapped_pscs.setdefault(name, {"repos": {}}).update(item)
     #                 elif dirname == "repo":
-    #                     mapped_pscs.setdefault(item["psc"], {"repos": {}})["repos"][name] = item["name"]
-    #                     mapped_pscs.setdefault(item["psc_rep"], {"repos": {}})["repos"][name] = item["name"]
+    #                     mapped_pscs.setdefault(item["psc"], {"repos": {}})\
+    #                         ["repos"][name] = item["name"]
+    #                     mapped_pscs.setdefault(item["psc_rep"], {"repos": {}})\
+    #                         ["repos"][name] = item["name"]
     #                 else:
     #                     raise NotImplementedError(_("Operation not supported."))
 

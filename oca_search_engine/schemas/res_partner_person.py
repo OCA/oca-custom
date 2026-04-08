@@ -2,9 +2,11 @@
 # @author Arnaud LAYEC <arnaud.layec@akretion.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _
-from typing import Union
+
 from extendable_pydantic import StrictExtendableBaseModel
+
+from odoo import _
+
 from .res_partner_common import Country, LogoUrls
 
 
@@ -19,8 +21,10 @@ class Role(StrictExtendableBaseModel):
             name=record["name"],
         )
 
+
 class Team(StrictExtendableBaseModel):
     """For Working Groups and PSC"""
+
     id: int
     name: str
     description: str
@@ -32,6 +36,7 @@ class Team(StrictExtendableBaseModel):
             name=record.name,
             description=record.description or "",
         )
+
 
 class ContactInfo(StrictExtendableBaseModel):
     email: str
@@ -47,23 +52,18 @@ class ContactInfo(StrictExtendableBaseModel):
             phone=record.is_published_phone and (record.phone or record.mobile) or "",
             website=record.is_published_website and record.website or "",
             city=(
-                "%(city)s %(state_code)s %(zip)s" % {
-                    "city": record.city,
-                    "state_code": record.state_id.code,
-                    "zip": record.zip,
-                }
-                if record.is_published_address and any([record.city, record.state_id.code, record.zip])
+                f"{record.city} {record.state_id.code} {record.zip}"
+                if record.is_published_address
+                and any([record.city, record.state_id.code, record.zip])
                 else ""
             ),
             address=(
-                "%(street)s\n%(street2)s" % {
-                    "street": record.street,
-                    "street2": record.street2,
-                }
+                f"{record.street}\n{record.street2}"
                 if record.is_published_address and (record.street or record.street2)
                 else ""
-            )
+            ),
         )
+
 
 class ParentCompany(StrictExtendableBaseModel):
     id: int
@@ -75,7 +75,9 @@ class ParentCompany(StrictExtendableBaseModel):
         if not record.commercial_company_name:
             return {}
         else:
-            record.commercial_partner_id._update_url_key(lang=record.env.context.get("lang"))
+            record.commercial_partner_id._update_url_key(
+                lang=record.env.context.get("lang")
+            )
             return cls.model_construct(
                 id=record.commercial_partner_id.id,
                 name=record.commercial_company_name.strip() or "",
@@ -85,22 +87,23 @@ class ParentCompany(StrictExtendableBaseModel):
 
 class PersonBase(StrictExtendableBaseModel):
     """Intermediate 'Person' Class, used in PSC members"""
+
     id: int
     name: str
-    company: Union[ParentCompany, dict] # allow {}
+    company: ParentCompany | dict  # allow {}
     contact: ContactInfo
-    country: Union[Country, dict]
+    country: Country | dict
 
     # github
     github_users: list[str]
-    logo_urls: Union[LogoUrls, dict]
+    logo_urls: LogoUrls | dict
 
     @classmethod
     def from_record(cls, record):
         # ensure url is up to date
         record._update_url_key(lang=record.env.context.get("lang"))
         return cls.model_construct(**cls._model_construct_dict(record))
-    
+
     @classmethod
     def _model_construct_dict(cls, record):
         """Dict to permit inheritance in `Person`"""
@@ -118,6 +121,7 @@ class PersonBase(StrictExtendableBaseModel):
             # technical website fields
             "url_key": record.url_key,
         }
+
 
 class Person(PersonBase):
     url_key: str
@@ -144,9 +148,8 @@ class Person(PersonBase):
             # "psc": len(psc),
             # "psc_list": psc.read(["name", "description"]),
             "work_group_list": [
-                Team.from_record(record)
-                for record in record._get_working_groups()
-            ]
+                Team.from_record(record) for record in record._get_working_groups()
+            ],
         }
 
     @classmethod
@@ -157,8 +160,12 @@ class Person(PersonBase):
             for x in record.membership_category_ids.sorted("sequence", reverse=True)
         ]
         if record._is_contributor():
-            res.append(Role.from_record({
-                "id": -1,
-                "name": _("Contributor"),
-            }))
+            res.append(
+                Role.from_record(
+                    {
+                        "id": -1,
+                        "name": _("Contributor"),
+                    }
+                )
+            )
         return res

@@ -17,28 +17,32 @@ class TestOcaSponsor(TransactionCase):
         cls.country_be = cls.env.ref("base.be")
         cls.country_ch = cls.env.ref("base.ch")
         # Industries
-        cls.industry_a, cls.industry_b = cls.env["res.partner.industry"].create([
-            {"name": "ERP"}, {"name": "CRM"}
-        ])
+        cls.industry_a, cls.industry_b = cls.env["res.partner.industry"].create(
+            [{"name": "ERP"}, {"name": "CRM"}]
+        )
 
         # Users & partners
-        cls.manager = new_test_user(cls.env, "manager", groups="base.group_user,base.group_partner_manager")
-        cls.env.ref("oca_sponsor.mail_activity_team_sponsor_reviewers").member_ids |= cls.manager
+        cls.manager = new_test_user(
+            cls.env, "manager", groups="base.group_user,base.group_partner_manager"
+        )
+        cls.env.ref(
+            "oca_sponsor.mail_activity_team_sponsor_reviewers"
+        ).member_ids |= cls.manager
         cls.portal_user = new_test_user(cls.env, "sponsor", groups="base.group_portal")
         cls.sponsor = cls.portal_user.partner_id
-        cls.sponsor.with_user(cls.manager).write({
-            "grade_id": cls.grade.id,
-            "is_company": True,
-            "country_id": cls.country_fr.id,
-            "website_long_description": "Initial description",
-        })
-
+        cls.sponsor.with_user(cls.manager).write(
+            {
+                "grade_id": cls.grade.id,
+                "is_company": True,
+                "country_id": cls.country_fr.id,
+                "website_long_description": "Initial description",
+            }
+        )
 
     def test_is_sponsor_search(self):
         self.assertTrue(self.sponsor.is_sponsor)
         self.assertIn(
-            self.sponsor,
-            self.env["res.partner"].search([("is_sponsor", "=", True)])
+            self.sponsor, self.env["res.partner"].search([("is_sponsor", "=", True)])
         )
 
     @users("sponsor")
@@ -52,8 +56,8 @@ class TestOcaSponsor(TransactionCase):
 
         countries = self.sponsor.sponsor_country_ids
         self.assertIn(self.country_be, countries)
-        self.assertNotIn(self.country_fr, countries) # replaced by be
-        self.assertIn(self.country_ch, countries) # kept
+        self.assertNotIn(self.country_fr, countries)  # replaced by be
+        self.assertIn(self.country_ch, countries)  # kept
 
     @users("sponsor")
     def test_industry_id_to_ids(self):
@@ -79,13 +83,17 @@ class TestOcaSponsor(TransactionCase):
     def test_sponsor_review_membership_manager(self):
         """Membership Managers do not trigger `sponsor_to_review`"""
         self.assertFalse(self.sponsor.sponsor_to_review)
-        self.sponsor.with_user(self.manager).website_long_description = "Changed by internal"
+        self.sponsor.with_user(
+            self.manager
+        ).website_long_description = "Changed by internal"
         self.assertFalse(self.sponsor.sponsor_to_review)
-    
+
     @users("sponsor")
     def test_sponsor_review_relevant(self):
         """Mark to review when relevant (portal + fields) & create activities"""
-        self.sponsor.with_user(self.portal_user).sudo().website_long_description = "text to review"
+        self.sponsor.with_user(
+            self.portal_user
+        ).sudo().website_long_description = "text to review"
         self.assertTrue(self.sponsor.sponsor_to_review)
         self.assertIn(self.manager, self.sponsor.activity_team_user_ids)
 
@@ -100,12 +108,16 @@ class TestOcaSponsor(TransactionCase):
     def test_search_fetch_partner_order_with_context(self):
         """Sponsors to be reviewed are displayed first"""
         ResPartner = self.env["res.partner"]
-        sponsor2 = ResPartner.with_user(self.manager).create([{
-            "name": "Sponsor Corp 2",
-            "grade_id": self.grade.id,
-            "is_company": True,
-            "sponsor_to_review": False,
-        }])
+        sponsor2 = ResPartner.with_user(self.manager).create(
+            [
+                {
+                    "name": "Sponsor Corp 2",
+                    "grade_id": self.grade.id,
+                    "is_company": True,
+                    "sponsor_to_review": False,
+                }
+            ]
+        )
         sponsors = self.sponsor | sponsor2
 
         def _get_first_sponsor():
@@ -113,6 +125,7 @@ class TestOcaSponsor(TransactionCase):
                 [("id", "in", sponsors.ids)],
                 ["name", "sponsor_to_review"],
             )[0]
+
         self.assertEqual(_get_first_sponsor(), self.sponsor)
         sponsor2.sponsor_to_review = True
         self.assertEqual(_get_first_sponsor(), sponsor2)

@@ -3,6 +3,7 @@
 
 from odoo import api, models
 
+
 class BlogPost(models.Model):
     _inherit = ["blog.post"]
 
@@ -16,10 +17,10 @@ class BlogPost(models.Model):
         res = super().write(vals)
         self.author_id._se_mark_to_update()
         return res
-    
+
     def _get_background_url(self):
         """Strips the css and returns background's absolute URL"""
-        background_image = (self._get_background() or '')
+        background_image = self._get_background() or ""
         if not background_image or background_image == "none":
             return None
         elif background_image.startswith("url(/web/image/"):

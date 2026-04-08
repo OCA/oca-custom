@@ -4,13 +4,11 @@
 
 
 import os
-from pathlib import Path
-
 import tempfile
-from unittest.mock import patch, PropertyMock
+from pathlib import Path
+from unittest.mock import PropertyMock, patch
 
 from odoo.tests.common import TransactionCase
-
 
 YML_CONTENT = {
     "psc": """
@@ -24,7 +22,7 @@ test-repo-name:
   name: Human name of the test repo
   psc: test-oca-psc
   psc_rep: test-oca-psc
-"""
+""",
 }
 
 
@@ -32,16 +30,23 @@ class TestOcaPscsSearchEngine(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.member = cls.env["res.partner"].create([{
-            "name": "Happy Member",
-            "is_company": False,
-            "country_id": cls.env.ref("base.fr").id,
-            "free_member": True,
-            "is_published": True,
-        }])
-        cls.repository_branch = cls.env.ref("oca_search_engine.vcp_branch_repo_oca_maintainer_conf_master")
+        cls.member = cls.env["res.partner"].create(
+            [
+                {
+                    "name": "Happy Member",
+                    "is_company": False,
+                    "country_id": cls.env.ref("base.fr").id,
+                    "free_member": True,
+                    "is_published": True,
+                }
+            ]
+        )
+        cls.repository_branch = cls.env.ref(
+            "oca_search_engine.vcp_branch_repo_oca_maintainer_conf_master"
+        )
 
     def setUp(self):
+        super().setUp()
         self._setup_fake_repo()
 
     def _setup_fake_repo(self):
@@ -68,8 +73,7 @@ class TestOcaPscsSearchEngine(TransactionCase):
             os.makedirs(full_dir, exist_ok=True)
             file_path.write_text(YML_CONTENT[base_dir])
 
-
-    #==================== Tools ===============
+    # ==================== Tools ===============
 
     def _process_rule_oca_psc_update(self):
         """Process all the rule without downloading code and return the created fake PSC
@@ -84,21 +88,22 @@ class TestOcaPscsSearchEngine(TransactionCase):
             rule._process_rule_oca_psc_update(self.repository_branch)
         return self.env["vcp.oca.psc"].search([])
 
-
-    #==================== Tests ===============
+    # ==================== Tests ===============
 
     def test_psc_download(self):
         """Test .yml reading"""
         psc = self._process_rule_oca_psc_update()
         user = self.env["vcp.user"].search([("name", "=", "user-github-login")])
-        
+
         self.assertEqual(user.name, "user-github-login")
         self.assertEqual(
             psc.read(["name", "description", "user_ids"]),
-            [{
-                "id": psc.id,
-                "name": "test-oca-psc",
-                "description": "Human name of the test OCA PSC",
-                "user_ids": user.ids,
-            }]
+            [
+                {
+                    "id": psc.id,
+                    "name": "test-oca-psc",
+                    "description": "Human name of the test OCA PSC",
+                    "user_ids": user.ids,
+                }
+            ],
         )

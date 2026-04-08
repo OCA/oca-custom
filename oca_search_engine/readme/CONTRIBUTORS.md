@@ -1,0 +1,2 @@
+- Sébastien BEAU (<sebastien.beau@akretion.com>)
+- Arnaud LAYEC (<arnaud.layec@akretion.com>)

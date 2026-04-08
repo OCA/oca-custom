@@ -2,17 +2,18 @@
 # @author Arnaud LAYEC <arnaud.layec@akretion.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import models, api, fields
+from odoo import api, models
 
 INDEX_COMPANIES = "oca_search_engine.oca_typesense_index_companies"
 INDEX_PERSONS = "oca_search_engine.oca_typesense_index_persons"
+
 
 class ResPartner(models.Model):
     _name = "res.partner"
     _inherit = ["res.partner", "se.indexable.record", "abstract.url"]
 
-    #====== Search engine sync logics ======#
-    def _add_to_oca_search_engine(self, vals={}):
+    # ====== Search engine sync logics ======#
+    def _add_to_oca_search_engine(self, vals=None):
         """Add, update or remove partners in 'Company' or 'Person' index"""
         companies = self.filtered("is_company")
         persons = self - companies
@@ -31,7 +32,9 @@ class ResPartner(models.Model):
         and remove partner manually set to "unpublished"
         """
         # if called from write: prevent re-publishing a company already unpublished
-        if vals and not any(x in vals and vals[x] for x in ["grade_id", "is_integrator"]):
+        if vals and not any(
+            x in vals and vals[x] for x in ["grade_id", "is_integrator"]
+        ):
             return
 
         self.filtered(
@@ -39,7 +42,7 @@ class ResPartner(models.Model):
         ).sudo().is_published = True
         # 'sudo' to bypass AccessError of 'website.published.multi.mixin'
 
-    #====== CRUD ======#
+    # ====== CRUD ======#
     @api.model_create_multi
     def create(self, vals_list):
         records = super().create(vals_list)
@@ -51,7 +54,7 @@ class ResPartner(models.Model):
         self._add_to_oca_search_engine(vals)
         return res
 
-    #===== Business logics =====#
+    # ===== Business logics =====#
     def _get_working_groups(self):
         return self.mail_group_member_ids.mail_group_id.filtered("is_working_group")
 

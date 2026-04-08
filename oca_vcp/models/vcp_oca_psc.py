@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 
-from odoo import models, fields, api, Command
+from odoo import Command, api, fields, models
 
 INDEX_PSCS = "oca_search_engine.oca_typesense_index_pscs"
 
@@ -47,12 +47,12 @@ class VcpOcaPsc(models.Model):
         )
     ]
 
-    #===== CRUD =====#    
+    # ===== CRUD =====#
     def _add_to_oca_search_engine(self):
         """Add records or update fields in the index"""
         self._add_to_index(self.env.ref(INDEX_PSCS))
         return self
-    
+
     @api.model_create_multi
     def create(self, vals_list):
         return super().create(vals_list)._add_to_oca_search_engine()
@@ -62,7 +62,7 @@ class VcpOcaPsc(models.Model):
         self._add_to_oca_search_engine()
         return res
 
-    #===== Logics =====#
+    # ===== Logics =====#
     def _update_from_source(self, branch, mapped_pscs):
         """Update Odoo data from data source"""
         # Fetch data
@@ -88,18 +88,19 @@ class VcpOcaPsc(models.Model):
         if vals_list:
             pscs.create(vals_list)
 
-
     def _prepare_team_vals(self, name, psc_dict, host_users, platform):
         """Return `vals` for create
         Also create any missing users, since one could be PSC with no contribution
         For Repo: assumes they already exist (created by another rule)"""
         # Users
-        psc_logins = set(psc_dict.get("members", []) + psc_dict.get("representatives", []))
+        psc_logins = set(
+            psc_dict.get("members", []) + psc_dict.get("representatives", [])
+        )
         psc_users = host_users.filtered(lambda x: x.name in psc_logins)
         to_create = psc_logins - set(psc_users.mapped("name"))
         created_ids = [platform.host_id._get_user(login) for login in to_create]
         psc_users |= self.env["vcp.user"].browse(created_ids)
-        
+
         # Repositories
         psc_repos_names = psc_dict.get("repos", {}).keys()
         psc_repos = platform.repository_ids.filtered(

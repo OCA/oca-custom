@@ -4,6 +4,7 @@
 
 
 from odoo.addons.oca_vcp.tests.test_oca_vcp_psc import TestOcaPscsSearchEngine
+
 from ..schemas.res_partner_person import Person
 from ..schemas.vcp_oca_psc import Psc
 

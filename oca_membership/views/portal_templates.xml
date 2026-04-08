@@ -1,21 +1,89 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <template id="oca_search_engine.portal_my_details" inherit_id="portal.portal_my_details">
-        <form position="before">
-            <t t-set="show_publish_fields" t-value="partner.is_member or partner.is_integrator" />
+    <template
+        id="oca_membership.portal_my_details"
+        inherit_id="portal.portal_my_details"
+    >
+        <form action="/my/account" position="attributes">
+            <!-- For avatar -->
+            <attribute name="enctype">multipart/form-data</attribute>
         </form>
+
+        <form position="before">
+            <t
+                t-set="show_publish_fields"
+                t-value="partner.is_member or partner.is_integrator"
+            />
+        </form>
+
+        <!-- Add template side-content -->
+        <xpath expr="//div[hasclass('o_portal_details')]" position="inside">
+            <t t-call="oca_membership.portail_my_details_side_content" />
+        </xpath>
     </template>
 
-    <template id="oca_search_engine.portail_my_details_side_content" inherit_id="oca_sponsor.portail_my_details_side_content">
-        <div position="inside">
+    <template
+        id="portal_my_details_fields"
+        inherit_id="portal.portal_my_details_fields"
+    >
+        <xpath expr="//input[@name='phone']/parent::div" position="after">
+            <div
+                t-attf-class="mb-3 #{error.get('phone') and 'o_has_error' or ''} col-xl-6"
+            >
+                <label class="col-form-label" for="website">Website URL</label>
+                <input
+                    type="url"
+                    name="website"
+                    t-attf-class="form-control #{error.get('website') and 'is-invalid' or ''}"
+                    t-att-value="partner.website"
+                />
+            </div>
+        </xpath>
+    </template>
+
+    <template id="portail_my_details_side_content">
+        <div class="col-lg-4">
+            <div name="avatar" class="mb-3 col-lg-12" t-if="show_publish_fields">
+                <h4>Avatar</h4>
+                <div class="mb-2">
+                    <img
+                        class="o_portal_contact_img rounded o_object_fit_cover"
+                        t-att-src="image_data_uri(partner.avatar_128)"
+                        alt="Current avatar"
+                    />
+                </div>
+
+                <input
+                    type="file"
+                    name="image_1920"
+                    id="image_1920"
+                    accept="image/jpeg,image/png"
+                    class="form-control"
+                />
+                <div class="form-text">JPG or PNG, max 2 Mo.</div>
+
+                <!-- Affichage des erreurs -->
+                <div t-if="error.get('avatar')" class="invalid-feedback d-block">
+                    <t t-esc="error['avatar']" />
+                </div>
+            </div>
+
             <div name="privacy" t-if="show_publish_fields">
                 <h4>Privacy settings</h4>
 
                 <div class="mb-3">
-                    <label class="col-form-label" for="is_published">Show my profile on the website</label>
+                    <label
+                        class="col-form-label"
+                        for="is_published"
+                    >Show my profile on the website</label>
                     <select name="is_published" class="form-select">
-                        <option value="0">Do not publish my profile (no information)</option>
-                        <option value="1" t-att-selected="partner.is_published">Publish my profile</option>
+                        <option
+                            value="0"
+                        >Do not publish my profile (no information)</option>
+                        <option
+                            value="1"
+                            t-att-selected="partner.is_published"
+                        >Publish my profile</option>
                     </select>
                 </div>
 
@@ -49,7 +117,9 @@
                         class="form-check-input"
                         t-att-checked="partner.is_published_address"
                     />
-                    <label for="is_published_address">Publish location the website (address &amp; city)</label>
+                    <label
+                        for="is_published_address"
+                    >Publish location the website (address &amp; city)</label>
                 </div>
 
                 <div class="mb-1">
@@ -64,14 +134,5 @@
                 </div>
             </div>
         </div>
-    </template>
-
-    <template id="portal_my_details_fields" inherit_id="portal.portal_my_details_fields">
-        <xpath expr="//input[@name='phone']/parent::div" position="after">
-            <div t-attf-class="mb-3 #{error.get('phone') and 'o_has_error' or ''} col-xl-6">
-                <label class="col-form-label" for="website">Website URL</label>
-                <input type="url" name="website" t-attf-class="form-control #{error.get('website') and 'is-invalid' or ''}" t-att-value="partner.website" />
-            </div>
-        </xpath>
     </template>
 </odoo>

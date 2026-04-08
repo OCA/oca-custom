@@ -5,16 +5,16 @@
 
 {
     "name": "OCA Sponsors",
-    "description": """Add and manage sponsors data for OCA website""",
     "version": "18.0.1.0.0",
-    "author": "Akretion",
-    "website": "https://github.com/oca/oca-custom",
+    "author": "Akretion, Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/oca-custom",
     "license": "AGPL-3",
     "category": "Custom",
     "depends": [
-        "mail_activity_team", # for sponsor review process
+        "html_editor",  # for js diff review
+        "mail_activity_team",  # for sponsor review process
         "oca_membership",
-        "membership_extension", # for security groups
+        "membership_extension",  # for security groups
         "website_blog",
     ],
     "data": [
@@ -27,9 +27,9 @@
         "views/res_partner.xml",
         "views/sponsorship_line.xml",
     ],
-    'assets': {
-        'web.assets_backend': [
-            'oca_sponsor/static/src/**/*',
+    "assets": {
+        "web.assets_backend": [
+            "oca_sponsor/static/src/**/*",
         ]
     },
     "installable": True,

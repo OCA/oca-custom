@@ -16,9 +16,10 @@ class Country(StrictExtendableBaseModel):
             label=record.name,
         )
 
+
 class LogoUrls(StrictExtendableBaseModel):
     alt: str
-    l: str
+    l: str  # noqa: E741
     m: str
     s: str
 
@@ -40,4 +41,4 @@ class LogoUrls(StrictExtendableBaseModel):
 
     @classmethod
     def _get_full_url(cls, record, size):
-        return f'{record.get_base_url()}/web/image/res.partner/{record.id}/image_{size}'
+        return f"{record.get_base_url()}/web/image/res.partner/{record.id}/image_{size}"

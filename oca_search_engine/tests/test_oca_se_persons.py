@@ -4,6 +4,7 @@
 
 
 from odoo.tests.common import TransactionCase
+
 from ..schemas.res_partner_person import Person
 
 
@@ -11,13 +12,16 @@ class TestOcaPersonsSearchEngine(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.member = cls.env["res.partner"].create([{
-            "name": "Happy Member",
-            "is_company": False,
-            "country_id": cls.env.ref("base.fr").id,
-            "is_published": True,
-        }])
-
+        cls.member = cls.env["res.partner"].create(
+            [
+                {
+                    "name": "Happy Member",
+                    "is_company": False,
+                    "country_id": cls.env.ref("base.fr").id,
+                    "is_published": True,
+                }
+            ]
+        )
 
     def test_persons_json_output(self):
         """Test output generation methods: very simple tests,

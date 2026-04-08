@@ -1,13 +1,14 @@
 # Copyright 2026 AKRETION
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models, Command, exceptions, _
+from odoo import Command, _, api, exceptions, fields, models
 from odoo.osv.expression import NOT_OPERATOR
 from odoo.tools.safe_eval import safe_eval
 
 SPONSOR_WEBSITE_FIELDS = [
     # editable fields by the sponsor from the portal
-    "name", "sponsor_name",
+    "name",
+    "sponsor_name",
     "email",
     "phone",
     "website",
@@ -16,6 +17,7 @@ SPONSOR_WEBSITE_FIELDS = [
     "website_long_description",
     "image_1920",
 ]
+
 
 class ResPartner(models.Model):
     _name = "res.partner"
@@ -30,21 +32,19 @@ class ResPartner(models.Model):
         compute="_compute_is_sponsor",
         search="_search_is_sponsor",
     )
-    is_sponsor_reviewer = fields.Boolean(
-        compute="_compute_is_sponsor_reviewer"
-    )
+    is_sponsor_reviewer = fields.Boolean(compute="_compute_is_sponsor_reviewer")
     sponsor_to_review = fields.Boolean(
         string="To review",
         compute="_compute_sponsor_to_review",
         store=True,
         default=False,
         help="After the sponsor modifies its data from the web portal in autonomy, "
-             "the changes must be reviewed before being published on the website.",
+        "the changes must be reviewed before being published on the website.",
         tracking=True,
     )
     sponsor_review_data = fields.Html(
         # For history wizzard
-        compute='_compute_sponsor_review_data',
+        compute="_compute_sponsor_review_data",
         sanitize=True,
     )
     sponsorship_line_ids = fields.One2many(
@@ -54,8 +54,7 @@ class ResPartner(models.Model):
     )
     # Website fields
     sponsor_name = fields.Char(
-        string="Alternate name",
-        help="If empty, the company name is displayed instead."
+        string="Alternate name", help="If empty, the company name is displayed instead."
     )
     sponsor_child_ids = fields.One2many(
         comodel_name="res.partner",
@@ -63,7 +62,7 @@ class ResPartner(models.Model):
         string="Sponsored companies",
         domain=[("is_company", "=", True), ("is_sponsor", "=", False)],
         help="Choose company who are included in the sponsorship, like branch, "
-             "subsidiaries or commercial partners.",
+        "subsidiaries or commercial partners.",
     )
     sponsor_parent_id = fields.Many2one(
         comodel_name="res.partner",
@@ -91,7 +90,7 @@ class ResPartner(models.Model):
         store=True,
         readonly=False,
         help="On the website, 1 partner may have several industries. "
-             "Their description is the same for all sponsors."
+        "Their description is the same for all sponsors.",
     )
     website_long_description = fields.Text(
         string="Sponsor long description",
@@ -111,11 +110,12 @@ class ResPartner(models.Model):
         compute="_compute_blog_post_count",
     )
 
-    #====== Compute ======#
+    # ====== Compute ======#
     @api.depends("grade_id")
     def _compute_is_sponsor(self):
         for partner in self:
             partner.is_sponsor = bool(partner.grade_id)
+
     @api.model
     def _search_is_sponsor(self, operator, value):
         if operator not in ["=", "!="] or not isinstance(value, bool):
@@ -140,7 +140,7 @@ class ResPartner(models.Model):
         for sponsor in sponsors:
             old, new = sponsor._origin[origin_field], sponsor[origin_field]._origin
             current = sponsor[sponsor_field]._origin
-            if new and not new in current:
+            if new and new not in current:
                 sponsor[sponsor_field] = [Command.link(new.id)]
             if old and old != new and old in current:
                 sponsor[sponsor_field] = [Command.unlink(old.id)]
@@ -154,10 +154,10 @@ class ResPartner(models.Model):
     def _compute_is_sponsor_reviewer(self):
         """Field needed in the view"""
         self.is_sponsor_reviewer = self.env.user._is_sponsor_reviewer()
-    
+
     @api.depends("html_field_history")
     def _compute_sponsor_to_review(self):
-        """When `html.field.history.mixin` writes a new revision in `html_field_history`,
+        """When `html.field.history.mixin` writes a new revision in `html_field_history`
         this means fields have changed, and thus require a review"""
         self._set_sponsor_to_review()
 
@@ -167,17 +167,17 @@ class ResPartner(models.Model):
             partner.sponsor_review_data = partner._get_sponsor_review_data()
 
     def _get_sponsor_review_data(self):
-        return "\n\n".join([
-            """<h1 class="mt-4">%(name)s</h1>
-               %(content)s
-            """ % {
-                "name": self._fields[field].string,
-                "content": self[field] or "",
-            }
-            for field in SPONSOR_WEBSITE_FIELDS
-        ])
+        return "\n\n".join(
+            [
+                '<h1 class="mt-4">{name}</h1>\n' "{content}".format(
+                    name=self._fields[field].string,
+                    content=self[field] or "",
+                )
+                for field in SPONSOR_WEBSITE_FIELDS
+            ]
+        )
 
-    #====== ORM ======#
+    # ====== ORM ======#
     @api.model_create_multi
     def create(self, vals_list):
         """The ORM recomputes stored field right after create
@@ -189,9 +189,8 @@ class ResPartner(models.Model):
     def write(self, vals):
         """Hack to trigger logics of `html.field.history.mixin`
         without storing `sponsor_review_data`"""
-        if (
-            not fields.first(self).is_sponsor_reviewer
-            and set(vals).intersection(SPONSOR_WEBSITE_FIELDS)
+        if not fields.first(self).is_sponsor_reviewer and set(vals).intersection(
+            SPONSOR_WEBSITE_FIELDS
         ):
             return all(
                 super(ResPartner, partner).write(
@@ -206,21 +205,23 @@ class ResPartner(models.Model):
         with the ones to review at first"""
         if self._context.get("membership_sponsor"):
             delimiter = "" if not order else ", "
-            order = "sponsor_to_review DESC" + delimiter + (order or '')
+            order = "sponsor_to_review DESC" + delimiter + (order or "")
         return super().search_fetch(domain, field_names, offset, limit, order)
 
-    #===== Actions & buttons =====#
+    # ===== Actions & buttons =====#
     def action_open_blog_post(self):
         action = self.env.ref("website_blog.action_blog_post").sudo().read([])[0]
-        action.update({
-            "domain": [("author_id", "=", self.id)],
-            "context": (
-                safe_eval(action.get("context", "{}")) |
-                {
-                    "default_author_id": self.id,
-                }
-            )
-        })
+        action.update(
+            {
+                "domain": [("author_id", "=", self.id)],
+                "context": (
+                    safe_eval(action.get("context", "{}"))
+                    | {
+                        "default_author_id": self.id,
+                    }
+                ),
+            }
+        )
         return action
 
     def button_sponsor_review_accept(self):
@@ -228,11 +229,11 @@ class ResPartner(models.Model):
             raise exceptions.AccessError(_("You are not a Sponsor Reviewer."))
         self._sponsor_review_accept()
 
-    #===== Business logics =====#
+    # ===== Business logics =====#
     def _get_keyword_fields(self):
         """For `base_url`"""
         return ["sponsor_name"]
-    
+
     def _get_versioned_fields(self):
         """For `html.field.history.mixin`"""
         return ["sponsor_review_data"]
@@ -243,7 +244,7 @@ class ResPartner(models.Model):
         and notify reviewers with an activity"""
         if self.env.user._is_sponsor_reviewer():
             return
-        
+
         sponsors = self.filtered(lambda x: x.is_sponsor and not x.sponsor_to_review)
         if sponsors:
             sponsors.sponsor_to_review = True
@@ -254,19 +255,24 @@ class ResPartner(models.Model):
         `notify=False`: remove the activity at review validation"""
         reviewer_team = self.env["res.users"]._get_sponsor_reviewer_team()
         if not notify:
-            self.activity_ids.filtered(lambda x: x.team_id == reviewer_team).sudo().unlink()
+            self.activity_ids.filtered(
+                lambda x: x.team_id == reviewer_team
+            ).sudo().unlink()
         else:
             self.sudo().activity_schedule(
                 team_id=reviewer_team.id,
-                note=_("The sponsor changed its information from its profile. "
-                       "Please review those changes to publish them on the website."
+                note=_(
+                    "The sponsor changed its information from its profile. "
+                    "Please review those changes to publish them on the website."
                 ),
                 act_type_xmlid="mail.mail_activity_data_warning",
             )
 
     def _sponsor_review_accept(self):
         self._sponsor_reviewers_notify(notify=False)
-        self.sudo().write({ # 'sudo' to bypass AccessError of 'website.published.multi.mixin'
-            "is_published": True,
-            "sponsor_to_review": False,
-        })
+        self.sudo().write(
+            {  # 'sudo' to bypass AccessError of 'website.published.multi.mixin'
+                "is_published": True,
+                "sponsor_to_review": False,
+            }
+        )

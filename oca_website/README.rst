@@ -28,7 +28,7 @@ OCA Website Theme
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Custom theme for the oca website
+Custom website theme for OCA website.
 
 **Table of contents**
 

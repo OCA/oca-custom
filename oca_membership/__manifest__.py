@@ -5,20 +5,20 @@
 
 {
     "name": "OCA Membership (custom)",
-    "description": """Adapt membership processes for OCA needs""",
     "version": "18.0.1.0.0",
-    "author": "Akretion",
-    "website": "https://github.com/oca/oca-custom",
+    "author": "Akretion, Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/oca-custom",
     "license": "AGPL-3",
     "category": "Custom",
     "depends": [
-        "mail_group", # for Work Groups
-        "membership_extension", # for membership.category
+        "mail_group",  # for Work Groups
+        "membership_extension",  # for membership.category
     ],
     "data": [
         "data/membership_category_data.xml",
         "views/mail_group.xml",
         "views/membership_category.xml",
+        "views/portal_templates.xml",
         "views/res_partner.xml",
     ],
     "installable": True,

@@ -2,7 +2,6 @@
 <!-- Copyright 2026 AKRETION
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="blog_post_view_form_add" model="ir.ui.view">
         <field name="name">blog.post.view.form.add</field>
         <field name="model">blog.post</field>
@@ -13,5 +12,4 @@
             </field>
         </field>
     </record>
-
 </odoo>

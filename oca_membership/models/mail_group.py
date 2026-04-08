@@ -3,6 +3,7 @@
 
 from odoo import fields, models
 
+
 class MailGroup(models.Model):
     _inherit = ["mail.group"]
 

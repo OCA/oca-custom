@@ -10,7 +10,7 @@
     "development_status": "Alpha",
     "category": "Custom",
     "website": "https://github.com/OCA/oca-custom",
-    "author": " Akretion,Odoo Community Association (OCA)",
+    "author": " Akretion, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "external_dependencies": {
         "python": [],

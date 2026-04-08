@@ -5,6 +5,7 @@
 from odoo.addons.search_engine_serializer_pydantic.tools.serializer import (
     PydanticModelSerializer,
 )
+
 from ..schemas.vcp_oca_psc import Psc
 
 
@@ -13,6 +14,4 @@ class PscSerializer(PydanticModelSerializer):
         return Psc
 
     def serialize(self, record):
-        return (
-            self.get_model_class().from_record(record).model_dump(mode="json")
-        )
+        return self.get_model_class().from_record(record).model_dump(mode="json")
