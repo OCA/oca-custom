@@ -1,23 +1,22 @@
-#!/usr/bin/env python
-# Usage: click-odoo -d <database> 002_new_website_init.py
+# Copyright 2026 Akretion (https://www.akretion.com).
+# @author Arnaud LAYEC <sebastien.beau@akretion.com>
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
+from click_odoo import odoo
+from openupgradelib import openupgrade
 
 import logging
-
-import click
-import click_odoo
-from click_odoo import odoo
-
 _logger = logging.getLogger(__file__)
 
 
-@click.command()
-@click_odoo.env_options(default_log_level="info")
-def main(env):
-    _init_membership_category_id(env)
+@openupgrade.migrate(use_env=True)
+def migrate(env, version):
+    """Set Membership Categories on Products, as per their name
+    We now need them to manage the Role in the association.
+    This scripts helps recomputing the history and define the last active
+    'Category' in the association"""
 
-
-def _init_membership_category_id(env):
-    _logger.info("_init_membership_category_id: start")
+    _logger.info("Membership Category init: start")
 
     # 1. Configure product: set `membership_category_id` based on products' name
     mapped_categories = {
@@ -44,8 +43,4 @@ def _init_membership_category_id(env):
         )
         member.membership_category_id = last_line.category_id
 
-    _logger.info("_init_membership_category_id: done (%d members)", len(members))
-
-
-if __name__ == "__main__":
-    main()
+    _logger.info("Membership Category init: done (%d members)", len(members))
