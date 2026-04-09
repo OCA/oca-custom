@@ -114,7 +114,7 @@ class Company(StrictExtendableBaseModel):
         members = record._get_company_members()
         return cls.model_construct(
             id=record.id,
-            name=record.sponsor_name.strip() or record.name.strip() or "",
+            name=(record.sponsor_name or "").strip() or record.name.strip() or "",
             email=record.email or "",
             phone=record.phone or "",
             website=record.website or None,

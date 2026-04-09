@@ -13,6 +13,7 @@
     "depends": [
         "mail_group",  # for Work Groups
         "membership_extension",  # for membership.category
+        "oca_vcp",
     ],
     "data": [
         "data/membership_category_data.xml",

@@ -2,16 +2,21 @@
 # @author Arnaud LAYEC <arnaud.layec@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-
-from odoo.addons.oca_sponsor.tests.test_oca_sponsor import TestOcaSponsor
+from odoo import Command
+from odoo.tools import mute_logger
+from odoo.addons.oca_sponsor.tests.test_oca_sponsor import TestOcaSponsorCommon
 
 from ..schemas.res_partner_company import Company
 
 
-class TestOcaCompaniesSearchEngine(TestOcaSponsor):
+class TestOcaCompaniesSearchEngine(TestOcaSponsorCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        se_group_manager = cls.env.ref(
+            "connector_search_engine.group_connector_search_engine_manager"
+        )
+        cls.manager.groups_id = [Command.link(se_group_manager.id)]
 
     def test_companies_json_output(self):
         sponsor = self.env["res.partner"].create(
@@ -81,6 +86,7 @@ class TestOcaCompaniesSearchEngine(TestOcaSponsor):
         partner.is_published = False  # manually prevent publishing
         self.assertFalse(self._in_index(partner))
 
+    @mute_logger("odoo.addons.connector_search_engine.models.se_binding")
     def test_sponsor_to_review_not_in_index(self):
         """Sponsor with pending review *is* in index, but its synchro is paused"""
         self.assertTrue(self._in_index(self.sponsor, with_sync_active=True))

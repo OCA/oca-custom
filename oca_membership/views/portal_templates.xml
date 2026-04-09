@@ -40,14 +40,14 @@
             </div>
 
             <div
-                t-attf-class="mb-3 #{error.get('github_user') and 'o_has_error' or ''} col-xl-6"
+                t-attf-class="mb-3 #{error.get('github_main_login') and 'o_has_error' or ''} col-xl-6"
             >
-                <label class="col-form-label" for="github_user">Github user</label>
+                <label class="col-form-label" for="github_main_login">Github main login</label>
                 <input
                     type="text"
-                    name="github_user"
-                    t-attf-class="form-control #{error.get('github_user') and 'is-invalid' or ''}"
-                    t-att-value="partner.github_user"
+                    name="github_main_login"
+                    t-attf-class="form-control #{error.get('github_main_login') and 'is-invalid' or ''}"
+                    t-att-value="partner.github_main_login"
                 />
             </div>
         </xpath>
@@ -65,18 +65,18 @@
                     />
                 </div>
 
-                <div class="mb-2">
+                <div class="mb-2" invisible="not vcp_user_ids">
                     <input
                         type="checkbox"
-                        name="is_avatar_github"
-                        id="is_avatar_github"
+                        name="github_sync_avatar"
+                        id="github_sync_avatar"
                         class="form-check-input"
-                        t-att-checked="partner.is_avatar_github"
+                        t-att-checked="partner.github_sync_avatar"
                     />
-                    <label for="is_avatar_github">Fetch the avatar from Github</label>
+                    <label for="github_sync_avatar">Fetch the avatar from Github</label>
                 </div>
 
-                <div class="mb-2" t-if="not partner.is_avatar_github">
+                <div class="mb-2" t-if="not partner.github_sync_avatar">
                     <label for="image_1920">Or upload your avatar</label>
                     <input
                         type="file"

@@ -115,7 +115,7 @@ class PersonBase(StrictExtendableBaseModel):
             "country": (
                 Country.from_record(record.country_id) if record.country_id else {}
             ),
-            # github, TODO @sebastienbeau
+            # github
             "github_users": record.vcp_user_ids.mapped("name"),
             "logo_urls": LogoUrls.from_record(record),
             # technical website fields

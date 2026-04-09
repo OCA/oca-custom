@@ -29,6 +29,12 @@ class ResPartner(models.Model):
         string="Active roles",
         compute="_compute_membership_state",
     )
+    # Mail Groups: needed for for `oca_search_engine`,
+    # rest is in `oca_membership_groups`
+    mail_group_member_ids = fields.One2many(
+        comodel_name="mail.group.member",
+        inverse_name="partner_id",
+    )
     # website privacy
     is_published = fields.Boolean(
         tracking=True,
@@ -64,9 +70,9 @@ class ResPartner(models.Model):
 
     @api.depends(
         "child_ids",
-        "child_ids.github_name",
-        "child_ids.membership_state",
+        "child_ids.is_member",
         "child_ids.parent_id",
+        "child_ids.vcp_user_ids",
     )
     def _compute_is_integrator(self):
         """Integrators are companies having contributors or members"""

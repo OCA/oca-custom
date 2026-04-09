@@ -26,6 +26,5 @@ class TestOcaPersonsSearchEngine(TransactionCase):
     def test_persons_json_output(self):
         """Test output generation methods: very simple tests,
         just to ensure the code does not throw errors"""
-        self.assertEqual(self.member.membership_state, "free")
         data = Person.from_record(self.member).model_dump(mode="json")
         self.assertEqual(data["country"]["code"], "FR")

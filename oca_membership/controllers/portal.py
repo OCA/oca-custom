@@ -16,21 +16,21 @@ AVATAR_ALLOWED_MIMETYPES = {
 
 
 class CustomerPortalPublish(CustomerPortal):
-    def _get_is_published_fields(self):
+    def _get_boolean_fields(self):
         return [
             "is_published",
             "is_published_email",
             "is_published_phone",
             "is_published_address",
             "is_published_website",
-            "is_avatar_github",
+            "github_sync_avatar",
         ]
 
     def details_form_validate(self, data, partner_creation=False):
         error, error_message = super().details_form_validate(data, partner_creation)
 
         # Published fields
-        for field in self._get_is_published_fields():
+        for field in self._get_boolean_fields():
             data[field] = field in data and data[field] in ("1", "on")
 
         # Avatar
@@ -50,13 +50,13 @@ class CustomerPortalPublish(CustomerPortal):
                 avatar_update = True
             image_file.seek(0)
         if not avatar_update:
-            data.pop("image_1920")
+            data.pop("image_1920", None)
 
         return error, error_message
 
     def _get_optional_fields(self):
         return (
-            super()._get_optional_fields()
-            + ["website", "github_user"]
-            + self._get_is_published_fields()
+            ["website", "github_main_login"]
+            + super()._get_optional_fields()
+            + self._get_boolean_fields()
         )

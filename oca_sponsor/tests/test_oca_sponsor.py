@@ -5,7 +5,7 @@
 from odoo.tests import TransactionCase, new_test_user, users
 
 
-class TestOcaSponsor(TransactionCase):
+class TestOcaSponsorCommon(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -38,6 +38,11 @@ class TestOcaSponsor(TransactionCase):
                 "website_long_description": "Initial description",
             }
         )
+
+class TestOcaSponsor(TestOcaSponsorCommon):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
 
     def test_is_sponsor_search(self):
         self.assertTrue(self.sponsor.is_sponsor)
