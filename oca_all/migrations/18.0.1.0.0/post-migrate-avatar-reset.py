@@ -2,10 +2,12 @@
 # @author Arnaud LAYEC <sebastien.beau@akretion.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tools import SQL
+import logging
+
 from openupgradelib import openupgrade
 
-import logging
+from odoo.tools import SQL
+
 _logger = logging.getLogger(__file__)
 
 BATCH_SIZE = 1000
@@ -17,7 +19,8 @@ def migrate(env, version):
     though they are default avatar"""
 
     # 1. Get partners with similar avatar (by checksum)
-    res = env.execute_query(SQL("""
+    res = env.execute_query(
+        SQL("""
         SELECT res_id
         FROM ir_attachment
         WHERE checksum IN (
@@ -29,14 +32,13 @@ def migrate(env, version):
             ORDER BY COUNT(id) DESC
         )
         AND res_model = 'res.partner'
-    """))
-    partner_ids = [
-        y
-        for x in res
-        for y in x
-    ]
+    """)
+    )
+    partner_ids = [y for x in res for y in x]
     partners = (
-        env["res.partner"].browse(set(partner_ids)).exists()
+        env["res.partner"]
+        .browse(set(partner_ids))
+        .exists()
         .with_context(prefetch_fields=False)
     )
 

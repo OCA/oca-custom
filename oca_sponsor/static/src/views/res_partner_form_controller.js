@@ -1,11 +1,11 @@
 /** @odoo-module */
 /* Inspired from `project/static/src/views/project_task_form/project_task_form_controller.js` */
 
-import {escape} from "@web/core/utils/strings";
 import {FormControllerWithHTMLExpander} from "@resource/views/form_with_html_expander/form_controller_with_html_expander";
 import {HistoryDialog} from "@html_editor/components/history_dialog/history_dialog";
-import {useService} from "@web/core/utils/hooks";
 import {_t} from "@web/core/l10n/translation";
+import {escape} from "@web/core/utils/strings";
+import {useService} from "@web/core/utils/hooks";
 
 export class ResPartnerFormController extends FormControllerWithHTMLExpander {
     setup() {

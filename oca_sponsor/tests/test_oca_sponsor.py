@@ -39,6 +39,7 @@ class TestOcaSponsorCommon(TransactionCase):
             }
         )
 
+
 class TestOcaSponsor(TestOcaSponsorCommon):
     @classmethod
     def setUpClass(cls):

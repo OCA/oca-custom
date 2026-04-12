@@ -42,7 +42,10 @@
             <div
                 t-attf-class="mb-3 #{error.get('github_main_login') and 'o_has_error' or ''} col-xl-6"
             >
-                <label class="col-form-label" for="github_main_login">Github main login</label>
+                <label
+                    class="col-form-label"
+                    for="github_main_login"
+                >Github main login</label>
                 <input
                     type="text"
                     name="github_main_login"

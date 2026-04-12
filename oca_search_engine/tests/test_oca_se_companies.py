@@ -4,6 +4,7 @@
 
 from odoo import Command
 from odoo.tools import mute_logger
+
 from odoo.addons.oca_sponsor.tests.test_oca_sponsor import TestOcaSponsorCommon
 
 from ..schemas.res_partner_company import Company

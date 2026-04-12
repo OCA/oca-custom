@@ -2,10 +2,11 @@
 # @author Arnaud LAYEC <sebastien.beau@akretion.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import logging
+
 from click_odoo import odoo
 from openupgradelib import openupgrade
 
-import logging
 _logger = logging.getLogger(__file__)
 
 
