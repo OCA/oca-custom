@@ -1,2 +1,2 @@
-This module adds menu "Integrators" in website, which displays
+This module added a menu "Integrators" in website, which displays
 integrators, contributors, members and modules related information.

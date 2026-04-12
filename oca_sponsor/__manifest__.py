@@ -11,11 +11,12 @@
     "license": "AGPL-3",
     "category": "Custom",
     "depends": [
-        "html_editor",  # for js diff review
-        "mail_activity_team",  # for sponsor review process
-        "oca_membership",
-        "membership_extension",  # for security groups
+        "html_editor",
+        "mail_activity_team",
+        "membership_extension",
         "website_blog",
+        # Custom
+        "oca_membership",
     ],
     "data": [
         "data/mail_activity_team.xml",
