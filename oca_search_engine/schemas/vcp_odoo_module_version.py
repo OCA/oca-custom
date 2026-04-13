@@ -26,10 +26,12 @@ class VcpOdooModuleVersion(StrictExtendableBaseModel):
     authors: list[VcpOdooAuthor]
     github_url: str
     runboat_url: str
-    readme_fragments: list
+    readme_fragments: dict
     maintainers: list[VcpOdooMaintainer]
     icon_url: str
     must_have: bool
+    url_key: str
+    redirect_url_key: list[str]
 
     @classmethod
     def _get_runboat_url(cls, odoo_rec):
@@ -41,6 +43,8 @@ class VcpOdooModuleVersion(StrictExtendableBaseModel):
 
     @classmethod
     def from_record(cls, odoo_rec):
+        # Ensure url key is up to date
+        odoo_rec.module_id._update_url_key(lang=odoo_rec.env.context.get("lang"))
         return cls.model_construct(
             id=odoo_rec.id,
             name=odoo_rec.name,
@@ -65,4 +69,8 @@ class VcpOdooModuleVersion(StrictExtendableBaseModel):
             dependencies=odoo_rec.depends_on_module_ids.mapped("name"),
             icon_url=odoo_rec.icon_url,
             must_have=odoo_rec.module_id.must_have,
+            # Note all module version have the same url
+            # as version are just variants of the module
+            url_key=odoo_rec.module_id.url_key,
+            redirect_url_key=odoo_rec.module_id.redirect_url_key,
         )

@@ -137,11 +137,14 @@ class Person(PersonBase):
     @classmethod
     def _model_construct_dict(cls, record):
         # psc = record.vcp_user_ids.vcp_oca_psc_ids
+        modules_maintained = len(record.env["vcp.odoo.module.version"].search([
+            ("maintainer_ids", "=", record.vcp_user_ids.ids),
+        ]).module_id)
         return super()._model_construct_dict(record) | {
             # github indicators
             "translations": 0,
             "collaborator_index": 0,
-            "modules_maintained": 0,
+            "modules_maintained": modules_maintained,
             # role
             "roles": cls._get_roles(record),
             # psc (obsolete)

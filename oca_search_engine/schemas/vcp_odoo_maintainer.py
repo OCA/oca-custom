@@ -16,10 +16,9 @@ class VcpOdooMaintainer(StrictExtendableBaseModel):
         return cls.model_construct(
             name=odoo_rec.name,
             github_user=odoo_rec.external_id,
-            avatar_url=odoo_rec.avatar_url,
+            avatar_url=odoo_rec.avatar_url or "",
             url_key=(
-                odoo_rec.partner_id.website_published
-                and odoo_rec.env["ir.http"]._slugify(odoo_rec.partner_id.name)
+                odoo_rec.partner_id.website_published and odoo_rec.partner_id.url_key
             )
             or "",
         )
