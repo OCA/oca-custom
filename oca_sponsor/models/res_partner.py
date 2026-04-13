@@ -230,10 +230,6 @@ class ResPartner(models.Model):
         self._sponsor_review_accept()
 
     # ===== Business logics =====#
-    def _get_keyword_fields(self):
-        """For `base_url`"""
-        return ["sponsor_name"]
-
     def _get_versioned_fields(self):
         """For `html.field.history.mixin`"""
         return ["sponsor_review_data"]
