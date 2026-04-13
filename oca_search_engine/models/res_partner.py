@@ -15,16 +15,19 @@ class ResPartner(models.Model):
     # ====== Search engine sync logics ======#
     def _add_to_oca_search_engine(self, vals=None):
         """Add, update or remove partners in 'Company' or 'Person' index"""
-        companies = self.filtered("is_company")
-        persons = self - companies
+        index_companies = self.env.ref(INDEX_COMPANIES)
+        index_persons = self.env.ref(INDEX_PERSONS)
 
         if vals and "is_published" in vals and not vals["is_published"]:
-            companies._remove_from_index(self.env.ref(INDEX_COMPANIES))
-            persons._remove_from_index(self.env.ref(INDEX_PERSONS))
+            self._remove_from_index(index_companies | index_persons)
         else:
-            companies._autopublish_companies(vals)
-            companies._add_to_index(self.env.ref(INDEX_COMPANIES))
-            persons._add_to_index(self.env.ref(INDEX_PERSONS))
+            self._autopublish_companies(vals)
+
+            to_publish = self.filtered("is_published")
+            companies = to_publish.filtered("is_company")
+            persons = to_publish - companies
+            companies._add_to_index(index_companies)
+            persons._add_to_index(index_persons)
 
     def _autopublish_companies(self, vals):
         """Auto-publish new integrators and new sponsors
@@ -33,12 +36,12 @@ class ResPartner(models.Model):
         """
         # if called from write: prevent re-publishing a company already unpublished
         if vals and not any(
-            x in vals and vals[x] for x in ["grade_id", "is_integrator"]
+            x in vals and vals[x] for x in ["is_integrator", "grade_id"]
         ):
             return
 
         self.filtered(
-            lambda x: x.is_company and not x.is_published
+            lambda x: not x.is_published and (x.is_integrator or x.is_sponsor)
         ).sudo().is_published = True
         # 'sudo' to bypass AccessError of 'website.published.multi.mixin'
 
