@@ -54,7 +54,7 @@ class VcpOdooModuleVersion(StrictExtendableBaseModel):
             version=odoo_rec.version,
             license=odoo_rec.license,
             summary=odoo_rec.summary,
-            development_status=odoo_rec.development_status,
+            development_status=odoo_rec.development_status or "",
             authors=[
                 VcpOdooAuthor.from_record(author)
                 for author in odoo_rec.author_ids
@@ -62,7 +62,7 @@ class VcpOdooModuleVersion(StrictExtendableBaseModel):
             ],
             github_url=odoo_rec.website,
             runboat_url=cls._get_runboat_url(odoo_rec),
-            readme_fragments=odoo_rec.readme_fragments,
+            readme_fragments=odoo_rec.readme_fragments or {},
             maintainers=[
                 VcpOdooMaintainer.from_record(user) for user in odoo_rec.maintainer_ids
             ],

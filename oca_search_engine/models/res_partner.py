@@ -89,4 +89,17 @@ class ResPartner(models.Model):
         return self.mail_group_member_ids.mail_group_id.filtered("is_working_group")
 
     def _get_company_members(self):
-        return self.filtered("is_company").child_ids.filtered("is_member")
+        self.ensure_one()
+        if self.is_company:
+            return (self | self.sponsor_child_ids).child_ids.filtered("is_member")
+        else:
+            return self.browse()
+
+    def _get_company_contributors(self):
+        self.ensure_one()
+        if self.is_company:
+            return (self | self.sponsor_child_ids).child_ids.filtered(
+                lambda s: s._is_contributor()
+                )
+        else:
+            return self.browse()

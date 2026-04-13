@@ -7,6 +7,8 @@ from extendable_pydantic import StrictExtendableBaseModel
 
 from .vcp_repository_category import VcpRepositoryCategory
 
+from odoo.exceptions import UserError
+
 
 class VcpRepository(StrictExtendableBaseModel):
     name: str
@@ -16,6 +18,11 @@ class VcpRepository(StrictExtendableBaseModel):
 
     @classmethod
     def from_record(cls, odoo_rec):
+        if not odoo_rec.category_id:
+            raise UserError(odoo_rec.env._(
+                "The category on the repository is missing, please fill it"
+                )
+            )
         return cls.model_construct(
             name=odoo_rec.name,
             description=odoo_rec.description,

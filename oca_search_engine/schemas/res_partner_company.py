@@ -77,6 +77,32 @@ class Sponsorship(StrictExtendableBaseModel):
         )
 
 
+class Contact(StrictExtendableBaseModel):
+    name: str
+    street: str | None = None
+    street2: str | None = None
+    zip: str | None = None
+    city: str | None = None
+    state: str | None = None
+    country: Country
+    phone: str | None = None
+    email: str | None = None
+
+    @classmethod
+    def from_record(cls, record):
+        return cls.model_construct(
+            name=record.name,
+            street=record.street or None,
+            street2=record.street2 or None,
+            zip=record.zip or None,
+            city=record.city or None,
+            state=record.state_id.name or None,
+            country=Country.from_record(record.country_id),
+            phone=record.phone or None,
+            email=record.email or None,
+        )
+
+
 class Company(StrictExtendableBaseModel):
     id: int
     name: str
@@ -88,7 +114,7 @@ class Company(StrictExtendableBaseModel):
     logo_urls: LogoUrls | dict
     # github indicators
     contributors_count: int
-    contributors_index: int
+    collaboration_index: int
     members_count: int
     modules_count: int
     # technical website fields
@@ -96,6 +122,7 @@ class Company(StrictExtendableBaseModel):
     redirect_url_key: list[str]
     # sponsorship
     sponsorship: Sponsorship | None
+    contacts: list[Contact]
 
     @classmethod
     def from_record(cls, record):
@@ -112,6 +139,7 @@ class Company(StrictExtendableBaseModel):
         # ensure url is up to date
         record._update_url_key(lang=record.env.context.get("lang"))
         members = record._get_company_members()
+        contributors = record._get_company_contributors()
         return cls.model_construct(
             id=record.id,
             name=(record.sponsor_name or "").strip() or record.name.strip() or "",
@@ -122,16 +150,16 @@ class Company(StrictExtendableBaseModel):
             countries=[
                 Country.from_record(country) for country in record.sponsor_country_ids
             ],
+            contacts=[
+                Contact.from_record(contact)
+                for contact in record | record.sponsor_child_ids
+                ],
             logo_urls=LogoUrls.from_record(record),
             # github indicators
-            # "contributors_count=record.contributors_count or 0,
-            # "contributors_index=record.contributors_index or 0,
-            # "members_count=record.members_count or 0,
-            # "modules_count=record.modules_count or 0,
-            contributors_count=10,
-            contributors_index=20,
+            contributors_count=len(contributors),
+            collaboration_index=sum(members.mapped("oca_collaboration_index")),
             members_count=len(members),
-            modules_count=40,
+            modules_count=record.modules_author_count,
             # technical website fields
             url_key=record.url_key,
             redirect_url_key=record.redirect_url_key,

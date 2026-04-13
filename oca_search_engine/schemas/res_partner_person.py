@@ -116,7 +116,7 @@ class PersonBase(StrictExtendableBaseModel):
                 Country.from_record(record.country_id) if record.country_id else {}
             ),
             # github
-            "github_users": record.vcp_user_ids.mapped("name"),
+            "github_users": record.vcp_user_ids.mapped("external_id"),
             "logo_urls": LogoUrls.from_record(record),
             # technical website fields
             "url_key": record.url_key,
@@ -130,21 +130,18 @@ class Person(PersonBase):
     # psc_list: list[Team]
     work_group_list: list[Team]
 
-    collaborator_index: int
+    collaboration_index: int
     modules_maintained: int
     module_contribution_ids: list[int]
 
     @classmethod
     def _model_construct_dict(cls, record):
         # psc = record.vcp_user_ids.vcp_oca_psc_ids
-        modules_maintained = len(record.env["vcp.odoo.module.version"].search([
-            ("maintainer_ids", "=", record.vcp_user_ids.ids),
-        ]).module_id)
         return super()._model_construct_dict(record) | {
             # github indicators
             "translations": 0,
-            "collaborator_index": 0,
-            "modules_maintained": modules_maintained,
+            "collaboration_index": record.oca_collaboration_index,
+            "modules_maintained": record.modules_maintained_count,
             # role
             "roles": cls._get_roles(record),
             # psc (obsolete)
