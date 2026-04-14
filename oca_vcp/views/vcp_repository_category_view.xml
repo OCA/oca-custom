@@ -48,7 +48,7 @@
         </field>
     </record>
 
-    <record model="ir.actions.act_window" id="vcp_repository_category_action">
+    <record id="vcp_repository_category_action" model="ir.actions.act_window">
         <field name="name">Repository Categories</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">vcp.repository.category</field>

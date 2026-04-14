@@ -5,7 +5,7 @@
 from datetime import timedelta
 
 from odoo import fields
-from odoo.tests import TransactionCase, new_test_user, common
+from odoo.tests import TransactionCase, common, new_test_user
 
 MEMBERSHIP_DURATION = 365
 GRACE_DAYS = 90
@@ -24,29 +24,45 @@ class TestOcaMembershipGroups(TransactionCase):
         )
         cls.partner = cls.portal_user.partner_id
         cls.partner.email = "test.member@example.com"
-        cls.partner2 = cls.env["res.partner"].create([{
-            "name": "Test Member 2",
-            "email": "test.member2@example.com",
-        }])
+        cls.partner2 = cls.env["res.partner"].create(
+            [
+                {
+                    "name": "Test Member 2",
+                    "email": "test.member2@example.com",
+                }
+            ]
+        )
 
         # Membership
-        cls.category = cls.env["membership.membership_category"].create([{
-            "name": "Test Category",
-        }])
+        cls.category = cls.env["membership.membership_category"].create(
+            [
+                {
+                    "name": "Test Category",
+                }
+            ]
+        )
         date_from, date_to = cls._get_dates()
-        cls.membership_product = cls.env["product.product"].create([{
-            "name": "Test Membership Product",
-            "membership": True,
-            "membership_date_from": date_from,
-            "membership_date_to": date_to,
-            "membership_category_id": cls.category.id,
-        }])
-        cls.mail_group = cls.env["mail.group"].create([{
-            "name": "Test Members Group",
-            "alias_name": "test-members-group",
-            "membership_category_ids": cls.category.ids,
-            "grace_days": GRACE_DAYS,
-        }])
+        cls.membership_product = cls.env["product.product"].create(
+            [
+                {
+                    "name": "Test Membership Product",
+                    "membership": True,
+                    "membership_date_from": date_from,
+                    "membership_date_to": date_to,
+                    "membership_category_id": cls.category.id,
+                }
+            ]
+        )
+        cls.mail_group = cls.env["mail.group"].create(
+            [
+                {
+                    "name": "Test Members Group",
+                    "alias_name": "test-members-group",
+                    "membership_category_ids": cls.category.ids,
+                    "grace_days": GRACE_DAYS,
+                }
+            ]
+        )
 
     # ===== Helpers =====#
     @classmethod
@@ -54,7 +70,7 @@ class TestOcaMembershipGroups(TransactionCase):
         """Return tuple (date_from, date_to)"""
         today = fields.Date.today()
         return (today, today + timedelta(days=MEMBERSHIP_DURATION))
-    
+
     @classmethod
     def _promote_member(cls, partner=None, product=None, state="paid"):
         """Create or update membership.line, triggering compute of
@@ -73,17 +89,19 @@ class TestOcaMembershipGroups(TransactionCase):
                 "state": state,
             }
             cls.env["membership.membership_line"].create([vals])
-        cls.env.invalidate_all() # needed to retrigger compute methods
+        cls.env.invalidate_all()  # needed to retrigger compute methods
 
     @classmethod
     def _destitute_member(cls, partner=None):
         (partner or cls.partner).member_lines.state = "old"
-        cls.env.invalidate_all() # needed to retrigger compute methods
+        cls.env.invalidate_all()  # needed to retrigger compute methods
 
     @classmethod
     def _is_partner_in_group(cls, partner=None, group=None, active_test=True):
         """Return Partners object of a Mail Group"""
-        members = (group or cls.mail_group).with_context(active_test=active_test).member_ids
+        members = (
+            (group or cls.mail_group).with_context(active_test=active_test).member_ids
+        )
         return (partner or cls.partner) in members.partner_id
 
     @classmethod
@@ -94,17 +112,12 @@ class TestOcaMembershipGroups(TransactionCase):
             .mail_group_member_ids
         )
 
-    @classmethod
-    def _print_debug(cls):
-        print("partner", cls.partner.read(["membership_state", "membership_category_ids", "mail_group_member_ids"]))
-        print("members", cls._get_members().read(["mail_group_id", "partner_id", "grace_date_start", "grace_date_deadline"]))
-
     # ===== Tests =====#
 
     def test_member_auto_add_in_groups(self):
         """Ensure a member is automatically **added** to relevant Mail Groups
         as per its Membership Categories"""
-        self.assertFalse(self._is_partner_in_group()) # Initial state
+        self.assertFalse(self._is_partner_in_group())  # Initial state
         self._promote_member()
         self.assertTrue(self._is_partner_in_group())
 
@@ -124,7 +137,7 @@ class TestOcaMembershipGroups(TransactionCase):
         self.assertTrue(self._is_partner_in_group())
         self.assertEqual(
             self._get_members().grace_date_deadline,
-            date_from + timedelta(days=GRACE_DAYS)
+            date_from + timedelta(days=GRACE_DAYS),
         )
 
         # 3. Simulate the CRON: unsubscription
@@ -161,7 +174,7 @@ class TestOcaMembershipGroups(TransactionCase):
         the mail.group.member is archived (active=False), not deleted.
         2. Re-subscribing via the portal toggles it back to active=True,
         instead of creating a duplicate record."""
-        self._promote_member() # Start state
+        self._promote_member()  # Start state
 
         # 1. Portal user unsubscribe from the website
         mail_group_portal = self.mail_group.with_context(from_portal=True)
@@ -191,10 +204,10 @@ class TestOcaMembershipGroups(TransactionCase):
 
         # Play like removing/re-adding the member => it should be kept archived
         self._destitute_member()
-        self.assertTrue(self._is_partner_in_group(active_test=False)) # kept
+        self.assertTrue(self._is_partner_in_group(active_test=False))  # kept
         self._promote_member()
-        self.assertFalse(self._is_partner_in_group()) # still not activated
-        self.assertTrue(self._is_partner_in_group(active_test=False)) # kept
+        self.assertFalse(self._is_partner_in_group())  # still not activated
+        self.assertTrue(self._is_partner_in_group(active_test=False))  # kept
 
         # No duplicate
         self.assertEqual(1, len(self._get_members(active_test=False)))

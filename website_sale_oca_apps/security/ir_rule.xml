@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo noupdate="1">
     <record id="rule_product_template_odoo_apps_public_read" model="ir.rule">
         <field name="name">Product Template: public access to archived apps</field>

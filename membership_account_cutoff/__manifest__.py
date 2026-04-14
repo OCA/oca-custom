@@ -14,9 +14,7 @@
         "membership_extension",
         "account_invoice_start_end_dates",
     ],
-    "data": [
-        "views/membership_line.xml"
-    ],
+    "data": ["views/membership_line.xml"],
     "installable": True,
     "application": False,
     "development_status": "Alpha",

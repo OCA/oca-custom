@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 ============
 OCA Sponsors
 ============
@@ -13,7 +17,7 @@ OCA Sponsors
 .. |badge1| image:: https://img.shields.io/badge/maturity-Alpha-red.png
     :target: https://odoo-community.org/page/development-status
     :alt: Alpha
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Foca--custom-lightgray.png?logo=github
@@ -45,35 +49,45 @@ review process of new information.
 Usage
 =====
 
-1. On a standard partner, open the new *Sponsorship* tab
-2. Create or choose a *Sponsor Level*
-3. On the website portal, the sponsor may login and edit sponsorship
-   fields from its profile, **using at login the account related to this
-   company**.
-4. On sponsor fields change, a review process is started: sponsor
-   information are *not* updated yet on the website and the new
-   information must be reviewed from the backend by a reviewer (member
-   of the Activity Group named *Sponsors Reviewers*).
-5. As a reminder of these review, activities are set on those sponsors
-   for all reviewers. Moreover, the new *Members / Sponsors* page is
-   ordered so the first items are the ones to be validated, and a ribbon
-   *To review* appear on the Kanban cards.
-6. On the sponsor's partner form, review the data change. Use the action
-   *Sponsor Version History* to easily view the changes history and
-   differences.
-7. Once done, press the *Review sponsor* button in the *Sponsorship*
+1. On a standard partner, open the new *Sponsorship* tab.
+2. Create or choose a *Sponsor Level*.
+3. Grant the partner access to the portal, using the native wizard of
+   the action *Grant portal access* (on partners form or list views)
+4. On the website portal, the sponsor may login **with the user related
+   to the company**. This process will not work with users related to
+   sub-contacts of the company. From the ``/my/account`` page, the
+   sponsor may edit its information in autonomy.
+5. When a sponsor field changes, a review process is started: the
+   sponsor new information are *not* immediatly available on the
+   website. They must be reviewed from Odoo backend by a reviewer. A
+   reviewer is a member of the Activity Group named *Sponsors
+   Reviewers*, configurable at *Settings / Technical / Activity Teams*.
+6. Reviewers are notified of the sponsor to review by activities on
+   those sponsors. All reviewers receive a notification. Moreover, the
+   new *Members / Sponsors* page is ordered by Sponsor to review firs.
+   An explicit ribbon *To review* appear on their Kanban cards.
+7. On the sponsor's partner form, you may use the action *Sponsor
+   Version History* to easily view the difference with previous
+   information. The tab *Sponsor* also provides all last information.
+8. Once done, press the *Review sponsor* button in the *Sponsorship*
    tab. It re-starts the sponsor information synchronization with the
-   website, thus pushing the update online very soon. This button also
-   un-notify the other reviewers but removing the review activity.
+   website, thus pushing the information online very soon (by default,
+   ~10min). This button also un-notify the other reviewers but removing
+   the review activity.
+9. If a *Review* must be refused, you may leave the sponsor in *To
+   review* state and close the activity. Its data will be kept in *idle*
+   state, not being sent to the website. You may also correct the
+   sponsor information by yourself from Odoo backend and validate the
+   *Review*.
 
 Changelog
 =========
 
 # 2026-03 (Akretion)
 
-- Move in of sponsorship.line from website_oca_integrator and free
-  dependency with website_crm_partner_assign, which were obliging other
-  big dependencies like crm and base_geolocalize
+- Move in of ``sponsorship.line`` from ``website_oca_integrator`` and
+  free dependency with ``website_crm_partner_assign``, which were
+  obliging unwhished dependencies like ``crm`` and ``base_geolocalize``
 
 Bug Tracker
 ===========

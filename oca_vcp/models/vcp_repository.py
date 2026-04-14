@@ -8,4 +8,4 @@ from odoo import fields, models
 class VcpRepository(models.Model):
     _inherit = "vcp.repository"
 
-    category_id = fields.Many2one("vcp.repository.category", "Category")
+    category_id = fields.Many2one("vcp.repository.category")

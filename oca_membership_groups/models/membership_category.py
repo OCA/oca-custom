@@ -4,6 +4,7 @@
 
 from odoo import fields, models
 
+
 class MembershipCategory(models.Model):
     _inherit = ["membership.membership_category"]
 
@@ -14,5 +15,5 @@ class MembershipCategory(models.Model):
         column1="category_id",
         column2="mail_group_id",
         help="The members of this category will automatically subscribe to these "
-             "Mail Groups. They will be able to unsubscribe too.",
+        "Mail Groups. They will be able to unsubscribe too.",
     )

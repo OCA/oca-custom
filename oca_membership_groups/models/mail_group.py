@@ -4,6 +4,7 @@
 
 from odoo import fields, models
 
+
 class MailGroup(models.Model):
     _inherit = ["mail.group"]
 
@@ -19,17 +20,16 @@ class MailGroup(models.Model):
         column1="mail_group_id",
         column2="category_id",
         help="The members of this Mailing Group follows the members of those "
-            "membership categories."
+        "membership categories.",
     )
     grace_days = fields.Integer(
-        string="Grace Days",
         default=90,
         help="Number of days before the expired members are automatically "
-             "retired from this group. Only relevant for groups with auto-subscription "
-             "from the membership category.",
+        "retired from this group. Only relevant for groups with auto-subscription "
+        "from the membership category.",
     )
 
-    #===== Logics =====#
+    # ===== Logics =====#
     def _find_members(self, email, partner_id):
         """Prevent raising member constrain 'unique_partner' per mail.group"""
         return super(

@@ -2,7 +2,7 @@
 # @author Arnaud LAYEC <arnaud.layec@akretion.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models, _
+from odoo import api, fields, models
 
 
 class AccountMoveLine(models.Model):
@@ -25,7 +25,9 @@ class AccountMoveLine(models.Model):
             return
         lines = self.filtered("membership_lines")
         for line in lines.with_context(membership_prevent_recursive_dates=True):
-            line.write({
-                "start_date": line.membership_lines.date_from,
-                "end_date": line.membership_lines.date_to,
-            })
+            line.write(
+                {
+                    "start_date": line.membership_lines.date_from,
+                    "end_date": line.membership_lines.date_to,
+                }
+            )

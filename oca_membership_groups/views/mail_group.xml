@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2026 AKRETION
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
@@ -10,11 +10,20 @@
 
         <field name="arch" type="xml">
             <field name="description" position="before">
-                <div class="flex" invisible="not is_working_group and not membership_category_ids">
-                    <span class="o_badge badge rounded-pill o_tag o_tag_color_4" invisible="not is_working_group">
+                <div
+                    class="flex"
+                    invisible="not is_working_group and not membership_category_ids"
+                >
+                    <span
+                        class="o_badge badge rounded-pill o_tag o_tag_color_4"
+                        invisible="not is_working_group"
+                    >
                         Working Group
                     </span>
-                    <span class="o_badge badge rounded-pill o_tag o_tag_color_4" invisible="not membership_category_ids">
+                    <span
+                        class="o_badge badge rounded-pill o_tag o_tag_color_4"
+                        invisible="not membership_category_ids"
+                    >
                         Membership
                     </span>
                 </div>
@@ -32,8 +41,16 @@
                 <page name="Membership">
                     <group>
                         <field name="is_working_group" widget="boolean_toggle" />
-                        <field name="grace_days" invisible="not membership_category_ids" />
-                        <field name="membership_category_ids" widget="many2many_tags" readonly="1" invisible="not membership_category_ids" />
+                        <field
+                            name="grace_days"
+                            invisible="not membership_category_ids"
+                        />
+                        <field
+                            name="membership_category_ids"
+                            widget="many2many_tags"
+                            readonly="1"
+                            invisible="not membership_category_ids"
+                        />
                     </group>
                 </page>
             </notebook>

@@ -2,9 +2,10 @@
 # @author Arnaud LAYEC <arnaud.layec@akretion.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models, api
+from odoo import api, fields, models
 
 BATCH_SIZE_PROVISION_CRON = 1000
+
 
 class ResPartner(models.Model):
     _inherit = ["res.partner"]
@@ -18,7 +19,7 @@ class ResPartner(models.Model):
         compute="_compute_mail_group_count",
     )
 
-    #===== Compute =====#
+    # ===== Compute =====#
     @api.depends("mail_group_member_ids")
     def _compute_mail_group_count(self):
         for partner in self:
@@ -31,16 +32,20 @@ class ResPartner(models.Model):
             self._membership_groups_refresh()
         return res
 
-    #===== Logics =====#
+    # ===== Logics =====#
     def _join_mail_groups(self, groups):
-        """Add member to groups unless they unsubscribed* before (*archived membership)"""
+        """Add member to groups unless they unsubscribed* before
+        (*archived membership)"""
         if not groups:
             return
         self.ensure_one()
-        subscribed_group_ids = list((
-            groups.with_context(active_test=False)
-            ._find_members(self.email, self.id)
-        ).keys())
+        subscribed_group_ids = list(
+            (
+                groups.with_context(active_test=False)._find_members(
+                    self.email, self.id
+                )
+            ).keys()
+        )
         new_groups = groups.filtered(lambda x: x.id not in subscribed_group_ids)
         for group in new_groups:
             group._join_group(self.email, self.id)
@@ -77,16 +82,15 @@ class ResPartner(models.Model):
         according to their membership's category and implied Mailing Groups"""
         today = fields.Date.today()
         for partner in self:
-            # Add the member to new groups and stop any grace period previously set on them
+            # Add the member to new groups and stop any grace period previously set
             joined_groups = partner.membership_category_ids.mail_group_ids
             partner._join_mail_groups(joined_groups)
             partner._toggle_grace_mail_groups(joined_groups, False)
 
             # Start grace period of the leaving membership groups
             current_groups = partner.mail_group_member_ids.mail_group_id
-            leaving_groups = (
-                (current_groups - joined_groups)
-                .filtered("membership_category_ids")
+            leaving_groups = (current_groups - joined_groups).filtered(
+                "membership_category_ids"
             )
             partner._toggle_grace_mail_groups(leaving_groups, today)
 
@@ -108,7 +112,7 @@ class ResPartner(models.Model):
         for partner, expired_members in expired_members_grouped.items():
             partner._leave_mail_groups(expired_members.mail_group_id)
 
-    #===== Mailing =====#
+    # ===== Mailing =====#
     def _mailing_get_default_domain(self, _):
         """Email Martketing: default domain to fetch for Members"""
         categories = self.env["membership.membership_category"].search([])

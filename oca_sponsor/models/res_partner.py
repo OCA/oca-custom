@@ -168,7 +168,7 @@ class ResPartner(models.Model):
     def _get_sponsor_review_data(self):
         return "\n\n".join(
             [
-                '<h1 class="mt-4">{name}</h1>\n' "{content}".format(
+                '<h1 class="mt-4">{name}</h1>\n{content}'.format(
                     name=self._fields[field].string,
                     content=self[field] or "",
                 )

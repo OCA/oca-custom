@@ -17,14 +17,19 @@ class TestMembershipAccountCutoff(TransactionCase):
         cls.member = cls.env["res.partner"].create({"name": "In-between member"})
         cls.date_from = date(2026, 1, 1)
         cls.date_to = date(2026, 12, 31)
-        cls.product = cls.env["product.product"].create([{
-            "name": "Membership",
-            "membership": True,
-            "membership_date_from": cls.date_from,
-            "membership_date_to": cls.date_to,
-        }])
+        cls.product = cls.env["product.product"].create(
+            [
+                {
+                    "name": "Membership",
+                    "membership": True,
+                    "membership_date_from": cls.date_from,
+                    "membership_date_to": cls.date_to,
+                }
+            ]
+        )
         cls.member.create_membership_invoice(
-            product=cls.product, amount=10.0,
+            product=cls.product,
+            amount=10.0,
         )
         cls.member_line = cls.member.member_lines
         cls.invoice_line = cls.member_line.account_invoice_line
@@ -32,7 +37,7 @@ class TestMembershipAccountCutoff(TransactionCase):
 
     def test_invoice_dates(self):
         self.assertEqual(self.invoice_line.start_date, self.member_line.date_from)
-        self.assertEqual(self.invoice_line.end_date,   self.member_line.date_to)
+        self.assertEqual(self.invoice_line.end_date, self.member_line.date_to)
 
     def test_invoice_change_dates(self):
         new_date = date(2026, 2, 2)
@@ -55,11 +60,15 @@ class TestMembershipAccountCutoff(TransactionCase):
         """Test constrain preventing multiple membership lines for one
         invoice line"""
         with self.assertRaises(exceptions.ValidationError):
-            self.env["membership.membership_line"].create([{
-                "partner": self.member.id,
-                "membership_id": self.product.id,
-                "date_from": self.date_from,
-                "date_to": self.date_to,
-                "member_price": 10.0,
-                "account_invoice_line": self.invoice_line.id,
-            }])
+            self.env["membership.membership_line"].create(
+                [
+                    {
+                        "partner": self.member.id,
+                        "membership_id": self.product.id,
+                        "date_from": self.date_from,
+                        "date_to": self.date_to,
+                        "member_price": 10.0,
+                        "account_invoice_line": self.invoice_line.id,
+                    }
+                ]
+            )

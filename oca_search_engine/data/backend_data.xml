@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo noupdate="1">
     <record id="oca_typesense_backend" model="se.backend">
         <field name="name">OCA Typesense Backend</field>

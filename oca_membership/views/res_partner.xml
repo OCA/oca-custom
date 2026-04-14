@@ -1,12 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2026 AKRETION
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <!-- Search (membership_extension) -->
     <record id="view_res_partner_member_filter" model="ir.ui.view">
-        <field name="name">res.partner.select.membership_extension.oca_membership</field>
+        <field
+            name="name"
+        >res.partner.select.membership_extension.oca_membership</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="membership_extension.view_res_partner_member_filter" />
+        <field
+            name="inherit_id"
+            ref="membership_extension.view_res_partner_member_filter"
+        />
 
         <field name="arch" type="xml">
             <!-- Search bar fields -->
@@ -16,7 +21,10 @@
             </field>
 
             <!-- Quick filters -->
-            <filter name="all_members" position="replace">
+            <filter name="all_members" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </filter>
+            <filter name="all_members" position="after">
                 <filter
                     string="Elected"
                     name="elected"
@@ -34,17 +42,36 @@
                 />
 
                 <separator name="membership_state" />
-                <filter string="Paid member" name="paid"
-                    domain="[('membership_state', '=', 'paid')]" />
-                <filter string="Free member" name="free"
-                    domain="[('membership_state', '=', 'free')]" />
-                <filter string="Invoiced member" name="invoiced"
-                    domain="[('membership_state', '=', 'invoiced')]" />
-                <filter string="Waiting member" name="waiting"
-                    domain="[('membership_state', '=', 'waiting')]" />
-                <filter string="Old member" name="old" domain="[('membership_state', '=', 'old')]" />
-                <filter string="Canceled member" name="canceled"
-                    domain="[('membership_state', '=', 'canceled')]" />
+                <filter
+                    string="Paid member"
+                    name="paid"
+                    domain="[('membership_state', '=', 'paid')]"
+                />
+                <filter
+                    string="Free member"
+                    name="free"
+                    domain="[('membership_state', '=', 'free')]"
+                />
+                <filter
+                    string="Invoiced member"
+                    name="invoiced"
+                    domain="[('membership_state', '=', 'invoiced')]"
+                />
+                <filter
+                    string="Waiting member"
+                    name="waiting"
+                    domain="[('membership_state', '=', 'waiting')]"
+                />
+                <filter
+                    string="Old member"
+                    name="old"
+                    domain="[('membership_state', '=', 'old')]"
+                />
+                <filter
+                    string="Canceled member"
+                    name="canceled"
+                    domain="[('membership_state', '=', 'canceled')]"
+                />
 
                 <separator name="website" />
                 <filter
@@ -101,7 +128,10 @@
             </field>
         </field>
     </record>
-    <record id="membership.action_membership_members_view_kanban" model="ir.actions.act_window.view">
+    <record
+        id="membership.action_membership_members_view_kanban"
+        model="ir.actions.act_window.view"
+    >
         <field name="view_id" ref="oca_membership.res_partner_member_kanban" />
     </record>
 
@@ -159,7 +189,7 @@
     </record>
 
     <!-- Action -->
-    <record model="ir.actions.act_window" id="membership.action_membership_members">
+    <record id="membership.action_membership_members" model="ir.actions.act_window">
         <field name="domain">[("membership_state", "!=", "none")]</field>
         <field name="context">{
             "search_default_all_members": 1,

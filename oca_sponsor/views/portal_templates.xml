@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template
         id="portail_my_details_side_content"
@@ -50,7 +50,7 @@
                     t-foreach="countries or []"
                     t-as="country"
                     t-att-value="country.id"
-                    t-esc="country.name"
+                    t-out="country.name"
                     t-att-selected="'selected' if country.id in partner.sponsor_country_ids.ids else None"
                 />
             </select>
@@ -70,7 +70,7 @@
                     t-foreach="industries or []"
                     t-as="industry"
                     t-att-value="industry.id"
-                    t-esc="industry.name"
+                    t-out="industry.name"
                     t-att-selected="industry.id in partner.sponsor_industry_ids.ids"
                 />
             </select>
@@ -89,7 +89,7 @@
                 id="website_description_why_sponsoring"
                 style="min-height: 150px"
                 class="form-control"
-                t-esc="partner.website_description_why_sponsoring or '' "
+                t-out="partner.website_description_why_sponsoring or '' "
             />
         </div>
 
@@ -102,7 +102,7 @@
                 id="website_short_description"
                 style="min-height: 150px"
                 class="form-control"
-                t-esc="partner.website_short_description or '' "
+                t-out="partner.website_short_description or '' "
             />
         </div>
 
@@ -115,7 +115,7 @@
                 id="website_long_description"
                 style="min-height: 150px"
                 class="form-control"
-                t-esc="partner.website_long_description or '' "
+                t-out="partner.website_long_description or '' "
             />
         </div>
     </template>

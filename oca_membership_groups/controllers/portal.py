@@ -18,11 +18,7 @@ class PortalMailGroupMembership(PortalMailGroup):
         group_sudo, is_member, partner_id = super()._group_subscription_get_group(
             group_id, email, token
         )
-        return (
-            group_sudo.with_context(from_portal=True),
-            is_member,
-            partner_id
-        )
+        return (group_sudo.with_context(from_portal=True), is_member, partner_id)
 
     def _group_subscription_confirm_get_group(self, group_id, email, token, action):
         """For unlogged user, called to find group from the email link"""

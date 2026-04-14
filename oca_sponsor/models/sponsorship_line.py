@@ -10,7 +10,7 @@ class SponsorshipLine(models.Model):
     _name = "sponsorship.line"
     _description = "Sponsorship history"
 
-    partner_id = fields.Many2one(comodel_name="res.partner", string="Partner")
+    partner_id = fields.Many2one(comodel_name="res.partner")
     date_from = fields.Date(string="Join Date", required=True)
     date_end = fields.Date(string="End Date", required=True)
     grade_id = fields.Many2one(

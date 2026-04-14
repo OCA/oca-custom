@@ -5,10 +5,9 @@
 
 {
     "name": "OCA Membership Groups (custom)",
-    "description": """Manage Mailing Groups of the association""",
     "version": "18.0.1.0.0",
-    "author": "Akretion",
-    "website": "https://github.com/oca/oca-custom",
+    "author": "Akretion, Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/oca-custom",
     "license": "AGPL-3",
     "category": "Custom",
     "depends": [

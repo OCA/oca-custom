@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 =======================
 OCA Membership (custom)
 =======================
@@ -13,7 +17,7 @@ OCA Membership (custom)
 .. |badge1| image:: https://img.shields.io/badge/maturity-Alpha-red.png
     :target: https://odoo-community.org/page/development-status
     :alt: Alpha
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Foca--custom-lightgray.png?logo=github
@@ -30,16 +34,20 @@ OCA Membership (custom)
 
 This module adds several independant features.
 
-- **Target role [TO FINISH: logique de facturation]** New field *Target
-  role* on Members form: it defines the role the member will receive
-  when paying for its *next* membership. It should be updated by the
-  association' secretary when members roles change, like on election,
-  before the memberships are renewed.
-- **Working Group** New menu "Working Group" in *Membership* app. They
-  are native Odoo objects *Mail Groups* mail.group with custom boolean
-  *Is a Working Group* enabled. When creating a *Mail Group*, create a
-  *Partner Tag* with the same name. Then, to add Members to a *Mail
-  Group*, add the same tag to them.
+- **Membership Categories: the Roles in the assciation** The new field
+  *Current category* defines the Role of a member on the association.
+  Those choosen *Current category* plus the *Membership category* of all
+  active lines form the *Membership Categories*, they may be used to
+  filter the members, and which are used to automatically add or remove
+  member in Mail Groups (see oca_membership_groups).
+
+  Example: a member is invoiced and pays for the *OCA Member* product.
+  This product sets the *Member* category on membership lines. On the
+  member's form, it is defined as a *Delegate*.
+
+- **Implied roles (Membership Categories)** They help to define that a
+  *Board member* is also a *Delegate*. Configuration: browse to *Members
+  / Configuration / Membership Categories*
 
 .. IMPORTANT::
    This is an alpha version, the data model and design can change at any time without warning.
@@ -77,7 +85,7 @@ Authors
 Contributors
 ------------
 
-- Arnaud LAYEC (arnaud.layec@akretion.com)
+- Arnaud LAYEC (<arnaud.layec@akretion.com>)
 
 Maintainers
 -----------

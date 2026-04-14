@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2026 AKRETION
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
@@ -36,7 +36,7 @@
     </record>
 
     <!-- Kanban -->
-    <record model="ir.ui.view" id="res_partner_kanban_view">
+    <record id="res_partner_kanban_view" model="ir.ui.view">
         <field name="name">res.partner.kanban.oca_sponsor</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.res_partner_kanban_view" />
@@ -77,12 +77,12 @@
                     Sponsor information are pending a review to be updated on the website.
 
                     <button
-                        name="button_sponsor_review_accept"
-                        type="object"
-                        string="Accept changes"
-                        icon="fa-check"
-                        class="btn btn-success ms-2"
-                    />
+                    name="button_sponsor_review_accept"
+                    type="object"
+                    string="Accept changes"
+                    icon="fa-check"
+                    class="btn btn-success ms-2"
+                />
                 </div>
             </sheet>
 
@@ -174,7 +174,7 @@
     </record>
 
     <!-- New entry menu 'Sponsors' in Membership app -->
-    <record model="ir.actions.act_window" id="action_membership_sponsor">
+    <record id="action_membership_sponsor" model="ir.actions.act_window">
         <field name="name">Sponsors</field>
         <field name="res_model">res.partner</field>
         <field name="view_mode">kanban,list,form</field>

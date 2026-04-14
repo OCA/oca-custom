@@ -35,7 +35,7 @@ class ResPartner(models.Model):
         string="Current category",
         default=lambda self: self._get_default_membership_category().id,
         help="This field may reflect a Role in the association. Changing it is "
-             "immediatly reflected on Membership Categories.",
+        "immediatly reflected on Membership Categories.",
     )
     membership_category_ids = fields.Many2many(
         compute="_compute_membership_state",
@@ -78,7 +78,7 @@ class ResPartner(models.Model):
                 partner.membership_category_id
                 and partner.membership_category_id != default_category
             )
-    
+
     @api.model
     def _search_is_elected(self, operator, value):
         if operator != "=" or not isinstance(value, bool) or not value:
@@ -104,8 +104,7 @@ class ResPartner(models.Model):
         """Integrators are companies having contributors or members"""
         for partner in self:
             partner.is_integrator = partner.is_company and any(
-                child.is_contributor or child.is_member
-                for child in partner.child_ids
+                child.is_contributor or child.is_member for child in partner.child_ids
             )
 
     @api.depends(

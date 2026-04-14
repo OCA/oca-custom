@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template
         id="oca_membership.portal_my_details"
@@ -93,7 +93,7 @@
 
                 <!-- Affichage des erreurs -->
                 <div t-if="error.get('avatar')" class="invalid-feedback d-block">
-                    <t t-esc="error['avatar']" />
+                    <t t-out="error['avatar']" />
                 </div>
             </div>
 
@@ -146,9 +146,9 @@
                         class="form-check-input"
                         t-att-checked="partner.is_published_address"
                     />
-                    <label
-                        for="is_published_address"
-                    >Publish location the website (address &amp; city)</label>
+                    <label for="is_published_address">
+                        Publish location the website (address &amp; city)
+                    </label>
                 </div>
 
                 <div class="mb-1">
