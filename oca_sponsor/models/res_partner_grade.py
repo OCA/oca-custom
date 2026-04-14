@@ -21,6 +21,7 @@ class ResPartnerGrade(models.Model):
     _name = "res.partner.grade"
     _order = "sequence"
     _description = "Partner Grade"
+    _inherit = ["website.published.mixin"]
 
     sequence = fields.Integer()
     active = fields.Boolean(default=True)

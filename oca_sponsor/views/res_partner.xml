@@ -72,18 +72,17 @@
                     class="alert alert-warning"
                     role="alert"
                     name="warning_sponsor_review"
-                    invisible="not sponsor_to_review"
+                    invisible="not is_sponsor_reviewer or not sponsor_to_review"
                 >
                     Sponsor information are pending a review to be updated on the website.
 
                     <button
-                    name="button_sponsor_review_accept"
-                    type="object"
-                    string="Accept changes"
-                    icon="fa-check"
-                    class="btn btn-success"
-                    invisible="not is_sponsor_reviewer or not sponsor_to_review"
-                />
+                        name="button_sponsor_review_accept"
+                        type="object"
+                        string="Accept changes"
+                        icon="fa-check"
+                        class="btn btn-success ms-2"
+                    />
                 </div>
             </sheet>
 
@@ -190,7 +189,7 @@
 
     <!-- Action: review(accept) sponsor changes in mass -->
     <record id="action_sponsor_review_accept" model="ir.actions.server">
-        <field name="name">Publish changes to the website</field>
+        <field name="name">Review sponsor changes &amp; publish</field>
         <field name="model_id" ref="base.model_res_partner" />
         <field name="binding_model_id" ref="base.model_res_partner" />
         <field name="state">code</field>

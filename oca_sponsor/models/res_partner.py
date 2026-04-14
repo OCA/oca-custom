@@ -246,16 +246,14 @@ class ResPartner(models.Model):
             sponsors.sponsor_to_review = True
             sponsors._sponsor_reviewers_notify()
 
-    def _sponsor_reviewers_notify(self, notify=True):
-        """`notify=True`: notify the reviewers when review starts
-        `notify=False`: remove the activity at review validation"""
+    def _sponsor_reviewers_notify(self, unnotify=None):
         reviewer_team = self.env["res.users"]._get_sponsor_reviewer_team()
-        if not notify:
+        if unnotify:
             self.activity_ids.filtered(
                 lambda x: x.team_id == reviewer_team
-            ).sudo().unlink()
+            ).action_cancel()
         else:
-            self.sudo().activity_schedule(
+            self.activity_schedule(
                 team_id=reviewer_team.id,
                 note=_(
                     "The sponsor changed its information from its profile. "
@@ -265,7 +263,7 @@ class ResPartner(models.Model):
             )
 
     def _sponsor_review_accept(self):
-        self._sponsor_reviewers_notify(notify=False)
+        self._sponsor_reviewers_notify(unnotify=True)
         self.sudo().write(
             {  # 'sudo' to bypass AccessError of 'website.published.multi.mixin'
                 "is_published": True,
