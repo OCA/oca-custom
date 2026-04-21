@@ -152,6 +152,7 @@
         "multi_step_wizard",
         "partner_statement",
         "project_task_add_very_high",
+        "project_timesheet_time_control",
         "oca_custom",
         "partner_contact_access_link",
         "pdf_xml_attachment",

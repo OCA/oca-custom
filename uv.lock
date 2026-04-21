@@ -676,6 +676,7 @@ dependencies = [
     { name = "odoo-addon-pdf-xml-attachment" },
     { name = "odoo-addon-project-role" },
     { name = "odoo-addon-project-task-add-very-high" },
+    { name = "odoo-addon-project-timesheet-time-control" },
     { name = "odoo-addon-report-xlsx" },
     { name = "odoo-addon-report-xlsx-helper" },
     { name = "odoo-addon-sale-loyalty-partner-applicability" },
@@ -763,7 +764,7 @@ requires-dist = [
     { name = "odoo-addon-account-financial-report", specifier = "==18.0.*" },
     { name = "odoo-addon-account-invoice-overdue-reminder", specifier = "==18.0.*" },
     { name = "odoo-addon-account-lock-to-date", specifier = "==18.0.*" },
-    { name = "odoo-addon-account-payment-method-base-mode", git = "https://github.com/Therp/bank-payment?subdirectory=account_payment_method_base_mode&branch=18.0-add-account_payment_method_base_mode" },
+    { name = "odoo-addon-account-payment-method-base-mode", specifier = "==18.0.*" },
     { name = "odoo-addon-account-payment-mode", specifier = "==18.0.*" },
     { name = "odoo-addon-account-payment-order", specifier = "==18.0.*" },
     { name = "odoo-addon-account-payment-partner", specifier = "==18.0.*" },
@@ -809,6 +810,7 @@ requires-dist = [
     { name = "odoo-addon-pdf-xml-attachment", specifier = "==18.0.*" },
     { name = "odoo-addon-project-role", specifier = "==18.0.*" },
     { name = "odoo-addon-project-task-add-very-high", specifier = "==18.0.*" },
+    { name = "odoo-addon-project-timesheet-time-control", specifier = "==18.0.*" },
     { name = "odoo-addon-report-xlsx", specifier = "==18.0.*" },
     { name = "odoo-addon-report-xlsx-helper", specifier = "==18.0.*" },
     { name = "odoo-addon-sale-loyalty-partner-applicability", specifier = "==18.0.*" },
@@ -994,12 +996,15 @@ wheels = [
 
 [[package]]
 name = "odoo-addon-account-payment-method-base-mode"
-version = "18.0.1.0.0"
-source = { git = "https://github.com/Therp/bank-payment?subdirectory=account_payment_method_base_mode&branch=18.0-add-account_payment_method_base_mode#3af732e133fe923ed4ec767e24f057491a059bb8" }
+version = "18.0.1.0.0.3"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "odoo" },
     { name = "odoo-addon-account-payment-method-base" },
     { name = "odoo-addon-account-payment-mode" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/51/6d/d2dbe009c452472b5e3416e5ecf83f58ecdb8009d48ead0f503dbb96ec95/odoo_addon_account_payment_method_base_mode-18.0.1.0.0.3-py3-none-any.whl", hash = "sha256:7fbf64d3ca0470c4bc2560b91d526164478b6decced5efa644549b448c817b45", size = 23763, upload-time = "2026-04-04T02:42:44.733Z" },
 ]
 
 [[package]]
@@ -1584,6 +1589,17 @@ dependencies = [
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/46/c9/fa473f0b83d56c86ebff691f8df26137d24cde37fbddcb73d7e9f4e767e2/odoo_addon_project_task_add_very_high-18.0.1.1.0.2-py3-none-any.whl", hash = "sha256:1e2df58b9d8cae8657c7cab3ceff2f1865f29a87d6020ac50c03a321c93b2fc5", size = 84181, upload-time = "2025-06-05T03:25:37.08Z" },
+]
+
+[[package]]
+name = "odoo-addon-project-timesheet-time-control"
+version = "18.0.1.0.6"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "odoo" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/22/fa/fd44fcee2a72c4f5a499f9ac33d695492564c265496f9e7d38770b58d191/odoo_addon_project_timesheet_time_control-18.0.1.0.6-py3-none-any.whl", hash = "sha256:073e224f0ecc8e1fc12cbbdf730cf0c57f80fcbedf6afa284fc9c68f267481f6", size = 167479, upload-time = "2026-02-12T18:31:12.089Z" },
 ]
 
 [[package]]
