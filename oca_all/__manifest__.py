@@ -61,6 +61,7 @@
         "portal_rating",
         "product",
         "project",
+        "project_timesheet_time_control",
         "purchase",
         "purchase_stock",
         "rating",
