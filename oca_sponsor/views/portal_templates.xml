@@ -11,7 +11,10 @@
 
     <template id="portal_my_details" inherit_id="portal.portal_my_details">
         <t t-call="portal.portal_my_details_fields" position="after">
-            <t t-if="partner.is_sponsor" t-call="portal_my_details_sponsorship" />
+            <t
+                t-if="partner.is_sponsor"
+                t-call="oca_sponsor.portal_my_details_sponsorship"
+            />
         </t>
     </template>
 
