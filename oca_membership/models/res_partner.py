@@ -42,10 +42,10 @@ class ResPartner(models.Model):
         "Automatically enabled for companies (sponsors and integrators).\n"
         "To enable manually for individuals (members).",
     )
-    is_published_email = fields.Boolean(string="Publish email", default=True)
-    is_published_phone = fields.Boolean(string="Publish phone", default=True)
-    is_published_address = fields.Boolean(string="Publish address", default=True)
-    is_published_website = fields.Boolean(string="Publish website", default=True)
+    is_published_email = fields.Boolean(string="Publish email")
+    is_published_phone = fields.Boolean(string="Publish phone")
+    is_published_address = fields.Boolean(string="Publish address")
+    is_published_website = fields.Boolean(string="Publish website")
 
     def _default_membership_category_id(self):
         return self.env["membership.membership_category"].search([], limit=1).id
