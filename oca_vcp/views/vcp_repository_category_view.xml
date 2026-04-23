@@ -15,7 +15,25 @@
             <form>
                 <header />
                 <sheet>
-                    <field name="name" />
+                    <div class="oe_button_box" name="button_box" />
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group name="description">
+                        <separator string="Short Description" />
+                        <field name="short_description" nolabel="1" />
+                        <separator string="Description" />
+                        <field name="description" nolabel="1" />
+                    </group>
+                    <group name="repository" string="Repository">
+                        <field
+                            name="repository_ids"
+                            widget="many2many_tags"
+                            nolabel="1"
+                        />
+                    </group>
                 </sheet>
             </form>
         </field>
@@ -31,7 +49,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="vcp_repository_category_action">
-        <field name="name">Label</field>
+        <field name="name">Repository Categories</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">vcp.repository.category</field>
         <field name="view_mode">list,form</field>

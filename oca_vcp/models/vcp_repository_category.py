@@ -11,3 +11,11 @@ class VcpRepositoryCategory(models.Model):
     _description = "Repository Category"
 
     name = fields.Char()
+    short_description = fields.Text()
+    description = fields.Text()
+    repository_ids = fields.One2many(
+        "vcp.repository",
+        "category_id",
+        "Repositories",
+        readonly=True,
+    )

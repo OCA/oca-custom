@@ -20,8 +20,8 @@ class ResPartner(models.Model):
     oca_collaboration_index = fields.Integer(
         "OCA collaboration index",
         help="This index is based on the last 12 Months. Moving Annual Total (MAT)",
-        compute="_compute_oca_collaboration_index"
-        )
+        compute="_compute_oca_collaboration_index",
+    )
 
     @api.depends()
     def _compute_oca_collaboration_index(self):
@@ -29,9 +29,9 @@ class ResPartner(models.Model):
             record.oca_collaboration_index = (
                 record.vcp_merged_requests
                 + record.vcp_reviews
-                + record.vcp_created_requests ** .5
-                + record.vcp_comments ** .5
-                )
+                + record.vcp_created_requests**0.5
+                + record.vcp_comments**0.5
+            )
 
     @api.depends("vcp_user_ids.is_github_main_login")
     def _compute_github_main_login(self):
