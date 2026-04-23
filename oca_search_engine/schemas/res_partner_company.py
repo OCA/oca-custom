@@ -118,7 +118,7 @@ class Company(StrictExtendableBaseModel):
     members_count: int
     modules_count: int
     # technical website fields
-    url_key: str
+    url_key: str | None
     redirect_url_key: list[str]
     # sponsorship
     sponsorship: Sponsorship | None
@@ -153,7 +153,7 @@ class Company(StrictExtendableBaseModel):
             contacts=[
                 Contact.from_record(contact)
                 for contact in record | record.sponsor_child_ids
-                ],
+            ],
             logo_urls=LogoUrls.from_record(record),
             # github indicators
             contributors_count=len(contributors),
@@ -161,7 +161,7 @@ class Company(StrictExtendableBaseModel):
             members_count=len(members),
             modules_count=record.modules_author_count,
             # technical website fields
-            url_key=record.url_key,
+            url_key=record.is_sponsor and record.url_key or None,
             redirect_url_key=record.redirect_url_key,
             # sponsorship
             sponsorship=None

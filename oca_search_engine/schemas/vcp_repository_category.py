@@ -6,12 +6,28 @@
 from extendable_pydantic import StrictExtendableBaseModel
 
 
-class VcpRepositoryCategory(StrictExtendableBaseModel):
+class VcpRepositoryCategoryLight(StrictExtendableBaseModel):
     name: str
     url_key: str
 
     @classmethod
-    def from_record(cls, odoo_rec):
+    def from_record(cls, record):
+        record._update_url_key(lang=record.env.context.get("lang"))
         return cls.model_construct(
-            name=odoo_rec.name, url_key=odoo_rec.env["ir.http"]._slugify(odoo_rec.name)
+            name=record.name,
+            url_key=record.url_key,
         )
+
+
+class VcpRepositoryCategory(VcpRepositoryCategoryLight):
+    id: int
+    short_description: str | None
+    description: str | None
+
+    @classmethod
+    def from_record(cls, record):
+        obj = super().from_record(record)
+        obj.id = record.id
+        obj.short_description = record.short_description or None
+        obj.description = record.description or None
+        return obj

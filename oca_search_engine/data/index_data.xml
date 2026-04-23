@@ -25,9 +25,17 @@
 
     <record id="oca_typesense_index_module" model="se.index">
         <field name="backend_id" ref="oca_typesense_backend" />
-        <field name="name">modules</field>
+        <field name="custom_tech_name">modules</field>
         <field name="lang_id" ref="base.lang_en" />
         <field name="model_id" ref="vcp_odoo.model_vcp_odoo_module_version" />
         <field name="serializer_type">vcp_odoo_module_version_exports</field>
+    </record>
+
+    <record id="oca_typesense_index_category" model="se.index">
+        <field name="backend_id" ref="oca_typesense_backend" />
+        <field name="custom_tech_name">categories</field>
+        <field name="lang_id" ref="base.lang_en" />
+        <field name="model_id" ref="oca_vcp.model_vcp_repository_category" />
+        <field name="serializer_type">vcp_repository_category_exports</field>
     </record>
 </odoo>

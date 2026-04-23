@@ -10,6 +10,7 @@ from ..tools import (
     PersonSerializer,
     # PscSerializer,
     VcpOdooModuleVersionSerializer,
+    VcpRepositoryCategorySerializer,
 )
 
 
@@ -19,12 +20,14 @@ class SeIndex(models.Model):
     serializer_type = fields.Selection(
         selection_add=[
             ("vcp_odoo_module_version_exports", "Odoo Modules"),
+            ("vcp_repository_category_exports", "Modules Category"),
             ("companies_exports", "Companies (sponsors & integrators)"),
             ("persons_exports", "Persons (members & contributors)"),
             # ("pscs_exports", "PSCs (Project Steering Teams)"),
         ],
         ondelete={
             "vcp_odoo_module_version_exports": "cascade",
+            "vcp_repository_category_exports": "cascade",
             "companies_exports": "cascade",
             "persons_exports": "cascade",
             # "pscs_exports": "cascade",
@@ -38,6 +41,7 @@ class SeIndex(models.Model):
             "persons_exports": "res.partner",
             # "pscs_exports": "vcp.oca.psc",
             "vcp_odoo_module_version_exports": "vcp.odoo.module.version",
+            "vcp_repository_category_exports": "vcp.repository.category",
         }
         for se_index in self:
             model = mapped_models.get(se_index.serializer_type)
@@ -51,5 +55,6 @@ class SeIndex(models.Model):
             "persons_exports": PersonSerializer(),
             # "pscs_exports": PscSerializer(),
             "vcp_odoo_module_version_exports": VcpOdooModuleVersionSerializer(),
+            "vcp_repository_category_exports": VcpRepositoryCategorySerializer(),
         }
         return mapped_serializer.get(self.serializer_type) or super()._get_serializer()

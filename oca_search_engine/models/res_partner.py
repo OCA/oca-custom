@@ -35,7 +35,7 @@ class ResPartner(models.Model):
         # Add the right prefix for the url key dependendy if it's
         # a company or a person
         if self.is_company:
-            return f"companies/{url_key}"
+            return f"integrators/{url_key}"
         else:
             return f"community/{url_key}"
 
@@ -82,6 +82,7 @@ class ResPartner(models.Model):
     def write(self, vals):
         res = super().write(vals)
         self._add_to_oca_search_engine(vals)
+        self._se_mark_to_update()
         return res
 
     # ===== Business logics =====#
@@ -100,6 +101,6 @@ class ResPartner(models.Model):
         if self.is_company:
             return (self | self.sponsor_child_ids).child_ids.filtered(
                 lambda s: s._is_contributor()
-                )
+            )
         else:
             return self.browse()
