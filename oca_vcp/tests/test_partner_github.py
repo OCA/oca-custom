@@ -32,6 +32,12 @@ class TestPartnerGithub(TransactionCase):
         self.assertEqual(self.member.vcp_user_ids.external_id, "johndoe")
         self.assertTrue(self.member.vcp_user_ids.is_github_main_login)
 
+    def test_unset_github_login(self):
+        self.member.github_main_login = "johndoe"
+        self.assertEqual(len(self.member.vcp_user_ids), 1)
+        self.member.github_main_login = ""
+        self.assertFalse(self.member.vcp_user_ids)
+
     def test_set_existing_github_login(self):
         self.env["vcp.user"].create(
             {

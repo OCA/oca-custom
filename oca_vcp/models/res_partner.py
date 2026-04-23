@@ -50,37 +50,40 @@ class ResPartner(models.Model):
 
         github = self.env.ref("vcp_github.vcp_github_host")
         for record in self:
-            github_sync_avatar = record.github_sync_avatar
-            user = self.env["vcp.user"].search(
-                [
-                    ("external_id", "=", record.github_main_login),
-                    ("host_id", "=", github.id),
-                ]
-            )
-            if user:
-                if not user.partner_id:
-                    record.vcp_user_ids.filtered(
-                        "is_github_main_login"
-                    ).is_github_main_login = False
-                    user.partner_id = record
-                    user.is_github_main_login = True
-                elif user.partner_id != record:
-                    raise UserError(self.env._("This github login is already used"))
-                elif not user.is_github_main_login:
-                    record.vcp_user_ids.filtered(
-                        "is_github_main_login"
-                    ).is_github_main_login = False
-                    user.is_github_main_login = True
-            else:
-                user_id = github._get_user(record.github_main_login)
-                user = self.env["vcp.user"].browse(user_id)
-                user.write(
-                    {
-                        "is_github_main_login": True,
-                        "partner_id": record.id,
-                    }
+            if record.github_main_login:
+                github_sync_avatar = record.github_sync_avatar
+                user = self.env["vcp.user"].search(
+                    [
+                        ("external_id", "=", record.github_main_login),
+                        ("host_id", "=", github.id),
+                    ]
                 )
-            user.sync_image_to_partner = github_sync_avatar
+                if user:
+                    if not user.partner_id:
+                        record.vcp_user_ids.filtered(
+                            "is_github_main_login"
+                        ).is_github_main_login = False
+                        user.partner_id = record
+                        user.is_github_main_login = True
+                    elif user.partner_id != record:
+                        raise UserError(self.env._("This github login is already used"))
+                    elif not user.is_github_main_login:
+                        record.vcp_user_ids.filtered(
+                            "is_github_main_login"
+                        ).is_github_main_login = False
+                        user.is_github_main_login = True
+                else:
+                    user_id = github._get_user(record.github_main_login)
+                    user = self.env["vcp.user"].browse(user_id)
+                    user.write(
+                        {
+                            "is_github_main_login": True,
+                            "partner_id": record.id,
+                        }
+                    )
+                user.sync_image_to_partner = github_sync_avatar
+            else:
+                record.vcp_user_ids.unlink()
 
     @api.depends(
         "vcp_user_ids.is_github_main_login",
