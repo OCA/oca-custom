@@ -161,6 +161,7 @@
         "report_xlsx",
         "report_xlsx_helper",
         "sale_loyalty_partner_applicability",
+        "scheduler_error_mailer",
         "sentry",
         "server_action_mass_edit",
         "survey_xlsx",

@@ -681,6 +681,7 @@ dependencies = [
     { name = "odoo-addon-report-xlsx" },
     { name = "odoo-addon-report-xlsx-helper" },
     { name = "odoo-addon-sale-loyalty-partner-applicability" },
+    { name = "odoo-addon-scheduler-error-mailer" },
     { name = "odoo-addon-sentry" },
     { name = "odoo-addon-server-action-mass-edit" },
     { name = "odoo-addon-sql-request-abstract" },
@@ -816,6 +817,7 @@ requires-dist = [
     { name = "odoo-addon-report-xlsx", specifier = "==18.0.*" },
     { name = "odoo-addon-report-xlsx-helper", specifier = "==18.0.*" },
     { name = "odoo-addon-sale-loyalty-partner-applicability", specifier = "==18.0.*" },
+    { name = "odoo-addon-scheduler-error-mailer", specifier = "==18.0.*" },
     { name = "odoo-addon-sentry", specifier = "==18.0.*" },
     { name = "odoo-addon-server-action-mass-edit", specifier = "==18.0.*" },
     { name = "odoo-addon-sql-request-abstract", specifier = "==18.0.*" },
@@ -1649,6 +1651,17 @@ dependencies = [
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/14/a3/c6f356c47f5af202abf958a5498f759c0f911a380d5ba5d286f2befbedd8/odoo_addon_sale_loyalty_partner_applicability-18.0.1.0.0.2-py3-none-any.whl", hash = "sha256:fccf0fd83885baeda3ebf5fb228bd738ece937454eecd6620c880e4e4fe17230", size = 28475, upload-time = "2025-09-05T06:26:28.674Z" },
+]
+
+[[package]]
+name = "odoo-addon-scheduler-error-mailer"
+version = "18.0.1.0.0.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "odoo" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d9/bd/8173c16335a297b542b5f3bf0b67f67d66919007ce945e40dd11eb7df7e2/odoo_addon_scheduler_error_mailer-18.0.1.0.0.3-py3-none-any.whl", hash = "sha256:71afb2aac28a3208d4da091c9c515e8d4682b5b5072a98159af48f73a63b215f", size = 63244, upload-time = "2025-06-27T07:41:32.477Z" },
 ]
 
 [[package]]
