@@ -2,6 +2,12 @@
 set -e
 set -x
 
+if [[ "${DISABLE_NEUTRALIZE}" = 'yes' ]]
+then
+    echo "DISABLE_NEUTRALIZE = yes, skipping neutralization"
+    exit 0
+fi
+
 if [[ -z "${RUNNING_ENV}" ]]
 then
     echo "RUNNING_ENV is not defined, please set a RUNNING_ENV and try again"

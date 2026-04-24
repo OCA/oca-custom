@@ -26,6 +26,10 @@ def neutralize_db(env):
 @click_odoo.env_options(with_rollback=False)
 def main(env):
     running_env = os.getenv("RUNNING_ENV")
+    disable_neutralize = os.getenv("DISABLE_NEUTRALIZE")
+    if disable_neutralize == "yes":
+        _logger.info("DISABLE_NEUTRALIZE = yes, not neutralizing")
+        sys.exit(0)
     if not running_env:
         _logger.info(
             "RUNNING_ENV is not defined, please set a RUNNING_ENV and try again"
