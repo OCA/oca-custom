@@ -124,6 +124,7 @@
         "account_statement_import_online_stripe",
         "account_statement_import_online_wise",
         "account_statement_import_online_paypal",
+        "account_statement_import_online_ponto",
         "account_statement_import_sheet_file",
         "account_tax_unece",
         "account_usability",

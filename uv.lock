@@ -642,6 +642,7 @@ dependencies = [
     { name = "odoo-addon-account-statement-import-file" },
     { name = "odoo-addon-account-statement-import-file-reconcile-oca" },
     { name = "odoo-addon-account-statement-import-online-paypal" },
+    { name = "odoo-addon-account-statement-import-online-ponto" },
     { name = "odoo-addon-account-statement-import-online-stripe" },
     { name = "odoo-addon-account-statement-import-online-wise" },
     { name = "odoo-addon-account-statement-import-sheet-file" },
@@ -776,6 +777,7 @@ requires-dist = [
     { name = "odoo-addon-account-statement-import-file", specifier = "==18.0.*" },
     { name = "odoo-addon-account-statement-import-file-reconcile-oca", specifier = "==18.0.*" },
     { name = "odoo-addon-account-statement-import-online-paypal", specifier = "==18.0.*" },
+    { name = "odoo-addon-account-statement-import-online-ponto", specifier = "==18.0.*" },
     { name = "odoo-addon-account-statement-import-online-stripe", specifier = "==18.0.*" },
     { name = "odoo-addon-account-statement-import-online-wise", git = "https://github.com/Therp/bank-statement-import?subdirectory=account_statement_import_online_wise&branch=18.0-fix-account-statement-import-online-wise" },
     { name = "odoo-addon-account-statement-import-sheet-file", specifier = "==18.0.*" },
@@ -1185,6 +1187,18 @@ dependencies = [
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/50/f6/fcce33781f7fb924584cc0b2107322a45a17db216afa5c363b673296b752/odoo_addon_account_statement_import_online_paypal-18.0.1.0.2-py3-none-any.whl", hash = "sha256:b53f8baae23caf8d52a01226bfe7c686eee2544c26988bc73b0f0b41144ec967", size = 50836, upload-time = "2025-10-07T13:56:22.993Z" },
+]
+
+[[package]]
+name = "odoo-addon-account-statement-import-online-ponto"
+version = "18.0.1.0.1.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "odoo" },
+    { name = "odoo-addon-account-statement-import-online" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f3/a2/82056480d532ec3fb0b9e6950112e85881e68445adcb6a7885995962755f/odoo_addon_account_statement_import_online_ponto-18.0.1.0.1.3-py3-none-any.whl", hash = "sha256:2b6e35e218cf8dc1100e3992d96cd2ade03ef7a7b29cf8d5680f85a992403fe9", size = 48214, upload-time = "2026-01-21T02:44:17.49Z" },
 ]
 
 [[package]]
