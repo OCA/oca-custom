@@ -789,8 +789,8 @@ requires-dist = [
     { name = "odoo-addon-base-ubl", specifier = "==18.0.*" },
     { name = "odoo-addon-base-unece", specifier = "==18.0.*" },
     { name = "odoo-addon-bi-sql-editor", specifier = "==18.0.*" },
-    { name = "odoo-addon-crowdfunding", git = "https://github.com/hbrunn/crowdfunding?subdirectory=crowdfunding&branch=18.0-mig-crowdfunding" },
-    { name = "odoo-addon-crowdfunding-public-pledge", git = "https://github.com/hbrunn/crowdfunding?subdirectory=crowdfunding_public_pledge&branch=18.0-mig-crowdfunding" },
+    { name = "odoo-addon-crowdfunding", specifier = "==18.0.*" },
+    { name = "odoo-addon-crowdfunding-public-pledge", specifier = "==18.0.*" },
     { name = "odoo-addon-currency-rate-update", specifier = "==18.0.*" },
     { name = "odoo-addon-date-range", specifier = "==18.0.*" },
     { name = "odoo-addon-date-range-account", specifier = "==18.0.*" },
@@ -1318,20 +1318,26 @@ wheels = [
 
 [[package]]
 name = "odoo-addon-crowdfunding"
-version = "18.0.1.0.0.6"
-source = { git = "https://github.com/hbrunn/crowdfunding?subdirectory=crowdfunding&branch=18.0-mig-crowdfunding#b300e33302f55324470859a168515104d1e79f12" }
+version = "18.0.1.0.0.8"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "odoo" },
     { name = "odoo-addon-onchange-helper" },
 ]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7e/28/eaa271176b85bb5c62b2f10b337b7907c1ee541bf655989904dd9d446833/odoo_addon_crowdfunding-18.0.1.0.0.8-py3-none-any.whl", hash = "sha256:60b9f2f423c133f117a93208f126b09b0fa10af1b68014e2829a7bb148bdfd65", size = 46399, upload-time = "2026-04-24T07:57:42.992Z" },
+]
 
 [[package]]
 name = "odoo-addon-crowdfunding-public-pledge"
-version = "18.0.1.0.0.3"
-source = { git = "https://github.com/hbrunn/crowdfunding?subdirectory=crowdfunding_public_pledge&branch=18.0-mig-crowdfunding#b300e33302f55324470859a168515104d1e79f12" }
+version = "18.0.1.0.0.6"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "odoo" },
     { name = "odoo-addon-crowdfunding" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/80/e1/498f600244e14bf2770f82c8b9d878c7da63abbb6f56a136950bda0e32b1/odoo_addon_crowdfunding_public_pledge-18.0.1.0.0.6-py3-none-any.whl", hash = "sha256:0fe327955675eed0b7aad75dc4c89acbed5a651f8c6f0fa98f697d8348c7f7b5", size = 23261, upload-time = "2026-04-24T07:57:39.742Z" },
 ]
 
 [[package]]
