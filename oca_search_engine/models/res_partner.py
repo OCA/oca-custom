@@ -82,7 +82,7 @@ class ResPartner(models.Model):
     def write(self, vals):
         res = super().write(vals)
         self._add_to_oca_search_engine(vals)
-        self._se_mark_to_update()
+        self.sudo()._se_mark_to_update()
         return res
 
     # ===== Business logics =====#
