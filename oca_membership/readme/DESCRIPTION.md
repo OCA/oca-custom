@@ -1,6 +1,6 @@
 This module adds several independant features.
 
-- **Membership Categories: the Roles in the assciation** The new field
+- **Membership Categories: the Roles in the association** The new field
   *Current category* defines the Role of a member on the association.
   Those choosen *Current category* plus the *Membership category* of all
   active lines form the *Membership Categories*, they may be used to

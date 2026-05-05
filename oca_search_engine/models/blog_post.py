@@ -5,7 +5,7 @@ from odoo import api, models
 
 
 class BlogPost(models.Model):
-    _inherit = ["blog.post"]
+    _inherit = "blog.post"
 
     @api.model_create_multi
     def create(self, vals_list):

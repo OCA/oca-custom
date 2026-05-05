@@ -6,7 +6,7 @@ from odoo import fields, models
 
 
 class MailGroup(models.Model):
-    _inherit = ["mail.group"]
+    _inherit = "mail.group"
 
     is_working_group = fields.Boolean(
         string="Is a Working Group",

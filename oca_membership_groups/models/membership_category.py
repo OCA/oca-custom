@@ -6,7 +6,7 @@ from odoo import fields, models
 
 
 class MembershipCategory(models.Model):
-    _inherit = ["membership.membership_category"]
+    _inherit = "membership.membership_category"
 
     mail_group_ids = fields.Many2many(
         string="Mail Groups",

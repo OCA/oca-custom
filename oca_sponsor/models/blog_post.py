@@ -9,7 +9,7 @@ class BlogPost(models.Model):
     """Play review process at any update of a sponsor's blog,
     except if the update is done by a reviewer"""
 
-    _inherit = ["blog.post"]
+    _inherit = "blog.post"
 
     @api.model_create_multi
     def create(self, vals_list):

@@ -8,7 +8,7 @@ from odoo import fields, models
 
 
 class MembershipCategory(models.Model):
-    _inherit = ["membership.membership_category"]
+    _inherit = "membership.membership_category"
     _description = "Membership role"
     _order = "sequence"
 

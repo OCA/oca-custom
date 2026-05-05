@@ -4,11 +4,9 @@
 
 from odoo import api, fields, models
 
-BATCH_SIZE_PROVISION_CRON = 1000
-
 
 class ResPartner(models.Model):
-    _inherit = ["res.partner"]
+    _inherit = "res.partner"
 
     mail_group_member_ids = fields.One2many(
         comodel_name="mail.group.member",
@@ -52,12 +50,9 @@ class ResPartner(models.Model):
 
     def _leave_mail_groups(self, groups):
         """Unlink the membership unless the member explicitely unsubscribed.
-        In latter case, keep the subscription in archived mode."""
+        In latter case, `_leave_group` will keep the subscription since it's
+        archived."""
         self.ensure_one()
-        groups = groups.with_context(
-            # Ensure not to unsubscribe archived members
-            active_test=True
-        )
         for group in groups:
             group._leave_group(self.email, self.id)
 

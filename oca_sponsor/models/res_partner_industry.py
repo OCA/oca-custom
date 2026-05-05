@@ -5,7 +5,7 @@ from odoo import fields, models
 
 
 class ResPartnerIndustry(models.Model):
-    _inherit = ["res.partner.industry"]
+    _inherit = "res.partner.industry"
 
     sequence = fields.Integer()
     description = fields.Text(

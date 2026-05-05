@@ -5,7 +5,7 @@ from odoo import api, models
 
 
 class ResUsers(models.Model):
-    _inherit = ["res.users"]
+    _inherit = "res.users"
 
     def _is_sponsor_reviewer(self):
         return self in self._get_sponsor_reviewer_team().member_ids

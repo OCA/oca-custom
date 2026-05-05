@@ -42,13 +42,12 @@
                     <group>
                         <field name="is_working_group" widget="boolean_toggle" />
                         <field
-                            name="grace_days"
-                            invisible="not membership_category_ids"
-                        />
-                        <field
                             name="membership_category_ids"
                             widget="many2many_tags"
                             readonly="1"
+                        />
+                        <field
+                            name="grace_days"
                             invisible="not membership_category_ids"
                         />
                     </group>

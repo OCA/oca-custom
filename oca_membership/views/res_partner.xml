@@ -192,7 +192,6 @@
     <record id="membership.action_membership_members" model="ir.actions.act_window">
         <field name="domain">[("membership_state", "!=", "none")]</field>
         <field name="context">{
-            "search_default_all_members": 1,
             "search_default_paid": 1,
             "search_default_free": 1,
             "search_default_invoiced": 1,

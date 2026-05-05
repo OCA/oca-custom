@@ -9,7 +9,7 @@ INDEX_PSCS = "oca_search_engine.oca_typesense_index_pscs"
 
 
 class VcpUser(models.Model):
-    _inherit = ["vcp.user"]
+    _inherit = "vcp.user"
 
     vcp_oca_psc_ids = fields.Many2many(
         comodel_name="vcp.oca.psc",
@@ -21,7 +21,7 @@ class VcpUser(models.Model):
 
 class VcpOcaPsc(models.Model):
     _name = "vcp.oca.psc"
-    _inherit = ["se.indexable.record"]
+    _inherit = "se.indexable.record"
     _description = "Project Steering Team"
 
     name = fields.Char()

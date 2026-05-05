@@ -6,7 +6,7 @@ from odoo import _, api, exceptions, fields, models
 
 
 class MembershipLine(models.Model):
-    _inherit = ["membership.membership_line"]
+    _inherit = "membership.membership_line"
 
     date_from = fields.Date(
         compute="_compute_from_to_dates",

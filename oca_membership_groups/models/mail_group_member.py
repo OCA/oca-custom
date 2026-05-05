@@ -8,7 +8,7 @@ from odoo import api, fields, models
 
 
 class MailGroupMember(models.Model):
-    _inherit = ["mail.group.member"]
+    _inherit = "mail.group.member"
 
     active = fields.Boolean(default=True)
     grace_date_start = fields.Date(

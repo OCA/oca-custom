@@ -6,7 +6,7 @@ from odoo import api, fields, models
 
 
 class AccountMoveLine(models.Model):
-    _inherit = ["account.move.line"]
+    _inherit = "account.move.line"
 
     start_date = fields.Date(
         compute="_compute_start_end_dates",
