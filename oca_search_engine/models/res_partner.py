@@ -100,7 +100,7 @@ class ResPartner(models.Model):
         self.ensure_one()
         if self.is_company:
             return (self | self.sponsor_child_ids).child_ids.filtered(
-                lambda s: s._is_contributor()
+                lambda s: s.is_contributor
             )
         else:
             return self.browse()
