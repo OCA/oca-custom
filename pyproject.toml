@@ -102,7 +102,13 @@ dev = [
 [tool.uv.sources]
 # Include odoo patch for updating account move line update membership line
 # Include odoo patch for providing the right unsubscribe link in mail group mails
-odoo = { git = "https://github.com/Therp/OCB.git", rev = "refs/pull/2/head" }
+# web_reponsive is broken with old version of odoo
+# https://github.com/OCA/web/pull/3536
+# due to change in main branch https://github.com/odoo/odoo/pull/263039
+# so we need the last odoo version
+#odoo = { git = "https://github.com/Therp/OCB.git", rev = "refs/pull/2/head" }
+odoo = { git = "https://github.com/akretion/odoo", branch = "18.0-merge-odoo-core-fixes-rebased" }
+
 odoo-addon-apps_product_creator = { git = "https://github.com/Therp/apps-store",branch = "18.0-mig-apps_product_creator",subdirectory = "apps_product_creator"}
 
 # Unreleased addon sources (git), handled via uv.sources (NOT requirements/test-requirements)
