@@ -35,31 +35,16 @@ def migrate(env, version):
     """)
     )
     partner_ids = [y for x in res for y in x]
-    partners = (
-        env["res.partner"]
-        .browse(set(partner_ids))
-        .exists()
-        .with_context(prefetch_fields=False)
+    attachments = env["ir.attachment"].search(
+        [
+            ("res_model", "=", "res.partner"),
+            ("res_field", "in", ("image_1920", "image_1024", "image_256", "image_128")),
+            ("res_id", "in", partner_ids),
+        ]
     )
-
-    # 2. Cleaning duplicated avatars, by batch
-    if not partners:
-        _logger.info("No partner with duplicate avatar => stop here.")
-        return
-
-    partners_count = len(partners)
-    _logger.info("Start avatar cleaning: %d partners(s)", partners_count)
-
-    for i in range(0, partners_count, BATCH_SIZE):
-        offset = i * BATCH_SIZE
-        _logger.info(
-            "Batch %d: partners %d to %d...",
-            i + 1,
-            offset + 1,
-            min(offset + BATCH_SIZE, partners_count),
-        )
-
-        batch = partners[i : i + BATCH_SIZE]
-        batch.image_1920 = False
-
-    _logger.info("Avatar cleaning ended: %d partners cleaned.", partners_count)
+    # Remove all duplicated attachment in background
+    attachments.delayable().unlink().split(size=BATCH_SIZE).delay()
+    _logger.info(
+        "Avatar cleaning launch in background: %d partners will be cleaned.",
+        len(partner_ids),
+    )
