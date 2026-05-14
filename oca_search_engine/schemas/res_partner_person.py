@@ -39,29 +39,47 @@ class Team(StrictExtendableBaseModel):
 
 
 class ContactInfo(StrictExtendableBaseModel):
-    email: str
-    phone: str
-    website: str
-    city: str
-    address: str
+    email: str | None
+    phone: str | None
+    website: str | None
+    city: str | None
+    address: str | None
 
     @classmethod
     def from_record(cls, record):
+        # When an indiviual belong to a sponsor (so public company information)
+        # the company data are used as default if the indivual information
+        # are not public
+        if (
+            record.commercial_partner_id.sponsor_parent_id
+            or record.commercial_partner_id.is_sponsor
+        ):
+            company = record.commercial_partner_id
+        else:
+            company = record.browse()
+
+        def get_phone(record):
+            return record.phone or record.mobile or None
+
+        def get_city(record):
+            return " ".join(
+                filter(None, [record.city, record.state_id.code, record.zip])
+            )
+
+        def get_address(record):
+            return "\n".join(filter(None, [record.street, record.street2]))
+
         return cls.model_construct(
-            email=record.is_published_email and record.email or "",
-            phone=record.is_published_phone and (record.phone or record.mobile) or "",
-            website=record.is_published_website and record.website or "",
-            city=(
-                f"{record.city} {record.state_id.code} {record.zip}"
-                if record.is_published_address
-                and any([record.city, record.state_id.code, record.zip])
-                else ""
-            ),
-            address=(
-                f"{record.street}\n{record.street2}"
-                if record.is_published_address and (record.street or record.street2)
-                else ""
-            ),
+            email=record.is_published_email and record.email or company.email or None,
+            phone=record.is_published_phone and get_phone(record) or get_phone(company),
+            website=record.is_published_website
+            and record.website
+            or company.website
+            or None,
+            city=record.is_published_address and get_city(record) or get_city(company),
+            address=record.is_published_address
+            and get_address(record)
+            or get_address(company),
         )
 
 
@@ -87,7 +105,7 @@ class ParentCompany(StrictExtendableBaseModel):
                 url_key = None
             return cls.model_construct(
                 id=company.id,
-                name=company.name.strip(),
+                name=company.sponsor_name or company.name,
                 url_key=url_key,
             )
 
