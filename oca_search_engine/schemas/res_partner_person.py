@@ -72,19 +72,22 @@ class ParentCompany(StrictExtendableBaseModel):
 
     @classmethod
     def from_record(cls, record):
-        if not record.commercial_company_name:
+        company = (
+            record.commercial_partner_id.sponsor_parent_id
+            or record.commercial_partner_id
+        )
+
+        if not company:
             return {}
         else:
-            if record.commercial_partner_id.is_sponsor:
-                record.commercial_partner_id._update_url_key(
-                    lang=record.env.context.get("lang")
-                )
-                url_key = record.commercial_partner_id.url_key
+            if company.is_sponsor:
+                company._update_url_key(lang=record.env.context.get("lang"))
+                url_key = company.url_key
             else:
                 url_key = None
             return cls.model_construct(
-                id=record.commercial_partner_id.id,
-                name=record.commercial_company_name.strip() or "",
+                id=company.id,
+                name=company.name.strip(),
                 url_key=url_key,
             )
 

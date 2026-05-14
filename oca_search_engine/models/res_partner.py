@@ -83,6 +83,8 @@ class ResPartner(models.Model):
         res = super().write(vals)
         self._add_to_oca_search_engine(vals)
         self.sudo()._se_mark_to_update()
+        if set(vals.keys()).intersection("name", "sponsor_parent_id"):
+            self.sudo().child_ids._se_mark_to_update()
         return res
 
     # ===== Business logics =====#
