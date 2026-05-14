@@ -62,15 +62,26 @@ class ResPartner(models.Model):
         and remove partner manually set to "unpublished"
         """
         # if called from write: prevent re-publishing a company already unpublished
-        if vals and not any(
-            x in vals and vals[x] for x in ["is_integrator", "grade_id"]
+        if (
+            vals
+            and not any(x in vals and vals[x] for x in ["is_integrator", "grade_id"])
+            and "sponsor_parent_id" not in vals
         ):
             return
 
         self.filtered(
-            lambda x: not x.is_published and (x.is_integrator or x.is_sponsor)
+            lambda x: (
+                not x.sponsor_parent_id
+                and not x.is_published
+                and (x.is_integrator or x.is_sponsor)
+            )
         ).sudo().is_published = True
         # 'sudo' to bypass AccessError of 'website.published.multi.mixin'
+
+        # Unpublish company linked to a sponsor company
+        self.filtered(
+            lambda x: x.sponsor_parent_id and x.is_published
+        ).sudo().is_published = False
 
     # ====== CRUD ======#
     @api.model_create_multi
