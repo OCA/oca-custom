@@ -182,6 +182,8 @@
         "website_sale_oca_apps",
         # OCA CUSTOM
         "oca_website",
+        "connector_search_engine",
+        "connector_typesense",
     ],
     "installable": True,
 }

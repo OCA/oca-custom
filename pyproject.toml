@@ -126,6 +126,9 @@ odoo-addon-vcp-git = { git = "https://github.com/akretion/version-control-platfo
 
 odoo-addon-base-url = { git = "https://github.com/akretion/server-tools", branch="18.0-add-url-2", subdirectory="base_url" }
 
+# PR https://github.com/OCA/search-engine/pull/230
+odoo-addon-connector_search_engine = { git = "https://github.com/akretion/search-engine", branch="18.0-fix", subdirectory="connector_search_engine" }
+
 # VCP + base_url module mode dev
 #odoo-addon-vcp-management = { path = "/external-src/version-control-platform/vcp_management", editable = true }
 #odoo-addon-vcp-github = { path = "/external-src/version-control-platform/vcp_github", editable = true }
