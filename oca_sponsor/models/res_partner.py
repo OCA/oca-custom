@@ -239,6 +239,7 @@ class ResPartner(models.Model):
         else:
             self.activity_schedule(
                 team_id=reviewer_team.id,
+                team_user_id=reviewer_team.user_id.id,
                 note=_(
                     "The sponsor changed its information from its profile. "
                     "Please review those changes to publish them on the website."
