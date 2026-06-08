@@ -26,6 +26,7 @@
         "views/vcp_odoo_module_view.xml",
         "views/vcp_repository_view.xml",
         "views/vcp_repository_category_view.xml",
+        "views/res_partner_view.xml",
     ],
     "demo": [],
 }

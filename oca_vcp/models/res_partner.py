@@ -22,6 +22,7 @@ class ResPartner(models.Model):
         help="This index is based on the last 12 Months. Moving Annual Total (MAT)",
         compute="_compute_oca_collaboration_index",
     )
+    organization_history_ids = fields.One2many("vcp.organization.history", "partner_id")
 
     @api.depends()
     def _compute_oca_collaboration_index(self):
@@ -94,3 +95,16 @@ class ResPartner(models.Model):
             record.github_sync_avatar = record.vcp_user_ids.filtered(
                 "is_github_main_login"
             ).sync_image_to_partner
+
+    def _get_organization(self, date):
+        if self:
+            self.ensure_one()
+            if self.organization_history_ids:
+                items = self.organization_history_ids.filtered(
+                    lambda s, date=date: s.date_start <= date
+                ).sorted("date_start", reverse=True)
+                if items:
+                    return items[0].partner_organization_id
+            elif self.commercial_partner_id:
+                return self.commercial_partner_id
+        return self.browse()
