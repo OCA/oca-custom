@@ -156,6 +156,7 @@
         "project_timesheet_time_control",
         "oca_custom",
         "oca_search_engine",
+        "oca_vcp_sponsor",
         "partner_contact_access_link",
         "pdf_xml_attachment",
         "project_role",
