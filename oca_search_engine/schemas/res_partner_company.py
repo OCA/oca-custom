@@ -157,7 +157,7 @@ class Company(StrictExtendableBaseModel):
             logo_urls=LogoUrls.from_record(record),
             # github indicators
             contributors_count=len(contributors),
-            collaboration_index=sum(members.mapped("oca_collaboration_index")),
+            collaboration_index=record.oca_collaboration_index,
             members_count=len(members),
             modules_count=record.modules_author_count,
             # technical website fields
