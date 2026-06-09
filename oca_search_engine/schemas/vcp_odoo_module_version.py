@@ -60,7 +60,7 @@ class VcpOdooModuleVersion(StrictExtendableBaseModel):
                 for author in odoo_rec.author_ids
                 if author.name != "Odoo Community Association (OCA)"
             ],
-            github_url=odoo_rec.website,
+            github_url=odoo_rec.github_url,
             runboat_url=cls._get_runboat_url(odoo_rec),
             readme_fragments=odoo_rec.readme_fragments or {},
             maintainers=[

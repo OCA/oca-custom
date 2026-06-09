@@ -3,12 +3,25 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 
-from odoo import api, models
+from odoo import api, fields, models
 
 
 class VcpOdooModuleVersion(models.Model):
     _name = "vcp.odoo.module.version"
     _inherit = ["vcp.odoo.module.version", "se.indexable.record"]
+
+    github_url = fields.Char(compute="_compute_github_url")
+
+    def _compute_github_url(self):
+        for record in self:
+            record.github_url = "/".join(
+                [
+                    record.repository_branch_id.repository_id._get_repository_url(),
+                    "tree",
+                    record.repository_branch_id.branch_id.name,
+                    record.module_id.name,
+                ]
+            )
 
     def _add_to_oca_search_engine(self):
         self._add_to_index(self.env.ref("oca_search_engine.oca_typesense_index_module"))
