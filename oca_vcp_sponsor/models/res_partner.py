@@ -10,5 +10,5 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     def _get_organization(self, date):
-        partner = super()._get_organization()
+        partner = super()._get_organization(date)
         return partner.sponsor_parent_id or partner
