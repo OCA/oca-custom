@@ -50,7 +50,7 @@ class VcpOdooModuleVersion(StrictExtendableBaseModel):
             name=odoo_rec.name,
             techname=odoo_rec.module_id.name,
             repo=VcpRepository.from_record(odoo_rec.repository_branch_id.repository_id),
-            serie=odoo_rec.repository_branch_id.branch_id.name,
+            serie=odoo_rec.repository_branch_id.branch_id.name.zfill(4),
             version=odoo_rec.version,
             license=odoo_rec.license,
             summary=odoo_rec.summary,
