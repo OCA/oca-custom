@@ -98,7 +98,8 @@ class ParentCompany(StrictExtendableBaseModel):
         if not company:
             return {}
         else:
-            if company.is_sponsor:
+            # TODO discuss with Julie and marketing team about that
+            if company.is_sponsor and company.grade_id.name != "Bronze":
                 company._update_url_key(lang=record.env.context.get("lang"))
                 url_key = company.url_key
             else:
