@@ -87,8 +87,6 @@
         "website",
         "website_blog",
         "website_crm",
-        "website_crm_partner_assign",
-        "website_customer",
         "website_event",
         "website_event_sale",
         "website_event_track",
