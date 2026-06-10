@@ -72,5 +72,5 @@ class VcpOdooModuleVersion(StrictExtendableBaseModel):
             # Note all module version have the same url
             # as version are just variants of the module
             url_key=odoo_rec.module_id.url_key,
-            redirect_url_key=odoo_rec.module_id.redirect_url_key,
+            redirect_url_key=odoo_rec.module_id.redirect_url_key or [],
         )
