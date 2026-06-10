@@ -9,7 +9,7 @@
     "author": "Therp BV, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "installable": True,
-    "depends": ["website_sale"],
+    "depends": ["website_sale", "website_partner"],
     "data": [
         "data/ir_config_parameter.xml",
         "security/ir_rule.xml",
