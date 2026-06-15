@@ -1,0 +1,283 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oca_vcp
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oca_vcp
+#: model_terms:ir.ui.view,arch_db:oca_vcp.view_partner_form
+msgid ""
+"By default, all contributions from this partner are attached to the parent "
+"organization of this partner."
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_repository__category_id
+#: model_terms:ir.ui.view,arch_db:oca_vcp.vcp_repository_search_view
+msgid "Category"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model,name:oca_vcp.model_vcp_comment
+msgid "Comment"
+msgstr ""
+
+#. module: oca_vcp
+#: model_terms:ir.ui.view,arch_db:oca_vcp.view_partner_form
+msgid "Companies"
+msgstr ""
+
+#. module: oca_vcp
+#: model_terms:ir.ui.view,arch_db:oca_vcp.view_partner_form
+msgid "Company History"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model,name:oca_vcp.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: oca_vcp
+#: model_terms:ir.ui.view,arch_db:oca_vcp.view_partner_form
+msgid "Contributor"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_organization_history__create_uid
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_repository_category__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_organization_history__create_date
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_repository_category__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_organization_history__date_start
+msgid "Date Start"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_repository_category__description
+#: model_terms:ir.ui.view,arch_db:oca_vcp.vcp_repository_category_view_form
+msgid "Description"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_organization_history__display_name
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_repository_category__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: oca_vcp
+#: model_terms:ir.ui.view,arch_db:oca_vcp.view_partner_form
+msgid "Github"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_res_partner__github_main_login
+#: model:ir.model.fields,field_description:oca_vcp.field_res_users__github_main_login
+msgid "Github Main Login"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_res_partner__github_sync_avatar
+#: model:ir.model.fields,field_description:oca_vcp.field_res_users__github_sync_avatar
+msgid "Github Sync Avatar"
+msgstr ""
+
+#. module: oca_vcp
+#: model_terms:ir.ui.view,arch_db:oca_vcp.vcp_repository_search_view
+msgid "Group By"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_organization_history__id
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_repository_category__id
+msgid "ID"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_odoo_module_version__icon_url
+msgid "Icon Url"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_user__is_github_main_login
+msgid "Is Github Main Login"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_organization_history__write_uid
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_repository_category__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_organization_history__write_date
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_repository_category__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_odoo_module__must_have
+msgid "Must Have"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_repository_category__name
+msgid "Name"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_res_partner__oca_collaboration_index
+#: model:ir.model.fields,field_description:oca_vcp.field_res_users__oca_collaboration_index
+msgid "OCA collaboration index"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model,name:oca_vcp.model_vcp_odoo_module
+msgid "Odoo Module"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model,name:oca_vcp.model_vcp_odoo_module_version
+msgid "Odoo Module on an specific repository branch"
+msgstr ""
+
+#. module: oca_vcp
+#: model_terms:ir.ui.view,arch_db:oca_vcp.view_partner_form
+msgid ""
+"Only fill this information if the current member has a <strong>complex "
+"case</strong>."
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_organization_history__partner_organization_id
+msgid "Organization"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_res_partner__organization_history_ids
+#: model:ir.model.fields,field_description:oca_vcp.field_res_users__organization_history_ids
+msgid "Organization History"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_comment__partner_organization_id
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_review__partner_organization_id
+msgid "Organization Partner"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_organization_history__partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.constraint,message:oca_vcp.constraint_vcp_user_is_github_main_login_uniq
+msgid "Partner can have only one github main login."
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model,name:oca_vcp.model_vcp_rule
+msgid "Processing Rule"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_odoo_module_version__readme_fragments
+msgid "Readme Fragments"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_repository_category__repository_ids
+msgid "Repositories"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model,name:oca_vcp.model_vcp_repository
+#: model_terms:ir.ui.view,arch_db:oca_vcp.vcp_repository_category_view_form
+msgid "Repository"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.actions.act_window,name:oca_vcp.vcp_repository_category_action
+#: model:ir.ui.menu,name:oca_vcp.vcp_repository_category_menu
+msgid "Repository Categories"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model,name:oca_vcp.model_vcp_repository_category
+msgid "Repository Category"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model,name:oca_vcp.model_vcp_review
+msgid "Review"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_vcp_repository_category__short_description
+#: model_terms:ir.ui.view,arch_db:oca_vcp.vcp_repository_category_view_form
+msgid "Short Description"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,help:oca_vcp.field_vcp_comment__partner_organization_id
+msgid "The organization related to the user that have done the comment"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,help:oca_vcp.field_vcp_review__partner_organization_id
+msgid "The organization related to the user that have done the review"
+msgstr ""
+
+#. module: oca_vcp
+#. odoo-python
+#: code:addons/oca_vcp/models/res_partner.py:0
+msgid "This github login is already used"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model.fields,help:oca_vcp.field_res_partner__oca_collaboration_index
+#: model:ir.model.fields,help:oca_vcp.field_res_users__oca_collaboration_index
+msgid "This index is based on the last 12 Months. Moving Annual Total (MAT)"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model,name:oca_vcp.model_vcp_user
+msgid "User"
+msgstr ""
+
+#. module: oca_vcp
+#: model:ir.model,name:oca_vcp.model_vcp_organization_history
+msgid "Vcp Organization History"
+msgstr ""
+
+#. module: oca_vcp
+#: model_terms:ir.ui.view,arch_db:oca_vcp.view_partner_form
+msgid "You only have to fill this information if:"
+msgstr ""
+
+#. module: oca_vcp
+#: model_terms:ir.ui.view,arch_db:oca_vcp.view_partner_form
+msgid ""
+"the partner <strong>does not have a parent organization</strong> (the member"
+" paid personally);"
+msgstr ""
+
+#. module: oca_vcp
+#: model_terms:ir.ui.view,arch_db:oca_vcp.view_partner_form
+msgid "the partner has been in <strong>multiple companies</strong>."
+msgstr ""
