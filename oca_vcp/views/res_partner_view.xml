@@ -5,11 +5,12 @@
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
             <page name='sales_purchases' position="after">
-                <page
-                    name='organization_history'
-                    string="Organization History"
-                    invisible="is_company"
-                >
+                <page name='contributor' string="Contributor" invisible="is_company">
+                    <group name="github" string="Github">
+                        <field name="github_main_login" />
+                        <field name="github_sync_avatar" />
+                    </group>
+                    <separator string="Company History" />
                     <div class="alert alert-info" role="alert">
                         <p>
                             Only fill this information if the current member has a <strong
