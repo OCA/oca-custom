@@ -172,17 +172,17 @@
         "web_search_with_and",
         "web_widget_dropdown_dynamic",
         "website_sale_hide_empty_category",
-        # Custom
+        # OCA Custom
+        "connector_search_engine",
+        "connector_typesense",
+        "membership_account_invoice_start_end_dates",
         "oca_membership",
         "oca_search_engine",
         "oca_sponsor",
         "oca_website",
+        "membership_variable_period",
         "website_oca_integrator",
         "website_sale_oca_apps",
-        # OCA CUSTOM
-        "oca_website",
-        "connector_search_engine",
-        "connector_typesense",
     ],
     "installable": True,
 }
