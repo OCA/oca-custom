@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <page name='sales_purchases' position="after">
+                <page name='contributor' string="Contributor" invisible="is_company">
+                    <group name="github" string="Github">
+                        <field name="github_main_login" />
+                        <field name="github_sync_avatar" />
+                    </group>
+                    <separator string="Company History" />
+                    <div class="alert alert-info" role="alert">
+                        <p>
+                            Only fill this information if the current member has a <strong
+                        >complex case</strong>.
+                        </p>
+                        <p>
+                            By default, all contributions from this partner are attached to the parent organization of this partner.
+                        </p>
+                        <p>
+                            You only have to fill this information if:
+                            <ul>
+                            <li>the partner <strong
+                            >does not have a parent organization</strong> (the member paid personally);</li>
+                            <li>the partner has been in <strong
+                            >multiple companies</strong>.</li>
+                        </ul>
+                        </p>
+                    </div>
+                    <field name="organization_history_ids" nolabel="1">
+                        <list string="Companies" editable="bottom">
+                            <field name="date_start" />
+                            <field name="partner_organization_id" />
+                        </list>
+                    </field>
+                </page>
+            </page>
+        </field>
+    </record>
+</odoo>

@@ -353,6 +353,21 @@ wheels = [
 ]
 
 [[package]]
+name = "github3-py"
+version = "4.0.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pyjwt", extra = ["crypto"] },
+    { name = "python-dateutil" },
+    { name = "requests" },
+    { name = "uritemplate" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/89/91/603bcaf8cd1b3927de64bf56c3a8915f6653ea7281919140c5bcff2bfe7b/github3.py-4.0.1.tar.gz", hash = "sha256:30d571076753efc389edc7f9aaef338a4fcb24b54d8968d5f39b1342f45ddd36", size = 36214038, upload-time = "2023-04-26T17:56:37.677Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/61/ad/2394d4fb542574678b0ba342daf734d4d811768da3c2ee0c84d509dcb26c/github3.py-4.0.1-py3-none-any.whl", hash = "sha256:a89af7de25650612d1da2f0609622bcdeb07ee8a45a1c06b2d16a05e4234e753", size = 151800, upload-time = "2023-04-26T17:56:25.015Z" },
+]
+
+[[package]]
 name = "gitpython"
 version = "3.1.50"
 source = { registry = "https://pypi.org/simple" }
@@ -510,6 +525,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/fa/4c/29e74810ba49803bcf33a30371b1cfe633659a83fa44a0548c885da74a06/manifestoo_core-1.14.tar.gz", hash = "sha256:8232a43fe9988ada630cda93dc6653409cd5b5799c97fd1dd3f2c293bdc1da1f", size = 40852, upload-time = "2026-01-09T09:28:07.068Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/1c/40/c238f1d4679acaeee58e110d4ef3010aeb290d97ecc4aff1761fc1f4df9a/manifestoo_core-1.14-py3-none-any.whl", hash = "sha256:3a560c760af9130a401414de88e777ad1ccffb46808a6ce201044c2be8cb876a", size = 65535, upload-time = "2026-01-09T09:28:05.67Z" },
+]
+
+[[package]]
+name = "markdown"
+version = "3.10.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/2b/f4/69fa6ed85ae003c2378ffa8f6d2e3234662abd02c10d216c0ba96081a238/markdown-3.10.2.tar.gz", hash = "sha256:994d51325d25ad8aa7ce4ebaec003febcce822c3f8c911e3b17c52f7f589f950", size = 368805, upload-time = "2026-02-09T14:57:26.942Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/de/1f/77fa3081e4f66ca3576c896ae5d31c3002ac6607f9747d2e3aa49227e464/markdown-3.10.2-py3-none-any.whl", hash = "sha256:e91464b71ae3ee7afd3017d9f358ef0baf158fd9a298db92f1d4761133824c36", size = 108180, upload-time = "2026-02-09T14:57:25.787Z" },
 ]
 
 [[package]]
@@ -687,6 +711,8 @@ dependencies = [
     { name = "odoo-addon-sql-request-abstract" },
     { name = "odoo-addon-survey-xlsx" },
     { name = "odoo-addon-uom-unece" },
+    { name = "odoo-addon-vcp-github" },
+    { name = "odoo-addon-vcp-odoo" },
     { name = "odoo-addon-web-refresher" },
     { name = "odoo-addon-web-responsive" },
     { name = "odoo-addon-web-search-with-and" },
@@ -703,6 +729,7 @@ dependencies = [
     { name = "psycopg2" },
     { name = "pygithub" },
     { name = "pyopenssl" },
+    { name = "pypandoc" },
     { name = "pypdf2" },
     { name = "pyserial" },
     { name = "python-dateutil" },
@@ -823,6 +850,8 @@ requires-dist = [
     { name = "odoo-addon-sql-request-abstract", specifier = "==18.0.*" },
     { name = "odoo-addon-survey-xlsx", specifier = "==18.0.*" },
     { name = "odoo-addon-uom-unece", specifier = "==18.0.*" },
+    { name = "odoo-addon-vcp-github", git = "https://github.com/akretion/version-control-platform?subdirectory=vcp_github&branch=18.0-support-case-where-review-is-not-submited" },
+    { name = "odoo-addon-vcp-odoo", git = "https://github.com/akretion/version-control-platform?subdirectory=vcp_odoo&branch=18.0-vcp_odoo-fix-view" },
     { name = "odoo-addon-web-refresher", specifier = "==18.0.*" },
     { name = "odoo-addon-web-responsive", specifier = "==18.0.*" },
     { name = "odoo-addon-web-search-with-and", specifier = "==18.0.*" },
@@ -839,6 +868,7 @@ requires-dist = [
     { name = "psycopg2", specifier = "==2.9.9" },
     { name = "pygithub", specifier = "<2.0.0" },
     { name = "pyopenssl", specifier = "==24.1.0" },
+    { name = "pypandoc" },
     { name = "pypdf2", specifier = "==2.12.1" },
     { name = "pyserial", specifier = "==3.5" },
     { name = "python-dateutil", specifier = "==2.8.2" },
@@ -1729,6 +1759,51 @@ wheels = [
 ]
 
 [[package]]
+name = "odoo-addon-vcp-git"
+version = "18.0.1.0.0.4"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "gitpython" },
+    { name = "odoo" },
+    { name = "odoo-addon-vcp-management" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4f/3e/91904143561bfe6e78ddade376404f8c7d707ace52a2aead2bdd642a533c/odoo_addon_vcp_git-18.0.1.0.0.4-py3-none-any.whl", hash = "sha256:01fd91cdcdfc911d0b42d6a09a30024c9b770f7ef71ff814182b659e1a2a343f", size = 23427, upload-time = "2026-04-09T04:34:44.519Z" },
+]
+
+[[package]]
+name = "odoo-addon-vcp-github"
+version = "18.0.1.0.1.1"
+source = { git = "https://github.com/akretion/version-control-platform?subdirectory=vcp_github&branch=18.0-support-case-where-review-is-not-submited#513b7efa0c26cadbfc896a2b886b948150d053a3" }
+dependencies = [
+    { name = "github3-py" },
+    { name = "markdown" },
+    { name = "odoo" },
+    { name = "odoo-addon-vcp-git" },
+]
+
+[[package]]
+name = "odoo-addon-vcp-management"
+version = "18.0.1.0.1.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "odoo" },
+    { name = "pathspec" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/2a/94/272ea0838de4f27915880bbd589b6c954c3a909712826d45e63e60a69044/odoo_addon_vcp_management-18.0.1.0.1.1-py3-none-any.whl", hash = "sha256:b29e54f24f7c714028b255e0dfae6d2262de4879ba4c5f35f0698c74228e5c02", size = 65324, upload-time = "2026-05-27T04:32:16.593Z" },
+]
+
+[[package]]
+name = "odoo-addon-vcp-odoo"
+version = "18.0.1.0.1.2"
+source = { git = "https://github.com/akretion/version-control-platform?subdirectory=vcp_odoo&branch=18.0-vcp_odoo-fix-view#69d02b84b0da830ca116be68d394c275e9d0f128" }
+dependencies = [
+    { name = "odoo" },
+    { name = "odoo-addon-vcp-management" },
+]
+
+[[package]]
 name = "odoo-addon-web-refresher"
 version = "18.0.1.0.0.2"
 source = { registry = "https://pypi.org/simple" }
@@ -2048,6 +2123,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/91/a8/cbeec652549e30103b9e6147ad433405fdd18807ac2d54e6dbb73184d8a1/pyOpenSSL-24.1.0.tar.gz", hash = "sha256:cabed4bfaa5df9f1a16c0ef64a0cb65318b5cd077a7eda7d6970131ca2f41a6f", size = 179671, upload-time = "2024-03-09T23:16:25.539Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/54/a7/2104f674a5a6845b04c8ff01659becc6b8978ca410b82b94287e0b1e018b/pyOpenSSL-24.1.0-py3-none-any.whl", hash = "sha256:17ed5be5936449c5418d1cd269a1a9e9081bc54c17aed272b45856a3d3dc86ad", size = 56945, upload-time = "2024-03-09T23:16:23.44Z" },
+]
+
+[[package]]
+name = "pypandoc"
+version = "1.17"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/ea/d6/410615fc433e5d1eacc00db2044ae2a9c82302df0d35366fe2bd15de024d/pypandoc-1.17.tar.gz", hash = "sha256:51179abfd6e582a25ed03477541b48836b5bba5a4c3b282a547630793934d799", size = 69071, upload-time = "2026-03-14T22:39:07.21Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0c/86/e2ffa604eacfbec3f430b1d850e7e04c4101eca1a5828f9ae54bf51dfba4/pypandoc-1.17-py3-none-any.whl", hash = "sha256:01fdbffa61edb9f8e82e8faad6954efcb7b6f8f0634aead4d89e322a00225a67", size = 23554, upload-time = "2026-03-14T22:38:46.007Z" },
 ]
 
 [[package]]
@@ -2421,6 +2505,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/94/7d/a8a765761bbc0c836e397a2e48d498305a865b70a8600fd7a942e85dcf63/Unidecode-1.4.0.tar.gz", hash = "sha256:ce35985008338b676573023acc382d62c264f307c8f7963733405add37ea2b23", size = 200149, upload-time = "2025-04-24T08:45:03.798Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/8f/b7/559f59d57d18b44c6d1250d2eeaa676e028b9c527431f5d0736478a73ba1/Unidecode-1.4.0-py3-none-any.whl", hash = "sha256:c3c7606c27503ad8d501270406e345ddb480a7b5f38827eafe4fa82a137f0021", size = 235837, upload-time = "2025-04-24T08:45:01.609Z" },
+]
+
+[[package]]
+name = "uritemplate"
+version = "4.2.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/98/60/f174043244c5306c9988380d2cb10009f91563fc4b31293d27e17201af56/uritemplate-4.2.0.tar.gz", hash = "sha256:480c2ed180878955863323eea31b0ede668795de182617fef9c6ca09e6ec9d0e", size = 33267, upload-time = "2025-06-02T15:12:06.318Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a9/99/3ae339466c9183ea5b8ae87b34c0b897eda475d2aec2307cae60e5cd4f29/uritemplate-4.2.0-py3-none-any.whl", hash = "sha256:962201ba1c4edcab02e60f9a0d3821e82dfc5d2d6662a21abd533879bdb8a686", size = 11488, upload-time = "2025-06-02T15:12:03.405Z" },
 ]
 
 [[package]]

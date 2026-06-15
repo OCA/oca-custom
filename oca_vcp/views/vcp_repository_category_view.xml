@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="vcp_repository_category_view_list" model="ir.ui.view">
+        <field name="model">vcp.repository.category</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+            </list>
+        </field>
+    </record>
+
+    <record id="vcp_repository_category_view_form" model="ir.ui.view">
+        <field name="model">vcp.repository.category</field>
+        <field name="arch" type="xml">
+            <form>
+                <header />
+                <sheet>
+                    <div class="oe_button_box" name="button_box" />
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group name="description">
+                        <separator string="Short Description" />
+                        <field name="short_description" nolabel="1" />
+                        <separator string="Description" />
+                        <field name="description" nolabel="1" />
+                    </group>
+                    <group name="repository" string="Repository">
+                        <field
+                            name="repository_ids"
+                            widget="many2many_tags"
+                            nolabel="1"
+                        />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="vcp_repository_category_view_search" model="ir.ui.view">
+        <field name="model">vcp.repository.category</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+
+    <record id="vcp_repository_category_action" model="ir.actions.act_window">
+        <field name="name">Repository Categories</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">vcp.repository.category</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="vcp_repository_category_view_search" />
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem
+        id="vcp_repository_category_menu"
+        parent="vcp_management.vcp_settings_menu"
+        sequence="40"
+        action="vcp_repository_category_action"
+    />
+</odoo>

@@ -155,6 +155,7 @@
         "project_task_add_very_high",
         "project_timesheet_time_control",
         "oca_custom",
+        "oca_vcp",
         "partner_contact_access_link",
         "pdf_xml_attachment",
         "project_role",
