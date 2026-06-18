@@ -59,6 +59,7 @@
         <!-- Industries -->
         <div
             t-attf-class="mb-3 #{error.get('sponsor_industry_ids') and 'has-error' or ''} col-lg-6"
+            t-if="partner.grade_id.show_industry"
         >
             <label for="sponsor_industry_ids">Industries</label>
             <select

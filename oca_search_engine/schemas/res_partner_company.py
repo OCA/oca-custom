@@ -67,14 +67,21 @@ class Sponsorship(StrictExtendableBaseModel):
             description_short=record.website_short_description or "",
             description_why_oca=record.website_description_why_sponsoring or "",
             level=SponsorshipLevel.from_record(record.grade_id),
-            industries=[
-                Industry.from_record(industry)
-                for industry in record.sponsor_industry_ids
-            ],
+            industries=cls._get_industries(record),
             stories=[
                 BlogPost.from_record(blog_post) for blog_post in record.blog_post_ids
             ],
         )
+
+    @classmethod
+    def _get_industries(cls, record):
+        if record.grade_id.show_industry:
+            return [
+                Industry.from_record(industry)
+                for industry in record.sponsor_industry_ids
+            ]
+        else:
+            return []
 
 
 class Contact(StrictExtendableBaseModel):

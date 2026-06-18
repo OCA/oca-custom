@@ -11,11 +11,18 @@ from ..models.res_partner import SPONSOR_WEBSITE_FIELDS
 
 class CustomerPortalSponsor(CustomerPortal):
     def _prepare_portal_layout_values(self):
-        return super()._prepare_portal_layout_values() | {
-            "industries": request.env["res.partner.industry"].sudo().search([])
-        }
+        res = super()._prepare_portal_layout_values()
+        partner = request.env.user.partner_id
+        if partner.grade_id.show_industry:
+            res["industries"] = request.env["res.partner.industry"].sudo().search([])
+        return res
 
     def details_form_validate(self, data, partner_creation=False):
+        # industries are only allowed for some sponsor levels
+        partner = request.env.user.partner_id
+        if not partner.grade_id.show_industry:
+            data["sponsor_industry_ids"] = False
+
         # many2many fields
         for field in ["sponsor_country_ids", "sponsor_industry_ids"]:
             if data.get(field):

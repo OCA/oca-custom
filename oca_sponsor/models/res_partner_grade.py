@@ -32,3 +32,4 @@ class ResPartnerGrade(models.Model):
         help="Gives the probability to assign a lead to this partner "
         "(0 means no assignment).",
     )
+    show_industry = fields.Boolean()

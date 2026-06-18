@@ -128,7 +128,7 @@ class ResPartner(models.Model):
     def _compute_sponsor_country_ids(self):
         self._compute_sponsor_replace_in("country_id", "sponsor_country_ids")
 
-    @api.depends("industry_id", "grade_id")
+    @api.depends("industry_id", "grade_id", "grade_id.show_industry")
     def _compute_sponsor_industry_ids(self):
         self._compute_sponsor_replace_in("industry_id", "sponsor_industry_ids")
 
