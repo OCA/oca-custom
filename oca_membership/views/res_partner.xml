@@ -194,7 +194,6 @@
         <field name="context">{
             "search_default_paid": 1,
             "search_default_free": 1,
-            "search_default_invoiced": 1,
         }</field>
     </record>
 </odoo>

@@ -63,6 +63,12 @@ class ResPartner(models.Model):
     def _get_default_membership_category(self):
         return self.env["membership.membership_category"].search([], limit=1)
 
+    @api.model
+    def _membership_member_states(self):
+        """Inherit to only consider members the ones with 'paid' membership
+        (and remove 'invoiced')"""
+        return ("paid",)
+
     # ===== Compute =====#
     @api.depends("membership_state")
     def _compute_is_member(self):

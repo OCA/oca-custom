@@ -178,6 +178,7 @@
         <field name="name">Sponsors</field>
         <field name="res_model">res.partner</field>
         <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="membership.view_res_partner_member_filter" />
         <field name="domain">[("is_company", "=", True)]</field>
         <field name="context">{
             "search_default_is_sponsor": 1,
