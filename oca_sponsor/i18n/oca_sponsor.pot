@@ -1,0 +1,389 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oca_sponsor
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oca_sponsor
+#: model_terms:ir.ui.view,arch_db:oca_sponsor.portal_my_details_sponsorship
+msgid "<em>Below descriptions are in plain text, without formatting.</em>"
+msgstr ""
+
+#. module: oca_sponsor
+#: model_terms:ir.ui.view,arch_db:oca_sponsor.view_partner_form
+msgid "Accept changes"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner_grade__active
+msgid "Active"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,help:oca_sponsor.field_res_partner__sponsor_to_review
+#: model:ir.model.fields,help:oca_sponsor.field_res_users__sponsor_to_review
+msgid ""
+"After the sponsor modifies its data from the web portal in autonomy, the "
+"changes must be reviewed before being published on the website."
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner__sponsor_name
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_users__sponsor_name
+msgid "Alternate name"
+msgstr ""
+
+#. module: oca_sponsor
+#: model_terms:ir.ui.view,arch_db:oca_sponsor.portal_my_details_sponsorship
+msgid "Alternate name. If empty, the company name is displayed instead."
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner__blog_post_ids
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_users__blog_post_ids
+#: model_terms:ir.ui.view,arch_db:oca_sponsor.view_partner_form
+msgid "Blog posts"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner__blog_post_count
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_users__blog_post_count
+msgid "Blog posts count"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner_grade__can_publish
+msgid "Can Publish"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,help:oca_sponsor.field_res_partner__sponsor_child_ids
+#: model:ir.model.fields,help:oca_sponsor.field_res_users__sponsor_child_ids
+msgid ""
+"Choose company who are included in the sponsorship, like branch, "
+"subsidiaries or commercial partners."
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model,name:oca_sponsor.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner__sponsor_country_ids
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_users__sponsor_country_ids
+#: model_terms:ir.ui.view,arch_db:oca_sponsor.portal_my_details_sponsorship
+msgid "Countries"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner_grade__create_uid
+#: model:ir.model.fields,field_description:oca_sponsor.field_sponsorship_line__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner_grade__create_date
+#: model:ir.model.fields,field_description:oca_sponsor.field_sponsorship_line__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner_industry__description
+msgid "Description"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner_grade__display_name
+#: model:ir.model.fields,field_description:oca_sponsor.field_sponsorship_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_sponsorship_line__date_end
+msgid "End Date"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,help:oca_sponsor.field_res_partner_grade__partner_weight
+msgid ""
+"Gives the probability to assign a lead to this partner (0 means no "
+"assignment)."
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner__html_field_history
+msgid "History data"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner__html_field_history_metadata
+msgid "History metadata"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner_grade__id
+#: model:ir.model.fields,field_description:oca_sponsor.field_sponsorship_line__id
+msgid "ID"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,help:oca_sponsor.field_res_partner__sponsor_name
+#: model:ir.model.fields,help:oca_sponsor.field_res_users__sponsor_name
+msgid "If empty, the company name is displayed instead."
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner__sponsor_industry_ids
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_users__sponsor_industry_ids
+#: model_terms:ir.ui.view,arch_db:oca_sponsor.portal_my_details_sponsorship
+msgid "Industries"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model,name:oca_sponsor.model_res_partner_industry
+msgid "Industry"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner_grade__is_published
+msgid "Is Published"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner__is_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_users__is_sponsor
+msgid "Is Sponsor"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner__is_sponsor_reviewer
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_users__is_sponsor_reviewer
+msgid "Is Sponsor Reviewer"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_sponsorship_line__date_from
+msgid "Join Date"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner_grade__write_uid
+#: model:ir.model.fields,field_description:oca_sponsor.field_sponsorship_line__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner_grade__write_date
+#: model:ir.model.fields,field_description:oca_sponsor.field_sponsorship_line__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner_grade__partner_weight
+msgid "Level Weight"
+msgstr ""
+
+#. module: oca_sponsor
+#: model_terms:ir.ui.view,arch_db:oca_sponsor.portal_my_details_sponsorship
+msgid "Long Description"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner_grade__name
+msgid "Name"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,help:oca_sponsor.field_res_partner__sponsor_industry_ids
+#: model:ir.model.fields,help:oca_sponsor.field_res_users__sponsor_industry_ids
+msgid ""
+"On the website, 1 partner may have several industries. Their description is "
+"the same for all sponsors."
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_sponsorship_line__partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model,name:oca_sponsor.model_res_partner_grade
+msgid "Partner Grade"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.actions.server,name:oca_sponsor.action_sponsor_review_accept
+msgid "Review sponsor changes & publish"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner_grade__sequence
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner_industry__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: oca_sponsor
+#: model_terms:ir.ui.view,arch_db:oca_sponsor.portal_my_details_sponsorship
+msgid "Short Description"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner_grade__show_industry
+msgid "Show Industry"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner__grade_id
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_users__grade_id
+#: model:ir.model.fields,field_description:oca_sponsor.field_sponsorship_line__grade_id
+#: model_terms:ir.ui.view,arch_db:oca_sponsor.view_res_partner_member_filter
+msgid "Sponsor Level"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner__sponsor_review_data
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_users__sponsor_review_data
+msgid "Sponsor Review Data"
+msgstr ""
+
+#. module: oca_sponsor
+#. odoo-javascript
+#: code:addons/oca_sponsor/static/src/views/res_partner_form_controller.js:0
+msgid "Sponsor Version History"
+msgstr ""
+
+#. module: oca_sponsor
+#: model_terms:ir.ui.view,arch_db:oca_sponsor.view_partner_form
+msgid "Sponsor configuration"
+msgstr ""
+
+#. module: oca_sponsor
+#: model_terms:ir.ui.view,arch_db:oca_sponsor.view_partner_form
+msgid "Sponsor information are pending a review to be updated on the website."
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner__website_long_description
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_users__website_long_description
+msgid "Sponsor long description"
+msgstr ""
+
+#. module: oca_sponsor
+#: model_terms:ir.ui.view,arch_db:oca_sponsor.view_partner_form
+msgid "Sponsor presentation"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner__sponsor_child_ids
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_users__sponsor_child_ids
+msgid "Sponsored companies"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner__sponsor_parent_id
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_users__sponsor_parent_id
+msgid "Sponsoring company"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.actions.act_window,name:oca_sponsor.action_membership_sponsor
+#: model:ir.ui.menu,name:oca_sponsor.menu_membership_sponsor
+#: model_terms:ir.ui.view,arch_db:oca_sponsor.view_res_partner_member_filter
+msgid "Sponsors"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:mail.activity.team,name:oca_sponsor.mail_activity_team_sponsor_reviewers
+msgid "Sponsors Reviewers"
+msgstr ""
+
+#. module: oca_sponsor
+#: model_terms:ir.ui.view,arch_db:oca_sponsor.view_res_partner_member_filter
+msgid "Sponsors to review"
+msgstr ""
+
+#. module: oca_sponsor
+#: model_terms:ir.ui.view,arch_db:oca_sponsor.portal_my_details_sponsorship
+#: model_terms:ir.ui.view,arch_db:oca_sponsor.view_partner_form
+msgid "Sponsorship"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model,name:oca_sponsor.model_sponsorship_line
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner__sponsorship_line_ids
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_users__sponsorship_line_ids
+msgid "Sponsorship history"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,help:oca_sponsor.field_res_partner_industry__description
+msgid "The description is shared between all sponsors using this industry."
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,help:oca_sponsor.field_res_partner_grade__website_url
+msgid "The full URL to access the document through the website."
+msgstr ""
+
+#. module: oca_sponsor
+#. odoo-python
+#: code:addons/oca_sponsor/models/res_partner.py:0
+msgid ""
+"The sponsor changed its information from its profile. Please review those "
+"changes to publish them on the website."
+msgstr ""
+
+#. module: oca_sponsor
+#. odoo-javascript
+#: code:addons/oca_sponsor/static/src/views/res_partner_form_controller.js:0
+msgid "The sponsor lacks any past content to review."
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner__sponsor_to_review
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_users__sponsor_to_review
+#: model_terms:ir.ui.view,arch_db:oca_sponsor.res_partner_kanban_view
+msgid "To review"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model,name:oca_sponsor.model_res_users
+msgid "User"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner_grade__website_published
+msgid "Visible on current website"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner_grade__website_url
+msgid "Website URL"
+msgstr ""
+
+#. module: oca_sponsor
+#: model_terms:ir.ui.view,arch_db:oca_sponsor.portal_my_details_sponsorship
+msgid "Why sponsoring"
+msgstr ""
+
+#. module: oca_sponsor
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner__website_description_why_sponsoring
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_users__website_description_why_sponsoring
+msgid "Why sponsoring description"
+msgstr ""
+
+#. module: oca_sponsor
+#. odoo-python
+#: code:addons/oca_sponsor/models/res_partner.py:0
+msgid "You are not a Sponsor Reviewer."
+msgstr ""
