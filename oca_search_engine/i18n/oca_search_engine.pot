@@ -1,0 +1,170 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oca_search_engine
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oca_search_engine
+#. odoo-python
+#: code:addons/oca_search_engine/models/se_index.py:0
+msgid "'Serializer Type' must match 'Model'"
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model,name:oca_search_engine.model_blog_post
+msgid "Blog Post"
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model.fields.selection,name:oca_search_engine.selection__se_index__serializer_type__companies_exports
+msgid "Companies (sponsors & integrators)"
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model,name:oca_search_engine.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: oca_search_engine
+#. odoo-python
+#: code:addons/oca_search_engine/schemas/res_partner_person.py:0
+msgid "Contributor"
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model.fields,field_description:oca_search_engine.field_res_partner__count_se_binding_done
+#: model:ir.model.fields,field_description:oca_search_engine.field_vcp_odoo_module_version__count_se_binding_done
+#: model:ir.model.fields,field_description:oca_search_engine.field_vcp_repository_category__count_se_binding_done
+msgid "Count Se Binding Done"
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model.fields,field_description:oca_search_engine.field_res_partner__count_se_binding_error
+#: model:ir.model.fields,field_description:oca_search_engine.field_vcp_odoo_module_version__count_se_binding_error
+#: model:ir.model.fields,field_description:oca_search_engine.field_vcp_repository_category__count_se_binding_error
+msgid "Count Se Binding Error"
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model.fields,field_description:oca_search_engine.field_res_partner__count_se_binding_pending
+#: model:ir.model.fields,field_description:oca_search_engine.field_vcp_odoo_module_version__count_se_binding_pending
+#: model:ir.model.fields,field_description:oca_search_engine.field_vcp_repository_category__count_se_binding_pending
+msgid "Count Se Binding Pending"
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model.fields,field_description:oca_search_engine.field_res_partner__count_se_binding_total
+#: model:ir.model.fields,field_description:oca_search_engine.field_vcp_odoo_module_version__count_se_binding_total
+#: model:ir.model.fields,field_description:oca_search_engine.field_vcp_repository_category__count_se_binding_total
+msgid "Count Se Binding Total"
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model.fields,field_description:oca_search_engine.field_res_partner__count_url
+#: model:ir.model.fields,field_description:oca_search_engine.field_vcp_odoo_module__count_url
+#: model:ir.model.fields,field_description:oca_search_engine.field_vcp_repository_category__count_url
+msgid "Count Url"
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model.fields,field_description:oca_search_engine.field_vcp_odoo_module_version__github_url
+msgid "Github Url"
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model.fields.selection,name:oca_search_engine.selection__se_index__serializer_type__vcp_repository_category_exports
+msgid "Modules Category"
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model,name:oca_search_engine.model_vcp_odoo_module
+msgid "Odoo Module"
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model,name:oca_search_engine.model_vcp_odoo_module_version
+msgid "Odoo Module on an specific repository branch"
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model.fields.selection,name:oca_search_engine.selection__se_index__serializer_type__vcp_odoo_module_version_exports
+msgid "Odoo Modules"
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model.fields.selection,name:oca_search_engine.selection__se_index__serializer_type__persons_exports
+msgid "Persons (members & contributors)"
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model.fields,field_description:oca_search_engine.field_res_partner__redirect_url_key
+#: model:ir.model.fields,field_description:oca_search_engine.field_vcp_odoo_module__redirect_url_key
+#: model:ir.model.fields,field_description:oca_search_engine.field_vcp_repository_category__redirect_url_key
+msgid "Redirect Url Keys"
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model,name:oca_search_engine.model_vcp_repository_category
+msgid "Repository Category"
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model,name:oca_search_engine.model_se_index
+msgid "Se Index"
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model.fields,field_description:oca_search_engine.field_res_partner__se_binding_ids
+#: model:ir.model.fields,field_description:oca_search_engine.field_vcp_odoo_module_version__se_binding_ids
+#: model:ir.model.fields,field_description:oca_search_engine.field_vcp_repository_category__se_binding_ids
+msgid "Seacrh Engine Bindings"
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model.fields,field_description:oca_search_engine.field_se_index__serializer_type
+msgid "Serializer Type"
+msgstr ""
+
+#. module: oca_search_engine
+#. odoo-python
+#: code:addons/oca_search_engine/schemas/vcp_repository.py:0
+msgid "The category on the repository is missing, please fill it"
+msgstr ""
+
+#. module: oca_search_engine
+#. odoo-python
+#: code:addons/oca_search_engine/schemas/res_partner_company.py:0
+msgid ""
+"The information of this sponsor were updated and are pending a review, thus "
+"this operation was blocked."
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model.fields,field_description:oca_search_engine.field_res_partner__url_ids
+#: model:ir.model.fields,field_description:oca_search_engine.field_vcp_odoo_module__url_ids
+#: model:ir.model.fields,field_description:oca_search_engine.field_vcp_repository_category__url_ids
+msgid "Url"
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model.fields,field_description:oca_search_engine.field_res_partner__url_key
+#: model:ir.model.fields,field_description:oca_search_engine.field_vcp_odoo_module__url_key
+#: model:ir.model.fields,field_description:oca_search_engine.field_vcp_repository_category__url_key
+msgid "Url Key"
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model.fields,field_description:oca_search_engine.field_res_partner__url_need_refresh
+#: model:ir.model.fields,field_description:oca_search_engine.field_vcp_odoo_module__url_need_refresh
+#: model:ir.model.fields,field_description:oca_search_engine.field_vcp_repository_category__url_need_refresh
+msgid "Url Need Refresh"
+msgstr ""
