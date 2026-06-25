@@ -1,0 +1,301 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oca_membership
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.portail_my_details_side_content
+msgid "<option value=\"0\">Do not publish my profile (no information)</option>"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.portail_my_details_side_content
+msgid "Avatar"
+msgstr ""
+
+#. module: oca_membership
+#: model:membership.membership_category,name:oca_membership.membership_category_board_oca
+msgid "Board member"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.view_res_partner_member_filter
+msgid "Canceled member"
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model.fields,help:oca_membership.field_res_partner__membership_category_ids
+#: model:ir.model.fields,help:oca_membership.field_res_users__membership_category_ids
+msgid "Categories of active membership lines plus Current Category."
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model.fields,field_description:oca_membership.field_membership_membership_category__color
+msgid "Color"
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model,name:oca_membership.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model.fields,field_description:oca_membership.field_res_partner__is_contributor
+#: model:ir.model.fields,field_description:oca_membership.field_res_users__is_contributor
+#: model_terms:ir.ui.view,arch_db:oca_membership.view_res_partner_member_filter
+msgid "Contributor"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.view_res_partner_member_filter
+msgid "Current Category"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.portail_my_details_side_content
+msgid "Current avatar"
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model.fields,field_description:oca_membership.field_res_partner__membership_category_id
+#: model:ir.model.fields,field_description:oca_membership.field_res_users__membership_category_id
+msgid "Current category"
+msgstr ""
+
+#. module: oca_membership
+#: model:membership.membership_category,name:oca_membership.membership_category_delegate_oca
+msgid "Delegate"
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model.fields,field_description:oca_membership.field_res_partner__is_elected
+#: model:ir.model.fields,field_description:oca_membership.field_res_users__is_elected
+#: model_terms:ir.ui.view,arch_db:oca_membership.view_res_partner_member_filter
+msgid "Elected"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.portail_my_details_side_content
+msgid "Fetch the avatar from Github"
+msgstr ""
+
+#. module: oca_membership
+#. odoo-python
+#: code:addons/oca_membership/controllers/portal.py:0
+msgid "File is too big (%d Mo max)."
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model.fields,help:oca_membership.field_membership_membership_category__sequence
+msgid "First category will the default one for new members."
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.view_res_partner_member_filter
+msgid "Free member"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.portal_my_details_fields
+msgid "Github main login"
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model.fields,help:oca_membership.field_res_partner__is_contributor
+#: model:ir.model.fields,help:oca_membership.field_res_users__is_contributor
+msgid "Has participated in Github, with a comment, a commit, ..."
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model.fields,field_description:oca_membership.field_membership_membership_category__implied_ids
+msgid "Implied roles"
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model.fields,help:oca_membership.field_membership_membership_category__implied_ids
+msgid "Implied roles by this one"
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model.fields,field_description:oca_membership.field_res_partner__is_integrator
+#: model:ir.model.fields,field_description:oca_membership.field_res_users__is_integrator
+#: model_terms:ir.ui.view,arch_db:oca_membership.view_res_partner_member_filter
+msgid "Integrator"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.view_res_partner_member_filter
+msgid "Invoiced member"
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model.fields,field_description:oca_membership.field_res_partner__is_published
+#: model:ir.model.fields,field_description:oca_membership.field_res_users__is_published
+msgid "Is Published"
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model.fields,help:oca_membership.field_res_partner__is_member
+#: model:ir.model.fields,help:oca_membership.field_res_users__is_member
+msgid "Is currently a member of the assocation"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.portail_my_details_side_content
+msgid "JPG or PNG, max 2 Mo."
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model.fields,field_description:oca_membership.field_res_partner__mail_group_member_ids
+#: model:ir.model.fields,field_description:oca_membership.field_res_users__mail_group_member_ids
+msgid "Mail Group Member"
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model.fields,field_description:oca_membership.field_res_partner__is_member
+#: model:ir.model.fields,field_description:oca_membership.field_res_users__is_member
+msgid "Member"
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model.fields,field_description:oca_membership.field_res_partner__membership_category_ids
+#: model:ir.model.fields,field_description:oca_membership.field_res_users__membership_category_ids
+msgid "Membership Categories"
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model,name:oca_membership.model_membership_membership_category
+msgid "Membership role"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.view_res_partner_member_filter
+msgid "Old member"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.portail_my_details_side_content
+msgid "Or upload your avatar"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.view_res_partner_member_filter
+msgid "Paid member"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.portail_my_details_side_content
+msgid "Privacy settings"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.portail_my_details_side_content
+msgid "Publish URL on the website"
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model.fields,field_description:oca_membership.field_res_partner__is_published_address
+#: model:ir.model.fields,field_description:oca_membership.field_res_users__is_published_address
+msgid "Publish address"
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model.fields,field_description:oca_membership.field_res_partner__is_published_email
+#: model:ir.model.fields,field_description:oca_membership.field_res_users__is_published_email
+msgid "Publish email"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.portail_my_details_side_content
+msgid "Publish email on the website"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.portail_my_details_side_content
+msgid "Publish location the website (address &amp; city)"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.portail_my_details_side_content
+msgid "Publish my profile"
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model.fields,field_description:oca_membership.field_res_partner__is_published_phone
+#: model:ir.model.fields,field_description:oca_membership.field_res_users__is_published_phone
+msgid "Publish phone"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.portail_my_details_side_content
+msgid "Publish phone on the website"
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model.fields,field_description:oca_membership.field_res_partner__is_published_website
+#: model:ir.model.fields,field_description:oca_membership.field_res_users__is_published_website
+msgid "Publish website"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.view_res_partner_member_filter
+msgid "Published"
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model.fields,field_description:oca_membership.field_membership_membership_category__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.portail_my_details_side_content
+msgid "Show my profile on the website"
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model.fields,help:oca_membership.field_res_partner__membership_category_id
+#: model:ir.model.fields,help:oca_membership.field_res_users__membership_category_id
+msgid ""
+"This field may reflect a Role in the association. Changing it is immediatly "
+"reflected on Membership Categories."
+msgstr ""
+
+#. module: oca_membership
+#. odoo-python
+#: code:addons/oca_membership/controllers/portal.py:0
+msgid "Unauthorized format (JPG or PNG only)."
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.view_res_partner_member_filter
+msgid "Waiting member"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.view_partner_form
+msgid "Website"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.portal_my_details_fields
+msgid "Website URL"
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model.fields,help:oca_membership.field_res_partner__is_published
+#: model:ir.model.fields,help:oca_membership.field_res_users__is_published
+msgid ""
+"Whether this contact publicly appears on the website.\n"
+"Automatically enabled for companies (sponsors and integrators).\n"
+"To enable manually for individuals (members)."
+msgstr ""
