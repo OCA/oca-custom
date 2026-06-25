@@ -1,0 +1,154 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oca_membership_groups
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oca_membership_groups
+#: model_terms:ir.ui.view,arch_db:oca_membership_groups.mail_group_view_kanban
+msgid ""
+"<span class=\"o_badge badge rounded-pill o_tag o_tag_color_4\" invisible=\"not is_working_group\">\n"
+"                        Working Group\n"
+"                    </span>\n"
+"                    <span class=\"o_badge badge rounded-pill o_tag o_tag_color_4\" invisible=\"not membership_category_ids\">\n"
+"                        Membership\n"
+"                    </span>"
+msgstr ""
+
+#. module: oca_membership_groups
+#: model:ir.model.fields,field_description:oca_membership_groups.field_mail_group_member__active
+msgid "Active"
+msgstr ""
+
+#. module: oca_membership_groups
+#: model:ir.model,name:oca_membership_groups.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: oca_membership_groups
+#: model:ir.model.fields,help:oca_membership_groups.field_mail_group_member__grace_date_start
+msgid ""
+"Date on which the member is not legitimate anymore to belong in this Mailing"
+msgstr ""
+
+#. module: oca_membership_groups
+#: model:ir.model.fields,help:oca_membership_groups.field_mail_group_member__grace_date_deadline
+msgid ""
+"Date on which the member will be retired automatically from this Mailing "
+"Group, unless he/she renew its membership."
+msgstr ""
+
+#. module: oca_membership_groups
+#: model:ir.model.fields,field_description:oca_membership_groups.field_mail_group_member__grace_date_start
+msgid "Grace Date Start"
+msgstr ""
+
+#. module: oca_membership_groups
+#: model:ir.model.fields,field_description:oca_membership_groups.field_mail_group__grace_days
+msgid "Grace Days"
+msgstr ""
+
+#. module: oca_membership_groups
+#: model:ir.model.fields,field_description:oca_membership_groups.field_mail_group_member__grace_date_deadline
+msgid "Grace Deadline"
+msgstr ""
+
+#. module: oca_membership_groups
+#: model:ir.actions.act_window,name:oca_membership_groups.mail_group_action_groups
+#: model:ir.ui.menu,name:oca_membership_groups.menu_membership_mail_group
+msgid "Groups"
+msgstr ""
+
+#. module: oca_membership_groups
+#: model_terms:ir.ui.view,arch_db:oca_membership_groups.mail_group_member_view_search
+msgid "In grace period"
+msgstr ""
+
+#. module: oca_membership_groups
+#: model:ir.model.fields,field_description:oca_membership_groups.field_mail_group__is_working_group
+msgid "Is a Working Group"
+msgstr ""
+
+#. module: oca_membership_groups
+#: model:ir.model,name:oca_membership_groups.model_mail_group
+msgid "Mail Group"
+msgstr ""
+
+#. module: oca_membership_groups
+#: model:ir.model.fields,field_description:oca_membership_groups.field_res_partner__mail_group_member_ids
+#: model:ir.model.fields,field_description:oca_membership_groups.field_res_users__mail_group_member_ids
+msgid "Mail Group Member"
+msgstr ""
+
+#. module: oca_membership_groups
+#: model:ir.model.fields,field_description:oca_membership_groups.field_membership_membership_category__mail_group_ids
+#: model:ir.model.fields,field_description:oca_membership_groups.field_res_partner__mail_group_count
+#: model:ir.model.fields,field_description:oca_membership_groups.field_res_users__mail_group_count
+msgid "Mail Groups"
+msgstr ""
+
+#. module: oca_membership_groups
+#: model:ir.actions.server,name:oca_membership_groups.ir_cron_membership_groups_categories_sync_ir_actions_server
+msgid "Mail Groups based on Membership: end grace periods"
+msgstr ""
+
+#. module: oca_membership_groups
+#: model:ir.model,name:oca_membership_groups.model_mail_group_member
+msgid "Mailing List Member"
+msgstr ""
+
+#. module: oca_membership_groups
+#: model:ir.model.fields,field_description:oca_membership_groups.field_mail_group__membership_category_ids
+msgid "Membership Categories"
+msgstr ""
+
+#. module: oca_membership_groups
+#: model:ir.model,name:oca_membership_groups.model_membership_membership_category
+msgid "Membership role"
+msgstr ""
+
+#. module: oca_membership_groups
+#: model:ir.model.fields,help:oca_membership_groups.field_mail_group__grace_days
+msgid ""
+"Number of days before the expired members are automatically retired from "
+"this group. Only relevant for groups with auto-subscription from the "
+"membership category."
+msgstr ""
+
+#. module: oca_membership_groups
+#: model:ir.model.fields,help:oca_membership_groups.field_mail_group__membership_category_ids
+msgid ""
+"The members of this Mailing Group follows the members of those membership "
+"categories."
+msgstr ""
+
+#. module: oca_membership_groups
+#: model:ir.model.fields,help:oca_membership_groups.field_membership_membership_category__mail_group_ids
+msgid ""
+"The members of this category will automatically subscribe to these Mail "
+"Groups. They will be able to unsubscribe too."
+msgstr ""
+
+#. module: oca_membership_groups
+#: model_terms:ir.ui.view,arch_db:oca_membership_groups.mail_group_member_view_search
+msgid "Unsubscribed (archived)"
+msgstr ""
+
+#. module: oca_membership_groups
+#: model:ir.model.fields,help:oca_membership_groups.field_mail_group__is_working_group
+msgid "Working Group are visible on the website page, on members profile."
+msgstr ""
+
+#. module: oca_membership_groups
+#: model_terms:ir.ui.view,arch_db:oca_membership_groups.mail_group_view_search
+msgid "Working Groups"
+msgstr ""
