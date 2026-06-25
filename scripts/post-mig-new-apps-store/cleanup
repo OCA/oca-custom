@@ -1,0 +1,10 @@
+#!/bin/bash
+set -euxo pipefail
+
+psql -c "
+    DELETE FROM ir_model_data
+    WHERE model='ir.model.fields'
+    AND module='website_crm_partner_assign'
+    AND res_id not in (select id from ir_model_fields)
+    "
+click-odoo-uninstall -m website_oca_integrator,website_crm_partner_assign,apps_product_creator,github_connector,github_connector_oca,github_connector_odoo
