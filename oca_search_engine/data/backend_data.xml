@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="oca_typesense_backend" model="se.backend">
+        <field name="name">OCA Typesense Backend</field>
+        <field name="tech_name">ocastore</field>
+        <field name="backend_type">typesense</field>
+        <field name="ts_server_host">typesense</field>
+        <field name="ts_server_port">443</field>
+        <field name="ts_server_protocol">https</field>
+        <field name="ts_api_key">xyz</field>
+    </record>
+</odoo>

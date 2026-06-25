@@ -3,7 +3,7 @@
 {
     "name": "Website OCA Integrator",
     "summary": "Displays Integrators in website.",
-    "version": "18.0.1.0.1",
+    "version": "18.0.1.0.2",
     "category": "Website",
     "license": "AGPL-3",
     "website": "https://github.com/OCA/oca-custom",
@@ -20,6 +20,7 @@
         "github_connector",
         "github_connector_odoo",
         "apps_product_creator",
+        "oca_sponsor",
     ],
     "data": [
         "security/ir.model.access.csv",
@@ -42,4 +43,5 @@
         ],
     },
     "installable": True,
+    "development_status": "Alpha",
 }

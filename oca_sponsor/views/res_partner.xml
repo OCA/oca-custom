@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 AKRETION
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Search -->
+    <record id="view_res_partner_member_filter" model="ir.ui.view">
+        <field name="name">res.partner.select.membership_extension.oca_sponsor</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="oca_membership.view_res_partner_member_filter" />
+
+        <field name="arch" type="xml">
+            <!-- Default filters -->
+            <filter name="is_integrator" position="after">
+                <filter
+                    string="Sponsors"
+                    name="is_sponsor"
+                    domain="[('is_sponsor', '=', True)]"
+                />
+                <filter
+                    string="Sponsors to review"
+                    name="sponsor_to_review"
+                    domain="[('is_sponsor', '=', True), ('sponsor_to_review', '=', True)]"
+                />
+            </filter>
+
+            <!-- Group By -->
+            <group position="inside">
+                <filter
+                    name="group_grade_id"
+                    string="Sponsor Level"
+                    domain="[('grade_id', '!=', False)]"
+                    context="{'group_by': 'grade_id'}"
+                />
+            </group>
+        </field>
+    </record>
+
+    <!-- Kanban -->
+    <record id="res_partner_kanban_view" model="ir.ui.view">
+        <field name="name">res.partner.kanban.oca_sponsor</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view" />
+
+        <field name="arch" type="xml">
+            <widget name="web_ribbon" position="after">
+                <widget
+                    name="web_ribbon"
+                    title="To review"
+                    bg_color="text-bg-warning"
+                    invisible="not sponsor_to_review"
+                />
+            </widget>
+        </field>
+    </record>
+
+    <!-- Form : add "Sponsorship" page -->
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form.oca_sponsor</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="membership.view_partner_form" />
+
+        <field name="arch" type="xml">
+            <form position="attributes">
+                <attribute name="js_class">res_partner_form</attribute>
+            </form>
+            <form position="inside">
+                <field name="html_field_history_metadata" invisible="1" />
+            </form>
+
+            <sheet position="before">
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    name="warning_sponsor_review"
+                    invisible="not is_sponsor_reviewer or not sponsor_to_review"
+                >
+                    Sponsor information are pending a review to be updated on the website.
+
+                    <button
+                    name="button_sponsor_review_accept"
+                    type="object"
+                    string="Accept changes"
+                    icon="fa-check"
+                    class="btn btn-success ms-2"
+                />
+                </div>
+            </sheet>
+
+            <!-- Add Smart Button for blog posts -->
+            <div name="button_box" position="inside">
+                <button
+                    type="action"
+                    name="%(website_blog.action_blog_post)d"
+                    context="{
+                        'default_author_id': id,
+                        'search_default_author_id': id,
+                    }"
+                    class="oe_stat_button"
+                    icon="fa-globe"
+                    invisible="not is_sponsor"
+                >
+                    <field
+                        name="blog_post_count"
+                        string="Blog posts"
+                        widget="statinfo"
+                    />
+                </button>
+            </div>
+
+            <!-- Add dedicated "Sponsorship" page -->
+            <page name="membership" position="after">
+                <page
+                    name="sponsorship"
+                    string="Sponsorship"
+                    invisible="not is_company or sponsor_parent_id"
+                >
+                    <!-- Configuration -->
+                    <group
+                        name="oca_sponsor_config"
+                        string="Sponsor configuration"
+                        col="12"
+                    >
+                        <group colspan="5">
+                            <field name="grade_id" />
+                            <field name="sponsor_name" />
+                            <field
+                                name="sponsor_child_ids"
+                                widget="many2many_tags"
+                                options="{'create': False}"
+                            />
+                            <field name="sponsor_country_ids" widget="many2many_tags" />
+                            <field
+                                name="sponsor_industry_ids"
+                                widget="many2many_tags"
+                            />
+                        </group>
+                        <group colspan="7">
+                            <label for="sponsorship_line_ids" />
+                            <field
+                                name="sponsorship_line_ids"
+                                colspan="2"
+                                nolabel="1"
+                                context="{'default_partner_id': id}"
+                            />
+                        </group>
+                    </group>
+
+                    <!-- Website descriptions -->
+                    <group name="oca_sponsor_description" string="Sponsor presentation">
+                        <label for="website_description_why_sponsoring" />
+                        <field
+                            name="website_description_why_sponsoring"
+                            nolabel="1"
+                            colspan="2"
+                        />
+
+                        <label for="website_short_description" class="mt-3" />
+                        <field
+                            name="website_short_description"
+                            nolabel="1"
+                            colspan="2"
+                        />
+
+                        <label for="website_long_description" class="mt-3" />
+                        <field
+                            name="website_long_description"
+                            nolabel="1"
+                            colspan="2"
+                        />
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+
+    <!-- New entry menu 'Sponsors' in Membership app -->
+    <record id="action_membership_sponsor" model="ir.actions.act_window">
+        <field name="name">Sponsors</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="membership.view_res_partner_member_filter" />
+        <field name="domain">[("is_company", "=", True)]</field>
+        <field name="context">{
+            "search_default_is_sponsor": 1,
+            "membership_sponsor": 1,
+        }</field>
+    </record>
+    <menuitem
+        id="menu_membership_sponsor"
+        sequence="20"
+        parent="membership.menu_association"
+        action="action_membership_sponsor"
+    />
+
+    <!-- Action: review(accept) sponsor changes in mass -->
+    <record id="action_sponsor_review_accept" model="ir.actions.server">
+        <field name="name">Review sponsor changes &amp; publish</field>
+        <field name="model_id" ref="base.model_res_partner" />
+        <field name="binding_model_id" ref="base.model_res_partner" />
+        <field name="state">code</field>
+        <field name="code">action = records.button_sponsor_review_accept()</field>
+    </record>
+</odoo>

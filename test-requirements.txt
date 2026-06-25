@@ -7,3 +7,5 @@ odoo-addon-apps_product_creator @ git+https://github.com/Therp/apps-store.git@18
 odoo-addon-account_statement_import_online_wise @ git+https://github.com/Therp/bank-statement-import@18.0-fix-account-statement-import-online-wise#subdirectory=account_statement_import_online_wise
 odoo-addon-account_banking_pain_base @ git+https://github.com/Therp/bank-payment.git@18.0-mig-account_banking_pain_base_sepa_hybrid_extended_for_09#subdirectory=account_banking_pain_base
 odoo-addon-account_banking_sepa_credit_transfer @ git+https://github.com/Therp/bank-payment.git@18.0-mig-account_banking_pain_base_sepa_hybrid_extended_for_09#subdirectory=account_banking_sepa_credit_transfer
+odoo-addon-base-url @ git+https://github.com/akretion/server-tools.git@18.0-add-url-2#subdirectory=base_url
+odoo-addon-membership_account_invoice_start_end_dates @ git+https://github.com/akretion/vertical-association.git@18.0-add-membership-start-end-date2#subdirectory=membership_account_invoice_start_end_dates

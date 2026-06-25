@@ -105,33 +105,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                     >
                                         <span t-field="integrator.display_name" />
                                     </a>
-                                    <t t-if="integrator.sponsorship_line_ids">
-                                        <t
-                                            t-set="today_date"
-                                            t-value="datetime.date.today()"
-                                        />
-                                        <t
-                                            t-set="current_sponsorships"
-                                            t-value="integrator.sponsorship_line_ids.filtered(lambda sponsorship: sponsorship.date_end &gt;= today_date and sponsorship.date_from &lt;= today_date)"
-                                        />
-                                        <t
-                                            t-foreach="current_sponsorships"
-                                            t-as="sponsorship"
-                                        >
-                                            <img
-                                                t-if="sponsorship.sponsorship_id.image_128"
-                                                t-att-src="image_data_uri(sponsorship.sponsorship_id.image_128)"
-                                                style="height: 50px; width: 50px;"
-                                                t-att-title="sponsorship.grade_id and sponsorship.grade_id.name or ''"
-                                                alt=""
-                                            />
-                                            <span
-                                                t-if="sponsorship.grade_id"
-                                                class="ms-2 small text-muted"
-                                                t-field="sponsorship.grade_id.name"
-                                            />
-                                        </t>
-                                    </t>
                                     <div
                                         t-field="integrator.website_short_description"
                                     />

@@ -19,12 +19,6 @@ class ResPartner(models.Model):
         store=True,
     )
 
-    is_integrator = fields.Boolean(
-        string="Integrator",
-        compute="_compute_integrator",
-        store=True,
-    )
-
     contributor_count = fields.Integer(
         string="Number of contributors",
         compute="_compute_contributor_count",
@@ -71,12 +65,6 @@ class ResPartner(models.Model):
         readonly=True,
     )
 
-    sponsorship_line_ids = fields.One2many(
-        string="Sponsorship Activities",
-        comodel_name="sponsorship.line",
-        inverse_name="partner_id",
-    )
-
     contributor_module_line_ids = fields.One2many(
         string="Contributed Modules",
         comodel_name="contributor.module.line",
@@ -92,23 +80,6 @@ class ResPartner(models.Model):
                 record.github_organization_url = github_url + record.github_organization
             else:
                 record.github_organization_url = False
-
-    @api.depends(
-        "child_ids",
-        "child_ids.github_name",
-        "child_ids.membership_state",
-        "child_ids.parent_id",
-    )
-    def _compute_integrator(self):
-        """
-        Integrators are partners who have any contact with a commit to OCA repositories
-        or a current OCA membership.
-        """
-        for partner in self:
-            partner.is_integrator = any(
-                (child.github_name or child.membership_state == "paid")
-                for child in partner.child_ids
-            )
 
     @api.depends("child_ids.github_name", "child_ids.parent_id")
     def _compute_contributor_count(self):

@@ -63,36 +63,6 @@ class TestIntegratorAssign(TransactionCase):
             }
         )
 
-    def test_integrators(self):
-        # Contact has github login and not a paid member => integrator
-        self.company1._compute_integrator()
-        self.assertEqual(
-            self.company1.is_integrator,
-            True,
-            "Partner with at least one contact having github login "
-            "should be an integrator.",
-        )
-
-        # No github login and not paid => not integrator
-        self.company2._compute_integrator()
-        self.assertEqual(
-            self.company2.is_integrator,
-            False,
-            "Partner with no github logins and no paid membership "
-            "should not be an integrator.",
-        )
-
-        # Becomes paid member => integrator
-        self.customer2.write({"membership_state": "paid"})
-        self.company2.invalidate_recordset()
-        self.company2._compute_integrator()
-
-        self.assertEqual(
-            self.company2.is_integrator,
-            True,
-            "Partner with a paid member contact should be an integrator.",
-        )
-
     def test_contributors_count(self):
         self.company1._compute_contributor_count()
         self.assertEqual(

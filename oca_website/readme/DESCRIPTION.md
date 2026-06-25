@@ -1,1 +1,1 @@
-Custom theme for the oca website
+Custom website theme for OCA website.

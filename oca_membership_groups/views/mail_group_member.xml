@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 AKRETION
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="mail_group_member_view_tree" model="ir.ui.view">
+        <field name="name">mail.group.member.view.list.membership_groups</field>
+        <field name="model">mail.group.member</field>
+        <field name="inherit_id" ref="mail_group.mail_group_member_view_tree" />
+
+        <field name="arch" type="xml">
+            <list position="inside">
+                <field name="grace_date_start" optional="hide" />
+                <field
+                    name="grace_date_deadline"
+                    widget="remaining_days"
+                    invisible="not grace_date_start"
+                />
+            </list>
+        </field>
+    </record>
+
+    <record id="mail_group_member_view_search" model="ir.ui.view">
+        <field name="name">mail.group.member.view.search.membership_groups</field>
+        <field name="model">mail.group.member</field>
+        <field name="inherit_id" ref="mail_group.mail_group_member_view_search" />
+        <field name="arch" type="xml">
+            <search position="inside">
+                <filter
+                    string="Unsubscribed (archived)"
+                    name="inactive"
+                    domain="[('active', '=', False)]"
+                />
+                <separator />
+                <filter
+                    string="In grace period"
+                    name="grace"
+                    domain="[('grace_date_start', '!=', False)]"
+                />
+            </search>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 AKRETION
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Sponsorship Line List -->
+    <record id="view_sponsorship_line_list" model="ir.ui.view">
+        <field name="name">sponsorship.line.list</field>
+        <field name="model">sponsorship.line</field>
+
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field
+                    name="partner_id"
+                    column_invisible="context.get('default_partner_id')"
+                />
+                <field name="date_from" />
+                <field name="date_end" />
+                <field name="grade_id" />
+            </list>
+        </field>
+    </record>
+</odoo>

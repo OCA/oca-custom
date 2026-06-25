@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 AKRETION
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- res.partner Form (membership_extension) -->
+    <record id="view_partner_form" model="ir.ui.view">
+        <field
+            name="name"
+        >res.partner.form.membership_extension.oca_membership_groups</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="membership_extension.view_partner_form" />
+
+        <field name="arch" type="xml">
+            <!-- Add a Mail Groups's Smart Button -->
+            <div name="button_box" position="inside">
+                <button
+                    type="action"
+                    name="%(mail_group.mail_group_member_action)d"
+                    context="{'search_default_partner_id': id}"
+                    class="oe_stat_button"
+                    icon="fa-envelope"
+                    invisible="not mail_group_member_ids"
+                >
+                    <field name="mail_group_count" widget="statinfo" />
+                </button>
+            </div>
+        </field>
+    </record>
+</odoo>

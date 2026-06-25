@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t
+        t-name="oca_sponsor.HistoryDialog"
+        t-inherit="html_editor.HistoryDialog"
+        t-inherit-mode="extension"
+    >
+        <button t-on-click="_onRestoreRevisionClick" position="replace" />
+    </t>
+</templates>

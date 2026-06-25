@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 AKRETION
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Search (membership_extension) -->
+    <record id="view_res_partner_member_filter" model="ir.ui.view">
+        <field
+            name="name"
+        >res.partner.select.membership_extension.oca_membership</field>
+        <field name="model">res.partner</field>
+        <field
+            name="inherit_id"
+            ref="membership_extension.view_res_partner_member_filter"
+        />
+
+        <field name="arch" type="xml">
+            <!-- Search bar fields -->
+            <field name="name" position="after">
+                <field name="membership_category_id" />
+                <field name="membership_category_ids" />
+            </field>
+
+            <!-- Quick filters -->
+            <filter name="all_members" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </filter>
+            <filter name="all_members" position="after">
+                <filter
+                    string="Elected"
+                    name="elected"
+                    domain="[('is_elected', '=', True)]"
+                />
+                <filter
+                    string="Contributor"
+                    name="is_contributor"
+                    domain="[('is_contributor', '=', True)]"
+                />
+                <filter
+                    string="Integrator"
+                    name="is_integrator"
+                    domain="[('is_integrator', '=', True)]"
+                />
+
+                <separator name="membership_state" />
+                <filter
+                    string="Paid member"
+                    name="paid"
+                    domain="[('membership_state', '=', 'paid')]"
+                />
+                <filter
+                    string="Free member"
+                    name="free"
+                    domain="[('membership_state', '=', 'free')]"
+                />
+                <filter
+                    string="Invoiced member"
+                    name="invoiced"
+                    domain="[('membership_state', '=', 'invoiced')]"
+                />
+                <filter
+                    string="Waiting member"
+                    name="waiting"
+                    domain="[('membership_state', '=', 'waiting')]"
+                />
+                <filter
+                    string="Old member"
+                    name="old"
+                    domain="[('membership_state', '=', 'old')]"
+                />
+                <filter
+                    string="Canceled member"
+                    name="canceled"
+                    domain="[('membership_state', '=', 'canceled')]"
+                />
+
+                <separator name="website" />
+                <filter
+                    string="Published"
+                    name="is_published"
+                    domain="[('is_published', '=', True)]"
+                />
+            </filter>
+
+            <!-- Grouped -->
+            <filter name="membership_category_ids" position="attributes">
+                <attribute name="domain">[]</attribute>
+            </filter>
+            <filter name="membership_category_ids" position="before">
+                <filter
+                    string="Current Category"
+                    name="membership_category_id"
+                    context="{'group_by': 'membership_category_id'}"
+                />
+            </filter>
+        </field>
+    </record>
+
+    <!-- Tree (membership) -->
+    <record id="membership_members_tree" model="ir.ui.view">
+        <field name="name">res.partner.list.membership.oca_membership</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="membership.membership_members_tree" />
+
+        <field name="arch" type="xml">
+            <list position="attributes">
+                <attribute name="create">0</attribute>
+                <attribute name="editable">top</attribute>
+                <attribute name="multi_edit">1</attribute>
+                <attribute name="open_form_view">1</attribute>
+            </list>
+            <field name="membership_state" position="after">
+                <field name="membership_category_id" />
+                <field name="membership_category_ids" widget="many2many_tags" />
+            </field>
+        </field>
+    </record>
+
+    <!-- Kanban: add custom view for Membership + inherit -->
+    <record id="res_partner_member_kanban" model="ir.ui.view">
+        <field name="name">res.partner.member.kanban.oca_custom</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base_setup.res_partner_kanban_view" />
+        <field name="mode">primary</field>
+
+        <field name="arch" type="xml">
+            <field name="category_id" position="after">
+                <field name="membership_state" widget="badge" class="mt-1" />
+            </field>
+        </field>
+    </record>
+    <record
+        id="membership.action_membership_members_view_kanban"
+        model="ir.actions.act_window.view"
+    >
+        <field name="view_id" ref="oca_membership.res_partner_member_kanban" />
+    </record>
+
+    <!-- Form (membership_extension) -->
+    <record id="view_partner_form_membership" model="ir.ui.view">
+        <field name="name">res.partner.form.membership_extension.oca_membership</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="membership_extension.view_partner_form" />
+
+        <field name="arch" type="xml">
+            <!-- Add `membership_category_id` -->
+            <xpath
+                expr="//field[@name='membership_category_ids' and @widget='many2many_tags']"
+                position="before"
+            >
+                <field name="membership_category_id" />
+            </xpath>
+        </field>
+    </record>
+    <!-- Form (base): add "is_published" toggles -->
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form.oca_search_engine</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Website" name="website">
+                    <group name="website">
+                        <field name="is_published" widget="boolean_toggle" />
+                        <field
+                            name="is_published_email"
+                            widget="boolean_toggle"
+                            invisible="not is_published"
+                        />
+                        <field
+                            name="is_published_phone"
+                            widget="boolean_toggle"
+                            invisible="not is_published"
+                        />
+                        <field
+                            name="is_published_address"
+                            widget="boolean_toggle"
+                            invisible="not is_published"
+                        />
+                        <field
+                            name="is_published_website"
+                            widget="boolean_toggle"
+                            invisible="not is_published"
+                        />
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="membership.action_membership_members" model="ir.actions.act_window">
+        <field name="domain">[("membership_state", "!=", "none")]</field>
+        <field name="context">{
+            "search_default_paid": 1,
+            "search_default_free": 1,
+        }</field>
+    </record>
+</odoo>

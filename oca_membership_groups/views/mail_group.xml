@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 AKRETION
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Kanban -->
+    <record id="mail_group_view_kanban" model="ir.ui.view">
+        <field name="name">mail.group.view.kanban.oca_membership</field>
+        <field name="model">mail.group</field>
+        <field name="inherit_id" ref="mail_group.mail_group_view_kanban" />
+
+        <field name="arch" type="xml">
+            <field name="description" position="before">
+                <div
+                    class="flex"
+                    invisible="not is_working_group and not membership_category_ids"
+                >
+                    <span
+                        class="o_badge badge rounded-pill o_tag o_tag_color_4"
+                        invisible="not is_working_group"
+                    >
+                        Working Group
+                    </span>
+                    <span
+                        class="o_badge badge rounded-pill o_tag o_tag_color_4"
+                        invisible="not membership_category_ids"
+                    >
+                        Membership
+                    </span>
+                </div>
+            </field>
+        </field>
+    </record>
+    <!-- Form -->
+    <record id="mail_group_view_form" model="ir.ui.view">
+        <field name="name">mail.group.view.form.oca_membership</field>
+        <field name="model">mail.group</field>
+        <field name="inherit_id" ref="mail_group.mail_group_view_form" />
+
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page name="Membership">
+                    <group>
+                        <field name="is_working_group" widget="boolean_toggle" />
+                        <field
+                            name="membership_category_ids"
+                            widget="many2many_tags"
+                            readonly="1"
+                        />
+                        <field
+                            name="grace_days"
+                            invisible="not membership_category_ids"
+                        />
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+    <!-- Search -->
+    <record id="mail_group_view_search" model="ir.ui.view">
+        <field name="name">mail.group.view.search.oca_membership</field>
+        <field name="model">mail.group</field>
+        <field name="inherit_id" ref="mail_group.mail_group_view_search" />
+
+        <field name="arch" type="xml">
+            <filter name="moderation" position="after">
+                <filter
+                    string="Working Groups"
+                    name="is_working_group"
+                    domain="[('is_working_group', '=', True)]"
+                />
+            </filter>
+        </field>
+    </record>
+
+    <!-- New entry menu 'Groups' in Membership app -->
+    <record id="mail_group_action_groups" model="ir.actions.act_window">
+        <field name="name">Groups</field>
+        <field name="res_model">mail.group</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+    <menuitem
+        id="menu_membership_mail_group"
+        sequence="30"
+        parent="membership.menu_association"
+        action="oca_membership_groups.mail_group_action_groups"
+    />
+</odoo>

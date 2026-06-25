@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 AKRETION
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record
+        id="membership_extension.membership_category_member"
+        model="membership.membership_category"
+    >
+        <field name="sequence" eval="10" />
+    </record>
+    <record
+        id="membership_category_delegate_oca"
+        model="membership.membership_category"
+    >
+        <field name="name">Delegate</field>
+        <field name="sequence" eval="20" />
+        <field
+            name="implied_ids"
+            eval="[(4, ref('membership_extension.membership_category_member'))]"
+        />
+    </record>
+    <record id="membership_category_board_oca" model="membership.membership_category">
+        <field name="name">Board member</field>
+        <field name="sequence" eval="30" />
+        <field
+            name="implied_ids"
+            eval="[
+            (4, ref('membership_extension.membership_category_member')),
+            (4, ref('oca_membership.membership_category_delegate_oca'))
+        ]"
+        />
+    </record>
+</odoo>

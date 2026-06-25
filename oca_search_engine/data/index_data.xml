@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="oca_typesense_index_companies" model="se.index">
+        <field name="backend_id" ref="oca_typesense_backend" />
+        <field name="custom_tech_name">companies</field>
+        <field name="lang_id" ref="base.lang_en" />
+        <field name="model_id" ref="base.model_res_partner" />
+        <field name="serializer_type">companies_exports</field>
+    </record>
+    <record id="oca_typesense_index_persons" model="se.index">
+        <field name="backend_id" ref="oca_typesense_backend" />
+        <field name="custom_tech_name">persons</field>
+        <field name="lang_id" ref="base.lang_en" />
+        <field name="model_id" ref="base.model_res_partner" />
+        <field name="serializer_type">persons_exports</field>
+    </record>
+
+    <!-- <record id="oca_typesense_index_pscs" model="se.index">
+        <field name="backend_id" ref="oca_typesense_backend" />
+        <field name="custom_tech_name">pscs</field>
+        <field name="lang_id" ref="base.lang_en" />
+        <field name="model_id" ref="oca_search_engine.model_vcp_oca_psc" />
+        <field name="serializer_type">pscs_exports</field>
+    </record> -->
+
+    <record id="oca_typesense_index_module" model="se.index">
+        <field name="backend_id" ref="oca_typesense_backend" />
+        <field name="custom_tech_name">modules</field>
+        <field name="lang_id" ref="base.lang_en" />
+        <field name="model_id" ref="vcp_odoo.model_vcp_odoo_module_version" />
+        <field name="serializer_type">vcp_odoo_module_version_exports</field>
+    </record>
+
+    <record id="oca_typesense_index_category" model="se.index">
+        <field name="backend_id" ref="oca_typesense_backend" />
+        <field name="custom_tech_name">categories</field>
+        <field name="lang_id" ref="base.lang_en" />
+        <field name="model_id" ref="oca_vcp.model_vcp_repository_category" />
+        <field name="serializer_type">vcp_repository_category_exports</field>
+    </record>
+</odoo>

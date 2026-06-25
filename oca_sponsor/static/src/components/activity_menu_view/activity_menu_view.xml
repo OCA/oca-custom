@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t
+        t-name="oca_sponsor.ActivityMenuView"
+        t-inherit="mail.ActivityMenu"
+        t-inherit-mode="extension"
+    >
+        <!-- Remove tabs "My Activities" and "Team Activities", because we merge there display -->
+        <xpath expr="//div[@t-ref='mail_activity_team_dropdown']" position="replace" />
+    </t>
+</templates>

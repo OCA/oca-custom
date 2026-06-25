@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 AKRETION
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="mail_activity_team_sponsor_reviewers" model="mail.activity.team">
+        <field name="name">Sponsors Reviewers</field>
+        <field name="res_model_ids" eval="[4, ref('base.model_res_partner')]" />
+    </record>
+</odoo>

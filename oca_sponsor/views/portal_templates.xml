@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template
+        id="portail_my_details_side_content"
+        inherit_id="oca_membership.portail_my_details_side_content"
+    >
+        <div name="avatar" position="attributes">
+            <attribute name="t-if">show_publish_fields or is_sponsor</attribute>
+        </div>
+    </template>
+
+    <template id="portal_my_details" inherit_id="portal.portal_my_details">
+        <t t-call="portal.portal_my_details_fields" position="after">
+            <t
+                t-if="partner.is_sponsor"
+                t-call="oca_sponsor.portal_my_details_sponsorship"
+            />
+        </t>
+    </template>
+
+    <template id="portal_my_details_sponsorship">
+        <h3 class="mt-5">Sponsorship</h3>
+
+        <!-- Sponsor name -->
+        <div
+            t-attf-class="mb-3 #{error.get('sponsor_name') and 'has-error' or ''} col-lg-12"
+        >
+            <label
+                for="sponsor_name"
+            >Alternate name. If empty, the company name is displayed instead.</label>
+            <input
+                type="text"
+                name="sponsor_name"
+                t-att-value="sponsor_name or partner.sponsor_name or ''"
+                t-attf-class="form-control #{error.get('sponsor_name') and 'is-invalid' or ''}"
+            />
+        </div>
+
+        <!-- Countries -->
+        <div
+            t-attf-class="mb-3 #{error.get('sponsor_country_ids') and 'has-error' or ''} col-lg-6"
+        >
+            <label for="sponsor_country_ids">Countries</label>
+            <select
+                name="sponsor_country_ids"
+                multiple="multiple"
+                t-attf-class="form-select #{error.get('sponsor_country_ids') and 'is-invalid' or ''}"
+            >
+                <option
+                    t-foreach="countries or []"
+                    t-as="country"
+                    t-att-value="country.id"
+                    t-out="country.name"
+                    t-att-selected="'selected' if country.id in partner.sponsor_country_ids.ids else None"
+                />
+            </select>
+        </div>
+
+        <!-- Industries -->
+        <div
+            t-attf-class="mb-3 #{error.get('sponsor_industry_ids') and 'has-error' or ''} col-lg-6"
+            t-if="partner.grade_id.show_industry"
+        >
+            <label for="sponsor_industry_ids">Industries</label>
+            <select
+                name="sponsor_industry_ids"
+                multiple="multiple"
+                t-attf-class="form-select #{error.get('sponsor_industry_ids') and 'is-invalid' or ''}"
+            >
+                <option
+                    t-foreach="industries or []"
+                    t-as="industry"
+                    t-att-value="industry.id"
+                    t-out="industry.name"
+                    t-att-selected="industry.id in partner.sponsor_industry_ids.ids"
+                />
+            </select>
+        </div>
+
+        <p class="mt-3">
+            <em>Below descriptions are in plain text, without formatting.</em>
+        </p>
+
+        <div
+            t-attf-class="mb-3 #{error.get('website_description_why_sponsoring') and 'has-error' or ''} col-xs-12"
+        >
+            <label for="website_description_why_sponsoring">Why sponsoring</label>
+            <textarea
+                name="website_description_why_sponsoring"
+                id="website_description_why_sponsoring"
+                style="min-height: 150px"
+                class="form-control"
+                t-out="partner.website_description_why_sponsoring or '' "
+            />
+        </div>
+
+        <div
+            t-attf-class="mb-3 #{error.get('website_short_description') and 'has-error' or ''} col-xs-12"
+        >
+            <label for="website_short_description">Short Description</label>
+            <textarea
+                name="website_short_description"
+                id="website_short_description"
+                style="min-height: 150px"
+                class="form-control"
+                t-out="partner.website_short_description or '' "
+            />
+        </div>
+
+        <div
+            t-attf-class="mb-3 #{error.get('website_long_description') and 'has-error' or ''} col-lg-12"
+        >
+            <label for="website_long_description">Long Description</label>
+            <textarea
+                name="website_long_description"
+                id="website_long_description"
+                style="min-height: 150px"
+                class="form-control"
+                t-out="partner.website_long_description or '' "
+            />
+        </div>
+    </template>
+</odoo>

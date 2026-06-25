@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 AKRETION
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <record id="membership_category_tree_view" model="ir.ui.view">
+        <field name="name">membership.category.oca_membership</field>
+        <field name="model">membership.membership_category</field>
+        <field
+            name="inherit_id"
+            ref="membership_extension.membership_category_tree_view"
+        />
+
+        <field name="arch" type="xml">
+            <list position="inside">
+                <field
+                    name="mail_group_ids"
+                    widget="many2many_tags"
+                    domain="[('membership_category_ids', '=', False)]"
+                />
+            </list>
+        </field>
+    </record>
+</odoo>

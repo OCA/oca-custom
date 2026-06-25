@@ -112,9 +112,8 @@ odoo-addon-account_statement_import_online_wise = { git = "https://github.com/Th
 odoo-addon-account_banking_pain_base = { git = "https://github.com/Therp/bank-payment", branch = "18.0-mig-account_banking_pain_base_sepa_hybrid_extended_for_09", subdirectory = "account_banking_pain_base" }
 odoo-addon-account_banking_sepa_credit_transfer = { git = "https://github.com/Therp/bank-payment", branch = "18.0-mig-account_banking_pain_base_sepa_hybrid_extended_for_09", subdirectory = "account_banking_sepa_credit_transfer" }
 
-odoo-addon-vcp-github = { git = "https://github.com/akretion/version-control-platform", branch="18.0-support-case-where-review-is-not-submited", subdirectory="vcp_github" }
-odoo-addon-vcp-odoo = { git = "https://github.com/akretion/version-control-platform", branch="18.0-vcp_odoo-fix-view", subdirectory="vcp_odoo" }
-
+odoo-addon-base-url = { git = "https://github.com/akretion/server-tools", branch="18.0-add-url-2", subdirectory="base_url" }
+odoo-addon-membership_account_invoice_start_end_dates = { git = "https://github.com/akretion/vertical-association", branch = "18.0-add-membership-start-end-date2", subdirectory = "membership_account_invoice_start_end_dates" }
 
 # Example to develop module from another repository in editable mode
 # odoo-addon-membership-delegated-partner-line = { path = "src/vertical-association/setup/membership_delegated_partner_line", editable = true }
