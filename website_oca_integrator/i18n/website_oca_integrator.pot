@@ -88,13 +88,11 @@ msgstr ""
 
 #. module: website_oca_integrator
 #: model:ir.model.fields,field_description:website_oca_integrator.field_contributor_module_line__create_uid
-#: model:ir.model.fields,field_description:website_oca_integrator.field_sponsorship_line__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: website_oca_integrator
 #: model:ir.model.fields,field_description:website_oca_integrator.field_contributor_module_line__create_date
-#: model:ir.model.fields,field_description:website_oca_integrator.field_sponsorship_line__create_date
 msgid "Created on"
 msgstr ""
 
@@ -106,13 +104,7 @@ msgstr ""
 
 #. module: website_oca_integrator
 #: model:ir.model.fields,field_description:website_oca_integrator.field_contributor_module_line__display_name
-#: model:ir.model.fields,field_description:website_oca_integrator.field_sponsorship_line__display_name
 msgid "Display Name"
-msgstr ""
-
-#. module: website_oca_integrator
-#: model:ir.model.fields,field_description:website_oca_integrator.field_sponsorship_line__date_end
-msgid "End Date"
 msgstr ""
 
 #. module: website_oca_integrator
@@ -146,7 +138,6 @@ msgstr ""
 
 #. module: website_oca_integrator
 #: model:ir.model.fields,field_description:website_oca_integrator.field_contributor_module_line__id
-#: model:ir.model.fields,field_description:website_oca_integrator.field_sponsorship_line__id
 msgid "ID"
 msgstr ""
 
@@ -157,41 +148,23 @@ msgid "Implemented Date"
 msgstr ""
 
 #. module: website_oca_integrator
-#: model:ir.model.fields,field_description:website_oca_integrator.field_res_partner__is_integrator
-#: model:ir.model.fields,field_description:website_oca_integrator.field_res_users__is_integrator
-msgid "Integrator"
-msgstr ""
-
-#. module: website_oca_integrator
 #: model:website.menu,name:website_oca_integrator.menu_integrator
 msgid "Integrators"
 msgstr ""
 
 #. module: website_oca_integrator
-#: model:ir.model.fields,field_description:website_oca_integrator.field_sponsorship_line__date_from
-msgid "Join Date"
-msgstr ""
-
-#. module: website_oca_integrator
 #: model:ir.model.fields,field_description:website_oca_integrator.field_contributor_module_line__write_uid
-#: model:ir.model.fields,field_description:website_oca_integrator.field_sponsorship_line__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: website_oca_integrator
 #: model:ir.model.fields,field_description:website_oca_integrator.field_contributor_module_line__write_date
-#: model:ir.model.fields,field_description:website_oca_integrator.field_sponsorship_line__write_date
 msgid "Last Updated on"
 msgstr ""
 
 #. module: website_oca_integrator
 #: model_terms:ir.ui.view,arch_db:website_oca_integrator.contributor_modules_list
 msgid "Latest Contributed Modules"
-msgstr ""
-
-#. module: website_oca_integrator
-#: model:ir.model.fields,field_description:website_oca_integrator.field_sponsorship_line__grade_id
-msgid "Level"
 msgstr ""
 
 #. module: website_oca_integrator
@@ -281,7 +254,6 @@ msgstr ""
 
 #. module: website_oca_integrator
 #: model:ir.model.fields,field_description:website_oca_integrator.field_contributor_module_line__partner_id
-#: model:ir.model.fields,field_description:website_oca_integrator.field_sponsorship_line__partner_id
 msgid "Partner"
 msgstr ""
 
@@ -308,29 +280,8 @@ msgid "Select company which is linked to this author."
 msgstr ""
 
 #. module: website_oca_integrator
-#: model_terms:ir.ui.view,arch_db:website_oca_integrator.view_crm_partner_geo_form_inherit
-msgid "Sponsorship"
-msgstr ""
-
-#. module: website_oca_integrator
-#: model:ir.model.fields,field_description:website_oca_integrator.field_res_partner__sponsorship_line_ids
-#: model:ir.model.fields,field_description:website_oca_integrator.field_res_users__sponsorship_line_ids
-msgid "Sponsorship Activities"
-msgstr ""
-
-#. module: website_oca_integrator
 #: model_terms:ir.ui.view,arch_db:website_oca_integrator.integrators
 msgid "Sponsorship Details"
-msgstr ""
-
-#. module: website_oca_integrator
-#: model:ir.model,name:website_oca_integrator.model_sponsorship_line
-msgid "Sponsorship Line"
-msgstr ""
-
-#. module: website_oca_integrator
-#: model:ir.model.fields,field_description:website_oca_integrator.field_sponsorship_line__sponsorship_id
-msgid "Sponsorship Product"
 msgstr ""
 
 #. module: website_oca_integrator
@@ -343,16 +294,6 @@ msgstr ""
 msgid ""
 "View\n"
 "                            All Modules"
-msgstr ""
-
-#. module: website_oca_integrator
-#: model_terms:ir.ui.view,arch_db:website_oca_integrator.website_portal_integrator_details
-msgid "Website Description"
-msgstr ""
-
-#. module: website_oca_integrator
-#: model_terms:ir.ui.view,arch_db:website_oca_integrator.website_portal_integrator_details
-msgid "Website Short Description"
 msgstr ""
 
 #. module: website_oca_integrator
