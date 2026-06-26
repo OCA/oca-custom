@@ -64,6 +64,12 @@ msgid "Created on"
 msgstr ""
 
 #. module: oca_vcp
+#: model:ir.model.fields,field_description:oca_vcp.field_res_partner__current_organization_id
+#: model:ir.model.fields,field_description:oca_vcp.field_res_users__current_organization_id
+msgid "Current Organization"
+msgstr ""
+
+#. module: oca_vcp
 #: model:ir.model.fields,field_description:oca_vcp.field_vcp_organization_history__date_start
 msgid "Date Start"
 msgstr ""
