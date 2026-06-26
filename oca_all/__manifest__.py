@@ -3,7 +3,7 @@
 {
     "name": "OCA All",
     "summary": "All oca modules dependencies",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.1.0",
     "development_status": "Alpha",
     "website": "https://github.com/OCA/oca-custom",
     "author": "Pierre Verkest <pierre@verkest.fr>, Odoo Community Association (OCA)",
@@ -38,7 +38,6 @@
         "gamification",
         "google_account",
         "google_gmail",
-        "google_recaptcha",
         "hr",
         "hr_timesheet",
         "http_routing",
@@ -171,6 +170,8 @@
         "web_refresher",
         "web_search_with_and",
         "web_widget_dropdown_dynamic",
+        "website_altcha",
+        "website_event_altcha",
         "website_sale_hide_empty_category",
         # OCA Custom
         "oca_custom",

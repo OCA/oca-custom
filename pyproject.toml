@@ -114,6 +114,8 @@ odoo-addon-account_banking_sepa_credit_transfer = { git = "https://github.com/Th
 
 odoo-addon-base-url = { git = "https://github.com/akretion/server-tools", branch="18.0-add-url-2", subdirectory="base_url" }
 odoo-addon-membership_account_invoice_start_end_dates = { git = "https://github.com/akretion/vertical-association", branch = "18.0-add-membership-start-end-date2", subdirectory = "membership_account_invoice_start_end_dates" }
+odoo-addon-website_altcha = { git = "https://github.com/hbrunn/website", branch="18.0-website_event_altcha", subdirectory="website_altcha"}
+odoo-addon-website_event_altcha = { git = "https://github.com/hbrunn/website", branch="18.0-website_event_altcha", subdirectory="website_event_altcha"}
 
 # Example to develop module from another repository in editable mode
 # odoo-addon-membership-delegated-partner-line = { path = "src/vertical-association/setup/membership_delegated_partner_line", editable = true }
