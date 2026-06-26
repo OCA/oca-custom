@@ -814,6 +814,7 @@ dependencies = [
     { name = "odoo-addon-pdf-xml-attachment" },
     { name = "odoo-addon-project-role" },
     { name = "odoo-addon-project-task-add-very-high" },
+    { name = "odoo-addon-project-task-description-template" },
     { name = "odoo-addon-project-timesheet-time-control" },
     { name = "odoo-addon-report-xlsx" },
     { name = "odoo-addon-report-xlsx-helper" },
@@ -960,6 +961,7 @@ requires-dist = [
     { name = "odoo-addon-pdf-xml-attachment", specifier = "==18.0.*" },
     { name = "odoo-addon-project-role", specifier = "==18.0.*" },
     { name = "odoo-addon-project-task-add-very-high", specifier = "==18.0.*" },
+    { name = "odoo-addon-project-task-description-template", specifier = "==18.0.*" },
     { name = "odoo-addon-project-timesheet-time-control", specifier = "==18.0.*" },
     { name = "odoo-addon-report-xlsx", specifier = "==18.0.*" },
     { name = "odoo-addon-report-xlsx-helper", specifier = "==18.0.*" },
@@ -1855,6 +1857,17 @@ dependencies = [
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/46/c9/fa473f0b83d56c86ebff691f8df26137d24cde37fbddcb73d7e9f4e767e2/odoo_addon_project_task_add_very_high-18.0.1.1.0.2-py3-none-any.whl", hash = "sha256:1e2df58b9d8cae8657c7cab3ceff2f1865f29a87d6020ac50c03a321c93b2fc5", size = 84181, upload-time = "2025-06-05T03:25:37.08Z" },
+]
+
+[[package]]
+name = "odoo-addon-project-task-description-template"
+version = "18.0.1.0.0.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "odoo" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/35/ab/d385183efdb203f87b109aa0cad63547aaad0bfa4938576f42c4a0560934/odoo_addon_project_task_description_template-18.0.1.0.0.2-py3-none-any.whl", hash = "sha256:cbd462c4195027976ab33809747b9426a34e42ff742bbcfd85c410312a7890e8", size = 29019, upload-time = "2025-09-15T08:52:30.593Z" },
 ]
 
 [[package]]
