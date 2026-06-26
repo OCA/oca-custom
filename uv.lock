@@ -3,6 +3,15 @@ revision = 3
 requires-python = "==3.12.*"
 
 [[package]]
+name = "altcha"
+version = "2.0.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/f0/c2/295917abf45cab0a33c2cd167beb645c68044e7b45967880375b4d4339ce/altcha-2.0.2.tar.gz", hash = "sha256:5897bb3812569e9b7b5234d7d93e216d9f158c9ccf0f5b822380bcdba59c1626", size = 23492, upload-time = "2026-06-20T10:16:26.389Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b5/9e/c9a1bcdfb33bc91c0f22f675c69fe7a7743f65b16eed9b80fd070ecc583b/altcha-2.0.2-py3-none-any.whl", hash = "sha256:1631905ac468538fccff04cabf6d2f026c03fe170aa96cab0af799363cb405e8", size = 18744, upload-time = "2026-06-20T10:16:25.228Z" },
+]
+
+[[package]]
 name = "annotated-types"
 version = "0.7.0"
 source = { registry = "https://pypi.org/simple" }
@@ -832,6 +841,8 @@ dependencies = [
     { name = "odoo-addon-web-responsive" },
     { name = "odoo-addon-web-search-with-and" },
     { name = "odoo-addon-web-widget-dropdown-dynamic" },
+    { name = "odoo-addon-website-altcha" },
+    { name = "odoo-addon-website-event-altcha" },
     { name = "odoo-addon-website-sale-hide-empty-category" },
     { name = "ofxparse" },
     { name = "openpyxl" },
@@ -979,6 +990,8 @@ requires-dist = [
     { name = "odoo-addon-web-responsive", specifier = "==18.0.*" },
     { name = "odoo-addon-web-search-with-and", specifier = "==18.0.*" },
     { name = "odoo-addon-web-widget-dropdown-dynamic", specifier = "==18.0.*" },
+    { name = "odoo-addon-website-altcha", git = "https://github.com/hbrunn/website?subdirectory=website_altcha&branch=18.0-website_event_altcha" },
+    { name = "odoo-addon-website-event-altcha", git = "https://github.com/hbrunn/website?subdirectory=website_event_altcha&branch=18.0-website_event_altcha" },
     { name = "odoo-addon-website-sale-hide-empty-category", specifier = "==18.0.*" },
     { name = "ofxparse", specifier = "==0.21" },
     { name = "openpyxl", specifier = "==3.1.2" },
@@ -2129,6 +2142,24 @@ dependencies = [
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/66/e8/52c6bd8a72eb0ba4278e4b4ccaa86c367f8690f8e2accf49c66ce21a9c18/odoo_addon_web_widget_dropdown_dynamic-18.0.2.0.0.2-py3-none-any.whl", hash = "sha256:2962a6a5e93ee1325fd7c3f4764fde86a92a581aa81c0bf99b90319762996ebe", size = 31235, upload-time = "2025-09-17T04:06:20.154Z" },
+]
+
+[[package]]
+name = "odoo-addon-website-altcha"
+version = "18.0.1.0.0.10"
+source = { git = "https://github.com/hbrunn/website?subdirectory=website_altcha&branch=18.0-website_event_altcha#4c582b7298d61c9da20ade77ad92576d0a02a8e7" }
+dependencies = [
+    { name = "altcha" },
+    { name = "odoo" },
+]
+
+[[package]]
+name = "odoo-addon-website-event-altcha"
+version = "18.0.1.0.0"
+source = { git = "https://github.com/hbrunn/website?subdirectory=website_event_altcha&branch=18.0-website_event_altcha#4c582b7298d61c9da20ade77ad92576d0a02a8e7" }
+dependencies = [
+    { name = "odoo" },
+    { name = "odoo-addon-website-altcha" },
 ]
 
 [[package]]
