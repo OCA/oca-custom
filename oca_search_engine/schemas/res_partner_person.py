@@ -90,11 +90,7 @@ class ParentCompany(StrictExtendableBaseModel):
 
     @classmethod
     def from_record(cls, record):
-        company = (
-            record.commercial_partner_id.sponsor_parent_id
-            or record.commercial_partner_id
-        )
-
+        company = record.current_organization_id
         if not company:
             return {}
         else:

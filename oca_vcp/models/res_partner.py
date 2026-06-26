@@ -27,6 +27,9 @@ class ResPartner(models.Model):
         compute_sudo=True,
     )
     organization_history_ids = fields.One2many("vcp.organization.history", "partner_id")
+    current_organization_id = fields.Many2one(
+        "res.partner", compute="_compute_current_organization_id", store=True
+    )
 
     @api.depends()
     def _compute_oca_collaboration_index(self):
@@ -100,7 +103,18 @@ class ResPartner(models.Model):
                 "is_github_main_login"
             ).sync_image_to_partner
 
-    def _get_organization(self, date):
+    @api.depends(
+        "commercial_partner_id",
+        "organization_history_ids.date_start",
+        "organization_history_ids.partner_id",
+    )
+    def _compute_current_organization_id(self):
+        for record in self:
+            record.current_organization_id = record._get_organization()
+
+    def _get_organization(self, date=None):
+        if date is None:
+            date = fields.Date.today()
         if self:
             self.ensure_one()
             if self.organization_history_ids:
