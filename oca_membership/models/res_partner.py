@@ -2,7 +2,9 @@
 # @author Arnaud LAYEC <arnaud.layec@akretion.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from functools import partial
+
+from odoo import SUPERUSER_ID, Command, api, fields, models
 
 
 class ResPartner(models.Model):
@@ -121,9 +123,52 @@ class ResPartner(models.Model):
         """Add in `membership_category_ids` the current role and its implied roles
         Example: a 'Delegate' is also a 'Member'"""
         res = super()._compute_membership_state()
+
         for partner in self:
             categories = partner.membership_category_ids
             if partner.is_member and partner.membership_category_id:
                 categories |= partner.membership_category_id
             partner.membership_category_ids = categories | categories.implied_ids
+
+        rec_first = fields.first(self)
+        if not isinstance(rec_first.id, models.NewId) or not rec_first._origin.id:
+            self._membership_groups_refresh()
+
         return res
+
+    # ===== Logics =====#
+    def _membership_groups_refresh(self):
+        """Update the group "Membership: members" with members' users.
+        This is used in E-Learning module, field "Auto-Enroll Groups", for
+        the access control of e-learning documents.
+        Note: it will mainly be *portal* users.
+        """
+        group = self.env.ref("oca_membership.group_membership_member")
+        if not group:
+            return
+        add_users = self.filtered("is_member").user_ids
+        remove_users = self.user_ids - add_users
+        if add_users or remove_users:
+            # **Sit on your chair**
+            # Writing in `res.groups` always trigger the method
+            # `call_cache_clearing_methods`, which invalidates all cache
+            # -> thus re-trigger `_compute_membership_state`
+            # -> thus make **INFINITE LOOP**
+            # To avoid it: write in `res.groups` AFTER the flush, using `postcommit`
+            def update_res_group(group_id, add_user_ids, remove_user_ids):
+                """This is performed in a separate transaction to allow running
+                as post-commit hook"""
+                with self.env.registry.cursor() as cr:
+                    env = api.Environment(cr, SUPERUSER_ID, {})
+                    env["res.groups"].browse(group_id).users = [
+                        Command.link(x) for x in add_user_ids
+                    ] + [Command.unlink(x) for x in remove_user_ids]
+
+            self.env.cr.postcommit.add(
+                partial(
+                    update_res_group,
+                    group.id,
+                    add_users.ids,
+                    remove_users.ids,
+                )
+            )

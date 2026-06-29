@@ -1,6 +1,3 @@
-from odoo import SUPERUSER_ID, api
-
-
 def migrate(cr, version):
     """Remove legacy stored field `is_membership_invoice`, which comes from
     an old module 'membership_delegated_partner_line', so that it becomes

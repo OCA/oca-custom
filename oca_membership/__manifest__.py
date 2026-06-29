@@ -5,7 +5,7 @@
 
 {
     "name": "OCA Membership (custom)",
-    "version": "18.0.1.0.2",
+    "version": "18.0.1.0.6",
     "author": "Akretion, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/oca-custom",
     "license": "AGPL-3",
@@ -17,6 +17,7 @@
     ],
     "data": [
         "data/membership_category_data.xml",
+        "data/res_groups.xml",
         "views/membership_category.xml",
         "views/portal_templates.xml",
         "views/res_partner.xml",
