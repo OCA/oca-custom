@@ -30,14 +30,11 @@ class ResPartner(models.Model):
         if not groups:
             return
         self.ensure_one()
-        subscribed_group_ids = list(
-            (
-                groups.with_context(active_test=False)._find_members(
-                    self.email, self.id
-                )
-            ).keys()
-        )
-        new_groups = groups.filtered(lambda x: x.id not in subscribed_group_ids)
+        joined_member_ids = self.with_context(active_test=False).mail_group_member_ids
+        joined_group_ids = groups.member_ids.with_context(active_test=False).filtered(
+            lambda x: x not in joined_member_ids
+        ).mail_group_id
+        new_groups = groups.filtered(lambda x: x not in joined_group_ids)
         for group in new_groups:
             group._join_group(self.email, self.id)
 
