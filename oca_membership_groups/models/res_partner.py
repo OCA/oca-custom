@@ -23,13 +23,6 @@ class ResPartner(models.Model):
         for partner in self:
             partner.mail_group_count = len(partner.mail_group_member_ids)
 
-    def _compute_membership_state(self):
-        """Update Mail Groups according to changes in Membership Categories"""
-        res = super()._compute_membership_state()
-        if not isinstance(self.id, models.NewId):
-            self._membership_groups_refresh()
-        return res
-
     # ===== Logics =====#
     def _join_mail_groups(self, groups):
         """Add member to groups unless they unsubscribed* before
@@ -75,6 +68,8 @@ class ResPartner(models.Model):
     def _membership_groups_refresh(self):
         """Auto-add members in Mailing Groups, and start or stop grace period,
         according to their membership's category and implied Mailing Groups"""
+        super()._membership_groups_refresh()
+
         today = fields.Date.today()
         for partner in self:
             # Add the member to new groups and stop any grace period previously set
