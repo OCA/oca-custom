@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="group_messages_robots"
+        inherit_id="mail_group.group_messages"
+        name="Mail Groups - Robots noindex"
+    >
+        <xpath expr="//t[@t-call='portal.portal_layout']" position="before">
+            <t t-set="website_indexed" t-value="False" />
+        </xpath>
+    </template>
+</odoo>
