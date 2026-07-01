@@ -16,6 +16,7 @@
     ],
     "data": [
         "data/ir_cron_data.xml",
+        "templates/mail_group.xml",
         "views/mail_group.xml",
         "views/mail_group_member.xml",
         "views/membership_category.xml",
