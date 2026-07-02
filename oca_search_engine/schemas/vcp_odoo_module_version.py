@@ -36,7 +36,7 @@ class VcpOdooModuleVersion(StrictExtendableBaseModel):
     @classmethod
     def _get_runboat_url(cls, odoo_rec):
         return (
-            "https://runboat.odoo-community.org/webui/builds.html?"
+            "https://runboat.odoo-community.org/builds?"
             f"repo=OCA/{odoo_rec.repository_branch_id.repository_id.name}"
             f"&target_branch={odoo_rec.repository_branch_id.branch_id.name}"
         )
