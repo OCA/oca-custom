@@ -139,6 +139,12 @@ msgid "Invoiced member"
 msgstr ""
 
 #. module: oca_membership
+#: model:ir.model.fields,field_description:oca_membership.field_account_bank_statement_line__is_membership_invoice
+#: model:ir.model.fields,field_description:oca_membership.field_account_move__is_membership_invoice
+msgid "Is Membership Invoice"
+msgstr ""
+
+#. module: oca_membership
 #: model:ir.model.fields,field_description:oca_membership.field_res_partner__is_published
 #: model:ir.model.fields,field_description:oca_membership.field_res_users__is_published
 msgid "Is Published"
@@ -153,6 +159,11 @@ msgstr ""
 #. module: oca_membership
 #: model_terms:ir.ui.view,arch_db:oca_membership.portail_my_details_side_content
 msgid "JPG or PNG, max 2 Mo."
+msgstr ""
+
+#. module: oca_membership
+#: model:ir.model,name:oca_membership.model_account_move
+msgid "Journal Entry"
 msgstr ""
 
 #. module: oca_membership
@@ -176,6 +187,11 @@ msgstr ""
 #. module: oca_membership
 #: model:ir.model,name:oca_membership.model_membership_membership_category
 msgid "Membership role"
+msgstr ""
+
+#. module: oca_membership
+#: model:res.groups,name:oca_membership.group_membership_member
+msgid "Membership: members"
 msgstr ""
 
 #. module: oca_membership
