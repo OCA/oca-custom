@@ -23,13 +23,6 @@ class ResPartner(models.Model):
         for partner in self:
             partner.mail_group_count = len(partner.mail_group_member_ids)
 
-    def _compute_membership_state(self):
-        """Update Mail Groups according to changes in Membership Categories"""
-        res = super()._compute_membership_state()
-        if not isinstance(self.id, models.NewId):
-            self._membership_groups_refresh()
-        return res
-
     # ===== Logics =====#
     def _join_mail_groups(self, groups):
         """Add member to groups unless they unsubscribed* before
@@ -37,14 +30,13 @@ class ResPartner(models.Model):
         if not groups:
             return
         self.ensure_one()
-        subscribed_group_ids = list(
-            (
-                groups.with_context(active_test=False)._find_members(
-                    self.email, self.id
-                )
-            ).keys()
+        joined_members = self.with_context(active_test=False).mail_group_member_ids
+        joined_groups = (
+            groups.member_ids.with_context(active_test=False)
+            .filtered(lambda x: x not in joined_members)
+            .mail_group_id
         )
-        new_groups = groups.filtered(lambda x: x.id not in subscribed_group_ids)
+        new_groups = groups.filtered(lambda x: x not in joined_groups)
         for group in new_groups:
             group._join_group(self.email, self.id)
 
@@ -75,6 +67,8 @@ class ResPartner(models.Model):
     def _membership_groups_refresh(self):
         """Auto-add members in Mailing Groups, and start or stop grace period,
         according to their membership's category and implied Mailing Groups"""
+        res = super()._membership_groups_refresh()
+
         today = fields.Date.today()
         for partner in self:
             # Add the member to new groups and stop any grace period previously set
@@ -91,6 +85,8 @@ class ResPartner(models.Model):
 
         # For groups with grace_days=0, remove members immediatly
         self._membership_groups_end_grace()
+
+        return res
 
     @api.model
     def _cron_membership_groups_end_grace(self):

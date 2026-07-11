@@ -10,10 +10,11 @@
         </form>
 
         <form position="before">
-            <t
+            <t t-set="show_publish_fields" t-value="True" />
+            <!-- <t
                 t-set="show_publish_fields"
                 t-value="partner.is_member or partner.is_integrator"
-            />
+            /> -->
         </form>
 
         <!-- Add template side-content -->
