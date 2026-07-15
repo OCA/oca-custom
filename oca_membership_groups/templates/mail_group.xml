@@ -11,7 +11,7 @@
                 <meta name="robots" content="noindex" />
             </t>
         </xpath>
-    </template>  
+    </template>
     <template
         id="group_message_robots"
         inherit_id="mail_group.group_message"
