@@ -1,19 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <template id="group_messages_robots" inherit_id="mail_group.group_messages" name="Mail Groups - Robots noindex">
+    <template
+        id="group_messages_robots"
+        inherit_id="mail_group.group_messages"
+        name="Mail Groups - Robots noindex"
+    >
         <xpath expr="//t[@t-call='portal.portal_layout']" position="before">
             <t t-set="head">
-                <t t-out="head"/>
-                <meta name="robots" content="noindex"/>
+                <t t-out="head" />
+                <meta name="robots" content="noindex" />
             </t>
-	</xpath>
+        </xpath>
     </template>  
-    <template id="group_message_robots" inherit_id="mail_group.group_message" name="Mail Groups Message - Robots noindex">
+    <template
+        id="group_message_robots"
+        inherit_id="mail_group.group_message"
+        name="Mail Groups Message - Robots noindex"
+    >
         <xpath expr="//t[@t-call='portal.portal_layout']" position="before">
             <t t-set="head">
-                <t t-out="head"/>
-                <meta name="robots" content="noindex, nofollow"/>
+                <t t-out="head" />
+                <meta name="robots" content="noindex, nofollow" />
             </t>
-	    </xpath>
-    </template>  
+        </xpath>
+    </template>
 </odoo>
