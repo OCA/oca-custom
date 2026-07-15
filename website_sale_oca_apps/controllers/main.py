@@ -6,6 +6,7 @@ from werkzeug.urls import url_join
 from odoo import http
 from odoo.http import request
 
+from odoo.addons.website_partner.controllers.main import WebsitePartnerPage
 from odoo.addons.website_sale.controllers.main import WebsiteSale
 
 
@@ -21,6 +22,56 @@ class WebsiteSaleProductRedirect(WebsiteSale):
                     "website_oca_apps_new_shop.url", "https://apps.odoo-community.org"
                 )
             )
-            product_url = url_join(new_shop_url, product_sudo.website_url)
-            return werkzeug.utils.redirect(product_url, 307)
+            url = (
+                request.env["url.url"]
+                .sudo()
+                .search([("key", "=", product_sudo.website_url)])
+            )
+            if url:
+                url_key = (
+                    request.env["vcp.odoo.module"].sudo().browse(url.res_id).url_key
+                )
+                product_url = url_join(new_shop_url, url_key)
+                return werkzeug.utils.redirect(product_url, 307)
         return super().product(product, category=category, search=search, **kwargs)
+
+
+class WebsitePartnerPageRedirect(WebsitePartnerPage):
+    @http.route(["/partners"], type="http", auth="public", website=True)
+    def partners(self, **post):
+        new_shop_url = (
+            request.env["ir.config_parameter"]
+            .sudo()
+            .get_param(
+                "website_oca_apps_new_shop.url", "https://apps.odoo-community.org"
+            )
+        )
+        url = url_join(new_shop_url, "integrators")
+        return werkzeug.utils.redirect(url, 307)
+
+    @http.route(
+        [
+            "/partners/<partner_id>",
+            "/integrators/<partner_id>",
+        ],
+        type="http",
+        auth="public",
+        website=True,
+    )
+    def partners_detail(self, partner_id, **post):
+        _, partner_id = request.env["ir.http"]._unslug(partner_id)
+        if partner_id:
+            partner_sudo = request.env["res.partner"].sudo().browse(partner_id)
+            if partner_sudo.is_sponsor:
+                new_shop_url = (
+                    request.env["ir.config_parameter"]
+                    .sudo()
+                    .get_param(
+                        "website_oca_apps_new_shop.url",
+                        "https://apps.odoo-community.org",
+                    )
+                )
+                if partner_sudo.url_key:
+                    url = url_join(new_shop_url, partner_sudo.url_key)
+                    return werkzeug.utils.redirect(url, 307)
+        return super().partners_detail(partner_id, **post)
