@@ -75,3 +75,45 @@ class WebsitePartnerPageRedirect(WebsitePartnerPage):
                     url = url_join(new_shop_url, partner_sudo.url_key)
                     return werkzeug.utils.redirect(url, 307)
         return super().partners_detail(partner_id, **post)
+
+
+class WebsiteMembership(http.Controller):
+    @http.route(
+        [
+            "/members",
+        ],
+        type="http",
+        auth="public",
+        website=True,
+        sitemap=True,
+    )
+    def members(self, **post):
+        new_shop_url = (
+            request.env["ir.config_parameter"]
+            .sudo()
+            .get_param(
+                "website_oca_apps_new_shop.url", "https://apps.odoo-community.org"
+            )
+        )
+        url = url_join(new_shop_url, "community")
+        return werkzeug.utils.redirect(url, 307)
+
+    # Do not use semantic controller due to SUPERUSER_ID
+    @http.route(["/members/<partner_id>"], type="http", auth="public", website=True)
+    def partners_detail(self, partner_id, **post):
+        _, partner_id = request.env["ir.http"]._unslug(partner_id)
+        if partner_id:
+            partner_sudo = request.env["res.partner"].sudo().browse(partner_id)
+            if partner_sudo.exists() and partner_sudo.website_published:
+                new_shop_url = (
+                    request.env["ir.config_parameter"]
+                    .sudo()
+                    .get_param(
+                        "website_oca_apps_new_shop.url",
+                        "https://apps.odoo-community.org",
+                    )
+                )
+                if partner_sudo.url_key:
+                    url = url_join(new_shop_url, partner_sudo.url_key)
+                    return werkzeug.utils.redirect(url, 307)
+        raise request.not_found()

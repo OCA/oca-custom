@@ -94,7 +94,6 @@
         "website_mail",
         "website_mail_group",
         "website_mass_mailing",
-        "website_membership",
         "website_partner",
         "website_payment",
         "website_profile",
