@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 
+import hashlib
 import logging
 import os
 import re
@@ -18,6 +19,11 @@ _logger = logging.getLogger(__name__)
 PANDOC_MARKDOWN_FORMAT = "gfm-raw_html-gfm_auto_identifiers"
 
 
+# Some module have the old OCA default logo
+# we remove it, so the website will use the right default logo
+DEPRECATED_ICON_HASH = ["6f6cca9a3564f66a2520cccf2c20f0fcfd391af1"]
+
+
 class VcpRule(models.Model):
     _inherit = "vcp.rule"
 
@@ -27,6 +33,11 @@ class VcpRule(models.Model):
         vals = super()._process_rule_odoo_module_prepare_vals(
             repository_branch, module_id, manifest_path
         )
+        deprecated_logo = (
+            vals["image_1920"]
+            and hashlib.sha1(vals["image_1920"]).hexdigest() in DEPRECATED_ICON_HASH
+        )
+
         module_path = os.path.dirname(manifest_path)
         repo = repository_branch.repository_id
         module = self.env["vcp.odoo.module"].browse(module_id)
@@ -68,9 +79,12 @@ class VcpRule(models.Model):
             module = self.env["vcp.odoo.module"].browse(module_id)
             repo_name = repository_branch.repository_id.name
             orga_name = repository_branch.repository_id.platform_id.name
-            vals["icon_url"] = (
-                f"https://raw.githubusercontent.com/{orga_name}/{repo_name}"
-                f"/refs/heads/{repository_branch.branch_id.name}/"
-                f"{module.name}/static/description/icon.png"
-            )
+            if deprecated_logo:
+                vals["icon_url"] = False
+            else:
+                vals["icon_url"] = (
+                    f"https://raw.githubusercontent.com/{orga_name}/{repo_name}"
+                    f"/refs/heads/{repository_branch.branch_id.name}/"
+                    f"{module.name}/static/description/icon.png"
+                )
         return vals
