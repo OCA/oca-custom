@@ -6,7 +6,7 @@
 {
     "name": "Oca VCP",
     "summary": "OCA VCP customisation",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "development_status": "Alpha",
     "category": "Custom",
     "website": "https://github.com/OCA/oca-custom",
