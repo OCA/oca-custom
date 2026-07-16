@@ -32,7 +32,7 @@ class WebsiteSaleProductRedirect(WebsiteSale):
                     request.env["vcp.odoo.module"].sudo().browse(url.res_id).url_key
                 )
                 product_url = url_join(new_shop_url, url_key)
-                return werkzeug.utils.redirect(product_url, 307)
+                return werkzeug.utils.redirect(product_url, 301)
         return super().product(product, category=category, search=search, **kwargs)
 
 
@@ -61,7 +61,7 @@ class WebsitePartnerPageRedirect(WebsitePartnerPage):
                 )
                 if partner_sudo.url_key:
                     url = url_join(new_shop_url, partner_sudo.url_key)
-                    return werkzeug.utils.redirect(url, 307)
+                    return werkzeug.utils.redirect(url, 301)
         return super().partners_detail(partner_id, **post)
 
 
@@ -83,5 +83,5 @@ class WebsiteMembership(http.Controller):
                 )
                 if partner_sudo.url_key:
                     url = url_join(new_shop_url, partner_sudo.url_key)
-                    return werkzeug.utils.redirect(url, 307)
+                    return werkzeug.utils.redirect(url, 301)
         raise request.not_found()
