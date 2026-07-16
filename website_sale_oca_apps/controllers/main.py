@@ -37,18 +37,6 @@ class WebsiteSaleProductRedirect(WebsiteSale):
 
 
 class WebsitePartnerPageRedirect(WebsitePartnerPage):
-    @http.route(["/partners"], type="http", auth="public", website=True)
-    def partners(self, **post):
-        new_shop_url = (
-            request.env["ir.config_parameter"]
-            .sudo()
-            .get_param(
-                "website_oca_apps_new_shop.url", "https://apps.odoo-community.org"
-            )
-        )
-        url = url_join(new_shop_url, "integrators")
-        return werkzeug.utils.redirect(url, 307)
-
     @http.route(
         [
             "/partners/<partner_id>",
@@ -78,26 +66,6 @@ class WebsitePartnerPageRedirect(WebsitePartnerPage):
 
 
 class WebsiteMembership(http.Controller):
-    @http.route(
-        [
-            "/members",
-        ],
-        type="http",
-        auth="public",
-        website=True,
-        sitemap=True,
-    )
-    def members(self, **post):
-        new_shop_url = (
-            request.env["ir.config_parameter"]
-            .sudo()
-            .get_param(
-                "website_oca_apps_new_shop.url", "https://apps.odoo-community.org"
-            )
-        )
-        url = url_join(new_shop_url, "community")
-        return werkzeug.utils.redirect(url, 307)
-
     # Do not use semantic controller due to SUPERUSER_ID
     @http.route(["/members/<partner_id>"], type="http", auth="public", website=True)
     def partners_detail(self, partner_id, **post):
