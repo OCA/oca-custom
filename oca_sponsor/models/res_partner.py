@@ -204,7 +204,7 @@ class ResPartner(models.Model):
         with the ones to review at first"""
         if self._context.get("membership_sponsor"):
             delimiter = "" if not order else ", "
-            order = "sponsor_to_review DESC" + delimiter + (order or "")
+            order = "sponsor_to_review DESC, name ASC" + delimiter + (order or "")
         return super().search_fetch(domain, field_names, offset, limit, order)
 
     # ===== Actions & buttons =====#
