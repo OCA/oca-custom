@@ -81,6 +81,16 @@ msgid "Github Url"
 msgstr ""
 
 #. module: oca_search_engine
+#: model:ir.model,name:oca_search_engine.model_mail_group
+msgid "Mail Group"
+msgstr ""
+
+#. module: oca_search_engine
+#: model:ir.model,name:oca_search_engine.model_mail_group_member
+msgid "Mailing List Member"
+msgstr ""
+
+#. module: oca_search_engine
 #: model:ir.model.fields.selection,name:oca_search_engine.selection__se_index__serializer_type__vcp_repository_category_exports
 msgid "Modules Category"
 msgstr ""
