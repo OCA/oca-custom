@@ -167,12 +167,6 @@ msgid "Journal Entry"
 msgstr ""
 
 #. module: oca_membership
-#: model:ir.model.fields,field_description:oca_membership.field_res_partner__mail_group_member_ids
-#: model:ir.model.fields,field_description:oca_membership.field_res_users__mail_group_member_ids
-msgid "Mail Group Member"
-msgstr ""
-
-#. module: oca_membership
 #: model:ir.model.fields,field_description:oca_membership.field_res_partner__is_member
 #: model:ir.model.fields,field_description:oca_membership.field_res_users__is_member
 msgid "Member"
