@@ -43,12 +43,6 @@ class ResPartner(models.Model):
         compute="_compute_membership_state",
         help="Categories of active membership lines plus Current Category.",
     )
-    # Mail Groups: needed for for `oca_search_engine`,
-    # rest is in `oca_membership_groups`
-    mail_group_member_ids = fields.One2many(
-        comodel_name="mail.group.member",
-        inverse_name="partner_id",
-    )
     # website privacy
     is_published = fields.Boolean(
         tracking=True,
