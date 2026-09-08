@@ -46,8 +46,10 @@ class ResPartner(models.Model):
         index_persons = self.env.ref(INDEX_PERSONS)
 
         if vals and (
-            "is_published" in vals and not vals["is_published"]
-            or "active" in vals and not vals["active"]
+            "is_published" in vals
+            and not vals["is_published"]
+            or "active" in vals
+            and not vals["active"]
         ):
             self._remove_from_index(index_companies | index_persons)
         else:
