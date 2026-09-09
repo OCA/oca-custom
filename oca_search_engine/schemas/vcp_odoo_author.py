@@ -15,7 +15,8 @@ class VcpOdooAuthor(StrictExtendableBaseModel):
         return cls.model_construct(
             name=odoo_rec.name,
             url_key=(
-                (partner.is_sponsor or partner.is_integrator) and partner.url_key
+                (partner.is_sponsor or partner.is_integrator)
+                and partner.url_key
                 or None
             ),
         )
