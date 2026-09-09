@@ -11,9 +11,12 @@ class VcpOdooAuthor(StrictExtendableBaseModel):
 
     @classmethod
     def from_record(cls, odoo_rec):
+        partner = odoo_rec.partner_id
         return cls.model_construct(
             name=odoo_rec.name,
             url_key=(
-                odoo_rec.partner_id.is_sponsor and odoo_rec.partner_id.url_key or None
+                (partner.is_sponsor or partner.is_integrator)
+                and partner.url_key
+                or None
             ),
         )
