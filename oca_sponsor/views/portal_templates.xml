@@ -38,20 +38,20 @@
 
         <!-- Countries -->
         <div
-            t-attf-class="mb-3 #{error.get('sponsor_country_ids') and 'has-error' or ''} col-lg-6"
+            t-attf-class="mb-3 #{error.get('country_ids') and 'has-error' or ''} col-lg-6"
         >
-            <label for="sponsor_country_ids">Countries</label>
+            <label for="country_ids">Countries</label>
             <select
-                name="sponsor_country_ids"
+                name="country_ids"
                 multiple="multiple"
-                t-attf-class="form-select #{error.get('sponsor_country_ids') and 'is-invalid' or ''}"
+                t-attf-class="form-select #{error.get('country_ids') and 'is-invalid' or ''}"
             >
                 <option
                     t-foreach="countries or []"
                     t-as="country"
                     t-att-value="country.id"
                     t-out="country.name"
-                    t-att-selected="'selected' if country.id in partner.sponsor_country_ids.ids else None"
+                    t-att-selected="'selected' if country.id in partner.country_ids.ids else None"
                 />
             </select>
         </div>

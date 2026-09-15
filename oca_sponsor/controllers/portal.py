@@ -24,7 +24,7 @@ class CustomerPortalSponsor(CustomerPortal):
             data["sponsor_industry_ids"] = False
 
         # many2many fields
-        for field in ["sponsor_country_ids", "sponsor_industry_ids"]:
+        for field in ["country_ids", "sponsor_industry_ids"]:
             if data.get(field):
                 response = request.httprequest.form.getlist(field)
                 data[field] = [Command.set([int(id) for id in response])]
@@ -36,7 +36,7 @@ class CustomerPortalSponsor(CustomerPortal):
         mandatory = super()._get_mandatory_fields()
         return (
             optional
-            + ["sponsor_country_ids", "sponsor_industry_ids"]
+            + ["country_ids", "sponsor_industry_ids"]
             + [
                 f
                 for f in SPONSOR_WEBSITE_FIELDS

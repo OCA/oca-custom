@@ -152,9 +152,7 @@ class Company(StrictExtendableBaseModel):
             phone=record.phone or "",
             website=record.website or None,
             is_integrator=record.is_integrator,
-            countries=[
-                Country.from_record(country) for country in record.sponsor_country_ids
-            ],
+            countries=[Country.from_record(country) for country in record.country_ids],
             contacts=[
                 Contact.from_record(contact)
                 for contact in record | record.sponsor_child_ids

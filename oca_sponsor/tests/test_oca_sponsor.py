@@ -52,15 +52,15 @@ class TestOcaSponsor(TestOcaSponsorCommon):
         )
 
     @users("sponsor")
-    def test_sponsor_country_ids(self):
-        """Ensure `country_id` is always in `sponsor_country_ids`
-        and that countries manually input stay in `sponsor_country_ids`
+    def test_country_ids(self):
+        """Ensure `country_id` is always in `country_ids`
+        and that countries manually input stay in `country_ids`
         """
-        self.sponsor.sponsor_country_ids = self.country_ch
+        self.sponsor.country_ids = self.country_ch
         self.sponsor.country_id = self.country_fr
         self.sponsor.country_id = self.country_be
 
-        countries = self.sponsor.sponsor_country_ids
+        countries = self.sponsor.country_ids
         self.assertIn(self.country_be, countries)
         self.assertNotIn(self.country_fr, countries)  # replaced by be
         self.assertIn(self.country_ch, countries)  # kept

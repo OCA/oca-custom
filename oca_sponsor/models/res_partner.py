@@ -69,13 +69,13 @@ class ResPartner(models.Model):
         ondelete="set null",
         domain=[("is_sponsor", "=", True)],
     )
-    sponsor_country_ids = fields.Many2many(
+    country_ids = fields.Many2many(
         comodel_name="res.country",
         relation="res_partner_country_rel",
         column1="partner_id",
         column2="country_id",
         string="Countries",
-        compute="_compute_sponsor_country_ids",
+        compute="_compute_country_ids",
         store=True,
         readonly=False,
     )
@@ -125,24 +125,23 @@ class ResPartner(models.Model):
         return _not + [("grade_id", "!=", False)]
 
     @api.depends("country_id", "grade_id")
-    def _compute_sponsor_country_ids(self):
-        self._compute_sponsor_replace_in("country_id", "sponsor_country_ids")
+    def _compute_country_ids(self):
+        self._compute_partner_replace_in("country_id", "country_ids")
 
     @api.depends("industry_id", "grade_id", "grade_id.show_industry")
     def _compute_sponsor_industry_ids(self):
-        self._compute_sponsor_replace_in("industry_id", "sponsor_industry_ids")
+        self._compute_partner_replace_in("industry_id", "sponsor_industry_ids")
 
-    def _compute_sponsor_replace_in(self, origin_field, sponsor_field):
-        """Replace `sponsor._origin[field]` by `sponsor[field]`
-        in `sponsor[sponsor_field]`, or add it if no origin value"""
-        sponsors = self.filtered(lambda x: x.is_sponsor)
-        for sponsor in sponsors:
-            old, new = sponsor._origin[origin_field], sponsor[origin_field]._origin
-            current = sponsor[sponsor_field]._origin
+    def _compute_partner_replace_in(self, origin_field, partner_field):
+        """Replace `partner._origin[field]` by `partner[field]`
+        in `partner[partner_field]`, or add it if no origin value"""
+        for partner in self:
+            old, new = partner._origin[origin_field], partner[origin_field]._origin
+            current = partner[partner_field]._origin
             if new and new not in current:
-                sponsor[sponsor_field] = [Command.link(new.id)]
+                partner[partner_field] = [Command.link(new.id)]
             if old and old != new and old in current:
-                sponsor[sponsor_field] = [Command.unlink(old.id)]
+                partner[partner_field] = [Command.unlink(old.id)]
 
     @api.depends("blog_post_ids")
     def _compute_blog_post_count(self):
