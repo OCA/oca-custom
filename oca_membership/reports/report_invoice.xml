@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template
+        id="report_invoice_document_membership"
+        inherit_id="account.report_invoice_document"
+    >
+        <xpath expr="//t[@t-set='display_discount']" position="after">
+            <t
+                t-set="display_member"
+                t-value="any(l.delegated_member_id for l in o.invoice_line_ids)"
+            />
+            <t
+                t-set="display_dates"
+                t-value="any(l.start_date or l.end_date for l in o.invoice_line_ids)"
+            />
+        </xpath>
+        <xpath expr="//th[@name='th_quantity']" position="before">
+            <th name="th_delegated_member" t-if="display_member" class="text-start">
+                <span>Member</span>
+            </th>
+            <th name="th_start_date" t-if="display_dates" class="text-start">
+                <span>Membership start date</span>
+            </th>
+            <th name="th_start_date" t-if="display_dates" class="text-start">
+                <span>Membership end date</span>
+            </th>
+        </xpath>
+        <xpath expr="//td[@name='td_quantity']" position="before">
+            <td name="td_delegated_member" t-if="display_member">
+                <span t-field="line.delegated_member_id.name" />
+            </td>
+            <td name="td_start_date" t-if="display_dates">
+                <span t-field="line.start_date" t-options='{"widget": "date"}' />
+            </td>
+            <td name="td_end_date" t-if="display_dates">
+                <span t-field="line.end_date" t-options='{"widget": "date"}' />
+            </td>
+        </xpath>
+    </template>
+</odoo>

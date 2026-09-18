@@ -159,6 +159,7 @@
         "scheduler_error_mailer",
         "sentry",
         "server_action_mass_edit",
+        "subscription_oca",
         "survey_xlsx",
         "sql_request_abstract",
         "uom_unece",
@@ -170,6 +171,9 @@
         "website_event_altcha",
         "website_sale_hide_empty_category",
         # OCA Custom
+        "oca_custom",
+        "oca_membership",
+        "oca_membership_subscription",
         "oca_search_engine",
         "oca_website",
         "website_sale_oca_apps",
