@@ -79,8 +79,8 @@ msgid "Contact"
 msgstr ""
 
 #. module: oca_sponsor
-#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner__sponsor_country_ids
-#: model:ir.model.fields,field_description:oca_sponsor.field_res_users__sponsor_country_ids
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_partner__country_ids
+#: model:ir.model.fields,field_description:oca_sponsor.field_res_users__country_ids
 #: model_terms:ir.ui.view,arch_db:oca_sponsor.portal_my_details_sponsorship
 msgid "Countries"
 msgstr ""
