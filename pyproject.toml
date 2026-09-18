@@ -85,6 +85,12 @@ addons_dirs = ["./"]
 [tool.uv]
 # tell uv when dependencies may change
 cache-keys = [{ file = "pyproject.toml" }, { file = "**/__manifest__.py" }]
+# Pin web_responsive to the last release targeting the core template wording
+# used by our pinned OCB core (t-if="env.isSmall"). Versions >= 18.0.1.0.6
+# extend "web.NavBar.AppsMenu" via //t[@t-if='this.ui.isSmall'] (official Odoo
+# wording) and crash at render with "xpath cannot be located in element tree".
+# Revisit when the odoo git source in tool.uv.sources is bumped past that core.
+constraint-dependencies = ["odoo-addon-web-responsive==18.0.1.0.5"]
 
 [dependency-groups]
 dev = [
