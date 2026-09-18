@@ -19,6 +19,21 @@ msgid "<option value=\"0\">Do not publish my profile (no information)</option>"
 msgstr ""
 
 #. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.report_invoice_document_membership
+msgid "<span>Member</span>"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.report_invoice_document_membership
+msgid "<span>Membership end date</span>"
+msgstr ""
+
+#. module: oca_membership
+#: model_terms:ir.ui.view,arch_db:oca_membership.report_invoice_document_membership
+msgid "<span>Membership start date</span>"
+msgstr ""
+
+#. module: oca_membership
 #: model_terms:ir.ui.view,arch_db:oca_membership.portail_my_details_side_content
 msgid "Avatar"
 msgstr ""
