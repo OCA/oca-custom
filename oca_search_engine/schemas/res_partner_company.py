@@ -152,9 +152,7 @@ class Company(StrictExtendableBaseModel):
             phone=record.phone or "",
             website=record.website or None,
             is_integrator=record.is_integrator,
-            countries=[
-                Country.from_record(country) for country in record.sponsor_country_ids
-            ],
+            countries=[Country.from_record(country) for country in record.country_ids],
             contacts=[
                 Contact.from_record(contact)
                 for contact in record | record.sponsor_child_ids
@@ -168,7 +166,9 @@ class Company(StrictExtendableBaseModel):
             members_count=len(record.organization_member_ids.filtered("is_member")),
             modules_count=record.modules_author_count,
             # technical website fields
-            url_key=record.is_sponsor and record.url_key or None,
+            url_key=(
+                (record.is_sponsor or record.is_integrator) and record.url_key or None
+            ),
             redirect_url_key=record.redirect_url_key or [],
             # sponsorship
             sponsorship=None

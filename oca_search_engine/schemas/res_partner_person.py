@@ -94,11 +94,8 @@ class ParentCompany(StrictExtendableBaseModel):
         if not company:
             return {}
         else:
-            if company.is_sponsor:
-                company._update_url_key(lang=record.env.context.get("lang"))
-                url_key = company.url_key
-            else:
-                url_key = None
+            company._update_url_key(lang=record.env.context.get("lang"))
+            url_key = company.url_key
             return cls.model_construct(
                 id=company.id,
                 name=company.sponsor_name or company.name,

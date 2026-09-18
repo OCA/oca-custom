@@ -170,7 +170,6 @@
         "website_event_altcha",
         "website_sale_hide_empty_category",
         # OCA Custom
-        "oca_custom",
         "oca_search_engine",
         "oca_website",
         "website_sale_oca_apps",

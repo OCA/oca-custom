@@ -128,7 +128,7 @@
                                 widget="many2many_tags"
                                 options="{'create': False}"
                             />
-                            <field name="sponsor_country_ids" widget="many2many_tags" />
+                            <field name="country_ids" widget="many2many_tags" />
                             <field
                                 name="sponsor_industry_ids"
                                 widget="many2many_tags"
