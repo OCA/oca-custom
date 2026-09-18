@@ -148,7 +148,7 @@
                         t-att-checked="partner.is_published_address"
                     />
                     <label for="is_published_address">
-                        Publish location the website (address &amp; city)
+                        Publish location on the website (address &amp; city)
                     </label>
                 </div>
 
