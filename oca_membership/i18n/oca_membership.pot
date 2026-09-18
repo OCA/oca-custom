@@ -287,6 +287,11 @@ msgid "Unauthorized format (JPG or PNG only)."
 msgstr ""
 
 #. module: oca_membership
+#: model:ir.model,name:oca_membership.model_res_users
+msgid "User"
+msgstr ""
+
+#. module: oca_membership
 #: model_terms:ir.ui.view,arch_db:oca_membership.view_res_partner_member_filter
 msgid "Waiting member"
 msgstr ""
