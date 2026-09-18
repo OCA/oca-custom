@@ -232,7 +232,7 @@ msgstr ""
 
 #. module: oca_membership
 #: model_terms:ir.ui.view,arch_db:oca_membership.portail_my_details_side_content
-msgid "Publish location the website (address &amp; city)"
+msgid "Publish location on the website (address &amp; city)"
 msgstr ""
 
 #. module: oca_membership
