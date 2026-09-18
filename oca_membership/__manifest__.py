@@ -14,10 +14,13 @@
         "account",
         "membership_extension",  # for membership.category
         "oca_vcp",
+        "membership_account_invoice_start_end_dates",  # for invoice report
+        "membership_delegated_partner_line",  # for invoice report
     ],
     "data": [
         "data/membership_category_data.xml",
         "data/res_groups.xml",
+        "reports/report_invoice.xml",
         "views/membership_category.xml",
         "views/portal_templates.xml",
         "views/res_partner.xml",
