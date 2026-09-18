@@ -1,10 +1,11 @@
 [project]
 name = "odoo-addons-oca-oca-custom"
-version = "18.0.20260918.0"
+version = "18.0.20260918.1"
 dependencies = [
     "odoo-addon-oca_all==18.0.*",
     "odoo-addon-oca_membership==18.0.*",
     "odoo-addon-oca_membership_groups==18.0.*",
+    "odoo-addon-oca_membership_subscription==18.0.*",
     "odoo-addon-oca_search_engine==18.0.*",
     "odoo-addon-oca_sponsor==18.0.*",
     "odoo-addon-oca_vcp==18.0.*",
