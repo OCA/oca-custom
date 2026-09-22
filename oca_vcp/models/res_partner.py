@@ -43,6 +43,8 @@ class ResPartner(models.Model):
                 + record.vcp_reviews
                 + record.vcp_created_requests**0.5
                 + record.vcp_comments**0.5
+            ) * min(
+                2, max(0.25, record.vcp_reviews / (record.vcp_created_requests or 1))
             )
 
     @api.depends("vcp_user_ids.is_github_main_login")
