@@ -1,0 +1,78 @@
+# Copyright 2026 Jan-Marten Veddeler
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+{
+    "name": "OCA Demo",
+    "summary": "Curated set of Odoo Community and OCA modules for a public demo",
+    "version": "18.0.1.0.0",
+    "development_status": "Alpha",
+    "category": "Hidden",
+    "website": "https://github.com/OCA/oca-custom",
+    "author": "Odoo Community Association (OCA)",
+    "license": "AGPL-3",
+    "depends": [
+        # Odoo apps
+        "account",
+        "calendar",
+        "contacts",
+        "crm",
+        "purchase_stock",
+        "sale_management",
+        "sale_stock",
+        "sale_timesheet",
+        # User interface and branding
+        "disable_odoo_online",
+        "mail_debrand",
+        "portal_odoo_debranding",
+        "remove_odoo_enterprise",
+        "web_chatter_position",
+        "web_dialog_size",
+        "web_refresher",
+        "web_responsive",
+        "web_search_with_and",
+        "web_tree_many2one_clickable",
+        # General
+        "mail_tracking",
+        "partner_contact_access_link",
+        "server_action_mass_edit",
+        # Accounting
+        "account_asset_management",
+        "account_credit_control",
+        "account_financial_report",
+        "account_reconcile_oca",
+        "account_statement_import_file_reconcile_oca",
+        "account_statement_import_sheet_file",
+        "account_usability",
+        "currency_rate_update",
+        "mis_builder",
+        "mis_builder_budget",
+        "mis_builder_demo",
+        "partner_statement",
+        # Documents, knowledge, sign, spreadsheet
+        "dms",
+        "document_page",
+        "sign_oca",
+        "spreadsheet_dashboard_oca",
+        "spreadsheet_oca",
+        # Helpdesk
+        "helpdesk_mgmt",
+        "helpdesk_mgmt_project",
+        "helpdesk_mgmt_sale",
+        # Project
+        "project_parent",
+        "project_timeline",
+        "project_timesheet_time_control",
+        # Sales and contracts
+        "contract",
+        "contract_sale",
+        "rma_sale",
+        "sale_cancel_reason",
+        "sale_order_archive",
+        "sale_order_line_price_history",
+        "sale_product_multi_add",
+        # Purchase and inventory
+        "partner_supplierinfo_smartbutton",
+        "purchase_request",
+        "stock_picking_invoice_link",
+    ],
+    "installable": True,
+}
