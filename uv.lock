@@ -459,14 +459,14 @@ wheels = [
 
 [[package]]
 name = "gitpython"
-version = "3.1.62"
+version = "3.2.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "gitdb" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e0/db/3ca813cbacb23ab6fe46ff38a9b5ef8e73e970c8051f2ce903aacafe0446/gitpython-3.1.62.tar.gz", hash = "sha256:1791de66309bc0c7cfca40bf8d2e3de7ca091cbf94e6051be1ad0722c61062af", size = 231728, upload-time = "2026-09-07T02:57:21.155Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c0/ff/fee293f1ec3e1b64db6eb270e00964f29c086d769201474cedb8d1608930/gitpython-3.2.1.tar.gz", hash = "sha256:0f1229ec5c057bdabdeeda8bda4f17bda679ab33dbccc00f24e6a480553c8613", size = 241688, upload-time = "2026-10-14T12:20:20.589Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d6/0b/29d7965215f8ef830a7ca1f42997fe13e5693d85e9edb18f938d063ef5f2/gitpython-3.1.62-py3-none-any.whl", hash = "sha256:7002251225e10e29d2e1f49e6532613fe5d5d9f0b6f1f02997a52b38fe56899e", size = 222753, upload-time = "2026-09-07T02:57:19.762Z" },
+    { url = "https://files.pythonhosted.org/packages/6b/50/2a923c4dc02522ff9567f07c67ed1deca6d5fa9474f4708168b8088dfa37/gitpython-3.2.1-py3-none-any.whl", hash = "sha256:d66b0832aa8755c1a84892937282df0befb16c97e5a64aeebd68be9c5e323f53", size = 231548, upload-time = "2026-10-14T12:20:18.844Z" },
 ]
 
 [[package]]
@@ -936,8 +936,8 @@ requires-dist = [
     { name = "markupsafe", specifier = "==2.1.5" },
     { name = "num2words", specifier = "==0.5.13" },
     { name = "odoo", git = "https://github.com/Therp/OCB.git?rev=refs%2Fpull%2F2%2Fhead" },
-    { name = "odoo-addon-account-banking-pain-base", git = "https://github.com/Therp/bank-payment?subdirectory=account_banking_pain_base&branch=18.0-mig-account_banking_pain_base_sepa_hybrid_extended_for_09" },
-    { name = "odoo-addon-account-banking-sepa-credit-transfer", git = "https://github.com/Therp/bank-payment?subdirectory=account_banking_sepa_credit_transfer&branch=18.0-mig-account_banking_pain_base_sepa_hybrid_extended_for_09" },
+    { name = "odoo-addon-account-banking-pain-base", specifier = "==18.0.*" },
+    { name = "odoo-addon-account-banking-sepa-credit-transfer", specifier = "==18.0.*" },
     { name = "odoo-addon-account-credit-control", specifier = "==18.0.*" },
     { name = "odoo-addon-account-financial-report", specifier = "==18.0.*" },
     { name = "odoo-addon-account-invoice-overdue-reminder", specifier = "==18.0.*" },
@@ -957,14 +957,14 @@ requires-dist = [
     { name = "odoo-addon-account-statement-import-online-paypal", specifier = "==18.0.*" },
     { name = "odoo-addon-account-statement-import-online-ponto", specifier = "==18.0.*" },
     { name = "odoo-addon-account-statement-import-online-stripe", specifier = "==18.0.*" },
-    { name = "odoo-addon-account-statement-import-online-wise", git = "https://github.com/Therp/bank-statement-import?subdirectory=account_statement_import_online_wise&branch=18.0-fix-account-statement-import-online-wise" },
+    { name = "odoo-addon-account-statement-import-online-wise", specifier = "==18.0.*" },
     { name = "odoo-addon-account-statement-import-sheet-file", specifier = "==18.0.*" },
     { name = "odoo-addon-account-tax-unece", specifier = "==18.0.*" },
     { name = "odoo-addon-account-usability", specifier = "==18.0.*" },
     { name = "odoo-addon-base-technical-features", specifier = "==18.0.*" },
     { name = "odoo-addon-base-ubl", specifier = "==18.0.*" },
     { name = "odoo-addon-base-unece", specifier = "==18.0.*" },
-    { name = "odoo-addon-base-url", git = "https://github.com/akretion/server-tools?subdirectory=base_url&branch=18.0-add-url-2" },
+    { name = "odoo-addon-base-url", specifier = "==18.0.*" },
     { name = "odoo-addon-bi-sql-editor", specifier = "==18.0.*" },
     { name = "odoo-addon-connector-typesense", specifier = "==18.0.*" },
     { name = "odoo-addon-crowdfunding", specifier = "==18.0.*" },
@@ -977,7 +977,7 @@ requires-dist = [
     { name = "odoo-addon-document-page", specifier = "==18.0.*" },
     { name = "odoo-addon-impersonate-login", specifier = "==18.0.*" },
     { name = "odoo-addon-mail-activity-team", specifier = "==18.0.*" },
-    { name = "odoo-addon-membership-account-invoice-start-end-dates", git = "https://github.com/akretion/vertical-association?subdirectory=membership_account_invoice_start_end_dates&branch=18.0-add-membership-start-end-date2" },
+    { name = "odoo-addon-membership-account-invoice-start-end-dates", specifier = "==18.0.*" },
     { name = "odoo-addon-membership-delegated-partner-line", git = "https://github.com/gfcapalbo/vertical-association?subdirectory=membership_delegated_partner_line&branch=18.0-MIG-membership_delegated_partner_line" },
     { name = "odoo-addon-membership-extension", specifier = "==18.0.*" },
     { name = "odoo-addon-membership-variable-period", specifier = "==18.0.*" },
@@ -1011,8 +1011,8 @@ requires-dist = [
     { name = "odoo-addon-web-responsive", specifier = "==18.0.*" },
     { name = "odoo-addon-web-search-with-and", specifier = "==18.0.*" },
     { name = "odoo-addon-web-widget-dropdown-dynamic", specifier = "==18.0.*" },
-    { name = "odoo-addon-website-altcha", git = "https://github.com/hbrunn/website?subdirectory=website_altcha&branch=18.0-website_event_altcha" },
-    { name = "odoo-addon-website-event-altcha", git = "https://github.com/hbrunn/website?subdirectory=website_event_altcha&branch=18.0-website_event_altcha" },
+    { name = "odoo-addon-website-altcha", specifier = "==18.0.*" },
+    { name = "odoo-addon-website-event-altcha", specifier = "==18.0.*" },
     { name = "odoo-addon-website-sale-hide-empty-category", specifier = "==18.0.*" },
     { name = "ofxparse", specifier = "==0.21" },
     { name = "openpyxl", specifier = "==3.1.2" },
@@ -1109,22 +1109,28 @@ dependencies = [
 
 [[package]]
 name = "odoo-addon-account-banking-pain-base"
-version = "18.0.1.1.1"
-source = { git = "https://github.com/Therp/bank-payment?subdirectory=account_banking_pain_base&branch=18.0-mig-account_banking_pain_base_sepa_hybrid_extended_for_09#c86abd96a25bf4f14166561b32e171824e2e9b1a" }
+version = "18.0.1.2.0.7"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "lxml" },
     { name = "odoo" },
     { name = "odoo-addon-account-payment-order" },
     { name = "unidecode" },
 ]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/99/85/501b035c5b14cc438cf533130ff7a014d386731eb3192eb7933db4ca9ddd/odoo_addon_account_banking_pain_base-18.0.1.2.0.7-py3-none-any.whl", hash = "sha256:80f0e27d46450c069ec4a385fa0212ea1f7be7b628b5709ab252d70c8e4aa40c", size = 136347, upload-time = "2026-07-10T02:43:37.929Z" },
+]
 
 [[package]]
 name = "odoo-addon-account-banking-sepa-credit-transfer"
-version = "18.0.1.0.1"
-source = { git = "https://github.com/Therp/bank-payment?subdirectory=account_banking_sepa_credit_transfer&branch=18.0-mig-account_banking_pain_base_sepa_hybrid_extended_for_09#c86abd96a25bf4f14166561b32e171824e2e9b1a" }
+version = "18.0.1.1.1.3"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "odoo" },
     { name = "odoo-addon-account-banking-pain-base" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d9/d9/063a9caeaccfd64a936ddafafd1f79c3839d9daed325cccd487fab780d64/odoo_addon_account_banking_sepa_credit_transfer-18.0.1.1.1.3-py3-none-any.whl", hash = "sha256:53803834e517f9917d4aba70360e402ec5431570b5f4153dc0aec6bc20c84539", size = 88312, upload-time = "2026-10-09T02:44:11.143Z" },
 ]
 
 [[package]]
@@ -1414,13 +1420,16 @@ wheels = [
 
 [[package]]
 name = "odoo-addon-account-statement-import-online-wise"
-version = "18.0.1.1.0.2"
-source = { git = "https://github.com/Therp/bank-statement-import?subdirectory=account_statement_import_online_wise&branch=18.0-fix-account-statement-import-online-wise#f0d25570d55934eaa2eedddedbd9f1629ecc87c0" }
+version = "18.0.1.1.0.1"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cryptography" },
     { name = "odoo" },
     { name = "odoo-addon-account-statement-import-online" },
     { name = "odoo-addon-web-widget-dropdown-dynamic" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b2/d0/8419f5f26783c2844a9f02a088b65a7e41f8adb3d577c7c02646dff3dc7a/odoo_addon_account_statement_import_online_wise-18.0.1.1.0.1-py3-none-any.whl", hash = "sha256:5c1787f78389b7b7adbb7800b3396c649740575b53f0d2705a454269f5097df3", size = 38124, upload-time = "2026-03-03T02:44:46.945Z" },
 ]
 
 [[package]]
@@ -1504,10 +1513,13 @@ wheels = [
 
 [[package]]
 name = "odoo-addon-base-url"
-version = "18.0.1.0.0.6"
-source = { git = "https://github.com/akretion/server-tools?subdirectory=base_url&branch=18.0-add-url-2#f2ba676c16eca16a6ac55701b2af32daf0cd8f3b" }
+version = "18.0.1.0.0.9"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "odoo" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/56/ea/d31e618328c515d65e2155294e4610f45118960d3f4eedbeb810e24f5489/odoo_addon_base_url-18.0.1.0.0.9-py3-none-any.whl", hash = "sha256:bc7e6455d9f69960c6a5e0e6666636ded668af2c192dc24748cc68ebdeb65b1c", size = 33054, upload-time = "2026-09-26T04:19:12.01Z" },
 ]
 
 [[package]]
@@ -1679,12 +1691,15 @@ wheels = [
 
 [[package]]
 name = "odoo-addon-membership-account-invoice-start-end-dates"
-version = "18.0.1.0.0"
-source = { git = "https://github.com/akretion/vertical-association?subdirectory=membership_account_invoice_start_end_dates&branch=18.0-add-membership-start-end-date2#596fe8f7301486aaa912400dfb9dbabe4b8cd957" }
+version = "18.0.1.0.0.2"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "odoo" },
     { name = "odoo-addon-account-invoice-start-end-dates" },
     { name = "odoo-addon-membership-extension" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/77/b7/174ad34004155d80b11ca5f9d821c79a0194c8b4be7c37f9c53b06ae7610/odoo_addon_membership_account_invoice_start_end_dates-18.0.1.0.0.2-py3-none-any.whl", hash = "sha256:577e09d69eb04f8d10963a2f58df63376cba4f0886c321b01563be951f9490f6", size = 26546, upload-time = "2026-09-24T14:32:09.914Z" },
 ]
 
 [[package]]
@@ -2142,20 +2157,26 @@ wheels = [
 
 [[package]]
 name = "odoo-addon-website-altcha"
-version = "18.0.1.0.0.10"
-source = { git = "https://github.com/hbrunn/website?subdirectory=website_altcha&branch=18.0-website_event_altcha#4c582b7298d61c9da20ade77ad92576d0a02a8e7" }
+version = "18.0.1.2.1"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "altcha" },
     { name = "odoo" },
 ]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d2/ca/12dee79c81b262ef7e4c5918e8cd17bcd6b3571d8c7fefb010c0472221e7/odoo_addon_website_altcha-18.0.1.2.1-py3-none-any.whl", hash = "sha256:525177cc35dab036394549627efb41c2be0f949ff9744559e0f3dc2d85181262", size = 115410, upload-time = "2026-10-23T06:07:19.643Z" },
+]
 
 [[package]]
 name = "odoo-addon-website-event-altcha"
-version = "18.0.1.0.0"
-source = { git = "https://github.com/hbrunn/website?subdirectory=website_event_altcha&branch=18.0-website_event_altcha#4c582b7298d61c9da20ade77ad92576d0a02a8e7" }
+version = "18.0.1.1.0.1"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "odoo" },
     { name = "odoo-addon-website-altcha" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c6/a6/6d933c17906713320fd95beaa1cec9905d2cdea3962ee0d9a2972541926b/odoo_addon_website_event_altcha-18.0.1.1.0.1-py3-none-any.whl", hash = "sha256:597ea96ca7002ac05877a9274cacbf93e66de30a3ef50be0ed67916bd71985bb", size = 20463, upload-time = "2026-09-04T04:44:27.058Z" },
 ]
 
 [[package]]
