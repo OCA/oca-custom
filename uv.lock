@@ -2,9 +2,6 @@ version = 1
 revision = 3
 requires-python = "==3.12.*"
 
-[manifest]
-constraints = [{ name = "odoo-addon-web-responsive", specifier = "==18.0.1.0.5" }]
-
 [[package]]
 name = "altcha"
 version = "2.1.0"
@@ -935,7 +932,7 @@ requires-dist = [
     { name = "lxml-html-clean" },
     { name = "markupsafe", specifier = "==2.1.5" },
     { name = "num2words", specifier = "==0.5.13" },
-    { name = "odoo", git = "https://github.com/Therp/OCB.git?rev=refs%2Fpull%2F2%2Fhead" },
+    { name = "odoo", url = "https://nightly.odoo.com/18.0/nightly/src/odoo_18.0.20261101.tar.gz" },
     { name = "odoo-addon-account-banking-pain-base", specifier = "==18.0.*" },
     { name = "odoo-addon-account-banking-sepa-credit-transfer", specifier = "==18.0.*" },
     { name = "odoo-addon-account-credit-control", specifier = "==18.0.*" },
@@ -1061,8 +1058,8 @@ dev = [
 
 [[package]]
 name = "odoo"
-version = "18.0"
-source = { git = "https://github.com/Therp/OCB.git?rev=refs%2Fpull%2F2%2Fhead#a709d930ca83735db81025175e378530e9549116" }
+version = "18.0.post20261101"
+source = { url = "https://nightly.odoo.com/18.0/nightly/src/odoo_18.0.20261101.tar.gz" }
 dependencies = [
     { name = "asn1crypto" },
     { name = "babel" },
@@ -1106,6 +1103,54 @@ dependencies = [
     { name = "xlwt" },
     { name = "zeep" },
 ]
+sdist = { hash = "sha256:1e499ef97d0dcd18e719a9e05cdd96df105a15bebf310012ba0132e4580d1272" }
+
+[package.metadata]
+requires-dist = [
+    { name = "asn1crypto" },
+    { name = "babel", specifier = ">=1.0" },
+    { name = "cbor2" },
+    { name = "chardet" },
+    { name = "cryptography" },
+    { name = "decorator" },
+    { name = "docutils" },
+    { name = "geoip2" },
+    { name = "gevent" },
+    { name = "greenlet" },
+    { name = "idna" },
+    { name = "jinja2" },
+    { name = "libsass" },
+    { name = "lxml" },
+    { name = "markupsafe" },
+    { name = "num2words" },
+    { name = "ofxparse" },
+    { name = "openpyxl" },
+    { name = "passlib" },
+    { name = "pillow" },
+    { name = "polib" },
+    { name = "psutil" },
+    { name = "psycopg2", specifier = ">=2.2" },
+    { name = "pyopenssl" },
+    { name = "pypdf2" },
+    { name = "pyserial" },
+    { name = "python-dateutil" },
+    { name = "python-ldap", marker = "extra == 'ldap'" },
+    { name = "python-stdnum" },
+    { name = "pytz" },
+    { name = "pyusb", specifier = ">=1.0.0b1" },
+    { name = "qrcode" },
+    { name = "reportlab" },
+    { name = "requests" },
+    { name = "rjsmin" },
+    { name = "urllib3" },
+    { name = "vobject" },
+    { name = "werkzeug" },
+    { name = "xlrd" },
+    { name = "xlsxwriter" },
+    { name = "xlwt" },
+    { name = "zeep" },
+]
+provides-extras = ["ldap"]
 
 [[package]]
 name = "odoo-addon-account-banking-pain-base"
@@ -2124,13 +2169,13 @@ wheels = [
 
 [[package]]
 name = "odoo-addon-web-responsive"
-version = "18.0.1.0.5"
+version = "18.0.1.0.10.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "odoo" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/eb/4b/6b041488a22ab5a6e9e8264e5da94807a3bbc1bbbeaea8b1634434087265/odoo_addon_web_responsive-18.0.1.0.5-py3-none-any.whl", hash = "sha256:276c012078ee5d4d5fdb5f71f8e9eae81ff246e7039d3db606ef01b55b62ebff", size = 8247878, upload-time = "2026-04-17T07:04:02.911Z" },
+    { url = "https://files.pythonhosted.org/packages/20/6f/06edb9c059fb4941cefb82735645c0af69bbef9a52f12460b330957d29bf/odoo_addon_web_responsive-18.0.1.0.10.1-py3-none-any.whl", hash = "sha256:2e99f5f1bde38e3760e8ea226d6e8d4f484a510b19e0a4bf75b58dcec802f19f", size = 8250945, upload-time = "2026-10-21T04:36:57.259Z" },
 ]
 
 [[package]]

@@ -85,12 +85,6 @@ addons_dirs = ["./"]
 [tool.uv]
 # tell uv when dependencies may change
 cache-keys = [{ file = "pyproject.toml" }, { file = "**/__manifest__.py" }]
-# Pin web_responsive to the last release targeting the core template wording
-# used by our pinned OCB core (t-if="env.isSmall"). Versions >= 18.0.1.0.6
-# extend "web.NavBar.AppsMenu" via //t[@t-if='this.ui.isSmall'] (official Odoo
-# wording) and crash at render with "xpath cannot be located in element tree".
-# Revisit when the odoo git source in tool.uv.sources is bumped past that core.
-constraint-dependencies = ["odoo-addon-web-responsive==18.0.1.0.5"]
 
 [dependency-groups]
 dev = [
@@ -107,7 +101,7 @@ dev = [
 
 [tool.uv.sources]
 # Include odoo patch for providing the right unsubscribe link in mail group mails
-odoo = { git = "https://github.com/Therp/OCB.git", rev = "refs/pull/2/head" }
+odoo = { url = "https://nightly.odoo.com/18.0/nightly/src/odoo_18.0.20261101.tar.gz"}
 
 # Unreleased addon sources (git), handled via uv.sources (NOT requirements/test-requirements)
 odoo-addon-membership_delegated_partner_line = { git = "https://github.com/gfcapalbo/vertical-association", branch = "18.0-MIG-membership_delegated_partner_line", subdirectory = "membership_delegated_partner_line" }
