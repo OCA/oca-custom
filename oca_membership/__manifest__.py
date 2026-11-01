@@ -13,6 +13,7 @@
     "depends": [
         "account",
         "membership_extension",  # for membership.category
+        "membership_variable_period",
         "oca_vcp",
         "membership_account_invoice_start_end_dates",  # for invoice report
         "membership_delegated_partner_line",  # for invoice report

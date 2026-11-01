@@ -24,4 +24,19 @@
             </t>
         </xpath>
     </template>
+    <!-- Port of OCB fix "[FIX] mail_group: 405 Method not allowed in
+         mail_footer": the native footer uses "unsub_url" as link target,
+         which points to the RFC 8058 one-click unsubscribe route. That
+         route only accepts POST, so following the link from a mail client
+         returns a 405. Use the GET-friendly unsubscribe page URL carried
+         by "unsub_label" instead, as fixed natively. -->
+    <template
+        id="mail_group_footer_unsubscribe_url"
+        inherit_id="mail_group.mail_group_footer"
+        name="Mail Group Footer - GET Unsubscribe URL"
+    >
+        <xpath expr="//a[@t-att-href='unsub_url']" position="attributes">
+            <attribute name="t-att-href">unsub_label</attribute>
+        </xpath>
+    </template>
 </odoo>
