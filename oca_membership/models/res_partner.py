@@ -61,9 +61,11 @@ class ResPartner(models.Model):
 
     @api.model
     def _membership_member_states(self):
-        """Inherit to only consider members the ones with 'paid' membership
-        (and remove 'invoiced')"""
-        return ("paid",)
+        """Do not consider 'invoiced' partner as members"""
+        return (
+            "paid",
+            "free",
+        )
 
     # ===== Compute =====#
     @api.depends("membership_state")

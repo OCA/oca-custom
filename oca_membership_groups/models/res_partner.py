@@ -24,20 +24,17 @@ class ResPartner(models.Model):
             partner.mail_group_count = len(partner.mail_group_member_ids)
 
     # ===== Logics =====#
-    def _join_mail_groups(self, groups):
+    def _get_current_groups(self):
+        return self.mail_group_member_ids.mail_group_id
+
+    def _join_mail_groups(self, target_groups):
         """Add member to groups unless they unsubscribed* before
         (*archived membership)"""
-        if not groups:
+        if not target_groups:
             return
         self.ensure_one()
-        joined_members = self.with_context(active_test=False).mail_group_member_ids
-        joined_groups = (
-            groups.member_ids.with_context(active_test=False)
-            .filtered(lambda x: x not in joined_members)
-            .mail_group_id
-        )
-        new_groups = groups.filtered(lambda x: x not in joined_groups)
-        for group in new_groups:
+        current_groups = self.with_context(active_test=False)._get_current_groups()
+        for group in target_groups - current_groups:
             group._join_group(self.email, self.id)
 
     def _leave_mail_groups(self, groups):
@@ -59,9 +56,8 @@ class ResPartner(models.Model):
             lambda x: x.mail_group_id in groups
         )
         if grace_date_start:
+            # Start the grace period only if it has not yet started already
             members = members.filtered(lambda x: not x.grace_date_start)
-        else:
-            members = members.filtered("grace_date_start")
         members.grace_date_start = grace_date_start
 
     def _membership_groups_refresh(self):
@@ -72,14 +68,13 @@ class ResPartner(models.Model):
         today = fields.Date.today()
         for partner in self:
             # Add the member to new groups and stop any grace period previously set
-            joined_groups = partner.membership_category_ids.mail_group_ids
-            partner._join_mail_groups(joined_groups)
-            partner._toggle_grace_mail_groups(joined_groups, False)
+            target_groups = partner.membership_category_ids.mail_group_ids
+            partner._join_mail_groups(target_groups)
+            partner._toggle_grace_mail_groups(target_groups, False)
 
             # Start grace period of the leaving membership groups
-            current_groups = partner.mail_group_member_ids.mail_group_id
-            leaving_groups = (current_groups - joined_groups).filtered(
-                "membership_category_ids"
+            leaving_groups = (partner._get_current_groups() - target_groups).filtered(
+                lambda group: group.grace_days is not False
             )
             partner._toggle_grace_mail_groups(leaving_groups, today)
 
@@ -95,13 +90,16 @@ class ResPartner(models.Model):
     @api.model
     def _membership_groups_end_grace(self):
         """End grace periods (remove expired mail group's members)"""
-        today = fields.Date.today()
-        partners = self.env["res.partner"].search([])
-        expired_members_grouped = partners.mail_group_member_ids.filtered(
-            lambda x: x.grace_date_start and today >= x.grace_date_deadline
-        ).grouped("partner_id")
-        for partner, expired_members in expired_members_grouped.items():
-            partner._leave_mail_groups(expired_members.mail_group_id)
+        expired_members = self.env["mail.group.member"]._read_group(
+            domain=[
+                ("grace_date_deadline", "!=", False),
+                ("grace_date_deadline", "<=", fields.Date.today()),
+            ],
+            groupby=["partner_id"],
+            aggregates=["id:recordset"],
+        )
+        for partner, mail_group_members in expired_members:
+            partner._leave_mail_groups(mail_group_members.mail_group_id)
 
     # ===== Mailing =====#
     def _mailing_get_default_domain(self, _):
