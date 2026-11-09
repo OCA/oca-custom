@@ -74,7 +74,7 @@ class ResPartner(models.Model):
 
             # Start grace period of the leaving membership groups
             leaving_groups = (partner._get_current_groups() - target_groups).filtered(
-                lambda group: group.grace_days is not False
+                "membership_category_ids"
             )
             partner._toggle_grace_mail_groups(leaving_groups, today)
 
