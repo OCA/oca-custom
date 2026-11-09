@@ -18,6 +18,7 @@ class MailGroupMember(models.Model):
     grace_date_deadline = fields.Date(
         string="Grace Deadline",
         compute="_compute_grace_date_deadline",
+        store=True,  # this eases a domain search on this field
         help="Date on which the member will be retired automatically from this "
         "Mailing Group, unless he/she renew its membership.",
     )
